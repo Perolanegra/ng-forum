@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   signIn() {
     console.log('metodo de entrar na conta do cara e levar ele prahome');
-    
   }
 
 }

@@ -52,7 +52,7 @@ export const MY_FORMATS = {
   ],
   exports: [
     CommonModule,
-    // MatButtonModule,
+    MatButtonModule,
     // MatCheckboxModule,
     // MatTableModule,
     MatInputModule,

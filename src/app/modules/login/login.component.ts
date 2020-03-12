@@ -12,4 +12,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  signIn() {
+    console.log('metodo de entrar na conta do cara e levar ele prahome');
+    
+  }
+
 }

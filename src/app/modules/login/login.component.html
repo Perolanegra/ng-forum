@@ -10,12 +10,13 @@
             <mat-label>Password</mat-label>
             <input matInput #input type="password" [type]="hide ? 'password' : 'text'"
             maxlength="10" minlength="8"> 
-            <mat-icon-button  matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon-button style="cursor: pointer;" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-icon-button>
             <mat-hint align="end">{{input.value?.length || 0}}/8</mat-hint>
         </mat-form-field>
 
+        <button mat-raised-button color="accent" (click)="signIn()" class="btn" cdkFocusInitial>Entrar</button>
     </div>
 
 </div>

@@ -1,0 +1,21 @@
+<div class="out-login">
+
+    <div class="login">
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="perolanegra">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" hintLabel="Mínimo de 8 caracteres" style="display: flex;">
+            <mat-label>Password</mat-label>
+            <input matInput #input type="password" [type]="hide ? 'password' : 'text'"
+            maxlength="10" minlength="8"> 
+            <mat-icon-button  matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-icon-button>
+            <mat-hint align="end">{{input.value?.length || 0}}/8</mat-hint>
+        </mat-form-field>
+
+    </div>
+
+</div>

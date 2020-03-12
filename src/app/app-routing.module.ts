@@ -4,11 +4,11 @@ import { LoginComponent } from './modules/login/login.component';
 
 
 const routes: Routes = [
-  // { path: '', pathMatch: 'full', redirectTo: '' },
-  { path: '', pathMatch: 'full', component: LoginComponent }, // voltar dps
-  { 
-    path: '',
-  }
+  { path: '', pathMatch: 'full', redirectTo: 'login' }, // voltar dps
+  { path: 'login', component: LoginComponent }, 
+  // { 
+  //   path: '',
+  // }
 ];
 
 @NgModule({

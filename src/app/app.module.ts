@@ -8,12 +8,14 @@ import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { MaterialModule } from './shared/modules/material.module';
 import { SharedModule } from './shared/shared.module';
+import { MainNavComponent } from './shared/components/main-nav/main-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,9 @@ import {MAT_CHIPS_DEFAULT_OPTIONS} from '@angular/material/chips';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list'
+
 
 export const MY_FORMATS = {
   parse: {
@@ -35,9 +38,9 @@ export const MY_FORMATS = {
     MatDialogModule,
     ReactiveFormsModule,
     // MatToolbarModule,
-    // MatSidenavModule,
     MatIconModule,
-    // MatListModule,
+    MatSidenavModule,
+    MatListModule,
     // MatMenuModule,
     // MatProgressSpinnerModule,
     // MatSortModule,
@@ -59,9 +62,9 @@ export const MY_FORMATS = {
     MatDialogModule,
     ReactiveFormsModule,
     // MatToolbarModule,
-    // MatSidenavModule,
     MatIconModule,
-    // MatListModule,
+    MatSidenavModule,
+    MatListModule,
     // MatMenuModule,
     // MatProgressSpinnerModule,
     // MatSortModule,
@@ -84,6 +87,7 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
   ]
+  
 })
 export class MaterialModule {
 }

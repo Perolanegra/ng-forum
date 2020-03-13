@@ -1,2 +1,9 @@
 
-<router-outlet></router-outlet>
+<app-main-nav [fillerNav]="['Início', 'Perfil', 'Meus posts']" *ngIf="isLoggedIn(); else unLogged">
+    <router-outlet></router-outlet>
+</app-main-nav>
+
+<ng-template #unLogged>
+    <router-outlet></router-outlet>
+</ng-template>
+  

@@ -4,8 +4,8 @@ import { LoginComponent } from './modules/login/login.component';
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' }, // voltar dps
-  { path: 'login', component: LoginComponent }, 
+  { path: '', pathMatch: 'full', redirectTo: 'LoginComponent' }, // voltar dps
+  { path: 'LoginComponent', component: LoginComponent }, 
   // { 
   //   path: '',
   // }

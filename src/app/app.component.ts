@@ -7,4 +7,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
   title = 'ng-forum';
+   // Implementar um subscription que muda o valor do observable quando o cara loga/desloga,
+   // e a partir disso alterar perspectiva no html
+  isLoggedIn() {
+    return false;
+  }
 }
+

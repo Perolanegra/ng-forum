@@ -2,3 +2,28 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./assets/fonts/Montserrat-Regular.ttf'); /* IE9 Compat Modes */
+}
+
+.accent-color {
+    color: #ff4081;
+}
+
+.primary-color {
+    color: #fff;
+}
+
+.base-color {
+    background-color: black;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+	color: #ff4081;
+}
+
+.font {
+    font-family: 'Montserrat';
+}

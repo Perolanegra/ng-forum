@@ -56,7 +56,7 @@ export const MY_FORMATS = {
   exports: [
     CommonModule,
     MatButtonModule,
-    // MatCheckboxModule,
+    MatCheckboxModule,
     // MatTableModule,
     MatInputModule,
     MatDialogModule,

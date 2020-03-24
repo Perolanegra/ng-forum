@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, HostBinding } from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 
 @Component({
@@ -7,15 +7,18 @@ import {MediaMatcher} from '@angular/cdk/layout';
     styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent implements OnInit {
+
     @Input() fillerNav: Array<String>;
     mobileQuery: MediaQueryList;
-    constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) { 
-
+    constructor(changeDetectorRef: ChangeDetectorRef, 
+    media: MediaMatcher,
+    ) { 
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
-
     }
+
+   
     
     private _mobileQueryListener: () => void;
 

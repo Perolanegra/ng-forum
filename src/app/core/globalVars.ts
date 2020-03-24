@@ -39,6 +39,20 @@ export class GlobalVars {
     return localStorage.getItem(KEY_REFRESH);
   }
 
+  setStateActiveRoute(actualRoutePath: string, newRoutePath: string) {
+    const { routes } = JSON.parse(localStorage.getItem('fillerNav'));
+    routes.map(val => {
+      if(val.path === actualRoutePath) {
+        val.isActive = false;
+      }
+      if(val.path === newRoutePath) {
+        val.isActive = true;
+      }
+    });
+
+    localStorage.setItem('fillerNav', JSON.stringify(routes));
+  }
+
   // setAccessToken(str: string) { // será usado futuramente
   //   this.accessToken = str;
   //   return localStorage.setItem(KEY, str);

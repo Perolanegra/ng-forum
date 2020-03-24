@@ -1,5 +1,5 @@
 
-<app-main-nav [fillerNav]="['Início', 'Perfil', 'Meus posts']" *ngIf="isLoggedIn(); else unLogged">
+<app-main-nav *ngIf="isLoggedIn(); else unLogged">
     <router-outlet></router-outlet>
 </app-main-nav>
 

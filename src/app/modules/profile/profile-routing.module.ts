@@ -1,19 +1,19 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './home.component';
+import { ProfileComponent } from './profile.component';
 
 
 const routes: Routes = [
     {
-        path:'home', // rota/:param
-        component: HomeComponent,
+        path:'profile', // rota/:param
+        component: ProfileComponent,
         // resolve: {
         // },
         // canActivate: [NoAuthGuard],
         data: {
-          breadcrumb: 'Home'
+          breadcrumb: 'Perfil'
         },
-        redirectTo: 'home', 
+        redirectTo: 'profile', 
         pathMatch: 'full'
     }
 ];
@@ -25,4 +25,4 @@ const routes: Routes = [
         // resolvers
     ]
 })
-export class HomeRoutingModule { }
+export class ProfileRoutingModule { }

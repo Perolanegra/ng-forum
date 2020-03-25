@@ -38,20 +38,26 @@
   margin-right: 16px;
   padding-left: 56px !important;
   margin-bottom: 5px;
+  width: 280px !important;
 }
 
 .nav-item-layout {
   color: #fff;
   font-family: 'Montserrat';
   font-weight: bold;
-  background-color: #039be5 !important;
+  background-color: #ff4081 !important;
 }
 
 .mat-nav-list .mat-list-item {
   font-family: 'Montserrat';
+  color: #fff;
 }
 
 .div-menu-header {
-  width: 260px;
+  width: 300px;
   height: 230px;
+}
+
+.position-sidenav {
+  // por aqui o margin-right
 }

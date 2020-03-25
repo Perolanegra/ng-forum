@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalVars } from 'src/app/core/globalVars';
 
@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     public globalVars: GlobalVars
   ) { 
   }
-
   ngOnInit(): void {
   }
 

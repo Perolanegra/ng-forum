@@ -12,10 +12,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     public globalVars: GlobalVars
-  ) { }
+  ) { 
+  }
 
   ngOnInit(): void {
-    console.log('imhere');
   }
 
   signOut() {
@@ -24,13 +24,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.globalVars.setStateActiveRoute('home', 'profile'); // onde tiver a chamada do navigate
+    // this.globalVars.setStateActiveRoute('home', 'profile'); // onde tiver a chamada do navigate
   }
 
   clickMe() {
+    this.globalVars.removeUserLoggedIn();
     this.router.navigate(['profile']).catch(error => {
-        console.log('erro navegação: ', error);
-    })
-}
+      console.log('erro navegação: ', error);
+    });
+  }
 
 }

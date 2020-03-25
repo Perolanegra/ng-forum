@@ -23,8 +23,9 @@ import { GlobalVars } from '../core/globalVars';
     ],
     exports: [
         FormComponent,
+        MaterialModule,
+        ReactiveFormsModule
     ],
-    
     entryComponents: [
         
     ],

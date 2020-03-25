@@ -4,8 +4,9 @@ import { HomeComponent } from './home.component';
 
 
 const routes: Routes = [
+    { path: 'home', redirectTo: '', pathMatch: 'full' },
     {
-        path:'home', // rota/:param
+        path:'', // rota/:param
         component: HomeComponent,
         // resolve: {
         // },

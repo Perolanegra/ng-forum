@@ -31,8 +31,12 @@ export class LoginComponent implements OnInit {
       deleted_at: new Date(),
       updated_at: new Date()
     };
-    this.router.navigate(['home']);
     this.globalVars.setUserLoggedIn(userAuth);
+    
+    this.router.navigate(['home']).catch(error => {
+      console.log('erro: ', error);
+    });
+    
     console.log('metodo de entrar na conta do cara e levar ele prahome');
   }
 

@@ -10,12 +10,14 @@ import { LoginComponent } from './modules/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainNavComponent } from './shared/components/main-nav/main-nav.component';
+import { AppMenuOverDirective } from './core/app-menu-over.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainNavComponent
+    MainNavComponent,
+    AppMenuOverDirective
   ],
   imports: [
     BrowserModule,

@@ -17,13 +17,13 @@ export class GlobalVars {
   }
 
   getUserLoggedIn(): UserModel {
-    return JSON.parse(localStorage.getItem(KEY_USER_LOGGED_IN));
+    return JSON.parse(sessionStorage.getItem(KEY_USER_LOGGED_IN));
   }
 
   setUserLoggedIn(userLogged: UserModel) {
     this.user = new UserModel();
     this.user = userLogged;
-    localStorage.setItem(KEY_USER_LOGGED_IN, JSON.stringify(userLogged));
+    sessionStorage.setItem(KEY_USER_LOGGED_IN, JSON.stringify(userLogged));
   }
 
  //Verifica se existe token
@@ -36,11 +36,11 @@ export class GlobalVars {
   }
 
   getRefreshToken(): string {
-    return localStorage.getItem(KEY_REFRESH);
+    return sessionStorage.getItem(KEY_REFRESH);
   }
 
   setStateActiveRoute(actualRoutePath: string, newRoutePath: string) {
-    const { routes } = JSON.parse(localStorage.getItem('fillerNav'));
+    const { routes } = JSON.parse(sessionStorage.getItem('fillerNav'));
     routes.map(val => {
       if(val.path === actualRoutePath) {
         val.isActive = false;
@@ -50,26 +50,26 @@ export class GlobalVars {
       }
     });
 
-    localStorage.setItem('fillerNav', JSON.stringify(routes));
+    sessionStorage.setItem('fillerNav', JSON.stringify(routes));
   }
 
   // setAccessToken(str: string) { // será usado futuramente
   //   this.accessToken = str;
-  //   return localStorage.setItem(KEY, str);
+  //   return sessionStorage.setItem(KEY, str);
   // }
 
   setRefreshToken = (str: string) => {
     this.refreshToken = str;
-    return localStorage.setItem(KEY_REFRESH, str);
+    return sessionStorage.setItem(KEY_REFRESH, str);
   }
 
   //Remove o token, utilizado para efetuar logout
   removeToken() {
-    localStorage.removeItem(KEY);
+    sessionStorage.removeItem(KEY);
   }
 
   removeUserLoggedIn() {
-    localStorage.removeItem(KEY_USER_LOGGED_IN);
+    sessionStorage.removeItem(KEY_USER_LOGGED_IN);
   }
 
   //Verifica se tem alguém logado

@@ -1,9 +1,9 @@
 
-<app-main-nav *ngIf="isLoggedIn(); else unLogged">
+<app-main-nav *ngIf="isLoggedIn(); else deslogado">
     <router-outlet></router-outlet>
 </app-main-nav>
 
-<ng-template #unLogged>
+<ng-template #deslogado>
     <router-outlet></router-outlet>
 </ng-template>
   

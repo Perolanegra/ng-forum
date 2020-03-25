@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   title = 'ng-forum';
    // Implementar um subscription que muda o valor do observable quando o cara loga/desloga,
    // e a partir disso alterar perspectiva no html
-  public isLoggedIn() {
+  public get isLoggedIn(): Boolean {
     return this.globalVars.isLogged();
   }
 

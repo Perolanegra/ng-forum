@@ -14,6 +14,10 @@ export class LoginComponent implements OnInit {
     private globalVars: GlobalVars) { }
 
   ngOnInit(): void {
+  
+  }
+
+  signIn() {
     const userAuth: UserModel = {
       _id: 'string',
       name: 'string',
@@ -27,16 +31,8 @@ export class LoginComponent implements OnInit {
       deleted_at: new Date(),
       updated_at: new Date()
     };
-
-    setTimeout(() => {
-      this.globalVars.setUserLoggedIn(userAuth);
-      if(this.globalVars.isLogged()) {
-        this.router.navigate(['home']);
-      }
-    }, 5000);
-  }
-
-  signIn() {
+    this.router.navigate(['home']);
+    this.globalVars.setUserLoggedIn(userAuth);
     console.log('metodo de entrar na conta do cara e levar ele prahome');
   }
 

@@ -26,6 +26,9 @@ import { MainNavComponent } from './shared/components/main-nav/main-nav.componen
     HttpClientModule,
     LayoutModule,
   ],
+  exports: [
+    MaterialModule
+  ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' }
   ],

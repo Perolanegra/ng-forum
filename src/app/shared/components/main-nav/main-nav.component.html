@@ -12,10 +12,13 @@
           <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
         </mat-nav-list>
       </mat-sidenav>
-      
-      <ng-content></ng-content>
 
-        
+      <mat-sidenav-content>
+
+        <ng-content></ng-content>
+
+      </mat-sidenav-content>
+      
     </mat-sidenav-container>
     
   </div>

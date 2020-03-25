@@ -6,14 +6,22 @@ import { CommonModule } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import 'moment/locale/pt-br';
-import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
-import {MAT_CHIPS_DEFAULT_OPTIONS} from '@angular/material/chips';
+import {MAT_CHIPS_DEFAULT_OPTIONS, MatChipsModule} from '@angular/material/chips';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list'
+import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatRippleModule} from '@angular/material/core';
 
 
 export const MY_FORMATS = {
@@ -37,19 +45,21 @@ export const MY_FORMATS = {
     MatInputModule,
     MatDialogModule,
     ReactiveFormsModule,
-    // MatToolbarModule,
+    MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
+    
     MatListModule,
-    // MatMenuModule,
-    // MatProgressSpinnerModule,
-    // MatSortModule,
-    // MatSelectModule,
-    // MatDatepickerModule,
-    // MatNativeDateModule,
-    // MatChipsModule,
-    // MatDividerModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule,
+    MatDividerModule,
     CdkTreeModule,
+    MatRippleModule
     // MatTreeModule,
     // MatProgressBarModule
   ],
@@ -61,19 +71,20 @@ export const MY_FORMATS = {
     MatInputModule,
     MatDialogModule,
     ReactiveFormsModule,
-    // MatToolbarModule,
+    MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    // MatMenuModule,
-    // MatProgressSpinnerModule,
-    // MatSortModule,
-    // MatSelectModule,
-    // MatDatepickerModule,
-    // MatNativeDateModule,
-    // MatChipsModule,
-    // MatDividerModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule,
+    MatDividerModule,
     CdkTreeModule,
+    MatRippleModule
     // MatTreeModule,
     // MatProgressBarModule
   ],

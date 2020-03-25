@@ -7,19 +7,14 @@ import { GlobalVars } from 'src/app/core/globalVars';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanActivate{
+export class NoAuthGuard implements CanActivate{
 
     constructor(private globalVars: GlobalVars,
     private router: Router){}
 
     canActivate(route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {          
-                 
-        if(!this.globalVars.isLogged()) {
-            this.router.navigate(['login']);
-            return false;
-        }
-        
+        state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> { 
+            
         return true;
     }
 

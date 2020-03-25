@@ -16,7 +16,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('imhere');
-    
+  }
+
+  signOut() {
+    alert('you will be redirected in a few seconds...');
+    this.globalVars.removeUserLoggedIn();
   }
 
   ngOnDestroy() {

@@ -7,13 +7,11 @@ import {MediaMatcher} from '@angular/cdk/layout';
 })
 export class MainNavComponent implements OnInit {
 
-    fillerNav;
     mobileQuery: MediaQueryList;
 
     constructor(changeDetectorRef: ChangeDetectorRef, 
     media: MediaMatcher,
     ) { 
-        this.getfillerNav();
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);

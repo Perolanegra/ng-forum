@@ -10,11 +10,6 @@ const routes: Routes = [
         // resolve: {
         // },
         // canActivate: [NoAuthGuard],
-        data: {
-          breadcrumb: 'Home'
-        },
-        redirectTo: 'home', 
-        pathMatch: 'full'
     }
 ];
 

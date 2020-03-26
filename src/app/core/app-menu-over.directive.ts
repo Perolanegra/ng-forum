@@ -5,7 +5,7 @@ import { Directive, HostListener, Output, EventEmitter, Input } from '@angular/c
 })
 export class AppMenuOverDirective {
   @Input() sideNav;
-  @Output() toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
+  // @Output() toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {
   }

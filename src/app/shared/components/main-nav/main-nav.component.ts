@@ -8,9 +8,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 export class MainNavComponent implements OnInit {
 
     mobileQuery: MediaQueryList;
-    hasEnterContentRef: boolean = true;
-    hasLeaveSideNavRef: boolean = false;
-    hasLeaveContentRef: boolean = false;
+    hasEnterMenuRef: boolean = false;
     profileDefault: string = '../../../../assets/imgs/profile-default.jfif';
 
     constructor(changeDetectorRef: ChangeDetectorRef, 
@@ -34,14 +32,8 @@ export class MainNavComponent implements OnInit {
         return JSON.parse(localStorage.getItem('fillerNav'));
     }
 
-    hasLeaveSideNav(hasLeaveSideNavRef) {
-        this.hasLeaveSideNavRef = hasLeaveSideNavRef;
-    }
-
-    hasLeaveContent(hasLeaveContentRefObj) {
-        const { hasLeaveContent, hasLeaveSideNav } = hasLeaveContentRefObj;
-        this.hasLeaveContentRef = hasLeaveContent;
-        this.hasLeaveSideNavRef = hasLeaveSideNav;
+    onMenuBlur(hasEnterMenu) {
+        this.hasEnterMenuRef = hasEnterMenu;
     }
 
 

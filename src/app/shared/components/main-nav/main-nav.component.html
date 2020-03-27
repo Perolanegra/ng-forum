@@ -1,7 +1,7 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <!-- <mat-toolbar class="example-toolbar" *ngIf="!mobileQuery.matches"> 
   </mat-toolbar> -->
-    <div id="mouse-enter" appMenuOver 
+    <div id="mouse-enter" appMenuOver (hasEnterMenu)="onMenuBlur($event)" [hasMobileMatches]="mobileQuery.matches"
     style=" height: 100%;
     flex-direction: column;
     display: flex;
@@ -16,7 +16,7 @@
     transition: all .43s ease 0s;
     background: #2d323e !important;">
 
-      <div class="div-img-center-above" >
+      <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '150px' : '190px' }">
         <button tabindex="-1" mat-icon-button class="btn-toggle-mobile"><mat-icon>menu</mat-icon></button>
         <div style="display: flex; justify-content: center; width: 100%;">
           <img class="img-logo-menu" src="../../../assets/imgs/logo.png">
@@ -31,31 +31,26 @@
           <!-- aqui vai ficar o visto dele em ícone -->
         </div>
 
-        <div align="left" style="color: #fff; height: 0; width: inherit;">
-          APPLICATIONS
+        <div *ngIf="hasEnterMenuRef">
+          <div align="center" class="font" style="color: #fff; width: inherit;">
+            Igor Alves
+          </div>
+          <div align="center" class="font" style="color: #fff; width: inherit;">
+            igoralves@devbaiano.com.br
+          </div>
         </div>
 
       </div>
-      
-        <mat-nav-list id="sideNav" style="overflow: hidden;">
+
+      <mat-nav-list id="sideNav"  style="overflow: hidden;">
+        <div *ngIf="hasEnterMenuRef">
           <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
           <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
-        </mat-nav-list>
-
-      
-
+        </div>
+      </mat-nav-list>
     </div>
 
     <ng-content></ng-content>
 
-    <!-- <mat-sidenav-container class="example-sidenav-container" [hasBackdrop]="mobileQuery.matches ? true : false"
-      [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-
-      <mat-sidenav-content>
-       
-        
-      </mat-sidenav-content>
-      
-    </mat-sidenav-container> -->
     
   </div>

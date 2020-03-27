@@ -6,8 +6,12 @@ import { Directive, HostListener, Output, EventEmitter, Input, Renderer2, Elemen
 })
 export class AppMenuOverDirective {
   constructor(private renderer: Renderer2, private elRef: ElementRef) { }
+
+  @Output() hasEnterMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() hasMobileMatches: boolean;
   
   @HostListener('mouseenter') onMouseOver(eventData: Event): void {
+    this.hasEnterMenu.emit(true);
     this.renderer.setStyle(this.elRef.nativeElement, 'width', '296px');
     const nativeElement: HTMLElement = this.elRef.nativeElement;
    
@@ -16,12 +20,14 @@ export class AppMenuOverDirective {
     this.renderer.setStyle(nativeElement.querySelector('.div-img-background'), 'height', '119px');
 
 
-    this.renderer.setStyle(nativeElement.querySelector('.div-img-center-above'), 'height', '250px');
+    const heightDivMenuTop = this.hasMobileMatches ? '350px' : '250px';
+    this.renderer.setStyle(nativeElement.querySelector('.div-img-center-above'), 'height', heightDivMenuTop);
 
-    this.renderer.setStyle(nativeElement.querySelector('.img-logo-menu'), 'max-width', '130px');
-    
+    const maxWidthImgLogoMenu = this.hasMobileMatches ? '100px' : '130px';
+    this.renderer.setStyle(nativeElement.querySelector('.img-logo-menu'), 'max-width', maxWidthImgLogoMenu);
 
-    this.renderer.setStyle(nativeElement.querySelector('.div-img-center'), 'bottom', '17vh');
+    const bottomMenuVh = this.hasMobileMatches ? '20vh' : '15vh';
+    this.renderer.setStyle(nativeElement.querySelector('.div-img-center'), 'bottom', bottomMenuVh);
 
     this.renderer.setStyle(nativeElement.querySelector('#sideNav'), 'overflow', 'hidden auto');
 
@@ -32,6 +38,7 @@ export class AppMenuOverDirective {
   }
 
   @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
+    this.hasEnterMenu.emit(false);
     this.renderer.setStyle(this.elRef.nativeElement, 'width', '90px');
     const nativeElement: HTMLElement = this.elRef.nativeElement;
 
@@ -41,14 +48,17 @@ export class AppMenuOverDirective {
     this.renderer.setStyle(nativeElement.querySelector('.div-img-background'), 'margin-top', '15%');
     this.renderer.setStyle(nativeElement.querySelector('.div-img-background'), 'height', '65px');
 
-    this.renderer.setStyle(nativeElement.querySelector('.div-img-center-above'), 'height', '200px');
+    const heightDivMenuTop = this.hasMobileMatches ? '150px' : '190px';
+    this.renderer.setStyle(nativeElement.querySelector('.div-img-center-above'), 'height', heightDivMenuTop);
 
-    this.renderer.setStyle(nativeElement.querySelector('.img-logo-menu'), 'max-width', '90px');
+    const maxWidthPxNgLogoMenu = this.hasMobileMatches ? '75px' : '90px';
+    this.renderer.setStyle(nativeElement.querySelector('.img-logo-menu'), 'max-width', maxWidthPxNgLogoMenu);
 
     this.renderer.setStyle(nativeElement.querySelector('.div-img-center'), 'bottom', '9vh');
 
     this.renderer.setStyle(nativeElement.querySelector('.img-menu-over'), 'max-width', '55px');
     this.renderer.setStyle(nativeElement.querySelector('.img-menu-over'), 'max-height', '55px');
+    
   }
 
 }

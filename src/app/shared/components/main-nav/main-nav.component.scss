@@ -8,6 +8,7 @@
   height: inherit;
   flex: 1;
   background: #303030;
+  overflow: hidden;
 }
 
 .example-is-mobile .example-toolbar {
@@ -55,21 +56,23 @@
 }
 
 .img-menu-over {
-  max-height: 99px;
+  max-height: 55px;
   border-radius: 50px;
   box-shadow: #1E2129 5px 10px 9px;
-  max-width: 100px;
+  max-width: 55px;
 }
 
 .div-img-center {
   width: inherit; display: flex; justify-content: center;
   position: relative;
-  bottom: 55px;
+  // bottom: 55px;
+  bottom: 9vh;
 }
 
 .div-img-background {
-  width: 120px;
-  height: 119px;
+  width: 66px;
+  margin-top: 20%;
+  height: 65px;
   display: flex;
   border-radius: 60px;
   background: #2d323e;

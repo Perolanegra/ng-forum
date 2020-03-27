@@ -10,22 +10,28 @@
     box-shadow: 5px 10px 9px #9c4969;
     position: absolute;
     border-radius: 1px;
+    overflow-y: visible;
+    overflow-x: hidden;
     background: #2d323e !important;">
 
-    <div style="width: inherit; height: 200px; background-color: #1E2129;">
-    </div>
-
-    <div class="div-img-center">
-      <div class="div-img-background">
-        <img [src]="profileDefault" class="img-menu-over">
+      <div style="width: inherit; height: 200px; background-color: #1E2129; display: block;">
       </div>
-    </div>
-    
-    <span style="color: #fff;">APPLICATIONS</span>
 
-    <mat-nav-list style="padding-top: 20px;">
-      <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
-    </mat-nav-list>
+      <div class="div-img-center">
+        <div  id="out-img" class="div-img-background">
+          <img [src]="profileDefault" class="img-menu-over">
+        </div>
+      </div>
+      
+      <span style="color: #fff;">APPLICATIONS</span>
+
+      <mat-nav-list id="sideNav" style="padding-top: 20px; overflow: hidden;">
+        <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
+        <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
+        <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
+        <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
+        <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
+      </mat-nav-list>
 
     </div>
 

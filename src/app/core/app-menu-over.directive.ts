@@ -4,18 +4,16 @@ import { Directive, HostListener, Output, EventEmitter, Input, Renderer2, Elemen
   selector: '[appAppMenuOver]'
 })
 export class AppMenuOverDirective {
-  @Input() sideNav;
-  @Input() hasLeaveSideNav: boolean;
-  @Input() hasLeaveContent: boolean;
-
-  constructor(private renderer: Renderer2, private elRef: ElementRef) {
-  }
+  constructor(private renderer: Renderer2, private elRef: ElementRef) { }
   
   @HostListener('mouseenter') onMouseOver(eventData: Event): void {
-    if(!this.hasLeaveSideNav && this.hasLeaveContent) {
-      this.sideNav.toggle();
-      this.renderer.setStyle(this.elRef.nativeElement, 'z-index', '2 !important');
-    }
+    console.log('im here');
+    
+    this.renderer.setStyle(this.elRef.nativeElement, 'width', '275px');
   }
+
+  // @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
+  //   this.renderer.setStyle(this.elRef.nativeElement, 'width', '90px');
+  // }
 
 }

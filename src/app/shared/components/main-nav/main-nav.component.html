@@ -1,39 +1,36 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-    <!-- <mat-toolbar class="example-toolbar" *ngIf="!mobileQuery.matches">
-     
-    </mat-toolbar> -->
-    <div id="mouse-enter" appAppMenuOver [sideNav]="sideNavRef" [hasLeaveContent]="hasLeaveContentRef" [hasLeaveSideNav]="hasLeaveSideNavRef"
+    
+    <div id="mouse-enter" appAppMenuOver 
     style=" height: 100%;
-    width: 1.2rem;
+    width: 90px;
     z-index: 9999 !important;
+    box-shadow: 5px 10px 9px #9c4969;
     position: absolute;
-    background: transparent;">
+    border-radius: 1px;
+    background: #2d323e;">
+
+    <div style="width: inherit; height: 250px; background-color: yellow;">
+      <mat-toolbar class="example-toolbar"> <!-- *ngIf="!mobileQuery.matches"-->
+     
+      </mat-toolbar>
     </div>
 
-    <mat-sidenav-container class="example-sidenav-container" [hasBackdrop]="mobileQuery.matches ? true : false"
+    <mat-nav-list>
+      <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
+    </mat-nav-list>
+
+    </div>
+
+    <ng-content></ng-content>
+
+    <!-- <mat-sidenav-container class="example-sidenav-container" [hasBackdrop]="mobileQuery.matches ? true : false"
       [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
 
-      <!--diretiva mouseleave emite um true mouseleave-->
-      <mat-sidenav appAppMenuOverSideNav (hasNavOpenEmitter)="hasLeaveSideNav($event)"  #sideNavRef [mode]="'over'" class="position-sidenav" 
-      style="background: #2d323e;"   
-        [fixedInViewport]="mobileQuery.matches" 
-        fixedTopGap="56">
-
-        <div class="div-menu-header">
-          <h2>Mando aqui porra</h2>
-        </div>
-
-        <mat-nav-list>
-          <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
-        </mat-nav-list>
-      </mat-sidenav>
-      
-
-      <mat-sidenav-content appAppMenuOverDivOut (hasLeaveContent)="hasLeaveContent($event)" [sideNav]="sideNavRef" [hasLeaveSideNav]="hasLeaveSideNavRef" >
+      <mat-sidenav-content>
        
-        <ng-content></ng-content>
+        
       </mat-sidenav-content>
       
-    </mat-sidenav-container>
+    </mat-sidenav-container> -->
     
   </div>

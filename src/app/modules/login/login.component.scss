@@ -22,6 +22,7 @@ div.mat-form-field-infix ng-tns-c35-1 {
     font-size: 16px;
     font-weight: bold;
     color: #000;
+    background: #E91E63;
 }
 
 .logo-out {
@@ -45,7 +46,7 @@ div.mat-form-field-infix ng-tns-c35-1 {
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-    color: #ff4081;
+    color: #E91E63;
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
@@ -55,6 +56,11 @@ div.mat-form-field-infix ng-tns-c35-1 {
 
 ::ng-deep .mat-hint {
     color: #fff;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    opacity: 0.3;
+    color: #E91E63;
 }
 
 

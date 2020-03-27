@@ -11,6 +11,7 @@ export class MainNavComponent implements OnInit {
     hasEnterContentRef: boolean = true;
     hasLeaveSideNavRef: boolean = false;
     hasLeaveContentRef: boolean = false;
+    profileDefault: string = '../../../../assets/imgs/profile-default.jfif';
 
     constructor(changeDetectorRef: ChangeDetectorRef, 
     media: MediaMatcher,

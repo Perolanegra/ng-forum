@@ -11,13 +11,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainNavComponent } from './shared/components/main-nav/main-nav.component';
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
+import { AppMenuOverDivOutDirective } from './core/app-menu-over-div-out.directive';
+import { AppMenuOverSideNavDirective } from './core/app-menu-over-sidenav.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainNavComponent,
-    AppMenuOverDirective
+    AppMenuOverDirective,
+    AppMenuOverDivOutDirective,
+    AppMenuOverSideNavDirective
   ],
   imports: [
     BrowserModule,

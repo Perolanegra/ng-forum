@@ -8,6 +8,9 @@ import {MediaMatcher} from '@angular/cdk/layout';
 export class MainNavComponent implements OnInit {
 
     mobileQuery: MediaQueryList;
+    hasEnterContentRef: boolean = true;
+    hasLeaveSideNavRef: boolean = false;
+    hasLeaveContentRef: boolean = false;
 
     constructor(changeDetectorRef: ChangeDetectorRef, 
     media: MediaMatcher,
@@ -28,6 +31,16 @@ export class MainNavComponent implements OnInit {
 
     getfillerNav() {
         return JSON.parse(localStorage.getItem('fillerNav'));
+    }
+
+    hasLeaveSideNav(hasLeaveSideNavRef) {
+        this.hasLeaveSideNavRef = hasLeaveSideNavRef;
+    }
+
+    hasLeaveContent(hasLeaveContentRefObj) {
+        const { hasLeaveContent, hasLeaveSideNav } = hasLeaveContentRefObj;
+        this.hasLeaveContentRef = hasLeaveContent;
+        this.hasLeaveSideNavRef = hasLeaveSideNav;
     }
 
 

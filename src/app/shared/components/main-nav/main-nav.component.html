@@ -2,13 +2,20 @@
     <!-- <mat-toolbar class="example-toolbar" *ngIf="!mobileQuery.matches">
      
     </mat-toolbar> -->
+    <div id="mouse-enter" appAppMenuOver [sideNav]="sideNavRef" [hasLeaveContent]="hasLeaveContentRef" [hasLeaveSideNav]="hasLeaveSideNavRef"
+    style=" height: 100%;
+    width: 1.2rem;
+    z-index: 9999 !important;
+    position: absolute;
+    background: transparent;">
+    </div>
 
     <mat-sidenav-container class="example-sidenav-container" [hasBackdrop]="mobileQuery.matches ? true : false"
       [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
 
-      <!-- <button mat-icon-button (click)="sideNavRef.toggle()"><mat-icon>menu</mat-icon></button> mobileQuery.matches ? 'over' : 'push' -->
-
-      <mat-sidenav  #sideNavRef [mode]="'over'" class="position-sidenav" style="background: #2d323e; margin-left: 100px;"   
+      <!--diretiva mouseleave emite um true mouseleave-->
+      <mat-sidenav appAppMenuOverSideNav (hasNavOpenEmitter)="hasLeaveSideNav($event)"  #sideNavRef [mode]="'over'" class="position-sidenav" 
+      style="background: #2d323e;"   
         [fixedInViewport]="mobileQuery.matches" 
         fixedTopGap="56">
 
@@ -20,17 +27,10 @@
           <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
         </mat-nav-list>
       </mat-sidenav>
+      
 
-      <mat-sidenav-content>
-        <div id="mouse-enter" appAppMenuOver [sideNav]="sideNavRef"  style=" 
-        height: 100%;
-        width: 100px;
-        margin-left: 350px;
-        z-index: 1;
-        position: absolute;
-        background: #2d323e;"> <!--por a div aqui da coluna esquerda lateral-->
-        </div>
-
+      <mat-sidenav-content appAppMenuOverDivOut (hasLeaveContent)="hasLeaveContent($event)" [sideNav]="sideNavRef" [hasLeaveSideNav]="hasLeaveSideNavRef" >
+       
         <ng-content></ng-content>
       </mat-sidenav-content>
       

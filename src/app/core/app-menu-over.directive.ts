@@ -1,21 +1,21 @@
-import { Directive, HostListener, Output, EventEmitter, Input } from '@angular/core';
+import { Directive, HostListener, Output, EventEmitter, Input, Renderer2, ElementRef } from '@angular/core';
 
 @Directive({
   selector: '[appAppMenuOver]'
 })
 export class AppMenuOverDirective {
   @Input() sideNav;
-  // @Output() toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() hasLeaveSideNav: boolean;
+  @Input() hasLeaveContent: boolean;
 
-  constructor() {
+  constructor(private renderer: Renderer2, private elRef: ElementRef) {
   }
   
-  @HostListener('mouseover') onMouseOver(eventData: Event) {
-    this.sideNav.toggle();
+  @HostListener('mouseenter') onMouseOver(eventData: Event): void {
+    if(!this.hasLeaveSideNav && this.hasLeaveContent) {
+      this.sideNav.toggle();
+      this.renderer.setStyle(this.elRef.nativeElement, 'z-index', '2 !important');
+    }
   }
-
-  // @HostListener('mouseleave') onMouseLeave(eventData: Event) {
-  //   this.sideNav.toggle();
-  // }
 
 }

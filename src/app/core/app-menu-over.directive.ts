@@ -9,7 +9,7 @@ export class AppMenuOverDirective {
   @HostListener('mouseenter') onMouseOver(eventData: Event): void {
     console.log('im here');
     
-    this.renderer.setStyle(this.elRef.nativeElement, 'width', '275px');
+    this.renderer.setStyle(this.elRef.nativeElement, 'width', '296px');
   }
 
   // @HostListener('mouseleave') onMouseLeave(eventData: Event): void {

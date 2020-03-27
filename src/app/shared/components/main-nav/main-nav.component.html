@@ -42,8 +42,8 @@
 
       </div>
 
-      <mat-nav-list id="sideNav"  style="overflow: hidden;">
-        <div *ngIf="hasEnterMenuRef">
+      <mat-nav-list id="sideNav"  style="overflow: hidden; margin-top: -3vh;">
+        <div > <!--*ngIf="hasEnterMenuRef"-->
           <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
           <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
         </div>

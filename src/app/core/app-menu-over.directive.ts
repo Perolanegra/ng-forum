@@ -15,10 +15,10 @@ export class AppMenuOverDirective {
     this.renderer.setStyle(this.elRef.nativeElement, 'width', '296px');
     const nativeElement: HTMLElement = this.elRef.nativeElement;
    
+    this.renderer.setStyle(nativeElement.querySelector('#sideNav'), 'margin-top', '-8vh');
 
     this.renderer.setStyle(nativeElement.querySelector('.div-img-background'), 'width', '120px');
     this.renderer.setStyle(nativeElement.querySelector('.div-img-background'), 'height', '119px');
-
 
     const heightDivMenuTop = this.hasMobileMatches ? '350px' : '250px';
     this.renderer.setStyle(nativeElement.querySelector('.div-img-center-above'), 'height', heightDivMenuTop);
@@ -26,7 +26,7 @@ export class AppMenuOverDirective {
     const maxWidthImgLogoMenu = this.hasMobileMatches ? '100px' : '130px';
     this.renderer.setStyle(nativeElement.querySelector('.img-logo-menu'), 'max-width', maxWidthImgLogoMenu);
 
-    const bottomMenuVh = this.hasMobileMatches ? '20vh' : '15vh';
+    const bottomMenuVh = this.hasMobileMatches ? '20vh' : '17vh';
     this.renderer.setStyle(nativeElement.querySelector('.div-img-center'), 'bottom', bottomMenuVh);
 
     this.renderer.setStyle(nativeElement.querySelector('#sideNav'), 'overflow', 'hidden auto');
@@ -43,6 +43,7 @@ export class AppMenuOverDirective {
     const nativeElement: HTMLElement = this.elRef.nativeElement;
 
     this.renderer.setStyle(nativeElement.querySelector('#sideNav'), 'overflow', 'hidden');
+    this.renderer.setStyle(nativeElement.querySelector('#sideNav'), 'margin-top', '-3vh');
     
     this.renderer.setStyle(nativeElement.querySelector('.div-img-background'), 'width', '66px');
     this.renderer.setStyle(nativeElement.querySelector('.div-img-background'), 'margin-top', '15%');
@@ -58,7 +59,6 @@ export class AppMenuOverDirective {
 
     this.renderer.setStyle(nativeElement.querySelector('.img-menu-over'), 'max-width', '55px');
     this.renderer.setStyle(nativeElement.querySelector('.img-menu-over'), 'max-height', '55px');
-    
   }
 
 }

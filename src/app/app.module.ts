@@ -9,7 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './modules/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MainNavComponent } from './shared/components/main-nav/main-nav.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
 import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
 

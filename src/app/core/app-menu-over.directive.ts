@@ -1,7 +1,7 @@
 import { Directive, HostListener, Output, EventEmitter, Input, Renderer2, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[appAppMenuOver]'
+  selector: '[appMenuOver]'
 })
 export class AppMenuOverDirective {
   constructor(private renderer: Renderer2, private elRef: ElementRef) { }

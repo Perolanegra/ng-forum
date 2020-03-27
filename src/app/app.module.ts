@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainNavComponent } from './shared/components/main-nav/main-nav.component';
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
+import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { AppMenuOverDirective } from './core/app-menu-over.directive';
     LoginComponent,
     MainNavComponent,
     AppMenuOverDirective,
- 
+    AppAutofillOffDirective
   ],
   imports: [
     BrowserModule,

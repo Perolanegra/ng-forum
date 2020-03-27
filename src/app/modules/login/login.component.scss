@@ -63,4 +63,11 @@ div.mat-form-field-infix ng-tns-c35-1 {
     color: #E91E63;
 }
 
+// ::ng-deep .mat-input:-webkit-autofill {
+//     background: yellow !important;
+// }
 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #303030 inset;
+    color: #E91E63 !important;
+}

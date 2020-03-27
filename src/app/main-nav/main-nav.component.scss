@@ -1,0 +1,239 @@
+.example-container {
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: inherit;
+  flex: 1;
+  background: #303030;
+  overflow: hidden;
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+.example-toolbar {
+  background-color: #2d323e;
+  border-radius: 2px;
+}
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
+
+.nav-item {
+  height: 40px !important;
+  padding: 0 12px 0 24px !important;
+  border-radius: 0 20px 20px 0;
+  margin-right: 16px;
+  padding-left: 56px !important;
+  margin-bottom: 5px;
+  width: 280px !important;
+}
+
+.nav-item-layout {
+  color: #fff;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  background-color: #E91E63 !important;
+}
+
+.mat-nav-list .mat-list-item {
+  font-family: 'Montserrat';
+  color: #fff;
+}
+
+.div-menu-header {
+  width: 300px;
+  height: 230px;
+}
+
+.btn-toggle-mobile {
+  color: white;
+  text-align: end;
+  width: 96%;
+  outline: none;
+}
+
+.img-logo-menu {
+  max-width: 90px;
+  transition: all .43s ease 0s;
+}
+
+.img-menu-over {
+  max-height: 55px;
+  border-radius: 50px;
+  box-shadow: #1E2129 5px 10px 9px;
+  max-width: 55px;
+}
+
+.div-img-center {
+  width: inherit; display: flex; justify-content: center;
+  position: relative;
+  bottom: 9vh;
+  display: flex;
+  -webkit-box-pack: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.div-img-background {
+  width: 66px;
+  margin-top: 20%;
+  height: 65px;
+  display: flex;
+  border-radius: 60px;
+  background: #2d323e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .43s ease 0s;
+}
+
+.div-img-center-above {
+  width: inherit; 
+  min-height: 150px;
+  background-color: #1E2129; 
+} 
+
+::ng-deep .mat-list-base {
+  padding-top: 0px !important;
+}
+
+
+
+
+// .sidenav-content-det {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+
+  
+
+// .sidenav {
+//   // top: 90px !important;
+//   width: 200px;
+//   box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+//   -webkit-transition: width 0.3s linear 0.3s; /* For Safari 3.1 to 6.0 */
+//   transition: width 0.3s linear 0.3s;
+// }
+
+// .sidenav-collapsed {
+//   width: 70px;
+//   box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+//   -webkit-transition: width 0.3s linear 0.3s; /* For Safari 3.1 to 6.0 */
+//   transition: width 0.3s linear 0.3s;
+// }
+
+
+// .sidenav-collapsed-nav-list a p {
+//   display: none;
+// }
+
+
+
+// .spacer {
+//   flex: 1 1 auto;
+// }
+
+// mat-toolbar {
+//   background-color: #4E914E !important;
+// }
+
+// mat-toolbar a {
+//   display: inline-block;
+//   margin: 0 10px;
+//   color: white;
+//   text-decoration: none;
+// }
+
+
+// span{
+//   font-size: 80%;
+// }
+
+// button{
+//   padding:5px;
+// }
+
+
+// .title_sistema {
+//   color: white;
+//   font-size: 20px;
+//   letter-spacing: 1px;
+//   position: relative;
+//   top: -5px;
+// }
+
+// .title_versao {
+//   font-size: 10px;
+//   color: white;
+//   position: relative;
+//   top: 8px;
+//   left: -45px;
+// }
+
+// .logo img {
+//   position: relative;    
+//   margin-right: 5px;
+// }
+
+// .mat-toolbar{
+//   position: fixed;
+//   top: 0;
+//   z-index:10;
+//   height: 40px;
+//   background: rgb(32, 32, 136);
+// }
+
+
+// .fullpage{    
+//   height:90vh
+// }
+
+// .menuspacer{ 
+// min-height:40px
+// }
+
+// .inverted-arrow {
+//   -ms-transform: rotate(20deg); /* IE 9 */
+//   -webkit-transform: rotate(20deg); /* Safari 3-8 */
+//   transform: rotate(180deg);
+// }
+
+
+// .margin-left-200 {
+//   margin-left: 200px !important;
+//   -webkit-transition: all 0.3s linear 0.3s; /* For Safari 3.1 to 6.0 */
+//   transition: all 0.3s linear 0.3s;
+// }
+
+// .margin-left-70 {
+//   margin-left: 70px !important;
+//   -webkit-transition: all 0.3s linear 0.3s; /* For Safari 3.1 to 6.0 */
+//   transition: all 0.3s linear 0.3s;
+// }
+
+// @media screen and (max-width: 599px) {
+//   .margin-left-200 {
+//   margin-left: 0px !important;
+//   -webkit-transition: 0s;/* For Safari 3.1 to 6.0 */
+//   transition: 0s;
+    
+//   }
+// }
+
+
+// .mat-drawer-container {
+//   padding-top: 0px;
+// }

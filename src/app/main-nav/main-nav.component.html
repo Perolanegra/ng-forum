@@ -1,0 +1,94 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <div id="mouse-enter" appMenuOver (hasEnterMenu)="onMenuBlur($event)" [hasMobileMatches]="mobileQuery.matches"
+      style=" height: 100%;
+      flex-direction: column;
+      display: flex;
+      width: 90px;
+      z-index: 9999 !important;
+      box-shadow: 5px 10px 9px #9c4969;
+      position: absolute;
+      border-radius: 1px;
+      overflow-y: visible;
+      overflow-x: hidden;
+      position: absolute;
+      transition: all .43s ease 0s;
+      background: #2d323e !important;">
+
+      <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '150px' : '190px' }">
+        <button tabindex="-1" mat-icon-button class="btn-toggle-mobile"><mat-icon>menu</mat-icon></button>
+        <div style="display: flex; justify-content: center; width: 100%;">
+          <img class="img-logo-menu" src="../../../assets/imgs/logo.png">
+        </div>
+      </div>
+
+      <div class="div-img-center">
+        <div  id="out-img" class="div-img-background">
+          <img [src]="profileDefault" class="img-menu-over">
+        </div>
+        <div style="margin-top: 5px;">
+        </div>
+
+        <div *ngIf="hasEnterMenuRef">
+          <div align="center" class="font" style="color: #fff; width: inherit;">
+            Igor Alves
+          </div>
+          <div align="center" class="font" style="color: #fff; width: inherit;">
+            igoralves@devbaiano.com.br
+          </div>
+        </div>
+
+      </div>
+
+      <mat-nav-list id="sideNav"  style="overflow: hidden; margin-top: -3vh;">
+        <div *ngIf="hasEnterMenuRef">
+          <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
+          <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
+        </div>
+      </mat-nav-list>
+    </div>
+
+    <ng-content></ng-content>
+
+    
+  </div>
+
+  <!-- <div class="row">
+    <div class="col">
+        <mat-sidenav-container style="height: 100%">
+            <mat-sidenav #sidenav [mode]="'side'" [opened]="true" [ngClass]="smallWidth? 'sidenav-collapsed' :'sidenav'"
+                [fixedInViewport]="true" [fixedTopGap]="76" [fixedBottomGap]="0">
+
+                <div *ngIf="!smallWidth" class="d-flex justify-content-center cursor-pointer h3"
+                    style="background-color: green;color:#303030">
+                    <span>Igor</span>
+                </div>
+                <mat-nav-list [ngClass]="smallWidth? 'sidenav-collapsed-nav-list' :''">
+                    <a #mnuInformacoes mat-list-item title="Informações">
+                        <mat-icon mat-list-icon>info</mat-icon>
+                        <p matLine>Informações</p>
+                    </a>
+                    <a #mnuLotacoes mat-list-item  title="Lotações">
+                        <mat-icon mat-list-icon>assignment_ind</mat-icon>
+                        <p matLine>Lotações</p>
+                    </a>
+                    <a #mnuEmails mat-list-item
+                        title="Emails">
+                        <mat-icon mat-list-icon>email</mat-icon>
+                        <p matLine>Emails</p>
+                    </a>
+                    <a #mnuParametros mat-list-item  title="Parâmetros">
+                        <mat-icon mat-list-icon>settings_applications</mat-icon>
+                        <p matLine>Parâmetros</p>
+                    </a>
+                    <a #mnuCertificados mat-list-item  title="Certificados">
+                        <mat-icon mat-list-icon>list</mat-icon> 
+                        <p matLine>Certificados</p>
+                    </a>
+
+                </mat-nav-list>
+
+            </mat-sidenav>
+           
+        </mat-sidenav-container>
+    </div>
+</div> -->

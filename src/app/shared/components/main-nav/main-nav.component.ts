@@ -12,19 +12,19 @@ export class MainNavComponent implements OnInit {
     hasEnterMenuRef: boolean = false;
     profileDefault: string = '../../../../assets/imgs/profile-default.jfif';
     smallWidth: boolean
-    private mudancaTamanhoTelaSubscription: Subscription;
+    // private mudancaTamanhoTelaSubscription: Subscription;
 
 
     constructor(changeDetectorRef: ChangeDetectorRef, 
     private breakpointObserver: BreakpointObserver,
     media: MediaMatcher,
     ) { 
-        this.mudancaTamanhoTelaSubscription = this.breakpointObserver
-            .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
-            .subscribe((state: BreakpointState) => {
+        // this.mudancaTamanhoTelaSubscription = this.breakpointObserver
+        //     .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+        //     .subscribe((state: BreakpointState) => {
 
-                this.smallWidth = state.matches;
-            });
+        //         this.smallWidth = state.matches;
+        //     });
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);

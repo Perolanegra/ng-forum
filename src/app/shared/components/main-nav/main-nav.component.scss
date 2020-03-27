@@ -55,6 +55,18 @@
   height: 230px;
 }
 
+.btn-toggle-mobile {
+  color: white;
+  text-align: end;
+  width: 96%;
+  outline: none;
+}
+
+.img-logo-menu {
+  max-width: 90px;
+  transition: all .43s ease 0s;
+}
+
 .img-menu-over {
   max-height: 55px;
   border-radius: 50px;
@@ -65,8 +77,12 @@
 .div-img-center {
   width: inherit; display: flex; justify-content: center;
   position: relative;
-  // bottom: 55px;
   bottom: 9vh;
+  display: flex;
+  -webkit-box-pack: center;
+  align-items: center;
+  flex-direction: column;
+  
 }
 
 .div-img-background {
@@ -79,4 +95,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all .43s ease 0s;
+}
+
+.div-img-center-above {
+  width: inherit; 
+  height: 200px; 
+  min-height: 200px;
+  background-color: #1E2129; 
+} 
+
+::ng-deep .mat-list-base {
+  padding-top: 0px !important;
 }

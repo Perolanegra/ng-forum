@@ -12,6 +12,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
 import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
+import { AppController } from './core/appController';
+import { MainNavStyle } from './main-nav/main-nav.style';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.di
     MaterialModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt' }
+    { provide: LOCALE_ID, useValue: 'pt' },
+    AppController,
+    MainNavStyle
   ],
   bootstrap: [AppComponent],
   schemas: [

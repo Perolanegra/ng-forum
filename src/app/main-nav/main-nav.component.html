@@ -1,22 +1,12 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-    <div id="mouse-enter" appMenuOver (hasEnterMenu)="onMenuBlur($event)" [hasMobileMatches]="mobileQuery.matches"
-      style=" height: 100%;
-      flex-direction: column;
-      display: flex;
-      width: 90px;
-      z-index: 9999 !important;
-      box-shadow: 5px 10px 9px #9c4969;
-      position: absolute;
-      border-radius: 1px;
-      overflow-y: visible;
-      overflow-x: hidden;
-      position: absolute;
-      transition: all .43s ease 0s;
-      background: #2d323e !important;">
+
+  
+
+    <div #sideMenu appMenuOver (hasEnterMenu)="onMenuBlur($event)" [hasMobileMatches]="mobileQuery.matches"
+      class="side-menu-init">
 
       <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '150px' : '190px' }">
-        <button tabindex="-1" mat-icon-button class="btn-toggle-mobile"><mat-icon>menu</mat-icon></button>
-        <div style="display: flex; justify-content: center; width: 100%;">
+        <div class="div-img-center-logo">
           <img class="img-logo-menu" src="../../../assets/imgs/logo.png">
         </div>
       </div>
@@ -24,11 +14,16 @@
       <div class="div-img-center">
         <div  id="out-img" class="div-img-background">
           <img [src]="profileDefault" class="img-menu-over">
+
+          <div class="div-visto-img">
+            <img [src]="vistoPic" style="width: 75%; margin-left: 1px;">
+          </div>
+
         </div>
         <div style="margin-top: 5px;">
         </div>
 
-        <div *ngIf="hasEnterMenuRef">
+        <div *ngIf="hasEnterMenuRef" id="user-info" style="font-size: .9em; margin-bottom: 15px;">
           <div align="center" class="font" style="color: #fff; width: inherit;">
             Igor Alves
           </div>
@@ -39,7 +34,7 @@
 
       </div>
 
-      <mat-nav-list id="sideNav"  style="overflow: hidden; margin-top: -3vh;">
+      <mat-nav-list id="sideNav" style="overflow: hidden;">
         <div *ngIf="hasEnterMenuRef">
           <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
           <a mat-list-item  *ngFor="let nav of getfillerNav()?.routes" [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
@@ -47,8 +42,12 @@
       </mat-nav-list>
     </div>
 
-    <ng-content></ng-content>
+    <mat-toolbar class="example-toolbar" > 
+      <button tabindex="-1" mat-icon-button class="btn-toggle-mobile"(click)="toggleMenu(sideMenu)" *ngIf="mobileQuery.matches"><mat-icon>menu</mat-icon></button>
+    </mat-toolbar>
 
+    <ng-content></ng-content>
+    
     
   </div>
 

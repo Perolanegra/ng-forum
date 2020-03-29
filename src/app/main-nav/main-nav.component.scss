@@ -57,27 +57,25 @@
 
 .btn-toggle-mobile {
   color: white;
-  text-align: end;
+  text-align: start;
   width: 96%;
   outline: none;
 }
 
 .img-logo-menu {
-  max-width: 90px;
+  width: 55%;
   transition: all .43s ease 0s;
 }
 
 .img-menu-over {
-  max-height: 55px;
+  width: 80%;
   border-radius: 50px;
   box-shadow: #1E2129 5px 10px 9px;
-  max-width: 55px;
 }
 
 .div-img-center {
   width: inherit; display: flex; justify-content: center;
   position: relative;
-  bottom: 9vh;
   display: flex;
   -webkit-box-pack: center;
   align-items: center;
@@ -86,9 +84,10 @@
 }
 
 .div-img-background {
-  width: 66px;
-  margin-top: 20%;
-  height: 65px;
+  position: relative;
+  width: 85px;
+  height: 85px;
+  margin-top: -7vh;
   display: flex;
   border-radius: 60px;
   background: #2d323e;
@@ -108,132 +107,82 @@
   padding-top: 0px !important;
 }
 
+.side-menu-init {
+  height: 100vh;
+  flex-direction: column;
+  display: flex;
+  z-index: 9999 !important;
+  box-shadow: 5px 10px 9px #9c4969;
+  position: absolute;
+  border-radius: 1px;
+  overflow-y: visible;
+  overflow-x: hidden;
+  position: absolute;
+  transition: all .43s ease 0s;
+  background: #2d323e !important;
+}
+
+.div-img-center-logo {
+  display: flex; justify-content: center; margin-top: 3vh;
+}
+
+.div-visto-img {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: #4e535f;;
+  bottom: 0px;
+  right: 0px;
+  border-radius: 50%;
+}
+
+.side-menu-init {
+  width: 8vw;
+}
+
+.side-menu-init--active {
+  width: 26vw;
+}
 
 
+@media only screen and (max-width: 767px) {
+  .side-menu-init {
+    width: 0px;
+  }
 
-// .sidenav-content-det {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
+  .side-menu-init--active {
+    width: 85vw;
+  }
 
+  .div-img-background {
+    margin-top: -3vh;
+  }
+}
 
+@media only screen and (width: 1024px) {
+  .img-logo-menu {
+    width: 80%;
+  }
   
+  .side-menu-init--active .div-img-center-above {
+    height: 300px !important;
+  }
 
-// .sidenav {
-//   // top: 90px !important;
-//   width: 200px;
-//   box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
-//   -webkit-transition: width 0.3s linear 0.3s; /* For Safari 3.1 to 6.0 */
-//   transition: width 0.3s linear 0.3s;
-// }
+  .div-img-background {
+    margin-top: -4vh;
+  }
+}
 
-// .sidenav-collapsed {
-//   width: 70px;
-//   box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
-//   -webkit-transition: width 0.3s linear 0.3s; /* For Safari 3.1 to 6.0 */
-//   transition: width 0.3s linear 0.3s;
-// }
+@media only screen and (width: 768px) {
+  .img-logo-menu {
+    width: 80%;
+  }
 
-
-// .sidenav-collapsed-nav-list a p {
-//   display: none;
-// }
+  .div-img-background {
+    margin-top: -5vh;
+  }
+}
 
 
-
-// .spacer {
-//   flex: 1 1 auto;
-// }
-
-// mat-toolbar {
-//   background-color: #4E914E !important;
-// }
-
-// mat-toolbar a {
-//   display: inline-block;
-//   margin: 0 10px;
-//   color: white;
-//   text-decoration: none;
-// }
-
-
-// span{
-//   font-size: 80%;
-// }
-
-// button{
-//   padding:5px;
-// }
-
-
-// .title_sistema {
-//   color: white;
-//   font-size: 20px;
-//   letter-spacing: 1px;
-//   position: relative;
-//   top: -5px;
-// }
-
-// .title_versao {
-//   font-size: 10px;
-//   color: white;
-//   position: relative;
-//   top: 8px;
-//   left: -45px;
-// }
-
-// .logo img {
-//   position: relative;    
-//   margin-right: 5px;
-// }
-
-// .mat-toolbar{
-//   position: fixed;
-//   top: 0;
-//   z-index:10;
-//   height: 40px;
-//   background: rgb(32, 32, 136);
-// }
-
-
-// .fullpage{    
-//   height:90vh
-// }
-
-// .menuspacer{ 
-// min-height:40px
-// }
-
-// .inverted-arrow {
-//   -ms-transform: rotate(20deg); /* IE 9 */
-//   -webkit-transform: rotate(20deg); /* Safari 3-8 */
-//   transform: rotate(180deg);
-// }
-
-
-// .margin-left-200 {
-//   margin-left: 200px !important;
-//   -webkit-transition: all 0.3s linear 0.3s; /* For Safari 3.1 to 6.0 */
-//   transition: all 0.3s linear 0.3s;
-// }
-
-// .margin-left-70 {
-//   margin-left: 70px !important;
-//   -webkit-transition: all 0.3s linear 0.3s; /* For Safari 3.1 to 6.0 */
-//   transition: all 0.3s linear 0.3s;
-// }
-
-// @media screen and (max-width: 599px) {
-//   .margin-left-200 {
-//   margin-left: 0px !important;
-//   -webkit-transition: 0s;/* For Safari 3.1 to 6.0 */
-//   transition: 0s;
-    
-//   }
-// }
-
-
-// .mat-drawer-container {
-//   padding-top: 0px;
-// }

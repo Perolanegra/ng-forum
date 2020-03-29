@@ -1,5 +1,4 @@
-import { Directive, HostListener, Output, EventEmitter, Input, Renderer2, ElementRef, OnInit } from '@angular/core';
-import { AppController } from './appController';
+import { Directive, HostListener, Output, EventEmitter, Input, ElementRef } from '@angular/core';
 import { MainNavStyle } from '../main-nav/main-nav.style';
 
 @Directive({
@@ -7,7 +6,7 @@ import { MainNavStyle } from '../main-nav/main-nav.style';
   
 })
 export class AppMenuOverDirective {
-  constructor(private elRef: ElementRef, private appControler: AppController, private mainNavStyle: MainNavStyle) { }
+  constructor(private elRef: ElementRef, private mainNavStyle: MainNavStyle) { }
 
   @Output() hasEnterMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() hasMobileMatches: boolean;

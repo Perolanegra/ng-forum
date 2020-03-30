@@ -58,7 +58,6 @@
 .btn-toggle-mobile {
   color: white;
   text-align: start;
-  width: 96%;
   outline: none;
 }
 
@@ -146,6 +145,22 @@
   width: 26vw;
 }
 
+.btn-close-side-menu-mobile {
+  color: #fff;
+  outline: none;
+  width: 95%;
+  top: 10px;
+  height: 2px;
+}
+
+.div-close-side-menu-mobile {
+  width: 50px;
+  height: 0px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: 80%;
+}
 
 @media only screen and (max-width: 767px) {
   .side-menu-init {
@@ -175,14 +190,21 @@
   }
 }
 
-@media only screen and (width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 1023px)  {
   .img-logo-menu {
-    width: 80%;
+    width: 70%;
   }
 
   .div-img-background {
     margin-top: -5vh;
   }
-}
 
+  .side-menu-init {
+    width: 16vw;
+  }
+
+  .side-menu-init--active {
+    width: 35vw;
+  }
+}
 

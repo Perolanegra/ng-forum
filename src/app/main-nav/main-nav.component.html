@@ -1,11 +1,14 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
 
-  
-
     <div #sideMenu appMenuOver (hasEnterMenu)="onMenuBlur($event)" [hasMobileMatches]="mobileQuery.matches"
       class="side-menu-init">
 
       <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '150px' : '190px' }">
+
+        <div class="div-close-side-menu-mobile">
+          <button tabindex="-1" mat-icon-button class="btn-close-side-menu-mobile"  (click)="appController.removeElementClass(sideMenu, 'side-menu-init--active'); hasEnterMenuRef = !hasEnterMenuRef;" *ngIf="mobileQuery.matches"><mat-icon>close</mat-icon></button>
+        </div>
+
         <div class="div-img-center-logo">
           <img class="img-logo-menu" src="../../../assets/imgs/logo.png">
         </div>
@@ -43,51 +46,8 @@
     </div>
 
     <mat-toolbar class="example-toolbar" > 
-      <button tabindex="-1" mat-icon-button class="btn-toggle-mobile"(click)="toggleMenu(sideMenu)" *ngIf="mobileQuery.matches"><mat-icon>menu</mat-icon></button>
+      <button tabindex="-1" mat-icon-button class="btn-toggle-mobile" (click)="toggleMenu(sideMenu)" *ngIf="mobileQuery.matches"><mat-icon>menu</mat-icon></button>
     </mat-toolbar>
 
     <ng-content></ng-content>
-    
-    
   </div>
-
-  <!-- <div class="row">
-    <div class="col">
-        <mat-sidenav-container style="height: 100%">
-            <mat-sidenav #sidenav [mode]="'side'" [opened]="true" [ngClass]="smallWidth? 'sidenav-collapsed' :'sidenav'"
-                [fixedInViewport]="true" [fixedTopGap]="76" [fixedBottomGap]="0">
-
-                <div *ngIf="!smallWidth" class="d-flex justify-content-center cursor-pointer h3"
-                    style="background-color: green;color:#303030">
-                    <span>Igor</span>
-                </div>
-                <mat-nav-list [ngClass]="smallWidth? 'sidenav-collapsed-nav-list' :''">
-                    <a #mnuInformacoes mat-list-item title="Informações">
-                        <mat-icon mat-list-icon>info</mat-icon>
-                        <p matLine>Informações</p>
-                    </a>
-                    <a #mnuLotacoes mat-list-item  title="Lotações">
-                        <mat-icon mat-list-icon>assignment_ind</mat-icon>
-                        <p matLine>Lotações</p>
-                    </a>
-                    <a #mnuEmails mat-list-item
-                        title="Emails">
-                        <mat-icon mat-list-icon>email</mat-icon>
-                        <p matLine>Emails</p>
-                    </a>
-                    <a #mnuParametros mat-list-item  title="Parâmetros">
-                        <mat-icon mat-list-icon>settings_applications</mat-icon>
-                        <p matLine>Parâmetros</p>
-                    </a>
-                    <a #mnuCertificados mat-list-item  title="Certificados">
-                        <mat-icon mat-list-icon>list</mat-icon> 
-                        <p matLine>Certificados</p>
-                    </a>
-
-                </mat-nav-list>
-
-            </mat-sidenav>
-           
-        </mat-sidenav-container>
-    </div>
-</div> -->

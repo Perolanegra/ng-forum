@@ -23,7 +23,7 @@ export class MainNavComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     public media: MediaMatcher,
     private mainNavStyle: MainNavStyle,
-    private appController: AppController
+    public appController: AppController
     ) { 
         // this.mudancaTamanhoTelaSubscription = this.breakpointObserver
         //     .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
@@ -59,5 +59,6 @@ export class MainNavComponent implements OnInit {
         this.mainNavStyle.setStyleMenuNavInit(elementRef, this.mobileQuery.matches);
     }
 
+ 
 
 }

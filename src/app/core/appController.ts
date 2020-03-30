@@ -307,7 +307,7 @@ export class AppController {
     }
     
     /**
-     * 
+     * Método que adiciona classe em determinado elemento.
      * @param nativeElement Elemento a ser estilizado, nativeElement.
      * @param classOn Classe css a ser aplicada.
      * @returns void
@@ -318,7 +318,7 @@ export class AppController {
     }
 
     /**
-     * 
+     * Método que estiliza o elemento de acordo com a propriedade passada.
      * @param elementRef Elemento a ser estilizado, nativeElement.
      * @param key Propriedade css a ser aplicada.
      * @param value Valor css a ser aplicado.
@@ -327,6 +327,15 @@ export class AppController {
      */
     setElementStyle(element: Element, key: string, value: string) {
         this.renderer.setStyle(element, key, value);
+    }
+
+    /**
+     * Método que remove a classe passada como parâmetro em determinado elemento.
+     * @param nativeElement Elemento o qual a classe será removida.
+     * @param classOff Classe que será removida.
+     */
+    removeElementClass(nativeElement: ElementRef, classOff: string) {
+        this.renderer.removeClass(nativeElement, classOff);
     }
     
 

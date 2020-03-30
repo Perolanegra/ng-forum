@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild  } from '@angular/core';
 import {MediaMatcher, BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AppController } from '../core/appController';
@@ -15,7 +15,9 @@ export class MainNavComponent implements OnInit {
     profileDefault: string = '../../../../assets/imgs/profile-default.jfif';
     // smallWidth: boolean
     // private mudancaTamanhoTelaSubscription: Subscription;
-
+    @ViewChild('userInfo') elRefUserInfo: ElementRef;
+    @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;
+    
     public vistoPic = '../../assets/svg/moderator-male.svg';
 
 
@@ -55,10 +57,29 @@ export class MainNavComponent implements OnInit {
     }
 
     toggleMenu(elementRef: Element) {
-        this.hasEnterMenuRef = !this.hasEnterMenuRef;
+        this.hasEnterMenuRef = true;
         this.mainNavStyle.setStyleMenuNavInit(elementRef, this.mobileQuery.matches);
+
+        this.appController.removeElementClass(this.elRefUserInfo.nativeElement, 'div-fade-out');
+        this.appController.removeElementClass(this.elRefUserInfo.nativeElement, 'fade-transition-out');
+        this.appController.setElementClass(this.elRefUserInfo.nativeElement, 'fade-transition-in');
+
+        this.appController.removeElementClass(this.elRefnavListRoutes.nativeElement, 'div-fade-out');
+        this.appController.removeElementClass(this.elRefnavListRoutes.nativeElement, 'fade-transition-out');
+        this.appController.setElementClass(this.elRefnavListRoutes.nativeElement, 'fade-transition-in');
     }
 
+    closeSideMenuMobile(elementRefSideMenu: ElementRef) { // quando o ElementRef vem de referência, ele já passa o nativeElement
+        this.appController.removeElementClass(elementRefSideMenu, 'side-menu-init--active');
+
+        this.appController.setElementClass(this.elRefUserInfo.nativeElement, 'div-fade-out');
+        this.appController.removeElementClass(this.elRefUserInfo.nativeElement, 'fade-transition-in');
+        this.appController.setElementClass(this.elRefUserInfo.nativeElement, 'fade-transition-out');
+
+        this.appController.setElementClass(this.elRefnavListRoutes.nativeElement, 'div-fade-out');
+        this.appController.removeElementClass(this.elRefnavListRoutes.nativeElement, 'fade-transition-in');
+        this.appController.setElementClass(this.elRefnavListRoutes.nativeElement, 'fade-transition-out');
+    }
  
 
 }

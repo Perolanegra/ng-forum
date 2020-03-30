@@ -162,6 +162,24 @@
   left: 80%;
 }
 
+.div-user-info {
+  font-size: .9em; margin-bottom: 15px; 
+}
+
+.div-fade-out {
+  opacity: 0;
+}
+
+.fade-transition-in {
+  transition: 0.8s;
+  transition-timing-function: ease-in-out;
+}
+
+.fade-transition-out {
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
 @media only screen and (max-width: 767px) {
   .side-menu-init {
     width: 0px;
@@ -179,6 +197,14 @@
 @media only screen and (width: 1024px) {
   .img-logo-menu {
     width: 80%;
+  }
+
+  .side-menu-init {
+    width: 12vw;
+  }
+
+  .side-menu-init--active {
+    width: 26vw;
   }
   
   .side-menu-init--active .div-img-center-above {

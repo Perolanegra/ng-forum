@@ -3,7 +3,7 @@
   <div #sideMenu appMenuOver (hasEnterMenu)="onMenuBlur($event)" [hasMobileMatches]="mobileQuery.matches"
     class="side-menu-init">
 
-    <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '150px' : '190px' }">
+    <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '15vh' : '19vh' }">
 
       <div class="div-close-side-menu-mobile">
         <button id="btn-close" tabindex="-1" mat-icon-button class="btn-close-side-menu-mobile"
@@ -30,7 +30,7 @@
       <div style="margin-top: 5px;">
       </div>
 
-      <div #userInfo class="div-user-info ">
+      <div #userInfo class="div-user-info" *ngIf="hasEnterMenuRef">
         <div align="center" class="font" style="color: #fff; width: inherit;">
           Igor Alves
         </div>

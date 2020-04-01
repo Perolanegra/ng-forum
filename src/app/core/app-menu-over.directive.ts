@@ -17,15 +17,9 @@ export class AppMenuOverDirective {
   }
 
 
-  // @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
-  //   this.hasEnterMenu.emit(false);
-  //   const nativeElement: HTMLElement = this.elRef.nativeElement;
-
-  //   if(this.hasMobileMatches) {
-  //     this.renderer.setStyle(this.elRef.nativeElement, 'width', '26vw');
-  //   } else {
-  //     this.renderer.setStyle(this.elRef.nativeElement, 'width', '8vw');
-  //   }
-  // }
+  @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
+    this.hasEnterMenu.emit(false);
+    this.mainNavStyle.setStyleMenuClose(this.elRef.nativeElement, this.hasMobileMatches);
+  }
 
 }

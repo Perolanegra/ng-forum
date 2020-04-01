@@ -75,13 +75,16 @@ export class MainNavComponent implements OnInit {
     closeSideMenuMobile(elementRefSideMenu: ElementRef) { // quando o ElementRef vem de referência, ele já passa o nativeElement
         this.appController.removeElementClass(elementRefSideMenu, 'side-menu-init--active');
 
-        this.appController.setElementClass(this.elRefUserInfo.nativeElement, 'div-fade-out');
-        this.appController.removeElementClass(this.elRefUserInfo.nativeElement, 'fade-transition-in');
-        this.appController.setElementClass(this.elRefUserInfo.nativeElement, 'fade-transition-out');
+        this.mainNavStyle.setStyleMenuClose(this.elRefUserInfo.nativeElement, this.mobileQuery.matches);
+        this.mainNavStyle.setStyleMenuClose(this.elRefnavListRoutes.nativeElement, this.mobileQuery.matches);
 
-        this.appController.setElementClass(this.elRefnavListRoutes.nativeElement, 'div-fade-out');
-        this.appController.removeElementClass(this.elRefnavListRoutes.nativeElement, 'fade-transition-in');
-        this.appController.setElementClass(this.elRefnavListRoutes.nativeElement, 'fade-transition-out');
+        // this.appController.setElementClass(this.elRefUserInfo.nativeElement, 'div-fade-out');
+        // this.appController.removeElementClass(this.elRefUserInfo.nativeElement, 'fade-transition-in');
+        // this.appController.setElementClass(this.elRefUserInfo.nativeElement, 'fade-transition-out');
+
+        // this.appController.setElementClass(this.elRefnavListRoutes.nativeElement, 'div-fade-out');
+        // this.appController.removeElementClass(this.elRefnavListRoutes.nativeElement, 'fade-transition-in');
+        // this.appController.setElementClass(this.elRefnavListRoutes.nativeElement, 'fade-transition-out');
     }
  
 

@@ -13,11 +13,11 @@ export class MainNavStyle {
     setStyleMenuNavInit(elementRef: any, hasMobileMatches: boolean) {
         this.appControler.setElementClass(elementRef, 'side-menu-init--active');
         this.appControler.setElementStyle(elementRef.querySelector('.div-img-center-above'), 'height', '35vh');
-
+        
         if (hasMobileMatches) {
             this.appControler.setElementStyle(elementRef.querySelector('.div-img-center'), 'margin-top', '-33px');
         }
-
+      
         this.appControler.setElementStyle(elementRef.querySelector('#sideNav'), 'overflow', 'hidden auto');
     }
 }

@@ -214,6 +214,10 @@
   .div-img-background {
     margin-top: -4vh;
   }
+  
+  .div-img-center-above {
+    height: 26vh;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px)  {
@@ -232,5 +236,18 @@
   .side-menu-init--active {
     width: 35vw;
   }
+
+  .div-img-center-above {
+    height: 26vh;
+  }
 }
 
+@media only screen and (min-height: 1398px) {
+  .div-img-center-above {
+    height: 28vh !important;
+  }
+
+  .div-img-background {
+    margin-top: -5vh !important;
+  }
+}

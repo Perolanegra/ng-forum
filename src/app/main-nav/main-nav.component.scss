@@ -63,7 +63,7 @@
 
 .img-logo-menu {
   width: 55%;
-  transition: all .43s ease 0s;
+  transition: all .43s;
 }
 
 .img-menu-over {
@@ -100,6 +100,7 @@
   width: inherit; 
   min-height: 150px;
   background-color: #1E2129; 
+  transition: height 0.4s;
 } 
 
 ::ng-deep .mat-list-base {
@@ -171,7 +172,7 @@
 }
 
 .fade-transition-in {
-  transition: 0.8s;
+  transition: 0.4s;
   transition-timing-function: ease-in-out;
 }
 

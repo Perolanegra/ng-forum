@@ -12,6 +12,10 @@ export class MainNavStyle {
      */
     setStyleMenuNavInit(elementRef: any, hasMobileMatches: boolean) {
         this.appController.setElementClass(elementRef, 'side-menu-init--active');
+        this.appController.removeElementClass(elementRef, 'div-fade-out');
+        this.appController.setElementClass(elementRef, 'fade-transition-in');
+        this.appController.removeElementClass(elementRef, 'fade-transition-out');
+
         this.appController.setElementStyle(elementRef.querySelector('.div-img-center-above'), 'height', '35vh');
         
         if (hasMobileMatches) {

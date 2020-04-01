@@ -30,7 +30,7 @@
       <div style="margin-top: 5px;">
       </div>
 
-      <div #userInfo class="div-user-info" *ngIf="hasEnterMenuRef">
+      <div #userInfo class="div-user-info div-fade-out fade-transition-in">
         <div align="center" class="font" style="color: #fff; width: inherit;">
           Igor Alves
         </div>
@@ -42,7 +42,7 @@
     </div>
 
     <mat-nav-list id="sideNav" style="overflow: hidden;">
-      <div #navListRoutes  *ngIf="hasEnterMenuRef">
+      <div #navListRoutes id="sideNavContainer" class="div-fade-out fade-transition-in">
         <a mat-list-item *ngFor="let nav of getfillerNav()?.routes"
           [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
         <a mat-list-item *ngFor="let nav of getfillerNav()?.routes"

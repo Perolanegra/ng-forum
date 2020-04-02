@@ -17,7 +17,12 @@ export class AppNavNameBehaviorDirective {
       setState: this.hasEnterMenu ? this.appController.setElementClass : this.appController.removeElementClass
     };
     const { setState } = obj;
-    setState(this.elRef, 'div-fade-in');
+
+    // if(this.hasEnterMenu) {
+    //   this.appController.setElementClass()
+    // }
+
+    setState(this.elRef.nativeElement, 'div-fade-in');
   }
 
 

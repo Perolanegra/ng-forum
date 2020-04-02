@@ -44,7 +44,9 @@
       <div #navListRoutes id="sideNavContainer" [ngClass]="[ nav?.isActive ? 'div-nav-item--active' : '' ]" class="fade-transition-in" *ngFor="let nav of getfillerNav()?.routes">
           <a mat-list-item class="nav-item" [title]="nav?.name"> <!--[routerLink]="['route', {params: params}]" -->
             <mat-icon mat-list-icon>list</mat-icon>
-            <p matLine ngNavNameBehavior [hasEnterMenu]="hasEnterMenuRef" class="div-fade-out fade-transition-in" style="font-size: 14px !important;"  >{{ nav?.name }}</p> 
+            <div class="fade-transition-in div-fade-out" [ngClass]="[ hasEnterMenuRef ? 'div-fade-in' : 'div-fade-out' ]" >
+              {{ nav?.name }}
+            </div>
           </a>
       </div>
     </mat-nav-list>

@@ -48,6 +48,7 @@ export class MainNavStyle {
                 this.appController.setElementClass(elementRef, 'fade-transition-out');
 
                 this.appController.setElementClass(elementRef.querySelector('.div-user-info'), 'div-fade-out');
+                // this.appController.setElementClass(elementRef.querySelector('#navItemName'), 'div-fade-out');
             }
 
         }

@@ -2,7 +2,7 @@ import { Directive, HostListener, Output, EventEmitter, Input, ElementRef } from
 import { MainNavStyle } from '../main-nav/main-nav.style';
 
 @Directive({
-  selector: '[appMenuOver]',
+  selector: '[ngMenuOver]',
 
 })
 export class AppMenuOverDirective {

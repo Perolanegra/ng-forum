@@ -1,7 +1,7 @@
 import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[appAutofillOff]'
+  selector: '[ngAutofillOff]'
 })
 export class AppAutofillOffDirective {
   constructor(private elRef: ElementRef) { }

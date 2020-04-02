@@ -77,5 +77,9 @@ export class GlobalVars {
     return this.hasAccess();
   }
 
+  setSessionStorage() {
+    
+  }
+
   
 }

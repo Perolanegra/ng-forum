@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild  } from '@angular/core';
-import {MediaMatcher, BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { AppController } from '../core/appController';
 import { MainNavStyle } from './main-nav.style';
+import { Router } from '@angular/router';
+import { FillerNav } from '../core/fillerNav';
 @Component({
-    selector: 'app-main-nav',
+    selector: 'ng-main-nav',
     templateUrl: './main-nav.component.html',
     styleUrls: ['./main-nav.component.scss']
 })
@@ -13,8 +14,7 @@ export class MainNavComponent implements OnInit {
     mobileQuery: MediaQueryList;
     hasEnterMenuRef: boolean = false;
     profileDefault: string = '../../../../assets/imgs/profile-default.jfif';
-    // smallWidth: boolean
-    // private mudancaTamanhoTelaSubscription: Subscription;
+   
     @ViewChild('userInfo') elRefUserInfo: ElementRef;
     @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;
     
@@ -22,21 +22,15 @@ export class MainNavComponent implements OnInit {
 
 
     constructor(changeDetectorRef: ChangeDetectorRef, 
-    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    // private breakpointObserver: BreakpointObserver,
     public media: MediaMatcher,
     private mainNavStyle: MainNavStyle,
     public appController: AppController
     ) { 
-        // this.mudancaTamanhoTelaSubscription = this.breakpointObserver
-        //     .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
-        //     .subscribe((state: BreakpointState) => {
-
-        //         this.smallWidth = state.matches;
-        //     });
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
-        
     }
     
     private _mobileQueryListener: () => void;
@@ -67,5 +61,18 @@ export class MainNavComponent implements OnInit {
         this.mainNavStyle.setStyleMenuClose(this.elRefnavListRoutes.nativeElement, this.mobileQuery.matches);
     }
  
+    setActiveLink() {
+        const urlRef = this.router.url;
+        const { routes } = this.getfillerNav();
+
+        routes.map((prop) => {
+            if(urlRef.includes(prop.path)) {
+                prop.isActive = true;
+                return;
+            }
+        });
+
+        
+    }
 
 }

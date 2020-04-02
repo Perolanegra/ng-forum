@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { GlobalVars } from './core/globalVars';
 import { UserModel } from './shared/models/user/user.model';
+import { FillerNav } from './core/fillerNav';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +10,7 @@ import { UserModel } from './shared/models/user/user.model';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private router: Router,
-    private globalVars: GlobalVars) {
+  constructor(private globalVars: GlobalVars) {
     this.setRoutesLocalStorage();
   }
 
@@ -26,14 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   setRoutesLocalStorage() {
-    const fillerNav: Object = {
-      routes: [
-        { name: 'Início', isActive: true, path: 'home' },
-        { name: 'Perfil', isActive: false, path: 'profile' },
-        { name: 'Meus Posts', isActive: false, path: 'my-stuff' },
-      ]
-    };
-
+    const fillerNav: FillerNav = new FillerNav();
     localStorage.setItem('fillerNav', JSON.stringify(fillerNav));
   }
 

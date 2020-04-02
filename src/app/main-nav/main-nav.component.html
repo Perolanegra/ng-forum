@@ -1,14 +1,13 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
 
-  <div #sideMenu appMenuOver (hasEnterMenu)="onMenuBlur($event)" [hasMobileMatches]="mobileQuery.matches"
+  <div #sideMenu ngMenuOver (hasEnterMenu)="onMenuBlur($event)" [hasMobileMatches]="mobileQuery.matches"
     class="side-menu-init">
 
     <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '15vh' : '19vh' }">
 
       <div class="div-close-side-menu-mobile">
         <button id="btn-close" tabindex="-1" mat-icon-button class="btn-close-side-menu-mobile"
-          (click)="closeSideMenuMobile(sideMenu);"
-          *ngIf="mobileQuery.matches">
+          (click)="closeSideMenuMobile(sideMenu);" *ngIf="mobileQuery.matches">
           <mat-icon>close</mat-icon>
         </button>
       </div>
@@ -42,11 +41,13 @@
     </div>
 
     <mat-nav-list id="sideNav" style="overflow: hidden;">
-      <div #navListRoutes id="sideNavContainer" class="div-fade-out fade-transition-in">
-        <a mat-list-item *ngFor="let nav of getfillerNav()?.routes"
-          [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
-        <a mat-list-item *ngFor="let nav of getfillerNav()?.routes"
-          [ngClass]="['nav-item', nav?.isActive ? 'nav-item-layout' : '' ]">{{ nav?.name }}</a>
+      <div #navListRoutes id="sideNavContainer" class="fade-transition-in">
+
+        <a  mat-list-item [title]="nav?.name" *ngFor="let nav of getfillerNav()?.routes"> <!--[routerLink]="['route', {params: params}]" -->
+          <mat-icon mat-list-icon>list</mat-icon>
+          <p matLine >{{ nav?.name }}</p> 
+        </a>
+
       </div>
     </mat-nav-list>
   </div>

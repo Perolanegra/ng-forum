@@ -38,7 +38,7 @@
 }
 
 .div-fade-in {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .mat-nav-list .mat-list-item {
@@ -175,6 +175,12 @@
 .fade-transition-out {
   transition: 0.3s;
   transition-timing-function: ease-in-out;
+}
+
+.div-nav-item--active {
+  background: #E91E63;
+  width: 88%;
+  border-radius: 0 20px 20px 0;
 }
 
 @media only screen and (max-width: 767px) {

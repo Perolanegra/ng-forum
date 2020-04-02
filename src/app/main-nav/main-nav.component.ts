@@ -71,8 +71,6 @@ export class MainNavComponent implements OnInit {
                 return;
             }
         });
-
-        
     }
 
 }

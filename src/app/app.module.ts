@@ -14,6 +14,7 @@ import { AppMenuOverDirective } from './core/app-menu-over.directive';
 import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
 import { AppController } from './core/appController';
 import { MainNavStyle } from './main-nav/main-nav.style';
+import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MainNavStyle } from './main-nav/main-nav.style';
     LoginComponent,
     MainNavComponent,
     AppMenuOverDirective,
-    AppAutofillOffDirective
+    AppAutofillOffDirective,
+    AppNavNameBehaviorDirective
   ],
   imports: [
     BrowserModule,

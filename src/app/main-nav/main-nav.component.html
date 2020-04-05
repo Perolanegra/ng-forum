@@ -41,10 +41,10 @@
     </div>
 
     <mat-nav-list id="sideNav" style="overflow: hidden;">
-      <div #navListRoutes id="sideNavContainer" [ngClass]="[ nav?.isActive ? 'div-nav-item--active' : '' ]" class="fade-transition-in" *ngFor="let nav of getfillerNav()?.routes">
+      <div #navListRoutes id="sideNavContainer" [ngClass]="[ hasEnterMenuRef &&nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--disable' ]" class="fade-transition-in" *ngFor="let nav of getfillerNav()?.routes">
           <a mat-list-item class="nav-item" [title]="nav?.name"> <!--[routerLink]="['route', {params: params}]" -->
-            <mat-icon mat-list-icon>list</mat-icon>
-            <div class="fade-transition-in div-fade-out" [ngClass]="[ hasEnterMenuRef ? 'div-fade-in' : 'div-fade-out' ]" >
+            <img [src]="nav?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
+            <div style="margin-left: 8px;" class="fade-transition-in div-fade-out" [ngClass]="[ hasEnterMenuRef ? 'div-fade-in' : 'div-fade-out' ]" >
               {{ nav?.name }}
             </div>
           </a>

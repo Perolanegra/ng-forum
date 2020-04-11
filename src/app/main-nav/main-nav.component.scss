@@ -224,6 +224,10 @@
   font-size: 24px;
 }
 
+.hidden {
+  display: none;
+}
+
 @media only screen and (max-width: 767px) {
   .side-menu-init {
     width: 0px;
@@ -248,11 +252,11 @@
 
 @media only screen and (width: 1024px) {
   .img-logo-menu {
-    width: 80%;
+    width: 60%;
   }
 
   .side-menu-init {
-    width: 12vw;
+    width: 10vw;
   }
 
   .side-menu-init--active {
@@ -264,7 +268,13 @@
   }
 
   .div-img-background {
-    margin-top: -4vh;
+    margin-top: -2.8vh;
+    width: 65px;
+    height: 65px;
+  }
+
+  .div-img-background-mobile {
+    margin-top: -3vh;
   }
   
   .div-img-center-above {
@@ -279,11 +289,11 @@
   }
 
   .div-img-background {
-    margin-top: -5vh;
+    margin-top: -3.3vh;
   }
 
   .side-menu-init {
-    width: 16vw;
+    width: 10vw;
   }
 
   .side-menu-init--active {

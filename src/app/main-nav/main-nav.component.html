@@ -17,11 +17,11 @@
       </div>
     </div>
 
-    <div class="div-img-center hidden">
-      <div id="out-img" [ngClass]="[ mobileQuery.matches ? 'div-img-background-mobile' : 'div-img-background' ]">
+    <div class="div-img-center">
+      <div id="out-img" [ngClass]="[ mobileQuery.matches || hasEnterMenuRef ? 'div-img-background-mobile' : 'div-img-background' ]">
         <img [src]="profileDefault" class="img-menu-over">
 
-        <div class="div-visto-img">
+        <div class="div-visto-img div-fade-out fade-transition-in"> <!---->
           <img [src]="vistoPic" style="width: 75%; margin-left: 1px;">
         </div>
 

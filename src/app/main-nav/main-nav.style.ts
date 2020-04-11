@@ -24,7 +24,9 @@ export class MainNavStyle {
                 this.appController.removeElementClass(elementRef, 'fade-transition-out');
                 this.appController.setElementClass(elementRef, 'fade-transition-in');
             }
-           
+            
+            this.appController.removeElementClass(elementRef.querySelector('.div-visto-img'), 'div-fade-out');
+            
             this.appController.removeElementClass(elementRef.querySelector('.div-user-info'), 'div-fade-out');
 
             this.appController.setElementStyle(elementRef.querySelector('#sideNav'), 'overflow', 'hidden auto');
@@ -46,8 +48,8 @@ export class MainNavStyle {
                 this.appController.removeElementClass(elementRef, 'fade-transition-in');
                 this.appController.setElementClass(elementRef, 'fade-transition-out');
 
+                this.appController.setElementClass(elementRef.querySelector('.div-visto-img'), 'div-fade-out');
                 this.appController.setElementClass(elementRef.querySelector('.div-user-info'), 'div-fade-out');
-                // this.appController.setElementClass(elementRef.querySelector('#navItemName'), 'div-fade-out');
             }
 
         }

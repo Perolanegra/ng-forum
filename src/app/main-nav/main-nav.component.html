@@ -1,6 +1,6 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
 
-  <div #sideMenu ngMenuOver (hasEnterMenu)="onMenuBlur($event)" [hasMobileMatches]="mobileQuery.matches"
+  <div #sideMenu ngMenuOver (hasEnterMenu)="onMenuBlur($event)" id="sideMenuContainer" [hasMobileMatches]="mobileQuery.matches"
     class="side-menu-init">
 
     <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '15vh' : '19vh' }">
@@ -12,13 +12,13 @@
         </button>
       </div>
 
-      <div class="div-img-center-logo">
+      <div class="" [ngClass]="[ mobileQuery.matches ? 'div-img-center-logo-mobile' : 'div-img-center-logo' ]">
         <img class="img-logo-menu" src="../../../assets/imgs/logo.png">
       </div>
     </div>
 
-    <div class="div-img-center">
-      <div id="out-img" class="div-img-background">
+    <div class="div-img-center hidden">
+      <div id="out-img" [ngClass]="[ mobileQuery.matches ? 'div-img-background-mobile' : 'div-img-background' ]">
         <img [src]="profileDefault" class="img-menu-over">
 
         <div class="div-visto-img">
@@ -41,7 +41,7 @@
     </div>
 
     <mat-nav-list id="sideNav" style="overflow: hidden;">
-      <div #navListRoutes id="sideNavContainer" [ngClass]="[ hasEnterMenuRef &&nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--disable' ]" class="fade-transition-in" *ngFor="let nav of getfillerNav()?.routes">
+      <div #navListRoutes id="sideNavContainer" class="default-nav" [ngClass]="[ hasEnterMenuRef &&nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--disable' ]" class="fade-transition-in" *ngFor="let nav of getfillerNav()?.routes">
           <a mat-list-item class="nav-item" [title]="nav?.name"> <!--[routerLink]="['route', {params: params}]" -->
             <img [src]="nav?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
             <div style="margin-left: 8px;" class="fade-transition-in div-fade-out" [ngClass]="[ hasEnterMenuRef ? 'div-fade-in' : 'div-fade-out' ]" >
@@ -50,6 +50,8 @@
           </a>
       </div>
     </mat-nav-list>
+
+    
   </div>
 
   <mat-toolbar class="example-toolbar">

@@ -20,7 +20,6 @@ export class MainNavStyle {
             this.appController.setElementStyle(elementRef.querySelector('.div-img-center-above'), 'height', '35vh');
             
             if (hasMobileMatches) {
-                this.appController.setElementStyle(elementRef.querySelector('.div-img-center'), 'margin-top', '-33px');
                 this.appController.removeElementClass(elementRef, 'div-fade-out');
                 this.appController.removeElementClass(elementRef, 'fade-transition-out');
                 this.appController.setElementClass(elementRef, 'fade-transition-in');

@@ -40,7 +40,7 @@
 
     </div>
 
-    <div id="sideNav" style="overflow: hidden;" class="div-side-nav">
+    <div id="sideNav" class="div-side-nav">
       <div #navListRoutes id="sideNavContainer" style="cursor: pointer;" [ngClass]="[ hasEnterMenuRef &&nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--disable' ]" class="fade-transition-in" *ngFor="let nav of getfillerNav()?.routes">
         <div [title]="nav?.name" [ngClass]="[ hasEnterMenuRef ? 'nav-item' : 'nav-item-colapsed' ]"> <!--[routerLink]="['route', {params: params}]" -->
           <img [src]="nav?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />

@@ -18,7 +18,7 @@ export class MainNavComponent implements OnInit {
     @ViewChild('userInfo') elRefUserInfo: ElementRef;
     @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;
     
-    public vistoPic = '../../assets/svg/flaticons/moderator-male.svg';
+    public vistoPic = '../../assets/svg/moderator-male.svg';
 
 
     constructor(changeDetectorRef: ChangeDetectorRef, 

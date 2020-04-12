@@ -305,9 +305,19 @@ export class AppController {
 
         return lObjRetorno;
     }
+
+    fillerNavs(): Object {
+        return new Object({
+            routes: [
+                { name: 'Início', isActive: true, path: 'home', img: this.getSvg('home') },
+                { name: 'Minha Conta', isActive: false, path: 'profile', img: this.getSvg('profile') },
+                { name: 'My Issues', isActive: false, path: 'my-stuff', img: this.getSvg('profile') },
+            ]
+        });
+    }
     
     /**
-     * Método que adiciona classe em determinado elemento.
+     * Método que adiciona classe passada como parâmetro em determinado elemento.
      * @param nativeElement Elemento a ser estilizado, nativeElement.
      * @param classOn Classe css a ser aplicada.
      * @returns void
@@ -318,6 +328,16 @@ export class AppController {
     }
 
     /**
+     * Método que remove a classe passada como parâmetro em determinado elemento.
+     * @param nativeElement Elemento o qual a classe será removida.
+     * @param classOff Classe que será removida.
+     * @author igor.alves
+     */
+    removeElementClass(nativeElement: ElementRef, classOff: string): void {
+        this.renderer.removeClass(nativeElement, classOff);
+    }
+
+    /**
      * Método que estiliza o elemento de acordo com a propriedade passada.
      * @param elementRef Elemento a ser estilizado, nativeElement.
      * @param key Propriedade css a ser aplicada.
@@ -325,17 +345,17 @@ export class AppController {
      * @returns void
      * @author igor.alves
      */
-    setElementStyle(element: Element, key: string, value: string) {
+    setElementStyle(element: Element, key: string, value: string): void {
         this.renderer.setStyle(element, key, value);
     }
 
     /**
-     * Método que remove a classe passada como parâmetro em determinado elemento.
-     * @param nativeElement Elemento o qual a classe será removida.
-     * @param classOff Classe que será removida.
+     * Método que retorna a referência do svg, se existir, se não retorna nulo.
+     * @param nameSvg Nome do svg passado como parâmetro para busca.
+     * @author igor.alves
      */
-    removeElementClass(nativeElement: ElementRef, classOff: string) {
-        this.renderer.removeClass(nativeElement, classOff);
+    public getSvg(nameSvg: string): string {
+        return `../../assets/svg/${nameSvg}.svg` || null;
     }
     
 

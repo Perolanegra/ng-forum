@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GlobalVars } from './core/globalVars';
 import { UserModel } from './shared/models/user/user.model';
-import { FillerNav } from './core/fillerNav';
+import { AppController } from './core/appController';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  constructor(private globalVars: GlobalVars) {
+  constructor(private globalVars: GlobalVars, private appController: AppController) {
     this.setRoutesLocalStorage();
-  }
-
-  ngOnInit() {
   }
 
   title = 'ng-forum';
@@ -24,8 +21,8 @@ export class AppComponent implements OnInit {
     return this.globalVars.isLogged();
   }
 
-  setRoutesLocalStorage() {
-    const fillerNav: FillerNav = new FillerNav();
+  setRoutesLocalStorage(): void {
+    const fillerNav: Object = this.appController.fillerNavs();
     localStorage.setItem('fillerNav', JSON.stringify(fillerNav));
   }
 

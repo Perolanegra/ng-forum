@@ -28,22 +28,34 @@
   flex: 1 0 auto;
 }
 
+.div-side-nav {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+}
+
 .nav-item {
   height: 40px !important;
   padding: 0 12px 0 24px !important;
   border-radius: 0 20px 20px 0;
   margin-right: 16px;
-  margin-bottom: 5px;
   width: 280px !important;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.nav-item-colapsed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .div-fade-in {
   opacity: 1 !important;
-}
-
-.mat-nav-list .mat-list-item {
-  font-family: 'Montserrat';
-  color: #fff;
 }
 
 .div-menu-header {
@@ -108,14 +120,6 @@
   background-color: #1E2129; 
   transition: height 0.4s;
 } 
-
-::ng-deep .mat-list-base {
-  padding-top: 0px !important;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-}
 
 .side-menu-init {
   height: 100vh;

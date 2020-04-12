@@ -309,7 +309,7 @@ export class AppController {
     fillerNavs(): Object {
         return new Object({
             routes: [
-                { name: 'Início', isActive: true, path: 'home', img: this.getSvg('home') },
+                { name: 'Início', isActive: true, path: 'home', img: this.getSvg('profile') },
                 { name: 'Minha Conta', isActive: false, path: 'profile', img: this.getSvg('profile') },
                 { name: 'My Issues', isActive: false, path: 'my-stuff', img: this.getSvg('profile') },
             ]

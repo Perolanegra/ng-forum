@@ -33,6 +33,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;  
+  color: #fff;
 }
 
 .nav-item {
@@ -52,6 +53,15 @@
   justify-content: center;
   flex-direction: column;
   overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.nav-name-active {
+  display: unset;
+}
+
+.nav-name-colapsed {
+  display: none;
 }
 
 .div-fade-in {
@@ -220,7 +230,7 @@
   width: 35px;
   height: 35px;
   font-size: 35px;
-  filter: drop-shadow(16px 16px 20px red) invert(75%);
+  // filter: drop-shadow(16px 16px 20px red) invert(75%);
 }
 
 .img-open-icons {

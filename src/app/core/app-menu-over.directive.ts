@@ -1,5 +1,5 @@
 import { Directive, HostListener, Output, EventEmitter, Input, ElementRef } from '@angular/core';
-import { MainNavStyle } from '../main-nav/main-nav.style';
+import { MainNavStyle } from '../modules/main-nav/main-nav.style';
 
 @Directive({
   selector: '[ngMenuOver]',

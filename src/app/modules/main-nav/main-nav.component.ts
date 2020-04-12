@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild  } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { AppController } from '../core/appController';
+import { AppController } from '../../core/appController';
 import { MainNavStyle } from './main-nav.style';
 import { Router } from '@angular/router';
 

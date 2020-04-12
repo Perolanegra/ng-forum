@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppController } from '../core/appController';
+import { AppController } from '../../core/appController';
 
 @Injectable()
 export class MainNavStyle {

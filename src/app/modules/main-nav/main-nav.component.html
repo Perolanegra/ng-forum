@@ -1,7 +1,7 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
 
-  <div #sideMenu ngMenuOver (hasEnterMenu)="onMenuBlur($event)" id="sideMenuContainer" [hasMobileMatches]="mobileQuery.matches"
-    class="side-menu-init">
+  <div #sideMenu ngMenuOver (hasEnterMenu)="onMenuBlur($event)" id="sideMenuContainer"
+    [hasMobileMatches]="mobileQuery.matches" class="side-menu-init">
 
     <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '15vh' : '19vh' }">
 
@@ -18,10 +18,12 @@
     </div>
 
     <div class="div-img-center">
-      <div id="out-img" [ngClass]="[ mobileQuery.matches || hasEnterMenuRef ? 'div-img-background-mobile' : 'div-img-background' ]">
+      <div id="out-img"
+        [ngClass]="[ mobileQuery.matches || hasEnterMenuRef ? 'div-img-background-mobile' : 'div-img-background' ]">
         <img [src]="profileDefault" class="img-menu-over">
 
-        <div class="div-visto-img div-fade-out fade-transition-in"> <!---->
+        <div class="div-visto-img div-fade-out fade-transition-in">
+          <!---->
           <img [src]="vistoPic" style="width: 75%; margin-left: 1px;">
         </div>
 
@@ -37,14 +39,21 @@
           igoralves@devbaiano.com.br
         </div>
       </div>
-
     </div>
 
     <div id="sideNav" class="div-side-nav">
-      <div #navListRoutes id="sideNavContainer" style="cursor: pointer;" [ngClass]="[ hasEnterMenuRef &&nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--disable' ]" class="fade-transition-in" *ngFor="let nav of getfillerNav()?.routes">
-        <div [title]="nav?.name" [ngClass]="[ hasEnterMenuRef ? 'nav-item' : 'nav-item-colapsed' ]"> <!--[routerLink]="['route', {params: params}]" -->
-          <img [src]="nav?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
-          <div style="margin-left: 8px;" class="fade-transition-in div-fade-out" [ngClass]="[ hasEnterMenuRef ? 'div-fade-in' : 'div-fade-out', hasEnterMenuRef ? 'nav-name-active' : 'nav-name-colapsed' ]" >
+      <div #navListRoutes id="sideNavContainer" style="cursor: pointer;"
+        [ngClass]="[ hasEnterMenuRef && nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--colapsed', hasEnterMenuRef ? 'div-align-nav-item--active' : '' ]"
+        class="fade-transition-in" *ngFor="let nav of getfillerNav()?.routes">
+        <div [title]="nav?.name" [ngClass]="[ hasEnterMenuRef ? 'nav-item' : 'nav-item-colapsed' ]">
+          <!--[routerLink]="['route', {params: params}]" -->
+
+          <div [ngClass]="[ !hasEnterMenuRef && nav?.isActive ? 'div-img-closed-icons--active' : '' ]">
+            <img [src]="nav?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
+          </div>
+
+          <div style="margin-left: 20px;" class="fade-transition-in div-fade-out"
+            [ngClass]="[ hasEnterMenuRef ? 'div-fade-in' : 'div-fade-out', hasEnterMenuRef ? 'nav-name-active' : 'nav-name-colapsed' ]">
             {{ nav?.name }}
           </div>
         </div>

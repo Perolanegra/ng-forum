@@ -309,9 +309,9 @@ export class AppController {
     fillerNavs(): Object {
         return new Object({
             routes: [
-                { name: 'Início', isActive: true, path: 'home', img: this.getSvg('profile') },
-                { name: 'Minha Conta', isActive: false, path: 'profile', img: this.getSvg('profile') },
-                { name: 'My Issues', isActive: false, path: 'my-stuff', img: this.getSvg('profile') },
+                { name: 'Início', isActive: true, path: 'home', img: this.getImg('home') },
+                { name: 'Configurações', isActive: false, path: 'profile', img: this.getSvg('configs') },
+                { name: 'Meus Issues', isActive: false, path: 'my-stuff', img: this.getImg('my-issues') },
             ]
         });
     }
@@ -356,6 +356,16 @@ export class AppController {
      */
     public getSvg(nameSvg: string): string {
         return `../../assets/svg/${nameSvg}.svg` || null;
+    }
+
+    /**
+     * Método que retorna a referência da img, se existir, se não retorna nulo.
+     * @param nameSvg Nome da img passado como parâmetro para busca.
+     * @author igor.alves
+     */
+    public getImg(nameSvg: string): string {
+        const search = `../../assets/imgs/${nameSvg}`;
+        return search + '.png' || search + '.jpeg' || search + '.jpg' || null;
     }
     
 

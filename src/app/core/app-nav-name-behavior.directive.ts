@@ -3,8 +3,8 @@ import { AppController } from './appController';
 
 @Directive({
   selector: '[ngNavNameBehavior]',
-
 })
+
 export class AppNavNameBehaviorDirective {
   constructor(private elRef: ElementRef, private appController: AppController) {
     this.setState();
@@ -18,13 +18,7 @@ export class AppNavNameBehaviorDirective {
     };
     const { setState } = obj;
 
-    // if(this.hasEnterMenu) {
-    //   this.appController.setElementClass()
-    // }
-
     setState(this.elRef.nativeElement, 'div-fade-in');
   }
-
-
 
 }

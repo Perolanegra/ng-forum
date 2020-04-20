@@ -198,21 +198,28 @@ export class AppController {
 
     /**
     * Retorna para uma nova rota de navegação.
-    * @param pPage Recebe uma string como parâmetro que faz referência a rota a ser navegada.
-    * @author igor.silva
+    * @param path Recebe uma string como parâmetro que faz referência a rota a ser navegada.
+    * @author igor.alves
     */
-    // public navigate(pPage: string) {
-    //     let lDialogAguarde = this.openDialogAguarde();
+    public navigate(path: string) {
+        // let lDialogAguarde = this.openDialogAguarde();
+        this.router.navigate(['/' + path]).then(
+            pResp => {
+                // lDialogAguarde.close();
+            }).catch(
+            error => {
+                // lDialogAguarde.close();
+                this.tratarErro(error);
+        });
+    }
 
-    //     this.router.navigate(['/' + pPage]).then(
-    //         pResp => {
-    //             lDialogAguarde.close();
-    //         }).catch(
-    //         error => {
-    //             lDialogAguarde.close();
-    //             this.tratarErro(error);
-    //         });
-    // }
+    public setRoutesNav(fillerNav: Object): void {
+        localStorage.setItem('fillerNav', JSON.stringify(fillerNav));
+    }
+
+    public getRoutesNav() {
+        return JSON.parse(localStorage.getItem('fillerNav'));
+    }
 
     /**
     * Retorna um novo Array ordenado de Objetos com os atributos que foram passados e parâmetro de ordenação.

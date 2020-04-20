@@ -20,7 +20,6 @@ export class MainNavComponent implements OnInit {
     
     public vistoPic = '../../assets/svg/moderator-male.svg';
 
-
     constructor(changeDetectorRef: ChangeDetectorRef, 
     private router: Router,
     // private breakpointObserver: BreakpointObserver,
@@ -43,7 +42,7 @@ export class MainNavComponent implements OnInit {
     }
 
     getfillerNav() {
-        return JSON.parse(localStorage.getItem('fillerNav'));
+        return this.appController.getRoutesNav();
     }
 
     onMenuBlur(hasEnterMenu) {
@@ -61,16 +60,28 @@ export class MainNavComponent implements OnInit {
         this.mainNavStyle.setStyleMenuClose(this.elRefnavListRoutes.nativeElement, this.mobileQuery.matches);
     }
  
-    setActiveLink() {
-        const urlRef = this.router.url;
+    setMenuActiveLink(path: string) {
         const { routes } = this.getfillerNav();
+        // const url = this.router.url; url.includes(prop.path) fazer o observable
 
         routes.map((prop) => {
-            if(urlRef.includes(prop.path)) {
+            prop.isActive = false;
+
+            if(prop.path === path) {
                 prop.isActive = true;
                 return;
             }
         });
+
+        this.appController.setRoutesNav({ routes });
+    }
+
+    navigate(path: string) {
+        // console.log('rota agr: ', this.router.url);
+        // console.log('rota nova: ', path);
+        
+        this.appController.navigate(path);
+        this.setMenuActiveLink(path);
     }
 
 }

@@ -23,7 +23,7 @@ export class AppComponent {
 
   setRoutesLocalStorage(): void {
     const fillerNav: Object = this.appController.fillerNavs();
-    localStorage.setItem('fillerNav', JSON.stringify(fillerNav));
+    this.appController.setRoutesNav(fillerNav);
   }
 
 }

@@ -16,9 +16,9 @@ export class AppMenuOverDirective {
     this.mainNavStyle.setStyleMenuNavInit(this.elRef.nativeElement, this.hasMobileMatches);
   }
 
-  @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
-    this.hasEnterMenu.emit(false);
-    this.mainNavStyle.setStyleMenuClose(this.elRef.nativeElement, this.hasMobileMatches);
-  }
+  // @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
+  //   this.hasEnterMenu.emit(false);
+  //   this.mainNavStyle.setStyleMenuClose(this.elRef.nativeElement, this.hasMobileMatches);
+  // }
 
 }

@@ -33,7 +33,7 @@ export class MainNavStyle {
         }
     }
 
-    setStyleMenuClose(elementRef: any, hasMobileMatches: boolean) {
+    setStyleMenuNavClose(elementRef: any, hasMobileMatches: boolean) {
         if(elementRef) {
             this.appController.removeElementClass(elementRef, 'fade-transition-in');
             this.appController.setElementClass(elementRef, 'fade-transition-out');
@@ -48,8 +48,6 @@ export class MainNavStyle {
 
                 this.appController.setElementClass(elementRef.querySelector('.div-visto-img'), 'div-fade-out');
                 this.appController.setElementClass(elementRef.querySelector('.div-user-info'), 'div-fade-out');
-
-                // this.appController.setElementStyle(elementRef.querySelector('#sideNavContainer'), 'background', '#E91E63');
             }
 
         }

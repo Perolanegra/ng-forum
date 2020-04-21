@@ -56,8 +56,8 @@ export class MainNavComponent implements OnInit {
 
     closeSideMenuMobile(elementRefSideMenu: ElementRef) { // quando o ElementRef vem de referência, ele já passa o nativeElement
         this.appController.removeElementClass(elementRefSideMenu, 'side-menu-init--active');
-        this.mainNavStyle.setStyleMenuClose(this.elRefUserInfo.nativeElement, this.mobileQuery.matches);
-        this.mainNavStyle.setStyleMenuClose(this.elRefnavListRoutes.nativeElement, this.mobileQuery.matches);
+        this.mainNavStyle.setStyleMenuNavClose(this.elRefUserInfo.nativeElement, this.mobileQuery.matches);
+        this.mainNavStyle.setStyleMenuNavClose(this.elRefnavListRoutes.nativeElement, this.mobileQuery.matches);
     }
  
     setMenuActiveLink(path: string) {

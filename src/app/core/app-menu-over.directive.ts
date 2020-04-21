@@ -12,13 +12,19 @@ export class AppMenuOverDirective {
   @Input() hasMobileMatches: boolean;
 
   @HostListener('mouseenter') onMouseOver(eventData: Event): void {
-    this.hasEnterMenu.emit(true);
-    this.mainNavStyle.setStyleMenuNavInit(this.elRef.nativeElement, this.hasMobileMatches);
+    this.setStyle(true);
   }
 
   @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
-    this.hasEnterMenu.emit(false);
-    this.mainNavStyle.setStyleMenuClose(this.elRef.nativeElement, this.hasMobileMatches);
+    this.setStyle(false);
+  }
+
+  setStyle(state: boolean): void {
+    if(!this.hasMobileMatches) {
+      this.hasEnterMenu.emit(state);
+      state ? this.mainNavStyle.setStyleMenuNavInit(this.elRef.nativeElement, this.hasMobileMatches) : 
+      this.mainNavStyle.setStyleMenuNavClose(this.elRef.nativeElement, this.hasMobileMatches);
+    }
   }
 
 }

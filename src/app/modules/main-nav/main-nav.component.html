@@ -41,10 +41,10 @@
       </div>
     </div>
 
-    <div id="sideNav" class="div-side-nav">
+    <div id="sideNav" class="div-side-nav" *ngIf="!mobileQuery.matches; else navMobile">
       <div #navListRoutes id="sideNavContainer" style="cursor: pointer;" (click)="navigate(nav?.path);"
         [ngClass]="[ hasEnterMenuRef && nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--colapsed', hasEnterMenuRef ? 'div-align-nav-item--active' : '' ]"
-        class="fade-transition-in" *ngFor="let nav of getfillerNav()?.routes">
+        class="fade-transition-in" *ngFor="let nav of fillerNav">
         <div [title]="nav?.name" [ngClass]="[ hasEnterMenuRef ? 'nav-item' : 'nav-item-colapsed' ]">
 
           <div [ngClass]="[ !hasEnterMenuRef && nav?.isActive ? 'div-img-closed-icons--active' : '' ]">
@@ -59,7 +59,28 @@
       </div>
     </div>
 
+    <ng-template #navMobile>
+      <div class="div-side-nav">
+
+        <div>
+          <button style="margin-bottom: 15px;" *ngFor="let item of routesMobile" mat-raised-button
+            [ngClass]="[ hasEnterMenuRef && router.url.includes(item?.path) ? 'nav-mobile--active' : '' ]" (click)="navigate(item?.path)" class="btn font"
+            cdkFocusInitial>
+
+            <div id="euagr" class="div-nav-item-mobile">
+              <img style="margin-right: 15px;" [src]="item?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
+              {{ item?.name }}
+            </div>
+          </button>
+
+
+        </div>
+      </div>
+    </ng-template>
+
   </div>
+
+
 
   <mat-toolbar class="example-toolbar">
     <button tabindex="-1" mat-icon-button class="btn-toggle-mobile" (click)="toggleMenu(sideMenu)"

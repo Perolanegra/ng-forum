@@ -6,7 +6,11 @@ import { MainNavStyle } from '../modules/main-nav/main-nav.style';
 
 })
 export class AppMenuOverDirective {
-  constructor(private elRef: ElementRef, private mainNavStyle: MainNavStyle) { }
+ 
+  
+  constructor(private elRef: ElementRef, private mainNavStyle: MainNavStyle) {
+    
+  }
 
   @Output() hasEnterMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() hasMobileMatches: boolean;
@@ -20,10 +24,10 @@ export class AppMenuOverDirective {
   }
 
   setStyle(state: boolean): void {
-    if(!this.hasMobileMatches) {
+    if (!this.hasMobileMatches) {
       this.hasEnterMenu.emit(state);
-      state ? this.mainNavStyle.setStyleMenuNavInit(this.elRef.nativeElement, this.hasMobileMatches) : 
-      this.mainNavStyle.setStyleMenuNavClose(this.elRef.nativeElement, this.hasMobileMatches);
+      state ? this.mainNavStyle.setStyleMenuNavInit(this.elRef.nativeElement, this.hasMobileMatches) :
+        this.mainNavStyle.setStyleMenuNavClose(this.elRef.nativeElement, this.hasMobileMatches);
     }
   }
 

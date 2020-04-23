@@ -18,16 +18,15 @@ export class MainNavStyle {
             this.appController.removeElementClass(elementRef, 'fade-transition-out');
 
             this.appController.setElementStyle(elementRef.querySelector('.div-img-center-above'), 'height', '35vh');
+            this.appController.removeElementClass(elementRef.querySelector('.div-visto-img'), 'div-fade-out');
+            this.appController.removeElementClass(elementRef.querySelector('.div-user-info'), 'div-fade-out');
             
             if (hasMobileMatches) {
                 this.appController.removeElementClass(elementRef, 'div-fade-out');
                 this.appController.removeElementClass(elementRef, 'fade-transition-out');
                 this.appController.setElementClass(elementRef, 'fade-transition-in');
+                return;
             }
-            
-            this.appController.removeElementClass(elementRef.querySelector('.div-visto-img'), 'div-fade-out');
-            
-            this.appController.removeElementClass(elementRef.querySelector('.div-user-info'), 'div-fade-out');
 
             this.appController.setElementStyle(elementRef.querySelector('#sideNav'), 'overflow', 'hidden auto');
         }

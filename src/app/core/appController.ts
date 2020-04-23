@@ -3,7 +3,7 @@ import { AbstractControl } from "@angular/forms";
 import { debounceTime, tap, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, from } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 
@@ -15,8 +15,8 @@ export class AppController {
     private renderer: Renderer2;
 
     constructor(public dialog: MatDialog,
-    private rendererFactory: RendererFactory2,
-    private router: Router) { 
+        private rendererFactory: RendererFactory2,
+        private router: Router) {
         this.renderer = rendererFactory.createRenderer(null, null);
     }
 
@@ -207,10 +207,10 @@ export class AppController {
             pResp => {
                 // lDialogAguarde.close();
             }).catch(
-            error => {
-                // lDialogAguarde.close();
-                this.tratarErro(error);
-        });
+                error => {
+                    // lDialogAguarde.close();
+                    this.tratarErro(error);
+                });
     }
 
     public setRoutesNav(fillerNav: Object): void {
@@ -313,16 +313,16 @@ export class AppController {
         return lObjRetorno;
     }
 
-    fillerNavs(): Object {
+    async fillerNavs(): Promise<Object> {
         return new Object({
             routes: [
-                { name: 'Início', isActive: true, path: 'home', img: this.getImg('home') },
-                { name: 'Configurações', isActive: false, path: 'profile', img: this.getSvg('configs') },
-                { name: 'Meus Issues', isActive: false, path: 'my-stuff', img: this.getImg('my-issues') },
+                { name: 'Início', isActive: true, path: 'home', img: await this.getImg('home.png') },
+                { name: 'Configurações', isActive: false, path: 'configs', img: await this.getImg('configs.svg') },
+                { name: 'Meus Issues', isActive: false, path: 'my-issues', img: await this.getImg('my-issues.png') },
             ]
         });
     }
-    
+
     /**
      * Método que adiciona classe passada como parâmetro em determinado elemento.
      * @param nativeElement Elemento a ser estilizado, nativeElement.
@@ -357,23 +357,59 @@ export class AppController {
     }
 
     /**
-     * Método que retorna a referência do svg, se existir, se não retorna nulo.
-     * @param nameSvg Nome do svg passado como parâmetro para busca.
-     * @author igor.alves
-     */
-    public getSvg(nameSvg: string): string {
-        return `../../assets/svg/${nameSvg}.svg` || null;
-    }
-
-    /**
      * Método que retorna a referência da img, se existir, se não retorna nulo.
      * @param nameSvg Nome da img passado como parâmetro para busca.
      * @author igor.alves
      */
-    public getImg(nameSvg: string): string {
-        const search = `../../assets/imgs/${nameSvg}`;
-        return search + '.png' || search + '.jpeg' || search + '.jpg' || null;
+    public getImg(nameSvg: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            let prefix = `../../assets/imgs/`;
+
+            let searchImg: string, isValidImg;
+            
+            searchImg = prefix + nameSvg;
+            isValidImg = await this.verifyImg(searchImg);
+            
+            if(isValidImg) {
+                resolve(searchImg);
+            }
+           
+        });
     }
+
+    verifyImg(img): Promise<any> {
+        return new Promise((resolve, reject) => {
+            // if(formatSvg === '.svg') {
+                
+            //     let svg = new SVGElement();
+            //     svg.onload = function() {
+            //         resolve(true);
+            //     };
+        
+            //     svg.onerror = function() {
+            //         resolve(false);
+            //     };
+            //     svg = img;
+
+            // }
+            // else {
+                let image = new Image();
+                image.onload = function() {
+                    resolve(true);
+                };
+
+                image.onerror = function() {
+                    resolve(false);
+                };
+
+                image.src = img;
+            // }
+            
+        });
+    }
+
+
     
+
 
 }

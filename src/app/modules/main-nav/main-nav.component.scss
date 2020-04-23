@@ -261,11 +261,21 @@ div#sideNavContainer:hover {
   border-radius: 0 20px 20px 0;
 }
 
-// div#sideNavContainer:active {
-//   background: #E91E63;
-//   width: 88%;
-//   border-radius: 0 20px 20px 0;
-// }
+.nav-mobile--active {
+  background: #E91E63;
+  width: 88%;
+  border-radius: 0 20px 20px 0;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.div-nav-item-mobile {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-left: 25px;
+}
+
 
 @media only screen and (max-width: 767px) {
   .side-menu-init {

@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   clickMe() {
     this.globalVars.removeUserLoggedIn();
-    this.router.navigate(['profile']).catch(error => {
+    this.router.navigate(['login']).catch(error => { // dps tirar daqui e por o guarda de rota
       console.log('erro navegação: ', error);
     });
   }

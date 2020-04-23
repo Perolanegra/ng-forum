@@ -22,8 +22,9 @@ export class AppComponent {
   }
 
   setRoutesLocalStorage(): void {
-    const fillerNav: Object = this.appController.fillerNavs();
-    this.appController.setRoutesNav(fillerNav);
+    this.appController.fillerNavs().then(filer => {
+      this.appController.setRoutesNav(filer);
+    })
   }
 
 }

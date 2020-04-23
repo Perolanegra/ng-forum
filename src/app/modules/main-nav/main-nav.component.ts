@@ -1,13 +1,15 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, ChangeDetectionStrategy  } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AppController } from '../../core/appController';
 import { MainNavStyle } from './main-nav.style';
 import { Router } from '@angular/router';
+import { from, Observable } from 'rxjs';
 
 @Component({
     selector: 'ng-main-nav',
     templateUrl: './main-nav.component.html',
-    styleUrls: ['./main-nav.component.scss']
+    styleUrls: ['./main-nav.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainNavComponent implements OnInit {
 
@@ -21,7 +23,7 @@ export class MainNavComponent implements OnInit {
     public vistoPic = '../../assets/svg/moderator-male.svg';
 
     constructor(changeDetectorRef: ChangeDetectorRef, 
-    private router: Router,
+    public router: Router,
     // private breakpointObserver: BreakpointObserver,
     public media: MediaMatcher,
     private mainNavStyle: MainNavStyle,
@@ -33,16 +35,29 @@ export class MainNavComponent implements OnInit {
     }
     
     private _mobileQueryListener: () => void;
+    public routesMobile = [
+        {imgName: 'home.png', img: null, path: 'home', name: 'home'},
+        {imgName: 'configs.svg', img: null, path: 'profile', name: 'configs'},
+        {imgName: 'my-issues.png', img: null, path: 'profile' , name: 'my-issues'},
+    ];
+    public state$: Observable<any>
 
-    ngOnInit(): void {
+    ngOnInit() {
+       this.routesMobile.map(async (val) => {
+           val.img = await this.getIcon(val.imgName);
+       });
     }
 
     ngOnDestroy(): void {
         this.mobileQuery.removeListener(this._mobileQueryListener);
     }
 
-    getfillerNav() {
-        return this.appController.getRoutesNav();
+    get fillerNav() {
+        return this.appController.getRoutesNav().routes;
+    }
+
+    getIcon(item): Promise<any> {
+        return this.appController.getImg(item);
     }
 
     onMenuBlur(hasEnterMenu) {
@@ -57,12 +72,11 @@ export class MainNavComponent implements OnInit {
     closeSideMenuMobile(elementRefSideMenu: ElementRef) { // quando o ElementRef vem de referência, ele já passa o nativeElement
         this.appController.removeElementClass(elementRefSideMenu, 'side-menu-init--active');
         this.mainNavStyle.setStyleMenuNavClose(this.elRefUserInfo.nativeElement, this.mobileQuery.matches);
-        this.mainNavStyle.setStyleMenuNavClose(this.elRefnavListRoutes.nativeElement, this.mobileQuery.matches);
     }
  
     setMenuActiveLink(path: string) {
-        const { routes } = this.getfillerNav();
         // const url = this.router.url; url.includes(prop.path) fazer o observable
+        const routes = this.fillerNav
 
         routes.map((prop) => {
             prop.isActive = false;
@@ -78,10 +92,12 @@ export class MainNavComponent implements OnInit {
 
     navigate(path: string) {
         // console.log('rota agr: ', this.router.url);
-        // console.log('rota nova: ', path);
+        console.log('rota nova: ', path);
         
         this.appController.navigate(path);
         this.setMenuActiveLink(path);
     }
+
+    
 
 }

@@ -3,7 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { AppController } from '../../core/appController';
 import { MainNavStyle } from './main-nav.style';
 import { Router } from '@angular/router';
-import { from, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'ng-main-nav',
@@ -21,8 +21,6 @@ export class MainNavComponent implements OnInit {
     @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;
 
     private routeDetector: Subscription;
-
-   
     
     public vistoPic = '../../assets/imgs/moderator-male.svg';
 
@@ -50,16 +48,13 @@ export class MainNavComponent implements OnInit {
 
     ngOnDestroy(): void {
         this.mobileQuery.removeListener(this._mobileQueryListener);
+        this.routeDetector.unsubscribe();
     }
 
     getFillerNav() {
-        this.state$.subscribe((hasChanged) => {
+        this.routeDetector = this.state$.subscribe((hasChanged) => {
             if(hasChanged) this.routes = this.appController.getRoutesNav().routes;
         });
-    }
-
-    getIcon(item): Promise<any> {
-        return this.appController.getImg(item);
     }
 
     onMenuBlur(hasEnterMenu) {
@@ -78,8 +73,8 @@ export class MainNavComponent implements OnInit {
  
     setMenuActiveLink(path: string) {
         const routes = this.routes;
-
-        routes.some((prop) => {
+        
+        routes.map((prop) => {
             prop.isActive = false;
 
             if(prop.path === path) {
@@ -88,10 +83,8 @@ export class MainNavComponent implements OnInit {
             }
         });
 
-        this.state$ = Observable.create(observer => {
-            this.appController.setRoutesNav({ routes });
-            observer.next(true);
-        });
+        this.appController.setRoutesNav({ routes });
+        this.state$ = Observable.create(observer => observer.next(routes));
     }
 
     navigate(path: string) {
@@ -99,6 +92,6 @@ export class MainNavComponent implements OnInit {
         this.setMenuActiveLink(path);
     }
 
-    
+   
 
 }

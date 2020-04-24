@@ -217,7 +217,7 @@ export class AppController {
         localStorage.setItem('fillerNav', JSON.stringify(fillerNav));
     }
 
-    public getRoutesNav() {
+    public getRoutesNav(): any {
         return JSON.parse(localStorage.getItem('fillerNav'));
     }
 
@@ -316,9 +316,9 @@ export class AppController {
     async fillerNavs(): Promise<Object> {
         return new Object({
             routes: [
-                { name: 'Início', isActive: true, path: 'home', img: await this.getImg('home.png') },
-                { name: 'Configurações', isActive: false, path: 'configs', img: await this.getImg('configs.svg') },
-                { name: 'Meus Issues', isActive: false, path: 'my-issues', img: await this.getImg('my-issues.png') },
+                { name: 'Início', isActive: true,imgName: 'home.png', path: 'home', img: await this.getImg('home.png') },
+                { name: 'Configurações', isActive: false,imgName: 'configs.svg', path: 'configs', img: await this.getImg('configs.svg') },
+                { name: 'Meus Issues', isActive: false,imgName: 'my-issues.png', path: 'my-issues', img: await this.getImg('my-issues.png') },
             ]
         });
     }

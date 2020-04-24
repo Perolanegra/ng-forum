@@ -22,7 +22,7 @@ export class AppMenuOverDirective {
   @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
     this.setStyle(false);
   }
-
+  
   setStyle(state: boolean): void {
     if (!this.hasMobileMatches) {
       this.hasEnterMenu.emit(state);

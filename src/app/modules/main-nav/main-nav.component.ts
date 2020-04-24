@@ -94,14 +94,9 @@ export class MainNavComponent implements OnInit {
         });
     }
 
-    navigate(path: string, navListRoutes) {
-        console.log('rota agr: ', this.router.url);
-        console.log('hasenter: ', this.hasEnterMenuRef);
-        // console.log('rota nova: ', path);
-        
+    navigate(path: string) {
         this.appController.navigate(path);
         this.setMenuActiveLink(path);
-        console.log('rota agr: ', this.router.url);
     }
 
     

@@ -42,7 +42,7 @@
     </div>
 
     <div id="sideNav" class="div-side-nav" *ngIf="!mobileQuery.matches; else navMobile">
-      <div #navListRoutes id="sideNavContainer" class="div-side-nav-container" style="cursor: pointer;" (click)="navigate(nav?.path, navListRoutes);"
+      <div #navListRoutes id="sideNavContainer" class="div-side-nav-container" style="cursor: pointer;" (click)="navigate(nav?.path);"
         [ngClass]="[ hasEnterMenuRef && nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--colapsed', hasEnterMenuRef ? 'div-align-nav-item--active' : '' ]"
         class="fade-transition-in" *ngFor="let nav of routes">
         <div [title]="nav?.name" [ngClass]="[ hasEnterMenuRef ? 'nav-item' : 'nav-item-colapsed' ]">

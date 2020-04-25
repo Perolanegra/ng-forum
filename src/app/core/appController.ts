@@ -321,6 +321,7 @@ export class AppController {
                 { name: 'Início', isActive: true,imgName: 'home.png', path: 'home', img: await this.getImg('home.png') },
                 { name: 'Configurações', isActive: false,imgName: 'configs.svg', path: 'configs', img: await this.getImg('configs.svg') },
                 { name: 'Meus Issues', isActive: false,imgName: 'my-issues.png', path: 'my-issues', img: await this.getImg('my-issues.png') },
+              
             ]
         });
     }

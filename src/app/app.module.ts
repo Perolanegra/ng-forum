@@ -15,6 +15,14 @@ import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.di
 import { AppController } from './core/appController';
 import { MainNavStyle } from './modules/main-nav/main-nav.style';
 import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'src/environments/environment';
+import { RouterState } from './shared/state/router.state';
+import { AppState } from './shared/state/app.state';
+
+import { TutorialState } from './state/tutorial.state';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 @NgModule({
   declarations: [
@@ -23,7 +31,7 @@ import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.direct
     MainNavComponent,
     AppMenuOverDirective,
     AppAutofillOffDirective,
-    AppNavNameBehaviorDirective
+    AppNavNameBehaviorDirective,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +41,11 @@ import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.direct
     SharedModule,
     HttpClientModule,
     LayoutModule,
+    NgxsModule.forRoot([
+      TutorialState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot()
   ],
   exports: [
     MaterialModule

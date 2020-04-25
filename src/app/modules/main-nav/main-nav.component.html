@@ -41,8 +41,9 @@
       </div>
     </div>
 
-    <div id="sideNav" class="div-side-nav" *ngIf="!mobileQuery.matches; else navMobile">
-      <div #navListRoutes id="sideNavContainer" class="div-side-nav-container" style="cursor: pointer;" (click)="navigate(nav?.path);"
+    <div id="sideNav" class="div-side-nav" *ngIf="!mobileQuery.matches; else navMobile" style="overflow-y: auto; overflow-x: hidden;">
+      <div #navListRoutes id="sideNavContainer" class="div-side-nav-container" style="cursor: pointer;"
+        (click)="navigate(nav?.path);"
         [ngClass]="[ hasEnterMenuRef && nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--colapsed', hasEnterMenuRef ? 'div-align-nav-item--active' : '' ]"
         class="fade-transition-in" *ngFor="let nav of routes">
         <div [title]="nav?.name" [ngClass]="[ hasEnterMenuRef ? 'nav-item' : 'nav-item-colapsed' ]">
@@ -51,7 +52,7 @@
             <img [src]="nav?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
           </div>
 
-          <div style="margin-left: 20px;" class="fade-transition-in div-fade-out"
+          <div style="margin-left: 20px;" class="fade-transition-in div-fade-out font"
             [ngClass]="[ hasEnterMenuRef ? 'div-fade-in' : 'div-fade-out', hasEnterMenuRef ? 'nav-name-active' : 'nav-name-colapsed' ]">
             {{ nav?.name }}
           </div>
@@ -61,19 +62,16 @@
 
     <ng-template #navMobile>
       <div class="div-side-nav">
-
-        <div>
+        <div style="overflow-y: auto; overflow-x: hidden;">
           <button *ngFor="let item of routes" mat-raised-button
-            [ngClass]="[ hasEnterMenuRef && item?.isActive ? 'nav-mobile--active' : 'nav-mobile--default' ]" (click)="navigate(item?.path)" class="btn font"
-            cdkFocusInitial>
-
+            [ngClass]="[ hasEnterMenuRef && item?.isActive ? 'nav-mobile--active' : 'nav-mobile--default' ]"
+            (click)="navigate(item?.path)" class="btn font" cdkFocusInitial>
             <div id="euagr" class="div-nav-item-mobile">
-              <img style="margin-right: 15px;" [src]="item?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
+              <img style="margin-right: 15px;" [src]="item?.img"
+                [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
               {{ item?.name }}
             </div>
           </button>
-
-
         </div>
       </div>
     </ng-template>
@@ -82,12 +80,16 @@
 
 
 
-  <mat-toolbar class="example-toolbar">
-    <button tabindex="-1" mat-icon-button class="btn-toggle-mobile" (click)="toggleMenu(sideMenu)"
-      *ngIf="mobileQuery.matches">
-      <mat-icon>menu</mat-icon>
-    </button>
-  </mat-toolbar>
+  <div style="display: flex; justify-content: center; flex-direction: column;">
+    <mat-toolbar class="my-toolbar" *ngIf="mobileQuery.matches">
+      <button tabindex="-1" mat-icon-button class="btn-toggle-mobile" (click)="toggleMenu(sideMenu)">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
 
-  <ng-content></ng-content>
+    <div class="div-content-align" [ngStyle]="{'padding-left': mobileQuery.matches ? 'unset' : '6vw' }">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
 </div>

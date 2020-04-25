@@ -9,6 +9,7 @@
   flex: 1;
   background: #303030;
   overflow: hidden;
+  width: 100%;
 }
 
 .example-is-mobile .example-toolbar {
@@ -17,7 +18,7 @@
   z-index: 2;
 }
 
-.example-toolbar {
+.my-toolbar {
   background-color: #2d323e;
   border-radius: 2px;
 }
@@ -137,7 +138,7 @@
   position: absolute;
   border-radius: 1px;
   overflow-y: visible;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   position: absolute;
   transition: all .43s ease 0s;
   background: #2d323e !important;
@@ -174,6 +175,7 @@
 
 .side-menu-init--active {
   width: 20vw;
+  overflow-x: hidden;
 }
 
 .btn-close-side-menu-mobile {
@@ -286,6 +288,11 @@ div#sideNavContainer:not(.div-nav-item--active):hover {
   margin-left: 25px;
 }
 
+.div-content-align {
+  height: 100vh;
+  overflow-y: auto;
+}
+
 
 @media only screen and (max-width: 767px) {
   .side-menu-init {
@@ -373,4 +380,25 @@ div#sideNavContainer:not(.div-nav-item--active):hover {
   .div-img-background {
     margin-top: -5vh !important;
   }
+}
+
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

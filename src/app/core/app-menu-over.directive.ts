@@ -1,5 +1,6 @@
-import { Directive, HostListener, Output, EventEmitter, Input, ElementRef } from '@angular/core';
+import { Directive, HostListener, Output, Input, ElementRef } from '@angular/core';
 import { MainNavStyle } from '../modules/main-nav/main-nav.style';
+import { Subject } from 'rxjs';
 
 @Directive({
   selector: '[ngMenuOver]',
@@ -12,7 +13,7 @@ export class AppMenuOverDirective {
     
   }
 
-  @Output() hasEnterMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() hasEnterMenu: Subject<boolean> = new Subject<boolean>();
   @Input() hasMobileMatches: boolean;
 
   @HostListener('mouseenter') onMouseOver(eventData: Event): void {
@@ -25,7 +26,7 @@ export class AppMenuOverDirective {
   
   setStyle(state: boolean): void {
     if (!this.hasMobileMatches) {
-      this.hasEnterMenu.emit(state);
+      this.hasEnterMenu.next(state);
       state ? this.mainNavStyle.setStyleMenuNavInit(this.elRef.nativeElement, this.hasMobileMatches) :
         this.mainNavStyle.setStyleMenuNavClose(this.elRef.nativeElement, this.hasMobileMatches);
     }

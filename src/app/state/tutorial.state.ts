@@ -8,7 +8,7 @@ export class TutorialStateModel {
 
 // Section 3
 @State<TutorialStateModel>({
-    name: 'tutorials',
+    name: 'payload',
     defaults: {
         tutorials: []
     }

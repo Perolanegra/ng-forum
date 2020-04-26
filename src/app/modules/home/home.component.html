@@ -1,20 +1,9 @@
 
 
 
-    <div style="display: flex;
-    justify-content: center;
-    flex-direction: column;">
-    
-        <input type="text" placeholder="name" #name> 
-        <input type="text" placeholder="url" #url> 
-    
-        <button (click)="addTutorial(name.value, url.value)">Add Tutorial</button>
-        
-        <app-read></app-read>
-    </div>
 
     
-    <button mat-raised-button color="accent" (click)="clickMe()" class="btn font" cdkFocusInitial>Sair</button>
+    <button mat-raised-button color="accent" (click)="signOut()" class="btn font" cdkFocusInitial>Sair</button>
 
 
 

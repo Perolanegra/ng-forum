@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalVars } from 'src/app/core/globalVars';
-import { UserModel } from 'src/app/shared/models/user/user.model';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { AuthService } from '../../auth.service';
+import { Store, Select } from '@ngxs/store';
+import { AuthActions } from 'src/app/state/auth/auth.action';
+import { AuthState, AuthStateModel } from 'src/app/state/auth/auth.state';
+import { Observable } from 'rxjs';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +17,14 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   hide = true;
-  
+
   constructor(private router: Router,
     private formBuilder: FormBuilder,
+    private store: Store,
+    private auth: AuthService,
     private globalVars: GlobalVars) { }
+
+  // @Select(AuthState.userDetails) user$: Observable<UserModel>;
 
   ngOnInit(): void {
     this.setLoginForm();
@@ -29,36 +38,30 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  signIn() { // make login Request
+  signIn() {
+    if (this.isValidForm()) {
 
-    if(this.isValidForm()) {
-      const userAuth: UserModel = {
-        _id: 'string',
-        name: 'string',
-        statusMsg: 'string',
-        phone: 'string',
-        email: 'string',
-        password: 'string',
-        img: 'string',
-        birthDate: new Date(),
-        created_at: new Date(),
-        deleted_at: new Date(),
-        updated_at: new Date()
-      };
-      this.globalVars.setUserLoggedIn(userAuth);
-      
-      this.router.navigate(['home']).catch(error => {
-        console.log('erro: ', error);
-      });
+      const username = this.loginForm.get('username').value as string;
+      const password = this.loginForm.get('password').value as string
+
+      this.store.dispatch(new AuthActions.Signin(username, password))
+        .subscribe((data: any) => {
+          const { user } = data.auth;
+          this.globalVars.setUserLoggedIn(user);
+
+          this.router.navigate(['home']).catch(error => {
+            console.log('erro: ', error);
+          });
+        }, error => { });
+
     }
-    
-    console.log('metodo SignIn');
   }
+
 
   isValidForm(): boolean {
     return this.loginForm.valid;
   }
 
-  
+
 
 }

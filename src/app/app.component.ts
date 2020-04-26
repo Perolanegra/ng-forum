@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { GlobalVars } from './core/globalVars';
-import { UserModel } from './shared/models/user/user.model';
 import { AppController } from './core/appController';
 
 @Component({
@@ -15,9 +14,8 @@ export class AppComponent {
   }
 
   title = 'ng-forum';
-   // Implementar um subscription que muda o valor do observable quando o cara loga/desloga,
-   // e a partir disso alterar perspectiva no html
-  public get isLoggedIn(): Boolean {
+  
+  public get isLoggedIn(): Boolean { // remover esse kra daqui pq o html fica testando ele
     return this.globalVars.isLogged();
   }
 

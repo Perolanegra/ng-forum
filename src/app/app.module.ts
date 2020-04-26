@@ -16,13 +16,12 @@ import { AppController } from './core/appController';
 import { MainNavStyle } from './modules/main-nav/main-nav.style';
 import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
 import { NgxsModule } from '@ngxs/store';
-import { environment } from 'src/environments/environment';
-import { RouterState } from './shared/state/router.state';
-import { AppState } from './shared/state/app.state';
 
-import { TutorialState } from './state/tutorial.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { AuthState } from './state/auth/auth.state';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -42,10 +41,15 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
     HttpClientModule,
     LayoutModule,
     NgxsModule.forRoot([
-      TutorialState
-    ]),
+      AuthState
+    ],{
+      developmentMode: !environment.production,
+    }),
+    // NgxsStoragePluginModule.forRoot({
+    //   key: ['auth.token ', 'auth.refreshToken', 'auth.user.username', 'auth.user.email']
+    // }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot()
+    NgxsLoggerPluginModule.forRoot(),
   ],
   exports: [
     MaterialModule

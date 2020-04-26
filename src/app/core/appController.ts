@@ -214,8 +214,6 @@ export class AppController {
     }
 
     public setRoutesNav(fillerNav: Object): void {
-        console.log('im here: ', fillerNav);
-        
         localStorage.setItem('fillerNav', JSON.stringify(fillerNav));
     }
 

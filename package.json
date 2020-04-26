@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --aot",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,6 +24,7 @@
     "@angular/router": "~9.0.5",
     "@ngxs/devtools-plugin": "^3.6.2",
     "@ngxs/logger-plugin": "^3.6.2",
+    "@ngxs/storage-plugin": "^3.6.2",
     "@ngxs/store": "^3.6.2",
     "bootstrap": "^4.4.1",
     "material-icons": "^0.3.1",

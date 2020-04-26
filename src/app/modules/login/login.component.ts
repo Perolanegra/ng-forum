@@ -4,7 +4,7 @@ import { GlobalVars } from 'src/app/core/globalVars';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { Store, Select } from '@ngxs/store';
-import { AuthActions } from 'src/app/state/auth/auth.action';
+import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState, AuthStateModel } from 'src/app/state/auth/auth.state';
 import { Observable } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';

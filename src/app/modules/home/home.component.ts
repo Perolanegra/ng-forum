@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalVars } from 'src/app/core/globalVars';
 import { Store } from '@ngxs/store';
-import { AuthActions } from 'src/app/state/auth/auth.action';
+import { AuthActions } from 'src/app/state/auth/auth.actions';
 
 @Component({
   selector: 'app-home',

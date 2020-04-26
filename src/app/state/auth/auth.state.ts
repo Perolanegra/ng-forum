@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { AuthService } from '../../auth.service';
 import { tap } from 'rxjs/operators';
 import { UserModel } from 'src/app/models/user.model';
-import { AuthActions } from './auth.action';
+import { AuthActions } from './auth.actions';
 import { Injectable } from '@angular/core';
 
 export class AuthStateModel {

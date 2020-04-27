@@ -1,13 +1,14 @@
 export interface UserModel {
-    email?: string;
-    name?: string;
+    email: string;
+    name: string;
     lastName?: string;
     id_nivel?: number;
     statusMsg?: string;
     phone?: string;
-    username?: string;
-    password?: string;
-    img?: string;
+    ddd?: string;
+    username: string;
+    password: string;
+    photoURL: string;
     birthDate?: Date;
     created_at?: Date;
     deleted_at?: Date;

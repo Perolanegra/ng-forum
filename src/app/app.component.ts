@@ -9,7 +9,9 @@ import { AppController } from './core/appController';
 })
 export class AppComponent {
 
-  constructor(private globalVars: GlobalVars, private appController: AppController) {
+  constructor(private globalVars: GlobalVars, 
+    private appController: AppController,
+    ) {
     this.setRoutesLocalStorage();
   }
 

@@ -53,28 +53,27 @@ export class LoginComponent implements OnInit {
       this.store.dispatch(new AuthActions.Signin(username, password))
         .pipe(map(response => response)).subscribe((data: any) => data);
 
+      const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', password);
 
-      this.user$.subscribe(user => {
-        // this.globalVars.setUserLoggedIn(user);
+      // this.user$.subscribe(user => {
+      //   // this.globalVars.setUserLoggedIn(user);
        
-        if(user) {
-          console.log('user: ', user);
-          const username = this.loginForm.get('username').value as string;
-          const password = this.loginForm.get('password').value as string;
-          // ver essa desgraça depois
-          const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', password);
-  
-          if (user.password !== encrypted || user.username !== username) {
-            throw new Error('Login ou senha inválidos.');
-          }
-  
-          this.router.navigate(['home']).catch(error => {
-            console.log('erro: ', error);
-          });
-        }
-        
+      //   if(user) {
+      //     console.log('user: ', user);
+      //     const username = this.loginForm.get('username').value as string;
+      //     const password = this.loginForm.get('password').value as string;
 
-      })
+          
+  
+      //     if (user.password !== encrypted || user.username !== username) {
+      //       throw new Error('Login ou senha inválidos.');
+      //     }
+  
+      //     this.router.navigate(['home']).catch(error => {
+      //       console.log('erro: ', error);
+      //     });
+      //   }
+      // })
 
     }
   }

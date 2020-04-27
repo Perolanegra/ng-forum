@@ -5,7 +5,6 @@ import { AuthStateModel } from '../state/auth/auth.state';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
-import * as firebase from 'firebase';
 import { switchMap, map } from 'rxjs/operators';
 
 
@@ -35,13 +34,6 @@ export class AuthService {
     
   }
 
-  authState() {
-    return this.afAuth.authState.pipe(map(auth => {
-      if (auth) {
-        return this.db.collection("users").doc(auth.uid).get()
-      } else return of([]);
-    }));
-  }
 
   signIn(username: string, password: string): Observable<AuthStateModel> {
 
@@ -71,10 +63,6 @@ export class AuthService {
     return of(null);
   }
 
-  sair() {
-    this.afAuth.signOut();
-  }
-
   signUp(username, email, password) {
 
   }
@@ -94,40 +82,5 @@ export class AuthService {
     // }
   }
 
-  googleLogin(): Promise<any> {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    firebase.auth().languageCode = 'pt';
-    return this.afAuth.signInWithPopup(provider)
-      .then(() => console.log('successful auth'))
-      .catch(error => console.log(error));
-    // firebase.auth().getRedirectResult().then(function(result) {
-    //   if (result.credential) {
-    //     // This gives you a Google Access Token. You can use it to access the Google API.
-    //     var token = result.credential.accessToken;
-    //     // ...
-    //   }
-    //   // The signed-in user info.
-    //   var user = result.user;
-    // })
-
-  }
-
-  get hasUsername() {
-    return this.currentUser.username ? true : false
-  }
-
-  // checkUsername(username: string) {
-  //   username = username.toLowerCase()
-  //   return this.db.object(`usernames/${username}`)
-  // }
-
-  // updateUsername(username: string) {
-
-  //   let data = {}
-  //   data[username] = this.currentUser.uid
-
-  //   this.db.object(`/users/${this.currentUser.uid}`).update({ "username": username })
-  //   this.db.object(`/usernames`).update(data)
-  // }
 
 }

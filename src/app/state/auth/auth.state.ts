@@ -38,14 +38,14 @@ export class AuthState {
 
     @Action(AuthActions.Signin)
     login({ getState, setState }: StateContext<AuthStateModel>, { username, password }: AuthActions.Signin) {
-        return this.authService.authState()
-            .subscribe((user: Observable<any>) => user.subscribe(doc => {
-                const state = getState();
-                setState({
-                    ...state,
-                    user: doc.data()
-                });
-            }));
+        // return this.authService.authState()
+        //     .subscribe((user: Observable<any>) => user.subscribe(doc => {
+        //         const state = getState();
+        //         setState({
+        //             ...state,
+        //             user: doc.data()
+        //         });
+        //     }));
     }
 
     // @Action(AuthActions.Signout)

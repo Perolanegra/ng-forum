@@ -30,7 +30,6 @@
     "@types/crypto-js": "^3.1.44",
     "bootstrap": "^4.4.1",
     "crypto-js": "^4.0.0",
-    "firebase": "^7.14.2",
     "material-icons": "^0.3.1",
     "moment": "^2.24.0",
     "rxjs": "~6.5.4",

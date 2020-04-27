@@ -3,7 +3,7 @@ import { AbstractControl } from "@angular/forms";
 import { debounceTime, tap, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, from } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 
@@ -15,8 +15,8 @@ export class AppController {
     private renderer: Renderer2;
 
     constructor(public dialog: MatDialog,
-    private rendererFactory: RendererFactory2,
-    private router: Router) { 
+        private rendererFactory: RendererFactory2,
+        private router: Router) {
         this.renderer = rendererFactory.createRenderer(null, null);
     }
 
@@ -198,21 +198,28 @@ export class AppController {
 
     /**
     * Retorna para uma nova rota de navegação.
-    * @param pPage Recebe uma string como parâmetro que faz referência a rota a ser navegada.
-    * @author igor.silva
+    * @param path Recebe uma string como parâmetro que faz referência a rota a ser navegada.
+    * @author igor.alves
     */
-    // public navigate(pPage: string) {
-    //     let lDialogAguarde = this.openDialogAguarde();
+    public navigate(path: string) {
+        // let lDialogAguarde = this.openDialogAguarde();
+        this.router.navigate(['/' + path]).then(
+            pResp => {
+                // lDialogAguarde.close();
+            }).catch(
+                error => {
+                    // lDialogAguarde.close();
+                    this.tratarErro(error);
+                });
+    }
 
-    //     this.router.navigate(['/' + pPage]).then(
-    //         pResp => {
-    //             lDialogAguarde.close();
-    //         }).catch(
-    //         error => {
-    //             lDialogAguarde.close();
-    //             this.tratarErro(error);
-    //         });
-    // }
+    public setRoutesNav(fillerNav: Object): void {
+        localStorage.setItem('fillerNav', JSON.stringify(fillerNav));
+    }
+
+    public getRoutesNav(): any {
+        return JSON.parse(localStorage.getItem('fillerNav'));
+    }
 
     /**
     * Retorna um novo Array ordenado de Objetos com os atributos que foram passados e parâmetro de ordenação.
@@ -305,9 +312,20 @@ export class AppController {
 
         return lObjRetorno;
     }
-    
+
+    async fillerNavs(): Promise<Object> {
+        return new Object({
+            routes: [
+                { name: 'Início', isActive: true,imgName: 'home.png', path: 'home', img: await this.getImg('home.png') },
+                { name: 'Configurações', isActive: false,imgName: 'configs.svg', path: 'configs', img: await this.getImg('configs.svg') },
+                { name: 'Meus Issues', isActive: false,imgName: 'my-issues.png', path: 'my-issues', img: await this.getImg('my-issues.png') },
+              
+            ]
+        });
+    }
+
     /**
-     * Método que adiciona classe em determinado elemento.
+     * Método que adiciona classe passada como parâmetro em determinado elemento.
      * @param nativeElement Elemento a ser estilizado, nativeElement.
      * @param classOn Classe css a ser aplicada.
      * @returns void
@@ -318,6 +336,16 @@ export class AppController {
     }
 
     /**
+     * Método que remove a classe passada como parâmetro em determinado elemento.
+     * @param nativeElement Elemento o qual a classe será removida.
+     * @param classOff Classe que será removida.
+     * @author igor.alves
+     */
+    removeElementClass(nativeElement: ElementRef, classOff: string): void {
+        this.renderer.removeClass(nativeElement, classOff);
+    }
+
+    /**
      * Método que estiliza o elemento de acordo com a propriedade passada.
      * @param elementRef Elemento a ser estilizado, nativeElement.
      * @param key Propriedade css a ser aplicada.
@@ -325,18 +353,64 @@ export class AppController {
      * @returns void
      * @author igor.alves
      */
-    setElementStyle(element: Element, key: string, value: string) {
+    setElementStyle(element: Element, key: string, value: string): void {
         this.renderer.setStyle(element, key, value);
     }
 
     /**
-     * Método que remove a classe passada como parâmetro em determinado elemento.
-     * @param nativeElement Elemento o qual a classe será removida.
-     * @param classOff Classe que será removida.
+     * Método que retorna a referência da img, se existir, se não retorna nulo.
+     * @param nameSvg Nome da img passado como parâmetro para busca.
+     * @author igor.alves
      */
-    removeElementClass(nativeElement: ElementRef, classOff: string) {
-        this.renderer.removeClass(nativeElement, classOff);
+    public getImg(nameSvg: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            let prefix = `../../assets/imgs/`;
+
+            let searchImg: string, isValidImg;
+            
+            searchImg = prefix + nameSvg;
+            isValidImg = await this.verifyImg(searchImg);
+            
+            if(isValidImg) {
+                resolve(searchImg);
+            }
+           
+        });
     }
+
+    verifyImg(img): Promise<any> {
+        return new Promise((resolve, reject) => {
+            // if(formatSvg === '.svg') {
+                
+            //     let svg = new SVGElement();
+            //     svg.onload = function() {
+            //         resolve(true);
+            //     };
+        
+            //     svg.onerror = function() {
+            //         resolve(false);
+            //     };
+            //     svg = img;
+
+            // }
+            // else {
+                let image = new Image();
+                image.onload = function() {
+                    resolve(true);
+                };
+
+                image.onerror = function() {
+                    resolve(false);
+                };
+
+                image.src = img;
+            // }
+            
+        });
+    }
+
+
     
+
 
 }

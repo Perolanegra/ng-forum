@@ -1,40 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { GlobalVars } from './core/globalVars';
-import { UserModel } from './shared/models/user/user.model';
+import { AppController } from './core/appController';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  constructor(private router: Router,
-    private globalVars: GlobalVars) {
+  constructor(private globalVars: GlobalVars, 
+    private appController: AppController,
+    ) {
     this.setRoutesLocalStorage();
   }
 
-  ngOnInit() {
-  }
-
   title = 'ng-forum';
-   // Implementar um subscription que muda o valor do observable quando o cara loga/desloga,
-   // e a partir disso alterar perspectiva no html
-  public get isLoggedIn(): Boolean {
+  
+  public get isLoggedIn(): Boolean { // remover esse kra daqui pq o html fica testando ele
     return this.globalVars.isLogged();
   }
 
-  setRoutesLocalStorage() {
-    const fillerNav: Object = {
-      routes: [
-        { name: 'Início', isActive: true, path: 'home' },
-        { name: 'Perfil', isActive: false, path: 'profile' },
-        { name: 'Meus Posts', isActive: false, path: 'my-stuff' },
-      ]
-    };
-
-    localStorage.setItem('fillerNav', JSON.stringify(fillerNav));
+  setRoutesLocalStorage(): void {
+    this.appController.fillerNavs().then(filer => {
+      this.appController.setRoutesNav(filer);
+    })
   }
 
 }

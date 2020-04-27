@@ -9,11 +9,19 @@ import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './modules/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MainNavComponent } from './main-nav/main-nav.component';
+import { MainNavComponent } from './modules/main-nav/main-nav.component';
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
 import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
 import { AppController } from './core/appController';
-import { MainNavStyle } from './main-nav/main-nav.style';
+import { MainNavStyle } from './modules/main-nav/main-nav.style';
+import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
+import { NgxsModule } from '@ngxs/store';
+
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { AuthState } from './state/auth/auth.state';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +29,8 @@ import { MainNavStyle } from './main-nav/main-nav.style';
     LoginComponent,
     MainNavComponent,
     AppMenuOverDirective,
-    AppAutofillOffDirective
+    AppAutofillOffDirective,
+    AppNavNameBehaviorDirective,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +40,16 @@ import { MainNavStyle } from './main-nav/main-nav.style';
     SharedModule,
     HttpClientModule,
     LayoutModule,
+    NgxsModule.forRoot([
+      AuthState
+    ],{
+      developmentMode: !environment.production,
+    }),
+    // NgxsStoragePluginModule.forRoot({
+    //   key: ['auth.token ', 'auth.refreshToken', 'auth.user.username', 'auth.user.email']
+    // }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
   ],
   exports: [
     MaterialModule

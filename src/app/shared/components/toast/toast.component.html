@@ -1,0 +1,21 @@
+
+<div class="toast-out fade-transition-in ">
+    <div class="toast-in" [ngStyle]="{ 'width': hasMobileMatches ? '90vw' : 'unset' }">
+        <div class="toast-in-align" [ngStyle]="{ 'width': hasMobileMatches ? 'unset' : '19vw' }">
+            <div [ngClass]="[ hasMobileMatches ? 'ball-mobile' : 'ball-web' ]"></div>
+    
+            <div class="align-message">
+                <strong>Dados Inválidos</strong>
+                <p class="msg">{{ message }}</p>
+            </div>
+
+            <!-- <div class="div-close-toast-btn">
+                <button id="btn-close-toast" tabindex="-1" mat-icon-button class=""
+                    (click)="closeToast();">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div> -->
+        </div>
+    
+    </div>
+</div>

@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { Observable, from } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -16,13 +17,13 @@ export class AppController {
 
     constructor(public dialog: MatDialog,
         private rendererFactory: RendererFactory2,
+        private toastr: ToastrService,
         private router: Router) {
         this.renderer = rendererFactory.createRenderer(null, null);
     }
 
     tratarErro(err): void {
 
-        console.log('como chega o erro: ', err);
         // this.msg = err.message || err.error_description;
 
         //Erros de Response(possuem status)
@@ -72,7 +73,7 @@ export class AppController {
         //     }
 
         // }
-        // this.exibirErro(this.msg);
+        this.exibirErro(err);
     }
 
     // openDialogSessaoExpirada(): MatDialogRef<DialogSessaoExpiradaComponent> {
@@ -113,9 +114,14 @@ export class AppController {
     //     setTimeout(() => this.toastr.success(msg, ''));
     // }
 
-    // exibirErro(msg: string) {
-    //     setTimeout(() => this.toastr.error(msg, ''));
-    // }
+    exibirErro(msg: string) {
+        this.toastr.error(msg, '', {
+            progressAnimation: 'decreasing',
+            progressBar: true,
+            closeButton: true,
+            tapToDismiss: true,
+        });
+    }
 
     // exibirWarning(msg: string) {
     //     setTimeout(() => this.toastr.warning(msg, ''));

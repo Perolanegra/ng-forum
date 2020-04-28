@@ -27,3 +27,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .font {
     font-family: 'Montserrat';
 }
+
+.fade-transition-in {
+    transition: 0.4s;
+    transition-timing-function: ease-in-out;
+}
+  
+.fade-transition-out {
+    transition: 0.3s;
+    transition-timing-function: ease-in-out;
+}

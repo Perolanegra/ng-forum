@@ -22,7 +22,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AuthState } from './state/auth/auth.state';
 import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './core/http-config.interpcetor';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { HttpConfigInterceptor } from './core/http-config.interpcetor';
     SharedModule,
     HttpClientModule,
     LayoutModule,
+    ToastrModule.forRoot(),
     // NgxsModule.forRoot([
       
     // ],{

@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material.module';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './modules/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainNavComponent } from './modules/main-nav/main-nav.component';
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
@@ -21,6 +21,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AuthState } from './state/auth/auth.state';
 import { environment } from 'src/environments/environment';
+import { HttpConfigInterceptor } from './core/http-config.interpcetor';
 
 
 @NgModule({
@@ -40,13 +41,14 @@ import { environment } from 'src/environments/environment';
     SharedModule,
     HttpClientModule,
     LayoutModule,
-    NgxsModule.forRoot([
+    // NgxsModule.forRoot([
       
-    ],{
-      developmentMode: !environment.production,
-    }),
+    // ],{
+    //   developmentMode: !environment.production,
+    // }),
+    NgxsModule.forRoot([AuthState]),
     NgxsStoragePluginModule.forRoot({
-      key: ['auth.token ', 'auth.user']
+      key: 'auth.token'
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
@@ -56,6 +58,11 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpConfigInterceptor,
+      multi: true
+    },
     AppController,
     MainNavStyle
   ],

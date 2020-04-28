@@ -43,6 +43,7 @@ export class AuthService {
     const url = `http://localhost:3000/auth/login`;
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    
     const body = {
       username: username,
       password: password

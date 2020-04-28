@@ -1,5 +1,5 @@
 
-<ng-main-nav *ngIf="isLoggedIn; else deslogado">
+<ng-main-nav *ngIf="token$ | async; else deslogado">
     <router-outlet></router-outlet>
 </ng-main-nav>
 

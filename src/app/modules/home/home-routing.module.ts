@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
+import { AuthLoginResolver } from 'src/app/core/auth-login.resolver';
 
 
 const routes: Routes = [
@@ -9,7 +10,9 @@ const routes: Routes = [
         path:'', // rota/:param
         component: HomeComponent,
         // resolve: {
+        //     user: AuthLoginResolver
         // },
+        // runGuardsAndResolvers: 'paramsChange'
         // canActivate: [NoAuthGuard],
     }
 ];
@@ -19,6 +22,7 @@ const routes: Routes = [
     exports: [RouterModule],
     providers: [
         // resolvers
+        // AuthLoginResolver
     ]
 })
 export class HomeRoutingModule { }

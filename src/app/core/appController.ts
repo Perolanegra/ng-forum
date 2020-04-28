@@ -22,56 +22,56 @@ export class AppController {
 
     tratarErro(err): void {
 
-
-        this.msg = err.message || err.error_description;
+        console.log('como chega o erro: ', err);
+        // this.msg = err.message || err.error_description;
 
         //Erros de Response(possuem status)
-        if (err.status != undefined && err.status != null) {
-            if (err.status == 401) {
+        // if (err.status != undefined && err.status != null) {
+        //     if (err.status == 401) {
 
-                if (err.error.error == "invalid_token") {
-                    // this.openDialogSessaoExpirada();
-                    this.msg = 'Sua sessão expirou, favor realizar o login novamente.';
+        //         if (err.error.error == "invalid_token") {
+        //             // this.openDialogSessaoExpirada();
+        //             this.msg = 'Sua sessão expirou, favor realizar o login novamente.';
 
-                } else {
-                    //Token expirado			
-                    this.msg = 'Acesso não autorizado, verifique seu login ou procure o suporte técnico.';
-                }
-            } else {
-                if (err.status == 500) {
-                    this.msg = 'Um problema não esperado ocorreu durante a execução do serviço. Por favor, tente novamente mais tarde.';
-                } else {
-                    if (err.status == 404) {
+        //         } else {
+        //             //Token expirado			
+        //             this.msg = 'Acesso não autorizado, verifique seu login ou procure o suporte técnico.';
+        //         }
+        //     } else {
+        //         if (err.status == 500) {
+        //             this.msg = 'Um problema não esperado ocorreu durante a execução do serviço. Por favor, tente novamente mais tarde.';
+        //         } else {
+        //             if (err.status == 404) {
 
-                        this.msg = 'O serviço solicitado encontra-se indisponível no momento. Por favor, tente novamente mais tarde.';
-                    } else {
+        //                 this.msg = 'O serviço solicitado encontra-se indisponível no momento. Por favor, tente novamente mais tarde.';
+        //             } else {
 
-                        if (err.status == 0) {
+        //                 if (err.status == 0) {
 
-                            this.msg = 'Foi impossível conectar com o servidor. Verifique sua conexão com a internet ou tente novamente mais tarde.';
-                        } else {
+        //                     this.msg = 'Foi impossível conectar com o servidor. Verifique sua conexão com a internet ou tente novamente mais tarde.';
+        //                 } else {
 
-                            if (err.status == 400) {
-                                if (err.error && err.error.error == 'invalid_grant') {
-                                    this.msg = 'Usuário ou senha não reconhecidos. Verifique os dados informados e o acionamento da tecla CAPSLOCK.';
-                                } else {
-                                    this.msg = err.error.message;
-                                }
-                            } else {
+        //                     if (err.status == 400) {
+        //                         if (err.error && err.error.error == 'invalid_grant') {
+        //                             this.msg = 'Usuário ou senha não reconhecidos. Verifique os dados informados e o acionamento da tecla CAPSLOCK.';
+        //                         } else {
+        //                             this.msg = err.error.message;
+        //                         }
+        //                     } else {
 
-                                if (err.json != undefined) {
-                                    let errJson = err.error.json();
-                                    this.msg = errJson.message || errJson.error_description
-                                } else {
-                                    this.msg = err.message || err.error_description
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        //                         if (err.json != undefined) {
+        //                             let errJson = err.error.json();
+        //                             this.msg = errJson.message || errJson.error_description
+        //                         } else {
+        //                             this.msg = err.message || err.error_description
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
 
-        }
+        // }
         // this.exibirErro(this.msg);
     }
 
@@ -205,10 +205,8 @@ export class AppController {
         // let lDialogAguarde = this.openDialogAguarde();
         this.router.navigate(['/' + path]).then(
             pResp => {
-                // lDialogAguarde.close();
             }).catch(
                 error => {
-                    // lDialogAguarde.close();
                     this.tratarErro(error);
                 });
     }
@@ -316,10 +314,10 @@ export class AppController {
     async fillerNavs(): Promise<Object> {
         return new Object({
             routes: [
-                { name: 'Início', isActive: true,imgName: 'home.png', path: 'home', img: await this.getImg('home.png') },
-                { name: 'Configurações', isActive: false,imgName: 'configs.svg', path: 'configs', img: await this.getImg('configs.svg') },
-                { name: 'Meus Issues', isActive: false,imgName: 'my-issues.png', path: 'my-issues', img: await this.getImg('my-issues.png') },
-              
+                { name: 'Início', isActive: true, imgName: 'home.png', path: 'home', img: await this.getImg('home.png') },
+                { name: 'Configurações', isActive: false, imgName: 'configs.svg', path: 'configs', img: await this.getImg('configs.svg') },
+                { name: 'Meus Issues', isActive: false, imgName: 'my-issues.png', path: 'my-issues', img: await this.getImg('my-issues.png') },
+
             ]
         });
     }
@@ -367,26 +365,26 @@ export class AppController {
             let prefix = `../../assets/imgs/`;
 
             let searchImg: string, isValidImg;
-            
+
             searchImg = prefix + nameSvg;
             isValidImg = await this.verifyImg(searchImg);
-            
-            if(isValidImg) {
+
+            if (isValidImg) {
                 resolve(searchImg);
             }
-           
+
         });
     }
 
     verifyImg(img): Promise<any> {
         return new Promise((resolve, reject) => {
             // if(formatSvg === '.svg') {
-                
+
             //     let svg = new SVGElement();
             //     svg.onload = function() {
             //         resolve(true);
             //     };
-        
+
             //     svg.onerror = function() {
             //         resolve(false);
             //     };
@@ -394,23 +392,23 @@ export class AppController {
 
             // }
             // else {
-                let image = new Image();
-                image.onload = function() {
-                    resolve(true);
-                };
+            let image = new Image();
+            image.onload = function () {
+                resolve(true);
+            };
 
-                image.onerror = function() {
-                    resolve(false);
-                };
+            image.onerror = function () {
+                resolve(false);
+            };
 
-                image.src = img;
+            image.src = img;
             // }
-            
+
         });
     }
 
 
-    
+
 
 
 }

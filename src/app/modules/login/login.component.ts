@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { map } from 'rxjs/operators';
+import { AppController } from 'src/app/core/appController';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +25,11 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private store: Store,
     private auth: AuthService,
+    private appController: AppController,
     private encryptService: EncryptionService,
-    private globalVars: GlobalVars) { }
-
-
-  @Select(AuthState.userDetails) user$: Observable<UserModel>;
+    private globalVars: GlobalVars) {
+      window['t'] =this;
+  }
 
   ngOnInit(): void {
     this.setLoginForm();
@@ -48,20 +49,7 @@ export class LoginComponent implements OnInit {
       const password = this.loginForm.get('password').value as string;
       const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', password);
 
-      this.store.dispatch(new AuthActions.Signin(username, encrypted));
-
-      // this.globalVars.setUserLoggedIn(user);
-      // console.log('user: ', user);
-      // if (!user) {
-      //   throw new Error('Login ou senha inválidos.');
-      // }
-
-      
-
-      // this.router.navigate(['home']).catch(error => {
-      //   console.log('erro: ', error);
-      // });
-
+      this.store.dispatch(new AuthActions.Signin(username, encrypted)).subscribe(() => this.appController.navigate('home'));
     }
   }
 

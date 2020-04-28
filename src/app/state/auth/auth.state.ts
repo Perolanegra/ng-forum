@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { AuthService, User } from '../../core/auth.service';
+import { AuthService } from '../../core/auth.service';
 import { tap } from 'rxjs/operators';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthActions } from './auth.actions';

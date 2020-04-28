@@ -26,15 +26,12 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private encryptService: EncryptionService,
     private globalVars: GlobalVars) { }
-  teste = 0;
 
 
-  @Select(AuthState.userDetails) user$: any;
+  @Select(AuthState.userDetails) user$: Observable<UserModel>;
 
   ngOnInit(): void {
-    // this.auth.googleLogin();
     this.setLoginForm();
-
   }
 
   setLoginForm() {
@@ -49,31 +46,21 @@ export class LoginComponent implements OnInit {
     if (this.isValidForm()) {
       const username = this.loginForm.get('username').value as string;
       const password = this.loginForm.get('password').value as string;
-      // const decrypted = this.encryptService.get('10610433IA$#@$^@1ERF', encrypted);
-      this.store.dispatch(new AuthActions.Signin(username, password))
-        .pipe(map(response => response)).subscribe((data: any) => data);
-
       const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', password);
 
-      // this.user$.subscribe(user => {
-      //   // this.globalVars.setUserLoggedIn(user);
-       
-      //   if(user) {
-      //     console.log('user: ', user);
-      //     const username = this.loginForm.get('username').value as string;
-      //     const password = this.loginForm.get('password').value as string;
+      this.store.dispatch(new AuthActions.Signin(username, encrypted));
 
-          
-  
-      //     if (user.password !== encrypted || user.username !== username) {
-      //       throw new Error('Login ou senha inválidos.');
-      //     }
-  
-      //     this.router.navigate(['home']).catch(error => {
-      //       console.log('erro: ', error);
-      //     });
-      //   }
-      // })
+      // this.globalVars.setUserLoggedIn(user);
+      // console.log('user: ', user);
+      // if (!user) {
+      //   throw new Error('Login ou senha inválidos.');
+      // }
+
+      
+
+      // this.router.navigate(['home']).catch(error => {
+      //   console.log('erro: ', error);
+      // });
 
     }
   }

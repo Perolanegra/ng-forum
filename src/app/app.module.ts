@@ -16,7 +16,7 @@ import { AppController } from './core/appController';
 import { MainNavStyle } from './modules/main-nav/main-nav.style';
 import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
 import { NgxsModule } from '@ngxs/store';
-
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AuthState } from './state/auth/auth.state';
@@ -41,13 +41,13 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     LayoutModule,
     NgxsModule.forRoot([
-      AuthState
+      
     ],{
       developmentMode: !environment.production,
     }),
-    // NgxsStoragePluginModule.forRoot({
-    //   key: ['auth.token ', 'auth.refreshToken', 'auth.user.username', 'auth.user.email']
-    // }),
+    NgxsStoragePluginModule.forRoot({
+      key: ['auth.token ', 'auth.user']
+    }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
   ],

@@ -5,5 +5,10 @@ export namespace AppActions {
         constructor(public hasMobileMatches: boolean) { }
     }
 
+    export class SetSessionState {
+        static readonly type = '[App] Set Session State';
+        constructor(public statePath: string) { }
+    }
+
 
 }

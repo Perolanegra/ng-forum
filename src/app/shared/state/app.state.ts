@@ -5,12 +5,14 @@ import { AppActions } from './app.actions';
 
 export class AppStateModel {
     hasMobileMatches: boolean;
+    statePath: string;
 }
 
 @State<AppStateModel>({
     name: 'app',
     defaults: {
-        hasMobileMatches: null
+        hasMobileMatches: null,
+        statePath: 'login'
     }
 })
 
@@ -24,12 +26,27 @@ export class AppState {
         return state.hasMobileMatches;
     }
 
+    @Selector()
+    static sessionState(state: AppStateModel): string {
+        return state.statePath;
+    }
+
     @Action(AppActions.SetMediaScreen)
     setMediaScreen({ getState, setState }: StateContext<AppStateModel>, { hasMobileMatches }: AppActions.SetMediaScreen) {
         const state = getState();
         setState({
             ...state,
             hasMobileMatches: hasMobileMatches
+        });
+
+    }
+
+    @Action(AppActions.SetSessionState)
+    setSessionState({ getState, setState }: StateContext<AppStateModel>, { statePath }: AppActions.SetSessionState) {
+        const state = getState();
+        setState({
+            ...state,
+            statePath: statePath
         });
 
     }

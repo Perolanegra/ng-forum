@@ -4,6 +4,7 @@ import { GlobalVars } from 'src/app/core/globalVars';
 import { Store, Actions } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { NgDefault } from 'src/app/core/ng-default';
+import { AppActions } from 'src/app/shared/state/app.actions';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent extends NgDefault  implements OnInit, OnDestroy {
   }
 
   signOut() {
+    this.store.dispatch(new AppActions.SetSessionState('login'));
     this.store.dispatch(new AuthActions.Signout()).subscribe(() => this.globalVars.removeUserLoggedIn());
   }
 

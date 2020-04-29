@@ -50,7 +50,7 @@ import { AppState } from './shared/state/app.state';
     // }),
     NgxsModule.forRoot([AuthState, AppState]),
     NgxsStoragePluginModule.forRoot({
-      key: ['auth.token', 'app.hasMobileMatches']
+      key: ['auth.token', 'app.hasMobileMatches', 'app.statePath']
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { GlobalVars } from 'src/app/core/globalVars';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { AuthService } from '../../core/auth.service';
-import { Store, Select } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
-import { AuthState, AuthStateModel } from 'src/app/state/auth/auth.state';
-import { Observable } from 'rxjs';
-import { UserModel } from 'src/app/models/user.model';
 import { EncryptionService } from 'src/app/core/encryption.service';
-import { map } from 'rxjs/operators';
 import { AppController } from 'src/app/core/appController';
+import { AppActions } from 'src/app/shared/state/app.actions';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +15,10 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   hide = true;
 
-  constructor(private router: Router,
-    private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private store: Store,
-    private auth: AuthService,
     private appController: AppController,
-    private encryptService: EncryptionService,
-    private globalVars: GlobalVars) {
+    private encryptService: EncryptionService) {
   }
 
   ngOnInit(): void {
@@ -44,6 +35,11 @@ export class LoginComponent implements OnInit {
 
   signIn() {
     if (this.isValidForm()) {
+
+      if (this.loginForm.get('saveState').value) {
+        this.store.dispatch(new AppActions.SetSessionState('home'));
+      }
+
       const username = this.loginForm.get('username').value as string;
       const password = this.loginForm.get('password').value as string;
       const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', password);

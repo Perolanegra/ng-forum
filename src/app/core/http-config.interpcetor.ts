@@ -1,16 +1,20 @@
-import { Injectable } from '@angular/core';import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpHeaders } from '@angular/common/http';import { Store } from '@ngxs/store';import { Observable, throwError } from 'rxjs';import { AppState } from '../shared/state/app.state';
+import { Injectable } from '@angular/core';import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpHeaders } from '@angular/common/http';import { Store, Select } from '@ngxs/store';import { Observable, throwError } from 'rxjs';import { AppState } from '../shared/state/app.state';
 import { map, catchError } from 'rxjs/operators';
 import { AppController } from './appController';
+import { AuthState } from '../state/auth/auth.state';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
+
+  @Select(AuthState.token) token$: Observable<string>;
 
   constructor(private _store: Store, private appController: AppController) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    const token = this._store.selectSnapshot<string>((state: { token: string }) => state.token);
-
+    let token;
+    this._store.select(state => token = state.token);
+    
     if (token) {
       req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
     }

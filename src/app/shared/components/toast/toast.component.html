@@ -1,11 +1,11 @@
 <div *ngIf="!hasClosed" class="toast-out fade-transition-in ">
-    <div class="toast-in" [ngStyle]="{ 'width': hasMobileMatches ? '90vw' : 'unset' }">
-        <div id="base-height" class="toast-in-align" [ngStyle]="{ 'width': hasMobileMatches ? 'unset' : '19vw' }">
-            <div [ngClass]="[ hasMobileMatches ? 'ball-mobile' : 'ball-web' ]"></div>
+    <div class="toast-in" [ngStyle]="{ 'width': hasMobileMatches ? '80vw' : 'unset' }">
+        <div id="base-height" class="toast-in-align" [ngStyle]="{ 'width': hasMobileMatches ? '100%' : '19vw' }">
+            <div [ngClass]="[ hasMobileMatches ? 'ball-mobile' : 'ball-web' ]" [ngStyle]="{ 'background': getBallBackground() }"></div>
 
             <div class="align-message">
-                <strong class="title-msg">{{ title }}</strong>
-                <p class="msg">{{ message }}</p>
+                <strong class="title-msg" [ngStyle]="{ 'line-height': getStyle('unset', '54px'), 'font-size': getStyle('16px', '22px') }">{{ title }}</strong>
+                <p class="msg" [ngStyle]="{ 'font-size': getStyle('13px', 'unset'), 'max-width': getStyle('180px', '255px') }">{{ message }}</p>
             </div>
         </div>
 

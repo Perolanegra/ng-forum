@@ -25,8 +25,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             return event;
         }),
         catchError((error) => {          
-          const { message, title } = error.error;
-          const ref = this.appController.showToastPopUp({ title, message });
+          const { message, title, type } = error.error;
+          const ref = this.appController.showToastPopUp({ title, message, type });
           ref.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
           });

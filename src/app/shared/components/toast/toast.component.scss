@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  // background: #22262e;
 }
-
 .toast-in {
   display: flex;
   background: #22262e;
@@ -26,17 +26,17 @@
 .ball-web {
   width: 24px;
   border-radius: 50%;
-  background: red;
   height: 24px;
   position: relative;
   top: 15px;
 }
 
 .ball-mobile {
-  width: 30px;
+  width: 20px;
   border-radius: 50%;
-  background: red;
   height: 20px;
+  position: relative;
+  top: 15px;
 }
 
 .align-message {
@@ -61,13 +61,10 @@
 .msg {
   word-break: break-all;
   margin-bottom: unset !important;
-  max-width: 255px;
 }
 
 .title-msg {
   font-family: 'Product Sans Light Regular';
-  font-size: 22px;
-  line-height: 54px;
   font-weight: 500;
   color: #fff;
 }
@@ -99,3 +96,37 @@
   color: #fff;
   outline: none;
 }
+
+
+@media only screen and (max-width: 767px) {
+  ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+    line-height: 24px;
+    color: #fff;
+    outline: none;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (width: 1024px) {
+
+  ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+    line-height: 24px;
+    color: #fff;
+    outline: none;
+    font-size: 20px;
+  }
+  
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px)  {
+  ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+    line-height: 24px;
+    color: #fff;
+    outline: none;
+    font-size: 20px;
+  }
+ 
+
+}
+

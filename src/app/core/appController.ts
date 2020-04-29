@@ -77,31 +77,13 @@ export class AppController {
         this.exibirErro(err);
     }
 
-    // openDialogSessaoExpirada(): MatDialogRef<DialogSessaoExpiradaComponent> {
-
-    //     let dialogRef = this.dialog.open(DialogSessaoExpiradaComponent, {
-    //         width: '250px',
-    //         autoFocus: true
-    //     });
-    //     return dialogRef;
-    // }
-
-    // openDialogAguarde(): MatDialogRef<DialogAguardeComponent> {
-
-    //     let dialogRef = this.dialog.open(DialogAguardeComponent, {
-    //         width: '250px', disableClose: true
-    //     }
-    //     );
-    //     return dialogRef;
-    // }
-
-
     showToastPopUp(paylaod: Object): MatDialogRef<ToastComponent> {
         let dialogRef = null;
 
         dialogRef = this.dialog.open(ToastComponent, {
             data: paylaod,
             hasBackdrop: true,
+            position: { top: '5vw' }
         });
 
         return dialogRef;

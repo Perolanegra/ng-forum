@@ -1,5 +1,5 @@
-import { Component, OnInit, Injectable, Inject, AfterViewInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'ng-toast',
@@ -26,6 +26,22 @@ export class ToastComponent implements OnInit, AfterViewInit {
     this.dialogRef.close();
   }
 
+  public getStyle(trueValue, falseValue) {
+    return this.hasMobileMatches ? trueValue : falseValue;
+  }
+
+  public getBallBackground() {
+    const call = {
+      error: () => { return 'red' },
+      info: () => { return 'blue' },
+      warning: () => { return 'orange' },
+      success: () => { return 'green' },
+    }
+
+    const { type } = this.data;
+    return call[type]();
+  }
+
   ngAfterViewInit() {
     Promise.resolve(null).then(() =>
       this.elementHeight = ((<HTMLElement>document.getElementById('base-height')).offsetHeight).toString().concat('px'));
@@ -36,28 +52,5 @@ export class ToastComponent implements OnInit, AfterViewInit {
     this.message = message;
     this.title = title;
   }
-
-  info(title: string, msg: string, hasMobileMatches: boolean) {
-
-  };
-
-  warning(message, title, options = null) {
-    this.alerts("warning", message, title, "icon-warning-sign", options);
-  }
-
-  error() {
-
-
-  };
-
-  success(message, title, options) {
-    this.alerts("success", message, title, "icon-ok-sign", options);
-  }
-
-  alerts(bol, bal, va, as, ds) {
-
-  }
-
-
 
 }

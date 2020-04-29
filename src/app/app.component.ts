@@ -46,7 +46,7 @@ export class AppComponent {
   setRoutesLocalStorage(): void {
     this.appController.fillerNavs().then(filer => {
       this.appController.setRoutesNav(filer);
-    })
+    });
   }
 
   ngOnDestroy(): void {

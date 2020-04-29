@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, ChangeDetectionStrategy  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, ChangeDetectionStrategy, AfterViewChecked  } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AppController } from '../../core/appController';
 import { MainNavStyle } from './main-nav.style';
@@ -11,7 +11,7 @@ import { Observable, Subscription } from 'rxjs';
     styleUrls: ['./main-nav.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MainNavComponent implements OnInit {
+export class MainNavComponent implements OnInit, AfterViewChecked {
 
     mobileQuery: MediaQueryList;
     hasEnterMenuRef: boolean = false;
@@ -45,6 +45,11 @@ export class MainNavComponent implements OnInit {
         this.setMenuActiveLink('home');
         this.getFillerNav();
     }
+
+    ngAfterViewChecked() {
+        localStorage.setItem('hasMobileMatches', JSON.stringify(this.mobileQuery.matches));
+    }
+
 
     ngOnDestroy(): void {
         this.mobileQuery.removeListener(this._mobileQueryListener);

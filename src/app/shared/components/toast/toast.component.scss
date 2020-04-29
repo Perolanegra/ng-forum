@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
   // width: fit-content; // descomentar dps q for usar
 }
 
@@ -42,25 +41,62 @@
 }
 
 .align-message {
-  margin-left: 1em;
+  margin-left: 1.5em;
   flex-direction: column;
   display: flex;
   justify-content: left;
   align-items: flex-start;
   line-height: 1.5rem;
   margin-top: 3%;
-  margin-bottom: 3%;
+  margin-bottom: 5%;
 }
 
 .div-close-toast-btn {
   color: #fff;
   position: absolute;
-  left: 425px;
-  top: 5px;
+  margin-left: 8%;
+  top: 17px;
+
 }
 
 .msg {
   word-break: break-all;
   margin-bottom: unset !important;
   max-width: 255px;
+}
+
+.title-msg {
+  font-family: 'Product Sans Light Regular';
+  font-size: 22px;
+  line-height: 54px;
+  font-weight: 500;
+  color: #fff;
+}
+
+::ng-deep .mat-dialog-container {
+  display: unset;
+  padding: unset;
+  border-radius: unset;
+  box-sizing: unset;
+  overflow: hidden;
+  outline: unset;
+  width: unset;
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+  background: transparent;
+}
+
+.align-close {
+  outline: none;
+  background: #E91E63;
+  align-items: center;
+  display: flex;
+  border-radius: 0px 5px 5px 0px;
+}
+
+::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+  line-height: 24px;
+  color: #fff;
+  outline: none;
 }

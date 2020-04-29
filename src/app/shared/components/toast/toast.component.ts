@@ -1,52 +1,60 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Injectable, Inject, AfterViewInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'ng-toast',
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })
-export class ToastComponent implements OnInit {
+export class ToastComponent implements OnInit, AfterViewInit {
 
-  @Input() public message: string = 'Usuário ou senha incorreta.'
-  @Input() public hasMobileMatches: boolean = false;
+  public message: string;
+  public hasMobileMatches: boolean;
+  public title: string;
+  public elementHeight: string;
 
-  constructor() {
 
+  constructor(
+    public dialogRef: MatDialogRef<ToastComponent>,
+    @Inject(MAT_DIALOG_DATA) public data) {
+      this.hasMobileMatches = localStorage.getItem('hasMobileMatches') === 'true';
+    }
 
+    closeToast(): void {
+    this.dialogRef.close();
   }
 
-  closeToast() {
-    console.log('pediu pra fechar');
-    
+  ngAfterViewInit() {
+    Promise.resolve(null).then(() => 
+    this.elementHeight = ((<HTMLElement>document.getElementById('base-height')).offsetHeight).toString().concat('px'));
   }
 
   ngOnInit(): void {
-    console.log('entrei aqui');
-    
+    const { title, message } = this.data;
+    this.message = message;
+    this.title = title;    
   }
 
-  info(message, title, options) {
-    this.alerts("info", message, title, "icon-info-sign", options);
+  info(title: string, msg: string, hasMobileMatches: boolean) {
+    
   };
 
   warning(message, title, options = null) {
     this.alerts("warning", message, title, "icon-warning-sign", options);
   }
 
-  error(message, title, options) {
-    this.alerts("error", message, title, "icon-minus-sign", options);
+  error() {
+    
+    
   };
 
   success(message, title, options) {
     this.alerts("success", message, title, "icon-ok-sign", options);
-  };
-
-  alerts(type, message, title, icon, options) {
-    console.log(type, message, title, icon)
-
-
   }
 
+  alerts(bol, bal, va, as, ds) {
+
+  }
 
 
 

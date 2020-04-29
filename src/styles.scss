@@ -5,8 +5,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('./assets/fonts/Montserrat-Regular.ttf'); /* IE9 Compat Modes */
+    src: url('./assets/fonts/Montserrat-Regular.ttf'),
 }
+
+@font-face { font-family: 'Product Sans'; src: url('./assets/fonts/ProductSans-Regular.ttf') }
+@font-face { font-family: 'Product Sans Light Italic'; src: url('./assets/fonts/ProductSans-LightItalic.ttf') }
+@font-face { font-family: 'Product Sans Light Regular'; src: url('./assets/fonts/ProductSans-Light.ttf') }
+@font-face { font-family: 'Product Sans Black Regular'; src: url('./assets/fonts/ProductSans-Black.ttf') }
+@font-face { font-family: 'Product Sans Medium'; src: url('./assets/fonts/ProductSans-Medium.ttf') }
+
+
 
 .accent-color {
     color: #E91E63;

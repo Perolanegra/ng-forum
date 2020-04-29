@@ -5,7 +5,7 @@ import { NoAuthGuard } from './shared/guards/no-auth.guard';
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' }, // voltar dps
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard]  }, 
   {
     path: 'home',

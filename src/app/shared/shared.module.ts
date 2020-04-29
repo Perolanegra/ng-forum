@@ -31,6 +31,7 @@ import { ToastComponent } from './components/toast/toast.component';
         ToastComponent
     ],
     entryComponents: [
+        ToastComponent
     ],
     providers: [
         GlobalVars

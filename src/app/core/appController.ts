@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { Observable, from } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { ToastComponent } from '../shared/components/toast/toast.component';
 
 
 
@@ -95,32 +96,28 @@ export class AppController {
     // }
 
 
-    // openDialogConfirmacao(pMsg): MatDialogRef<any> {
-    //     let lMsg: string = pMsg;
-    //     //Verifica se tem ao menos um item selecionado e abre o modal para confirmar a exclusão
-    //     let dialogRef = null;
+    showToastPopUp(paylaod: Object): MatDialogRef<ToastComponent> {
+        let dialogRef = null;
 
-    //     dialogRef = this.dialog.open(DialogConfirmacaoComponent, {
-    //         width: '250px',
-    //         data: { msg: lMsg },
-    //         autoFocus: true
+        dialogRef = this.dialog.open(ToastComponent, {
+            data: paylaod,
+            hasBackdrop: true
+        });
 
-    //     });
-
-    //     return dialogRef;
-    // }
+        return dialogRef;
+    }
 
     // exibirSucesso(msg: string) {
     //     setTimeout(() => this.toastr.success(msg, ''));
     // }
 
     exibirErro(msg: string) {
-        this.toastr.error(msg, '', {
-            progressAnimation: 'decreasing',
-            progressBar: true,
-            closeButton: true,
-            tapToDismiss: true,
-        });
+        // this.toastr.error(msg, '', {
+        //     progressAnimation: 'decreasing',
+        //     progressBar: true,
+        //     closeButton: true,
+        //     tapToDismiss: true,
+        // });
     }
 
     // exibirWarning(msg: string) {

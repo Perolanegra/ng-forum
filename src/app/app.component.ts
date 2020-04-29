@@ -22,6 +22,7 @@ export class AppComponent {
     private store: Store
     ) {
     this.setRoutesLocalStorage();
+    localStorage.setItem('hasMobileMatches', JSON.stringify(false));
   }
 
   ngOnInit() {

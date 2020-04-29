@@ -23,6 +23,7 @@ import { AuthState } from './state/auth/auth.state';
 import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './core/http-config.interpcetor';
 import { ToastrModule } from 'ngx-toastr';
+import { AppState } from './shared/state/app.state';
 
 @NgModule({
   declarations: [
@@ -47,9 +48,9 @@ import { ToastrModule } from 'ngx-toastr';
     // ],{
     //   developmentMode: !environment.production,
     // }),
-    NgxsModule.forRoot([AuthState]),
+    NgxsModule.forRoot([AuthState, AppState]),
     NgxsStoragePluginModule.forRoot({
-      key: 'auth.token'
+      key: ['auth.token', 'app.hasMobileMatches']
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

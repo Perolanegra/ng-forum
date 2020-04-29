@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, ChangeDetectionStrategy, AfterViewChecked  } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { AppController } from '../../core/appController';
 import { MainNavStyle } from './main-nav.style';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngxs/store';
 
 @Component({
     selector: 'ng-main-nav',
@@ -11,34 +11,31 @@ import { Observable, Subscription } from 'rxjs';
     styleUrls: ['./main-nav.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MainNavComponent implements OnInit, AfterViewChecked {
+export class MainNavComponent implements OnInit {
 
-    mobileQuery: MediaQueryList;
+    hasMobileMatches: boolean;
     hasEnterMenuRef: boolean = false;
     profileDefault: string = '../../../../assets/imgs/profile-default.jfif';
-   
+
     @ViewChild('userInfo') elRefUserInfo: ElementRef;
     @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;
 
     private routeDetector: Subscription;
-    
+
     public vistoPic = '../../assets/imgs/moderator-male.svg';
 
-    constructor(changeDetectorRef: ChangeDetectorRef, 
-    public router: Router,
-    // private breakpointObserver: BreakpointObserver,
-    public media: MediaMatcher,
-    private mainNavStyle: MainNavStyle,
-    public appController: AppController
-    ) { 
-        this.mobileQuery = media.matchMedia('(max-width: 600px)');
-        this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-        this.mobileQuery.addListener(this._mobileQueryListener);
+    constructor(
+        public router: Router,
+        // private breakpointObserver: BreakpointObserver,
+        private store: Store,
+        private mainNavStyle: MainNavStyle,
+        public appController: AppController
+    ) {
+        this.store.select(state => this.hasMobileMatches = state.stateMobileMatches);
     }
-    
-    private _mobileQueryListener: () => void;
+
     public routes = this.appController.getRoutesNav().routes;
-  
+
     public state$: Observable<any>;
 
     ngOnInit() {
@@ -46,19 +43,13 @@ export class MainNavComponent implements OnInit, AfterViewChecked {
         this.getFillerNav();
     }
 
-    ngAfterViewChecked() {
-        localStorage.setItem('hasMobileMatches', JSON.stringify(this.mobileQuery.matches));
-    }
-
-
     ngOnDestroy(): void {
-        this.mobileQuery.removeListener(this._mobileQueryListener);
         this.routeDetector.unsubscribe();
     }
 
     getFillerNav() {
         this.routeDetector = this.state$.subscribe((hasChanged) => {
-            if(hasChanged) this.routes = this.appController.getRoutesNav().routes;
+            if (hasChanged) this.routes = this.appController.getRoutesNav().routes;
         });
     }
 
@@ -68,21 +59,21 @@ export class MainNavComponent implements OnInit, AfterViewChecked {
 
     toggleMenu(elementRef: Element) {
         this.hasEnterMenuRef = true;
-        this.mainNavStyle.setStyleMenuNavInit(elementRef, this.mobileQuery.matches);
+        this.mainNavStyle.setStyleMenuNavInit(elementRef, this.hasMobileMatches);
     }
 
     closeSideMenuMobile(elementRefSideMenu: ElementRef) { // quando o ElementRef vem de referência, ele já passa o nativeElement
         this.appController.removeElementClass(elementRefSideMenu, 'side-menu-init--active');
-        this.mainNavStyle.setStyleMenuNavClose(this.elRefUserInfo.nativeElement, this.mobileQuery.matches);
+        this.mainNavStyle.setStyleMenuNavClose(this.elRefUserInfo.nativeElement, this.hasMobileMatches);
     }
- 
+
     setMenuActiveLink(path: string) {
         const routes = this.routes;
-        
+
         routes.map((prop) => {
             prop.isActive = false;
 
-            if(prop.path === path) {
+            if (prop.path === path) {
                 prop.isActive = true;
                 return;
             }
@@ -97,6 +88,6 @@ export class MainNavComponent implements OnInit, AfterViewChecked {
         this.setMenuActiveLink(path);
     }
 
-   
+
 
 }

@@ -1,25 +1,25 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<div class="example-container" [class.example-is-mobile]="hasMobileMatches">
 
   <div #sideMenu ngMenuOver (hasEnterMenu)="onMenuBlur($event)" id="sideMenuContainer"
-    [hasMobileMatches]="mobileQuery.matches" class="side-menu-init">
+    [hasMobileMatches]="hasMobileMatches" class="side-menu-init">
 
-    <div class="div-img-center-above" [ngStyle]="{'height': mobileQuery.matches ? '15vh' : '19vh' }">
+    <div class="div-img-center-above" [ngStyle]="{'height': hasMobileMatches ? '15vh' : '19vh' }">
 
       <div class="div-close-side-menu-mobile">
         <button id="btn-close" tabindex="-1" mat-icon-button class="btn-close-side-menu-mobile"
-          (click)="closeSideMenuMobile(sideMenu);" *ngIf="mobileQuery.matches">
+          (click)="closeSideMenuMobile(sideMenu);" *ngIf="hasMobileMatches">
           <mat-icon>close</mat-icon>
         </button>
       </div>
 
-      <div class="" [ngClass]="[ mobileQuery.matches ? 'div-img-center-logo-mobile' : 'div-img-center-logo' ]">
+      <div class="" [ngClass]="[ hasMobileMatches ? 'div-img-center-logo-mobile' : 'div-img-center-logo' ]">
         <img class="img-logo-menu" src="../../../assets/imgs/logo.png">
       </div>
     </div>
 
     <div class="div-img-center">
       <div id="out-img"
-        [ngClass]="[ mobileQuery.matches || hasEnterMenuRef ? 'div-img-background-mobile' : 'div-img-background' ]">
+        [ngClass]="[ hasMobileMatches || hasEnterMenuRef ? 'div-img-background-mobile' : 'div-img-background' ]">
         <img [src]="profileDefault" class="img-menu-over">
 
         <div class="div-visto-img div-fade-out fade-transition-in">
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div id="sideNav" class="div-side-nav" *ngIf="!mobileQuery.matches; else navMobile" style="overflow-y: auto; overflow-x: hidden;">
+    <div id="sideNav" class="div-side-nav" *ngIf="!hasMobileMatches; else navMobile" style="overflow-y: auto; overflow-x: hidden;">
       <div #navListRoutes id="sideNavContainer" class="div-side-nav-container" style="cursor: pointer;"
         (click)="navigate(nav?.path);"
         [ngClass]="[ hasEnterMenuRef && nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--colapsed', hasEnterMenuRef ? 'div-align-nav-item--active' : '' ]"
@@ -81,13 +81,13 @@
 
 
   <div style="display: flex; justify-content: center; flex-direction: column;">
-    <mat-toolbar class="my-toolbar" *ngIf="mobileQuery.matches">
+    <mat-toolbar class="my-toolbar" *ngIf="hasMobileMatches">
       <button tabindex="-1" mat-icon-button class="btn-toggle-mobile" (click)="toggleMenu(sideMenu)">
         <mat-icon>menu</mat-icon>
       </button>
     </mat-toolbar>
 
-    <div class="div-content-align" [ngStyle]="{'padding-left': mobileQuery.matches ? 'unset' : '6vw' }">
+    <div class="div-content-align" [ngStyle]="{'padding-left': hasMobileMatches ? 'unset' : '6vw' }">
       <ng-content></ng-content>
     </div>
   </div>

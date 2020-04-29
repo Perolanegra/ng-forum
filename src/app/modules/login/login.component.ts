@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     private appController: AppController,
     private encryptService: EncryptionService,
     private globalVars: GlobalVars) {
-      window['t'] =this;
   }
 
   ngOnInit(): void {

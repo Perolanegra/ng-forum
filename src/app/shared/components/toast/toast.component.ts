@@ -14,11 +14,10 @@ export class ToastComponent implements OnInit, AfterViewInit {
   public elementHeight: string;
   public hasClosed: boolean = false;
 
-
   constructor(
     public dialogRef: MatDialogRef<ToastComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
-    this.hasMobileMatches = localStorage.getItem('hasMobileMatches') === 'true';
+    this.hasMobileMatches = localStorage.getItem('app.hasMobileMatches') === 'true';
   }
 
   closeToast(): void {

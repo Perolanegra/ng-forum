@@ -1,4 +1,4 @@
-<div class="toast-out fade-transition-in ">
+<div *ngIf="!hasClosed" class="toast-out fade-transition-in ">
     <div class="toast-in" [ngStyle]="{ 'width': hasMobileMatches ? '90vw' : 'unset' }">
         <div id="base-height" class="toast-in-align" [ngStyle]="{ 'width': hasMobileMatches ? 'unset' : '19vw' }">
             <div [ngClass]="[ hasMobileMatches ? 'ball-mobile' : 'ball-web' ]"></div>
@@ -12,7 +12,7 @@
     </div>
 
 
-    <div tabindex="-1" class="align-close" [ngStyle]="{ 'height': elementHeight }">
+    <div class="align-close" [ngStyle]="{ 'height': elementHeight }">
         <button tabindex="-1" mat-icon-button style="height: 100%; outline: none;"  (click)="closeToast()">
             <mat-icon>close</mat-icon>
         </button>

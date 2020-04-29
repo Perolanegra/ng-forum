@@ -28,7 +28,6 @@ import { ToastComponent } from './components/toast/toast.component';
         FormComponent,
         MaterialModule,
         ReactiveFormsModule,
-        ToastComponent
     ],
     entryComponents: [
         ToastComponent

@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable, Inject, AfterViewInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'ng-toast',
@@ -12,31 +12,33 @@ export class ToastComponent implements OnInit, AfterViewInit {
   public hasMobileMatches: boolean;
   public title: string;
   public elementHeight: string;
+  public hasClosed: boolean = false;
 
 
   constructor(
     public dialogRef: MatDialogRef<ToastComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
-      this.hasMobileMatches = localStorage.getItem('hasMobileMatches') === 'true';
-    }
+    this.hasMobileMatches = localStorage.getItem('hasMobileMatches') === 'true';
+  }
 
-    closeToast(): void {
+  closeToast(): void {
+    this.hasClosed = true;
     this.dialogRef.close();
   }
 
   ngAfterViewInit() {
-    Promise.resolve(null).then(() => 
-    this.elementHeight = ((<HTMLElement>document.getElementById('base-height')).offsetHeight).toString().concat('px'));
+    Promise.resolve(null).then(() =>
+      this.elementHeight = ((<HTMLElement>document.getElementById('base-height')).offsetHeight).toString().concat('px'));
   }
 
   ngOnInit(): void {
     const { title, message } = this.data;
     this.message = message;
-    this.title = title;    
+    this.title = title;
   }
 
   info(title: string, msg: string, hasMobileMatches: boolean) {
-    
+
   };
 
   warning(message, title, options = null) {
@@ -44,8 +46,8 @@ export class ToastComponent implements OnInit, AfterViewInit {
   }
 
   error() {
-    
-    
+
+
   };
 
   success(message, title, options) {

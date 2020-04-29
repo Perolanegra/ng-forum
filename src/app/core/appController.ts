@@ -101,7 +101,7 @@ export class AppController {
 
         dialogRef = this.dialog.open(ToastComponent, {
             data: paylaod,
-            hasBackdrop: true
+            hasBackdrop: true,
         });
 
         return dialogRef;

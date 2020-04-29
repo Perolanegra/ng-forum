@@ -44,8 +44,8 @@ export class AppComponent {
   title = 'ng-forum';
 
   setRoutesLocalStorage(): void {
-    this.appController.fillerNavs().then(filer => {
-      this.appController.setRoutesNav(filer);
+    this.appController.fillerNavs().then(filler => {
+      this.appController.setRoutesNav(filler);
     });
   }
 

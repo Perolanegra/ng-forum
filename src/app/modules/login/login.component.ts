@@ -29,16 +29,11 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required),
-      saveState: new FormControl(false)
     });
   }
 
   signIn() {
     if (this.isValidForm()) {
-
-      if (this.loginForm.get('saveState').value) {
-        this.store.dispatch(new AppActions.SetSessionState('home'));
-      }
 
       const username = this.loginForm.get('username').value as string;
       const password = this.loginForm.get('password').value as string;

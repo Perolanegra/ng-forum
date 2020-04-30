@@ -9,21 +9,29 @@ import { AuthState } from 'src/app/state/auth/auth.state';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanActivate{
+export class AuthGuard implements CanActivate {
 
     @Select(AuthState.token) token$: Observable<any>;
 
     constructor(private globalVars: GlobalVars,
-    private store: Store,
-    private router: Router) {
-        
+        private store: Store,
+        private router: Router) {
+
     }
 
     canActivate(route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {          
+        state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
 
-        
+        const token = !!this.store.selectSnapshot(state => state.auth.token);
+
+        if (token) {
+            this.router.navigate(['/home']);
+            return false;
+        }
+
         return true;
+
+
     }
 
 }

@@ -38,7 +38,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.store.dispatch(new AppActions.SetMediaScreen(this.mobileQuery.matches));
-    this.actions.pipe(ofActionDispatched(AuthActions.Signout)).subscribe(() => this.appController.navigate('login'));
+    this.actions.pipe(ofActionDispatched(AuthActions.RemoveAccess));
   }
 
   title = 'ng-forum';

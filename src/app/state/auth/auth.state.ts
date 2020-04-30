@@ -43,20 +43,14 @@ export class AuthState {
                 user: user
             });
         }
-
     }
 
-    @Action(AuthActions.Signout)
-    logout({ setState, getState }: StateContext<AuthStateModel>) {
-        const { token } = getState();
-        return this.authService.signout().pipe(
-            tap(_ => {
-                setState({
-                    token: null,
-                    user: null
-                });
-            })
-        );
+    @Action(AuthActions.RemoveAccess)
+    removeAccess({ setState }: StateContext<AuthStateModel>) {
+        setState({
+            token: null,
+            user: null
+        });
     }
 
 

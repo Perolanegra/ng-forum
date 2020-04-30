@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';import { HttpInterceptor, HttpRequest
 import { map, catchError } from 'rxjs/operators';
 import { AppController } from './appController';
 import { AuthState } from '../state/auth/auth.state';
+import { AuthActions } from '../state/auth/auth.actions';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
@@ -12,8 +13,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    let token;
-    this._store.select(state => token = state.token);
+    const token = !!this._store.selectSnapshot(state => state.auth.token);
     
     if (token) {
       req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
@@ -30,10 +30,14 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         }),
         catchError((error) => {          
           const { message, title, type } = error.error;
-          const ref = this.appController.showToastPopUp({ title, message, type });
-          ref.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-          });
+         
+          if(error.status === 401 && !type) {
+            console.log('ok putassss'); // testar quando for uma request de sessao expirada p ver se da certo.
+            this._store.dispatch(new AuthActions.RemoveAccess());
+          }
+          
+          this.appController.showToastPopUp({ title, message, type });
+         
           return throwError(error);
         }));
   }

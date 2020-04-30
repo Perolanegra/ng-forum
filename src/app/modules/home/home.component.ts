@@ -1,24 +1,23 @@
-import { Component, OnInit, OnDestroy, Input, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GlobalVars } from 'src/app/core/globalVars';
-import { Store, Actions } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { NgDefault } from 'src/app/core/ng-default';
 import { AppActions } from 'src/app/shared/state/app.actions';
+import { AppController } from 'src/app/core/appController';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent extends NgDefault  implements OnInit, OnDestroy {
+export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
  
   constructor(
     protected router: Router,
-    public globalVars: GlobalVars,
     private store: Store,
     protected route: ActivatedRoute,
-    private actions: Actions
+    private appController: AppController,
   ) {
     super(route, router);
   }
@@ -30,7 +29,7 @@ export class HomeComponent extends NgDefault  implements OnInit, OnDestroy {
 
   signOut() {
     this.store.dispatch(new AppActions.SetSessionState('login'));
-    this.store.dispatch(new AuthActions.Signout()).subscribe(() => this.globalVars.removeUserLoggedIn());
+    this.store.dispatch(new AuthActions.RemoveAccess()).subscribe(() => this.appController.navigate('login'));
   }
 
 }

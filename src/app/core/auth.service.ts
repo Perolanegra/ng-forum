@@ -12,10 +12,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
 
-  signout(): Observable<null> {
-    return of(null);
-  }
-
   signUp(username, email, password) {
 
   }

@@ -1,20 +1,27 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
 import { Observable } from "rxjs";
-import { GlobalVars } from 'src/app/core/globalVars';
+import { Store } from '@ngxs/store';
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class NoAuthGuard implements CanActivate{
+export class NoAuthGuard implements CanActivate {
 
-    constructor(private globalVars: GlobalVars,
-    private router: Router){}
+    constructor(private store: Store,
+        private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> { 
-            
+        state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+
+        const token = !!this.store.selectSnapshot(state => state.auth.token);
+
+        if (!token) {
+            this.router.navigate(['/login']);
+            return false;
+        }
+
         return true;
     }
 

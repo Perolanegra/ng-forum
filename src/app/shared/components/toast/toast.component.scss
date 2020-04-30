@@ -1,0 +1,140 @@
+.toast-out {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background: #22262e;
+}
+.toast-in {
+  display: flex;
+  background: #22262e;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.toast-in-align {
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: baseline;
+  text-align: center;
+  color: #fff;
+  font-family: 'Montserrat';
+  text-align: left;
+  padding-left: 35px;
+}
+
+.ball-web {
+  width: 24px;
+  border-radius: 50%;
+  height: 24px;
+  position: relative;
+  top: 15px;
+}
+
+.ball-mobile {
+  width: 20px;
+  border-radius: 50%;
+  height: 20px;
+  position: relative;
+  top: 15px;
+}
+
+.align-message {
+  margin-left: 1.5em;
+  flex-direction: column;
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  line-height: 1.5rem;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.div-close-toast-btn {
+  color: #fff;
+  position: absolute;
+  margin-left: 8%;
+  top: 17px;
+
+}
+
+.msg {
+  word-break: break-all;
+  margin-bottom: unset !important;
+}
+
+.title-msg {
+  font-family: 'Product Sans Light Regular';
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+::ng-deep .mat-dialog-container {
+  display: unset;
+  padding: unset;
+  border-radius: unset;
+  box-sizing: unset;
+  overflow: hidden;
+  outline: unset;
+  width: unset;
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+  background: transparent;
+}
+
+.align-close {
+  outline: none;
+  align-items: center;
+  display: flex;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.btn-close {
+  outline: none;
+  display: flex;
+  position: relative;
+  bottom: 25%;
+}
+
+::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+  line-height: 24px;
+  color: #fff;
+  outline: none;
+}
+
+
+@media only screen and (max-width: 767px) {
+  ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+    line-height: 24px;
+    color: #fff;
+    outline: none;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (width: 1024px) {
+
+  ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+    line-height: 24px;
+    color: #fff;
+    outline: none;
+    font-size: 20px;
+  }
+  
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px)  {
+  ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+    line-height: 24px;
+    color: #fff;
+    outline: none;
+    font-size: 20px;
+  }
+ 
+
+}
+

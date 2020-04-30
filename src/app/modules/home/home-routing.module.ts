@@ -8,9 +8,6 @@ const routes: Routes = [
     {
         path:'', // rota/:param
         component: HomeComponent,
-        // resolve: {
-        // },
-        // canActivate: [NoAuthGuard],
     }
 ];
 

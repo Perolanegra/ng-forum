@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material.module';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './modules/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainNavComponent } from './modules/main-nav/main-nav.component';
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
@@ -16,12 +16,14 @@ import { AppController } from './core/appController';
 import { MainNavStyle } from './modules/main-nav/main-nav.style';
 import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
 import { NgxsModule } from '@ngxs/store';
-
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AuthState } from './state/auth/auth.state';
 import { environment } from 'src/environments/environment';
-
+import { HttpConfigInterceptor } from './core/http-config.interpcetor';
+import { ToastrModule } from 'ngx-toastr';
+import { AppState } from './shared/state/app.state';
 
 @NgModule({
   declarations: [
@@ -40,14 +42,16 @@ import { environment } from 'src/environments/environment';
     SharedModule,
     HttpClientModule,
     LayoutModule,
-    NgxsModule.forRoot([
-      AuthState
-    ],{
-      developmentMode: !environment.production,
-    }),
-    // NgxsStoragePluginModule.forRoot({
-    //   key: ['auth.token ', 'auth.refreshToken', 'auth.user.username', 'auth.user.email']
+    ToastrModule.forRoot(),
+    // NgxsModule.forRoot([
+      
+    // ],{
+    //   developmentMode: !environment.production,
     // }),
+    NgxsModule.forRoot([AuthState, AppState]),
+    NgxsStoragePluginModule.forRoot({
+      key: ['auth.token', 'app.hasMobileMatches', 'app.routes']
+    }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
   ],
@@ -56,6 +60,11 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpConfigInterceptor,
+      multi: true
+    },
     AppController,
     MainNavStyle
   ],

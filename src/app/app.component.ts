@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { GlobalVars } from './core/globalVars';
 import { AppController } from './core/appController';
+import { AuthState } from './state/auth/auth.state';
+import { Select, Store, Actions, ofActionDispatched } from '@ngxs/store';
+import { Observable, Subscription } from 'rxjs';
+import { AuthActions } from './state/auth/auth.actions';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { AppActions } from './shared/state/app.actions';
 
 @Component({
   selector: 'app-root',
@@ -9,22 +15,45 @@ import { AppController } from './core/appController';
 })
 export class AppComponent {
 
-  constructor(private globalVars: GlobalVars, 
+  @Select(AuthState.token) token$: Observable<string>;
+
+  private mobileQuery: MediaQueryList;
+
+  constructor(private globalVars: GlobalVars,
     private appController: AppController,
-    ) {
+    changeDetectorRef: ChangeDetectorRef,
+    public media: MediaMatcher,
+    private actions: Actions,
+    private store: Store
+  ) {
     this.setRoutesLocalStorage();
+
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
+
+  private _mobileQueryListener: () => void;
+
+  ngOnInit() {
+    this.store.dispatch(new AppActions.SetMediaScreen(this.mobileQuery.matches));
+    this.actions.pipe(ofActionDispatched(AuthActions.RemoveAccess));
   }
 
   title = 'ng-forum';
-  
-  public get isLoggedIn(): Boolean { // remover esse kra daqui pq o html fica testando ele
-    return this.globalVars.isLogged();
-  }
 
   setRoutesLocalStorage(): void {
-    this.appController.fillerNavs().then(filer => {
-      this.appController.setRoutesNav(filer);
-    })
+    this.appController.getFillerNav().subscribe(routes => {
+      if (!routes) {
+        this.appController.fillerNavs().then((filler: any) => {
+          this.store.dispatch(new AppActions.SetRouteState(filler));
+        });
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
 }

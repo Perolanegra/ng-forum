@@ -5,7 +5,7 @@ export namespace AuthActions {
         constructor(public username: string, public password: string) { }
     }
 
-    export class Signout {
+    export class RemoveAccess {
         static readonly type = '[Auth] Signout';
     }
 

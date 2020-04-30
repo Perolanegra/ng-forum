@@ -5,26 +5,21 @@ import { UserModel } from 'src/app/models/user.model';
 import { AuthActions } from './auth.actions';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { GlobalVars } from 'src/app/core/globalVars';
 
 export class AuthStateModel {
-    token?: string;
-    refreshToken?: string;
-    user?: UserModel
+    token: string;
+    user: UserModel
 }
 
 @State<AuthStateModel>({
-    name: 'auth',
-    defaults: {
-        token: 'null',
-        refreshToken: 'null',
-        user: null
-    }
+    name: 'auth'
 })
 
 @Injectable()
 export class AuthState {
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private globalVars: GlobalVars) { }
 
     @Selector()
     static token(state: AuthStateModel) {
@@ -32,31 +27,31 @@ export class AuthState {
     }
 
     @Selector()
-    static userDetails(state: AuthStateModel) {
+    static userDetails(state: AuthStateModel): UserModel {
         return state.user;
     }
 
     @Action(AuthActions.Signin)
-    login({ getState, setState }: StateContext<AuthStateModel>, { username, password }: AuthActions.Signin) {
-        // return this.authService.authState()
-        //     .subscribe((user: Observable<any>) => user.subscribe(doc => {
-        //         const state = getState();
-        //         setState({
-        //             ...state,
-        //             user: doc.data()
-        //         });
-        //     }));
+    async login({ getState, setState }: StateContext<AuthStateModel>, { username, password }: AuthActions.Signin) {
+
+        const data: any = await this.authService.getAccessToken(username, password).toPromise();
+
+        if(data) {
+            const user = await this.authService.getUserByToken(data.access_token).toPromise();
+            setState({
+                token: data.access_token,
+                user: user
+            });
+        }
     }
 
-    // @Action(AuthActions.Signout)
-    // logout({ setState, getState }: StateContext<AuthStateModel>) {
-    //     const { token } = getState();
-    //     return this.authService.signout().pipe(
-    //         tap(_ => {
-    //             setState({});
-    //         })
-    //     );
-    // }
+    @Action(AuthActions.RemoveAccess)
+    removeAccess({ setState }: StateContext<AuthStateModel>) {
+        setState({
+            token: null,
+            user: null
+        });
+    }
 
 
 }

@@ -1,21 +1,25 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { GlobalVars } from 'src/app/core/globalVars';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
+import { NgDefault } from 'src/app/core/ng-default';
+import { AppActions } from 'src/app/shared/state/app.actions';
+import { AppController } from 'src/app/core/appController';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
-
+export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
+ 
   constructor(
-    private router: Router,
-    public globalVars: GlobalVars,
-    private store: Store
+    protected router: Router,
+    private store: Store,
+    protected route: ActivatedRoute,
+    private appController: AppController,
   ) {
+    super(route, router);
   }
   ngOnInit(): void {
   }
@@ -24,13 +28,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   signOut() {
-    this.store.dispatch(new AuthActions.Signout()).subscribe(success => {
-      this.globalVars.removeUserLoggedIn();
-      this.router.navigate(['login']).catch(error => { // dps tirar daqui e por o guarda de rota
-        console.log('erro navegação: ', error);
-      });
-    }, error => { });
+    this.store.dispatch(new AuthActions.RemoveAccess()).subscribe(() => this.appController.navigate('login'));
+    this.store.dispatch(new AppActions.RemoveRouteState());
+    
   }
-
 
 }

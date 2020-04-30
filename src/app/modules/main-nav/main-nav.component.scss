@@ -203,16 +203,6 @@
   opacity: 0;
 }
 
-.fade-transition-in {
-  transition: 0.4s;
-  transition-timing-function: ease-in-out;
-}
-
-.fade-transition-out {
-  transition: 0.3s;
-  transition-timing-function: ease-in-out;
-}
-
 .div-nav-item--active {
   background: #E91E63;
   width: 88%;

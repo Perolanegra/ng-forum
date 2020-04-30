@@ -22,12 +22,6 @@
                 <mat-error *ngIf="!loginForm.get('password').valid">O Campo é obrigatório.</mat-error>
             </mat-form-field>
 
-            <div class="row">
-                <div class="col mt-3">
-                    <mat-checkbox class="font" style="color: white; font-size: 13px;" formControlName="saveState">Gravar sessão</mat-checkbox>
-                </div>
-            </div>
-            
             <button mat-raised-button class="product-sans-light btn" cdkFocusInitial>Entrar</button>
         </div>
     </form>

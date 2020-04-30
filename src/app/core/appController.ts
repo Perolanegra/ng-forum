@@ -7,6 +7,8 @@ import { Observable, from } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ToastComponent } from '../shared/components/toast/toast.component';
+import { AppActions } from '../shared/state/app.actions';
+import { Store } from '@ngxs/store';
 
 
 
@@ -19,6 +21,7 @@ export class AppController {
     constructor(public dialog: MatDialog,
         private rendererFactory: RendererFactory2,
         private toastr: ToastrService,
+        private _store: Store,
         private router: Router) {
         this.renderer = rendererFactory.createRenderer(null, null);
     }
@@ -195,15 +198,6 @@ export class AppController {
                     this.tratarErro(error);
                 });
     }
-
-    public setRoutesNav(fillerNav: Object): void {
-        localStorage.setItem('fillerNav', JSON.stringify(fillerNav));
-    }
-
-    public getRoutesNav(): any {
-        return JSON.parse(localStorage.getItem('fillerNav'));
-    }
-
     /**
     * Retorna um novo Array ordenado de Objetos com os atributos que foram passados e parâmetro de ordenação.
     * @param pArray Recebe o array iterável original o qual quer se capturar os atributos.
@@ -296,15 +290,13 @@ export class AppController {
         return lObjRetorno;
     }
 
-    async fillerNavs(): Promise<Object> {
-        return new Object({
-            routes: [
-                { name: 'Início', isActive: true, imgName: 'home.png', path: 'home', img: await this.getImg('home.png') },
-                { name: 'Configurações', isActive: false, imgName: 'configs.svg', path: 'configs', img: await this.getImg('configs.svg') },
-                { name: 'Meus Issues', isActive: false, imgName: 'my-issues.png', path: 'my-issues', img: await this.getImg('my-issues.png') },
+    async fillerNavs() {
+        return [
+            { name: 'Início', isActive: false, imgName: 'home.png', path: 'home', img: await this.getImg('home.png') },
+            { name: 'Configurações', isActive: false, imgName: 'configs.svg', path: 'configs', img: await this.getImg('configs.svg') },
+            { name: 'Meus Issues', isActive: false, imgName: 'my-issues.png', path: 'my-issues', img: await this.getImg('my-issues.png') },
+        ];
 
-            ]
-        });
     }
 
     /**
@@ -392,8 +384,30 @@ export class AppController {
         });
     }
 
+    setMenuActiveLink(path: string): void {
+        this.getFillerNav().subscribe(routes => {
+            const routesRef = routes;
 
+            if (routesRef) {
+                routesRef.some((prop) => {
+                    prop.isActive = false;
 
+                    if (prop.path === path) {
+                        prop.isActive = true;
+                        return;
+                    }
+                });
+
+                this._store.dispatch(new AppActions.SetRouteState(routesRef));
+            }
+        });
+    }
+
+    getFillerNav(): Observable<any> {
+        return this._store.select(state => {
+            return state.app.routes;
+        });
+    }
 
 
 }

@@ -4,6 +4,7 @@ import { MainNavStyle } from './main-nav.style';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngxs/store';
+import { AppActions } from 'src/app/shared/state/app.actions';
 
 @Component({
     selector: 'ng-main-nav',
@@ -20,9 +21,9 @@ export class MainNavComponent implements OnInit {
     @ViewChild('userInfo') elRefUserInfo: ElementRef;
     @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;
 
-    private routeDetector: Subscription;
-
     public vistoPic = '../../assets/imgs/moderator-male.svg';
+
+    fillerSubs: Subscription;
 
     constructor(
         public router: Router,
@@ -31,26 +32,22 @@ export class MainNavComponent implements OnInit {
         private mainNavStyle: MainNavStyle,
         public appController: AppController
     ) {
-        this.store.select(state => this.hasMobileMatches = state.stateMobileMatches);
+        this.store.select(state => this.hasMobileMatches = state.app.hasMobileMatches);
     }
 
-    public routes = this.appController.getRoutesNav().routes;
+    public routes;
 
     public state$: Observable<any>;
 
     ngOnInit() {
-        this.setMenuActiveLink('home');
-        this.getFillerNav();
+        this.appController.setMenuActiveLink('home');
+        this.fillerSubs = this.appController.getFillerNav().subscribe(routes => {
+            this.routes = routes;
+        });
     }
 
     ngOnDestroy(): void {
-        this.routeDetector.unsubscribe();
-    }
-
-    getFillerNav() {
-        this.routeDetector = this.state$.subscribe((hasChanged) => {
-            if (hasChanged) this.routes = this.appController.getRoutesNav().routes;
-        });
+        this.fillerSubs.unsubscribe();
     }
 
     onMenuBlur(hasEnterMenu) {
@@ -67,25 +64,9 @@ export class MainNavComponent implements OnInit {
         this.mainNavStyle.setStyleMenuNavClose(this.elRefUserInfo.nativeElement, this.hasMobileMatches);
     }
 
-    setMenuActiveLink(path: string) {
-        const routes = this.routes;
-
-        routes.map((prop) => {
-            prop.isActive = false;
-
-            if (prop.path === path) {
-                prop.isActive = true;
-                return;
-            }
-        });
-
-        this.appController.setRoutesNav({ routes });
-        this.state$ = Observable.create(observer => observer.next(routes));
-    }
-
     navigate(path: string) {
         this.appController.navigate(path);
-        this.setMenuActiveLink(path);
+        this.appController.setMenuActiveLink(path);
     }
 
 

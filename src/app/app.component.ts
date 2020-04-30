@@ -16,19 +16,18 @@ import { AppActions } from './shared/state/app.actions';
 export class AppComponent {
 
   @Select(AuthState.token) token$: Observable<string>;
-  
+
   private mobileQuery: MediaQueryList;
-  private routeDetector: Subscription;
 
   constructor(private globalVars: GlobalVars,
     private appController: AppController,
-    changeDetectorRef: ChangeDetectorRef, 
+    changeDetectorRef: ChangeDetectorRef,
     public media: MediaMatcher,
     private actions: Actions,
     private store: Store
   ) {
     this.setRoutesLocalStorage();
-    
+
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -44,14 +43,17 @@ export class AppComponent {
   title = 'ng-forum';
 
   setRoutesLocalStorage(): void {
-    this.appController.fillerNavs().then(filler => {
-      this.appController.setRoutesNav(filler);
+    this.appController.getFillerNav().subscribe(routes => {
+      if (!routes) {
+        this.appController.fillerNavs().then((filler: any) => {
+          this.store.dispatch(new AppActions.SetRouteState(filler));
+        });
+      }
     });
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
-    this.routeDetector.unsubscribe();
   }
 
 }

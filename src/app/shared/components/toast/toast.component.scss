@@ -15,12 +15,13 @@
   height: fit-content;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   align-items: baseline;
   text-align: center;
   color: #fff;
   font-family: 'Montserrat';
   text-align: left;
+  padding-left: 35px;
 }
 
 .ball-web {
@@ -46,7 +47,7 @@
   justify-content: left;
   align-items: flex-start;
   line-height: 1.5rem;
-  margin-top: 3%;
+  margin-top: 5%;
   margin-bottom: 5%;
 }
 
@@ -67,6 +68,7 @@
   font-family: 'Product Sans Light Regular';
   font-weight: 500;
   color: #fff;
+  margin-bottom: 5px;
 }
 
 ::ng-deep .mat-dialog-container {
@@ -85,10 +87,16 @@
 
 .align-close {
   outline: none;
-  background: #E91E63;
   align-items: center;
   display: flex;
   border-radius: 0px 5px 5px 0px;
+}
+
+.btn-close {
+  outline: none;
+  display: flex;
+  position: relative;
+  bottom: 25%;
 }
 
 ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {

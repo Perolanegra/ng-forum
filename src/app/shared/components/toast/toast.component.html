@@ -4,16 +4,15 @@
             <div [ngClass]="[ hasMobileMatches ? 'ball-mobile' : 'ball-web' ]" [ngStyle]="{ 'background': getBallBackground() }"></div>
 
             <div class="align-message">
-                <strong class="title-msg" [ngStyle]="{ 'line-height': getStyle('unset', '54px'), 'font-size': getStyle('16px', '22px') }">{{ title }}</strong>
-                <p class="msg" [ngStyle]="{ 'font-size': getStyle('13px', 'unset'), 'max-width': getStyle('180px', '255px') }">{{ message }}</p>
+                <strong class="title-msg" [ngStyle]="{ 'line-height': getStyle('unset', '28px'), 'font-size': getStyle('16px', '20px') }">{{ title }}</strong>
+                <p class="msg" [ngStyle]="{ 'font-size': getStyle('13px', '16px'), 'max-width': getStyle('161px', '255px') }">{{ message }}</p>
             </div>
         </div>
 
     </div>
 
-
-    <div class="align-close" [ngStyle]="{ 'height': elementHeight }">
-        <button tabindex="-1" mat-icon-button style="height: 100%; outline: none;"  (click)="closeToast()">
+    <div class="align-close" [ngStyle]="{ 'height': elementHeight, 'background': getStyle('#E91E63', '#22262e') }">
+        <button tabindex="-1" [ngClass]="[ hasMobileMatches ? '' : 'btn-close' ]" [ngStyle]="{ 'height': getStyle('100%', 'unset') }" mat-icon-button (click)="closeToast()">
             <mat-icon>close</mat-icon>
         </button>
     </div>

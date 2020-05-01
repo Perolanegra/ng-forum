@@ -43,7 +43,7 @@ import { AppState } from './shared/state/app.state';
     HttpClientModule,
     LayoutModule,
     ToastrModule.forRoot(),
-    NgxsModule.forRoot([AuthState, AppState], { developmentMode: !environment.production }),
+    NgxsModule.forRoot([AuthState, AppState]), // , { developmentMode: !environment.production }
     NgxsStoragePluginModule.forRoot({
       key: ['auth.token', 'app.hasMobileMatches', 'app.routes', 'app.user'],
     }),

@@ -363,20 +363,6 @@ export class AppController {
 
     verifyImg(img): Promise<any> {
         return new Promise((resolve, reject) => {
-            // if(formatSvg === '.svg') {
-
-            //     let svg = new SVGElement();
-            //     svg.onload = function() {
-            //         resolve(true);
-            //     };
-
-            //     svg.onerror = function() {
-            //         resolve(false);
-            //     };
-            //     svg = img;
-
-            // }
-            // else {
             let image = new Image();
             image.onload = function () {
                 resolve(true);
@@ -387,8 +373,6 @@ export class AppController {
             };
 
             image.src = img;
-            // }
-
         });
     }
 

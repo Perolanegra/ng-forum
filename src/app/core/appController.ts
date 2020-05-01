@@ -394,19 +394,9 @@ export class AppController {
 
     setMenuActiveLink(path: string): void {
         this.getFillerNav().subscribe(routes => {
-            const routesRef = routes;
-
-            if (routesRef) {
-                routesRef.some((prop) => {
-                    prop.isActive = false;
-
-                    if (prop.path === path) {
-                        prop.isActive = true;
-                        return;
-                    }
-                });
-
-                this._store.dispatch(new AppActions.SetRouteState(routesRef));
+            if (routes) {
+                routes.some((prop) => prop.isActive = prop.path === path);
+                this._store.dispatch(new AppActions.SetRouteState(routes));
             }
         });
     }

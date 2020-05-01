@@ -13,6 +13,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @font-face { font-family: 'Product Sans Light Regular'; src: url('./assets/fonts/ProductSans-Light.ttf') }
 @font-face { font-family: 'Product Sans Black Regular'; src: url('./assets/fonts/ProductSans-Black.ttf') }
 @font-face { font-family: 'Product Sans Medium'; src: url('./assets/fonts/ProductSans-Medium.ttf') }
+@font-face { font-family: 'Montserrat Semi Bold'; src: url('./assets/fonts/Montserrat-SemiBold.ttf') }
+@font-face { font-family: 'Montserrat Medium'; src: url('./assets/fonts/Montserrat-Medium.ttf') }
 
 
 
@@ -36,6 +38,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-family: 'Montserrat';
 }
 
+.font-semi-bold {
+    font-family: 'Montserrat Semi Bold';
+}
+
 .product-sans-light {
     font-family: 'Product Sans Light Regular';
 }
@@ -48,4 +54,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .fade-transition-out {
     transition: 0.3s;
     transition-timing-function: ease-in-out;
+}
+
+.btn-submit {
+    font-family: 'Product Sans Black Regular';
+    font-size: 1rem;
+    background: #E91E63;
+    color: #22262e;
+    outline: none !important;
 }

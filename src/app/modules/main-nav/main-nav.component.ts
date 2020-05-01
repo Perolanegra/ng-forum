@@ -3,8 +3,8 @@ import { AppController } from '../../core/appController';
 import { MainNavStyle } from './main-nav.style';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { Store } from '@ngxs/store';
-import { AppActions } from 'src/app/shared/state/app.actions';
+import { Select } from '@ngxs/store';
+import { AppState } from 'src/app/shared/state/app.state';
 
 @Component({
     selector: 'ng-main-nav',
@@ -20,6 +20,8 @@ export class MainNavComponent implements OnInit {
 
     @ViewChild('userInfo') elRefUserInfo: ElementRef;
     @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;
+    
+    @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
 
     public vistoPic = '../../assets/imgs/moderator-male.svg';
 
@@ -27,12 +29,10 @@ export class MainNavComponent implements OnInit {
 
     constructor(
         public router: Router,
-        // private breakpointObserver: BreakpointObserver,
-        private store: Store,
         private mainNavStyle: MainNavStyle,
         public appController: AppController
     ) {
-        this.store.select(state => this.hasMobileMatches = state.app.hasMobileMatches);
+        
     }
 
     public routes;
@@ -44,6 +44,8 @@ export class MainNavComponent implements OnInit {
         this.fillerSubs = this.appController.getFillerNav().subscribe(routes => {
             this.routes = routes;
         });
+
+        this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
     }
 
     ngOnDestroy(): void {
@@ -68,7 +70,6 @@ export class MainNavComponent implements OnInit {
         this.appController.navigate(path);
         this.appController.setMenuActiveLink(path);
     }
-
 
 
 }

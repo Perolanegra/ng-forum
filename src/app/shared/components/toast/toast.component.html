@@ -1,7 +1,7 @@
 <div *ngIf="!hasClosed" class="toast-out fade-transition-in ">
     <div class="toast-in" [ngStyle]="{ 'width': hasMobileMatches ? '80vw' : 'unset' }">
         <div id="base-height" class="toast-in-align" [ngStyle]="{ 'width': hasMobileMatches ? '100%' : '19vw' }">
-            <div [ngClass]="[ hasMobileMatches ? 'ball-mobile' : 'ball-web' ]" [ngStyle]="{ 'background': getBallBackground() }"></div>
+            <div [ngClass]="[ hasMobileMatches ? 'ball-mobile' : 'ball-web' ]" [ngStyle]="{ 'background': getColorRef(data) }"></div>
 
             <div class="align-message">
                 <strong class="title-msg" [ngStyle]="{ 'line-height': getStyle('unset', '28px'), 'font-size': getStyle('16px', '20px') }">{{ title }}</strong>
@@ -12,9 +12,8 @@
     </div>
 
     <div class="align-close" [ngStyle]="{ 'height': elementHeight, 'background': getStyle('#E91E63', '#22262e') }">
-        <button tabindex="-1" [ngClass]="[ hasMobileMatches ? '' : 'btn-close' ]" [ngStyle]="{ 'height': getStyle('100%', 'unset') }" mat-icon-button (click)="closeToast()">
+        <button tabindex="-1" #btnClose (mouseover)="setCloseColor(btnClose, data)" [ngClass]="[ hasMobileMatches ? '' : 'btn-close' ]" [ngStyle]="{ 'height': getStyle('100%', 'unset') }" mat-icon-button (click)="close()">
             <mat-icon>close</mat-icon>
         </button>
     </div>
-
 </div>

@@ -60,7 +60,7 @@
 }
 
 .msg {
-  word-break: break-all;
+  word-break: break-word;
   margin-bottom: unset !important;
 }
 
@@ -90,6 +90,8 @@
   align-items: center;
   display: flex;
   border-radius: 0px 5px 5px 0px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .btn-close {
@@ -97,11 +99,15 @@
   display: flex;
   position: relative;
   bottom: 25%;
+  color: #fff;
+}
+
+.btn-close:hover {
+  color: #e91e63;
 }
 
 ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
   line-height: 24px;
-  color: #fff;
   outline: none;
 }
 

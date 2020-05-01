@@ -80,13 +80,21 @@ export class AppController {
         this.exibirErro(err);
     }
 
-    showToastPopUp(paylaod: Object): MatDialogRef<ToastComponent> {
-        let dialogRef = null;
 
-        dialogRef = this.dialog.open(ToastComponent, {
+    showToastPopUp(paylaod: any, component): MatDialogRef<any> {
+        let dialogRef = null;
+        const { positionTop, positionBottom, positionLeft, positionRight } = paylaod.style;
+        
+        dialogRef = this.dialog.open(component, {
             data: paylaod,
             hasBackdrop: true,
-            position: { top: '5vw' }
+            disableClose: true,
+            position: { 
+                top: positionTop ? positionTop : '',
+                bottom: positionBottom ? positionBottom : '' ,
+                left: positionLeft ? positionLeft : '',
+                right: positionRight ? positionRight : ''
+            }
         });
 
         return dialogRef;

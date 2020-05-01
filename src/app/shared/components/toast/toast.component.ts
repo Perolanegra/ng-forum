@@ -1,44 +1,28 @@
-import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, Inject, AfterViewInit, Renderer2 } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { DialogDefault } from 'src/app/core/dialog-default';
+import { FormBuilder } from '@angular/forms';
+import { AppController } from 'src/app/core/appController';
 
 @Component({
   selector: 'ng-toast',
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })
-export class ToastComponent implements OnInit, AfterViewInit {
+export class ToastComponent extends DialogDefault implements OnInit, AfterViewInit {
 
   public message: string;
-  public hasMobileMatches: boolean;
   public title: string;
   public elementHeight: string;
-  public hasClosed: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ToastComponent>,
+    protected formBuilder: FormBuilder,
+    protected appController: AppController,
+    protected dialog: MatDialog,
+    protected renderer: Renderer2,
     @Inject(MAT_DIALOG_DATA) public data) {
-    this.hasMobileMatches = localStorage.getItem('app.hasMobileMatches') === 'true';
-  }
-
-  closeToast(): void {
-    this.hasClosed = true;
-    this.dialogRef.close();
-  }
-
-  public getStyle(trueValue, falseValue) {
-    return this.hasMobileMatches ? trueValue : falseValue;
-  }
-
-  public getBallBackground() {
-    const call = {
-      error: () => { return 'red' },
-      info: () => { return 'blue' },
-      warning: () => { return 'orange' },
-      success: () => { return 'green' },
-    }
-
-    const { type } = this.data;
-    return call[type]();
+    super(dialog, formBuilder, renderer, appController);
   }
 
   ngAfterViewInit() {

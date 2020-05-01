@@ -6,6 +6,7 @@ import { MaterialModule } from './modules/material.module';
 import { FormComponent } from './components/form/form.component';
 import { GlobalVars } from '../core/globalVars';
 import { ToastComponent } from './components/toast/toast.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ToastComponent } from './components/toast/toast.component';
     declarations: [
         FormComponent,
         ToastComponent,
+        ResetPasswordComponent
     ],
     exports: [
         FormComponent,
@@ -30,7 +32,8 @@ import { ToastComponent } from './components/toast/toast.component';
         ReactiveFormsModule,
     ],
     entryComponents: [
-        ToastComponent
+        ToastComponent,
+        ResetPasswordComponent
     ],
     providers: [
         GlobalVars

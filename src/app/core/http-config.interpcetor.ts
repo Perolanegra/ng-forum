@@ -3,6 +3,7 @@ import { map, catchError } from 'rxjs/operators';
 import { AppController } from './appController';
 import { AuthState } from '../state/auth/auth.state';
 import { AuthActions } from '../state/auth/auth.actions';
+import { ToastComponent } from '../shared/components/toast/toast.component';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
@@ -29,14 +30,14 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             return event;
         }),
         catchError((error) => {          
-          const { message, title, type } = error.error;
+          const { message, title, type, style } = error.error;
          
           if(error.status === 401 && !type) {
             console.log('ok putassss'); // testar quando for uma request de sessao expirada p ver se da certo.
             this._store.dispatch(new AuthActions.RemoveAccess());
           }
           
-          this.appController.showToastPopUp({ title, message, type });
+          this.appController.showToastPopUp({ title, message, type, style }, ToastComponent);
          
           return throwError(error);
         }));

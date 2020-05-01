@@ -55,3 +55,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     transition: 0.3s;
     transition-timing-function: ease-in-out;
 }
+
+.btn-submit {
+    font-family: 'Product Sans Black Regular';
+    font-size: 1rem;
+    background: #E91E63;
+    color: #22262e;
+    outline: none !important;
+}

@@ -69,5 +69,17 @@ input:-webkit-autofill {
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
     border: 1.4px solid #E91E63;
-  }
+}
 
+.forgot-pass {
+    color: #fff;
+    font-size: 75%;
+    font-family: 'Montserrat';
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.forgot-pass:hover {
+    color: #E91E63;
+}

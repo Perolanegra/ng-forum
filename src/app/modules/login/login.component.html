@@ -22,7 +22,11 @@
                 <mat-error *ngIf="!loginForm.get('password').valid">O Campo é obrigatório.</mat-error>
             </mat-form-field>
 
-            <button mat-raised-button class="product-sans-light btn" cdkFocusInitial>Entrar</button>
+            <div class="forgot-pass fade-transition-in" (click)="openResetPass()">
+                Esqueceu a senha?
+            </div>
+
+            <button mat-raised-button class="btn-submit" cdkFocusInitial>Entrar</button>
         </div>
     </form>
 </div>

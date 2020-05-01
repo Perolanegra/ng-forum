@@ -5,6 +5,7 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { AppController } from 'src/app/core/appController';
 import { AppActions } from 'src/app/shared/state/app.actions';
+import { ResetPasswordComponent } from 'src/app/shared/components/reset-password/reset-password.component';
 
 @Component({
   selector: 'app-login',
@@ -45,6 +46,10 @@ export class LoginComponent implements OnInit {
 
   isValidForm(): boolean {
     return this.loginForm.valid;
+  }
+
+  openResetPass() {
+    this.appController.showToastPopUp({ style: {} }, ResetPasswordComponent);
   }
 
 

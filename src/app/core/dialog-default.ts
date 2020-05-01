@@ -47,7 +47,9 @@ export abstract class DialogDefault {
     }
 
     setCloseColor(btnCloseElement, data) {
-        this.renderer.setStyle(btnCloseElement, 'color', this.getColorRef(data));
+        if(!this.hasMobileMatches) {
+            this.renderer.setStyle(btnCloseElement, 'color', this.getColorRef(data));
+        }
     }
 
 }

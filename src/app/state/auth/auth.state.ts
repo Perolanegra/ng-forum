@@ -53,5 +53,19 @@ export class AuthState {
         });
     }
 
+    @Action(AuthActions.ResetPassword)
+    async resetPassword({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.ResetPassword) {
+
+        // const data: any = await this.authService.resetPassword(username, password).toPromise();
+
+        // if(data) {
+        //     const user = await this.authService.getUserByToken(data.access_token).toPromise();
+        //     setState({
+        //         token: data.access_token,
+        //         user: user
+        //     });
+        // }
+    }
+
 
 }

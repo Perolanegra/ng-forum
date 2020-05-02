@@ -9,4 +9,10 @@ export namespace AuthActions {
         static readonly type = '[Auth] Signout';
     }
 
+    export class ResetPassword {
+        static readonly type = '[Auth] ResetPassword';
+        constructor(public payload: string) { }
+    }
+
+
 }

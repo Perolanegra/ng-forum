@@ -24,6 +24,7 @@ import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './core/http-config.interpcetor';
 import { ToastrModule } from 'ngx-toastr';
 import { AppState } from './shared/state/app.state';
+import { TesteComponent } from './modules/teste/teste.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AppState } from './shared/state/app.state';
     AppMenuOverDirective,
     AppAutofillOffDirective,
     AppNavNameBehaviorDirective,
+    TesteComponent
   ],
   imports: [
     BrowserModule,

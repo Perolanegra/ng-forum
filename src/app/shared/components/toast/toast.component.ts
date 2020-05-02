@@ -18,7 +18,7 @@ export class ToastComponent extends DialogDefault implements OnInit, AfterViewIn
   constructor(
     public dialogRef: MatDialogRef<ToastComponent>,
     protected formBuilder: FormBuilder,
-    protected appController: AppController,
+    public appController: AppController,
     protected dialog: MatDialog,
     protected renderer: Renderer2,
     @Inject(MAT_DIALOG_DATA) public data) {

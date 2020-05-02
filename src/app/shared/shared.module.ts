@@ -7,6 +7,7 @@ import { FormComponent } from './components/form/form.component';
 import { GlobalVars } from '../core/globalVars';
 import { ToastComponent } from './components/toast/toast.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { AppOverBtnDirective } from '../core/app-over-btn.directive';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     declarations: [
         FormComponent,
         ToastComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        AppOverBtnDirective
     ],
     exports: [
         FormComponent,

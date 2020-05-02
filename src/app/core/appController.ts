@@ -391,5 +391,15 @@ export class AppController {
         });
     }
 
+    public getColorRef(type): string {
+        const call = {
+            error: () => { return 'red' },
+            info: () => { return 'blue' },
+            warning: () => { return 'orange' },
+            success: () => { return 'green' },
+        }
+
+        return call[type]();
+    }
 
 }

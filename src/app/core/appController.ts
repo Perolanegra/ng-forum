@@ -203,7 +203,8 @@ export class AppController {
             pResp => {
             }).catch(
                 error => {
-                    this.tratarErro(error);
+                    // this.tratarErro(error);
+                    console.log('error: ', error);
                 });
     }
     /**

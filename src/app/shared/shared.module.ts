@@ -6,7 +6,7 @@ import { MaterialModule } from './modules/material.module';
 import { FormComponent } from './components/form/form.component';
 import { GlobalVars } from '../core/globalVars';
 import { ToastComponent } from './components/toast/toast.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AppOverBtnDirective } from '../core/app-over-btn.directive';
 
 
@@ -25,7 +25,7 @@ import { AppOverBtnDirective } from '../core/app-over-btn.directive';
     declarations: [
         FormComponent,
         ToastComponent,
-        ResetPasswordComponent,
+        ForgetPasswordComponent,
         AppOverBtnDirective
     ],
     exports: [
@@ -35,7 +35,7 @@ import { AppOverBtnDirective } from '../core/app-over-btn.directive';
     ],
     entryComponents: [
         ToastComponent,
-        ResetPasswordComponent
+        ForgetPasswordComponent
     ],
     providers: [
         GlobalVars

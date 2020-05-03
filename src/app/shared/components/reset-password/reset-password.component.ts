@@ -9,11 +9,11 @@ import { AppController } from 'src/app/core/appController';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent extends DialogDefault implements OnInit { 
+export class ForgetPasswordComponent extends DialogDefault implements OnInit { 
   
   constructor(
     public formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<ResetPasswordComponent>,
+    public dialogRef: MatDialogRef<ForgetPasswordComponent>,
     protected dialog: MatDialog,
     protected appController: AppController,
     protected renderer: Renderer2,

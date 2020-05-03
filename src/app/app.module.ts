@@ -34,7 +34,7 @@ import { TesteComponent } from './modules/teste/teste.component';
     AppMenuOverDirective,
     AppAutofillOffDirective,
     AppNavNameBehaviorDirective,
-    TesteComponent
+    // TesteComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,6 @@ import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { AppController } from 'src/app/core/appController';
-import { AppActions } from 'src/app/shared/state/app.actions';
 import { ForgetPasswordComponent } from 'src/app/shared/components/reset-password/reset-password.component';
 
 @Component({

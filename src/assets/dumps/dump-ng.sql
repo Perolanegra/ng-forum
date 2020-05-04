@@ -22,6 +22,6 @@ VALUES (null, 'Noob');
 
 
 INSERT INTO user(`id`, `id_nivel`, `name`, `ddd`, `phone`, `created_at`,
- `deleted_at`, `updated_at`, `username`, `password`, `lastName`, `statusMsg` , `email`, `photoURL`, `birthDate`)
+ `deleted_at`, `updated_at`, `username`, `password`, `lastName`, `statusMsg` , `email`, `photoURL`, `birthDate`, `hasForgotPass`)
 VALUES (null, 1, 'Igor', '071', '993337275', current_timestamp, '', '', 'perolanegra', 'ge7OBMv703BbeQZNnB52OA==', 'Alves', '', 'igoralves@devbaiano.com.br',
-'', '');
+'', '', '0');

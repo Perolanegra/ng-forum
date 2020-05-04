@@ -16,7 +16,7 @@ export class AuthService {
 
   }
 
-  getAccessToken(username: string, password: string): Observable<any> {
+  getAccessToken(username: string, password: string): Observable<any> { // por o token no headers em toda request
     const url = `${environment.server}/auth/login`;
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -36,6 +36,5 @@ export class AuthService {
 
     return this.http.get(url, { headers });
   }
-
 
 }

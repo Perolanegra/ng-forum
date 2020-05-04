@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS user (
     id_nivel INT NOT NULL DEFAULT 4,
     `password` VARCHAR(25) NOT NULL,
 	`name` VARCHAR(50) DEFAULT '',
-    username VARCHAR(25) NOT NULL UNIQUE,
+    `username` VARCHAR(25) NOT NULL UNIQUE,
 	lastName VARCHAR(50) DEFAULT '',
 	statusMsg VARCHAR(150) DEFAULT '',
 	ddd VARCHAR(3) DEFAULT '',
@@ -24,6 +24,6 @@ CREATE TABLE IF NOT EXISTS user (
 	created_at TIMESTAMP DEFAULT current_timestamp,
     deleted_at VARCHAR(75) DEFAULT '',
     updated_at VARCHAR(75) DEFAULT '',
-    hasForgotPass BOOLEAN DEFAULT FALSE,
+    hasForgotPass VARCHAR(2) DEFAULT '0',
     FOREIGN KEY (id_nivel) REFERENCES `nivel` (`id`)
 ) ENGINE=INNODB;

@@ -25,18 +25,6 @@ export abstract class DialogDefault {
         return this.hasMobileMatches ? trueValue : falseValue;
     }
 
-    public getColorRef(data) {
-        const call = {
-            error: () => { return 'red' },
-            info: () => { return 'blue' },
-            warning: () => { return 'orange' },
-            success: () => { return 'green' },
-        }
-
-        const { type } = data;
-        return call[type]();
-    }
-
     close(): void {
         this.hasClosed = true;
         this.dialog.closeAll();
@@ -47,7 +35,9 @@ export abstract class DialogDefault {
     }
 
     setCloseColor(btnCloseElement, data) {
-        this.renderer.setStyle(btnCloseElement, 'color', this.getColorRef(data));
+        if(!this.hasMobileMatches && btnCloseElement) {
+            this.renderer.setStyle(btnCloseElement, 'color', this.appController.getColorRef(data.type));
+        }
     }
 
 }

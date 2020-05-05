@@ -24,6 +24,8 @@ import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './core/http-config.interpcetor';
 import { ToastrModule } from 'ngx-toastr';
 import { AppState } from './shared/state/app.state';
+import { TesteComponent } from './modules/teste/teste.component';
+import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { AppState } from './shared/state/app.state';
     AppMenuOverDirective,
     AppAutofillOffDirective,
     AppNavNameBehaviorDirective,
+    // TesteComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,17 +46,19 @@ import { AppState } from './shared/state/app.state';
     HttpClientModule,
     LayoutModule,
     ToastrModule.forRoot(),
-    // NgxsModule.forRoot([
-      
-    // ],{
-    //   developmentMode: !environment.production,
-    // }),
-    NgxsModule.forRoot([AuthState, AppState]),
+    NgxsModule.forRoot([AuthState, AppState]), // , { developmentMode: !environment.production }
     NgxsStoragePluginModule.forRoot({
-      key: ['auth.token', 'app.hasMobileMatches', 'app.routes']
+      key: ['auth.token', 'app.hasMobileMatches', 'app.routes', 'app.user'],
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    // JwtModule.forRoot({
+    //   config: {
+        // tokenGetter: () => localStorage.getItem("meutoken"),
+        // whitelistedDomains: ["example.com"],
+        // blacklistedRoutes: ["http://example.com/examplebadroute/"],
+      // },
+    // }),
   ],
   exports: [
     MaterialModule
@@ -66,7 +71,9 @@ import { AppState } from './shared/state/app.state';
       multi: true
     },
     AppController,
-    MainNavStyle
+    MainNavStyle,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
   ],
   bootstrap: [AppComponent],
   schemas: [

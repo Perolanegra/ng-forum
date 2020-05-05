@@ -30,6 +30,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             return event;
         }),
         catchError((error) => {          
+           // setar interceptors específicos caso haja request para api externa.
           const { message, title, type, style } = error.error;
          
           if(error.status === 401 && !type) {

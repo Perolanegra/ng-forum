@@ -1,19 +1,23 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { AuthService } from '../../core/auth.service';
-import { tap } from 'rxjs/operators';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthActions } from './auth.actions';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { GlobalVars } from 'src/app/core/globalVars';
 
 export class AuthStateModel {
     token: string;
-    user: UserModel
+    user: UserModel;
+    forgotPassResponse: any;
 }
 
 @State<AuthStateModel>({
-    name: 'auth'
+    name: 'auth',
+    defaults: {
+        token: null,
+        user: null,
+        forgotPassResponse: null
+    }
 })
 
 @Injectable()
@@ -31,14 +35,21 @@ export class AuthState {
         return state.user;
     }
 
+    @Selector()
+    static forgotPassResponse(state: AuthStateModel): UserModel {
+        return state.forgotPassResponse;
+    }
+
     @Action(AuthActions.Signin)
     async login({ getState, setState }: StateContext<AuthStateModel>, { username, password }: AuthActions.Signin) {
 
         const data: any = await this.authService.getAccessToken(username, password).toPromise();
 
-        if(data) {
+        if (data) {
             const user = await this.authService.getUserByToken(data.access_token).toPromise();
+            const state = getState();
             setState({
+                ...state,
                 token: data.access_token,
                 user: user
             });
@@ -49,8 +60,23 @@ export class AuthState {
     removeAccess({ setState }: StateContext<AuthStateModel>) {
         setState({
             token: null,
-            user: null
+            user: null,
+            forgotPassResponse: null
         });
+    }
+
+    @Action(AuthActions.ForgotPassword)
+    async forgotPassword({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.ForgotPassword) {
+
+        const data: any = await this.authService.setForgotPass(payload).toPromise();
+
+        if (data) {
+            const state = getState();
+            setState({
+                ...state,
+                forgotPassResponse: data
+            });
+        }
     }
 
 

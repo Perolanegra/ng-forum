@@ -1,14 +1,13 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ProfileComponent } from './profile.component';
+import { ResetPasswordComponent } from './reset-password.component';
 
 
 const routes: Routes = [
-    { path: 'profile', pathMatch: 'full', redirectTo: '' },
+    { path: 'reset-password', redirectTo: '', pathMatch: 'full' },
     {
         path:'', // rota/:param
-        component: ProfileComponent,
-    
+        component: ResetPasswordComponent,
     }
 ];
 
@@ -19,4 +18,4 @@ const routes: Routes = [
         // resolvers
     ]
 })
-export class ProfileRoutingModule { }
+export class ResetPasswordRoutingModule { }

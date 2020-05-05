@@ -15,6 +15,9 @@ export class TestGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
 
+
+        
+
         return true;
     }
 

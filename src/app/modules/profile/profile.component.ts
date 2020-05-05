@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'ng-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewChecked {
 
-  constructor() { }
+  constructor(public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
+    
+  }
+
+  ngAfterViewChecked() {    
+
   }
 
 }

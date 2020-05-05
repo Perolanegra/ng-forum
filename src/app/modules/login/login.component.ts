@@ -4,8 +4,7 @@ import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { AppController } from 'src/app/core/appController';
-import { AppActions } from 'src/app/shared/state/app.actions';
-import { ResetPasswordComponent } from 'src/app/shared/components/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from 'src/app/shared/components/reset-password/forget-password.component';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +34,6 @@ export class LoginComponent implements OnInit {
 
   signIn() {
     if (this.isValidForm()) {
-
       const username = this.loginForm.get('username').value as string;
       const password = this.loginForm.get('password').value as string;
       const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', password);
@@ -48,8 +46,8 @@ export class LoginComponent implements OnInit {
     return this.loginForm.valid;
   }
 
-  openResetPass() {
-    this.appController.showToastPopUp({ style: {} }, ResetPasswordComponent);
+  openForgotPass() {
+    this.appController.showToastPopUp({ style: {} }, ForgetPasswordComponent);
   }
 
 

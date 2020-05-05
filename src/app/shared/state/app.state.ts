@@ -60,6 +60,4 @@ export class AppState {
         });
     }
 
-
-
 }

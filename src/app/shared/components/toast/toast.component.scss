@@ -100,10 +100,8 @@
   position: relative;
   bottom: 25%;
   color: #fff;
-}
-
-.btn-close:hover {
-  color: #e91e63;
+  width: fit-content;
+  right: 50%;
 }
 
 ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {

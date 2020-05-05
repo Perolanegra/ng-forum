@@ -203,7 +203,8 @@ export class AppController {
             pResp => {
             }).catch(
                 error => {
-                    this.tratarErro(error);
+                    // this.tratarErro(error);
+                    console.log('error: ', error);
                 });
     }
     /**
@@ -363,20 +364,6 @@ export class AppController {
 
     verifyImg(img): Promise<any> {
         return new Promise((resolve, reject) => {
-            // if(formatSvg === '.svg') {
-
-            //     let svg = new SVGElement();
-            //     svg.onload = function() {
-            //         resolve(true);
-            //     };
-
-            //     svg.onerror = function() {
-            //         resolve(false);
-            //     };
-            //     svg = img;
-
-            // }
-            // else {
             let image = new Image();
             image.onload = function () {
                 resolve(true);
@@ -387,26 +374,14 @@ export class AppController {
             };
 
             image.src = img;
-            // }
-
         });
     }
 
     setMenuActiveLink(path: string): void {
         this.getFillerNav().subscribe(routes => {
-            const routesRef = routes;
-
-            if (routesRef) {
-                routesRef.some((prop) => {
-                    prop.isActive = false;
-
-                    if (prop.path === path) {
-                        prop.isActive = true;
-                        return;
-                    }
-                });
-
-                this._store.dispatch(new AppActions.SetRouteState(routesRef));
+            if (routes) {
+                routes.some((prop) => prop.isActive = prop.path === path);
+                this._store.dispatch(new AppActions.SetRouteState(routes));
             }
         });
     }
@@ -417,5 +392,15 @@ export class AppController {
         });
     }
 
+    public getColorRef(type): string {
+        const call = {
+            error: () => { return 'red' },
+            info: () => { return 'blue' },
+            warning: () => { return 'orange' },
+            success: () => { return 'green' },
+        }
+
+        return call[type]();
+    }
 
 }

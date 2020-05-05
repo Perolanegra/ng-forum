@@ -1,10 +1,8 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { AuthService } from '../../core/auth.service';
-import { tap } from 'rxjs/operators';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthActions } from './auth.actions';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { GlobalVars } from 'src/app/core/globalVars';
 
 export class AuthStateModel {
@@ -73,7 +71,6 @@ export class AuthState {
         const data: any = await this.authService.setForgotPass(payload).toPromise();
 
         if (data) {
-            console.log('data: ', data);
             const state = getState();
             setState({
                 ...state,

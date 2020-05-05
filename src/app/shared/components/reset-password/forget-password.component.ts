@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Renderer2 } from '@angular/core';
+import { Component, OnInit, Inject, Renderer2, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DialogDefault } from 'src/app/core/dialog-default';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -6,16 +6,17 @@ import { AppController } from 'src/app/core/appController';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.state';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'ng-reset-password',
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.scss']
 })
-export class ForgetPasswordComponent extends DialogDefault implements OnInit { 
-  
+export class ForgetPasswordComponent extends DialogDefault implements OnInit, OnDestroy {
+
   @Select(AuthState.forgotPassResponse) fPassResponse$: Observable<any>;
+  private fPassResponseSubscription$: Subscription;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -34,17 +35,21 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit {
     this.getResponse();
   }
 
+  ngOnDestroy() {
+    this.fPassResponseSubscription$.unsubscribe();
+  }
+
   getResponse() {
-    this.fPassResponse$.subscribe(async (data) => {
+    this.fPassResponseSubscription$ = this.fPassResponse$.subscribe(async (data) => {
       console.log('data subscribe dialog: ', data);
-      if(data) {
+      if (data) {
         this.close();
       }
     });
   }
 
   reset() { // setar uma animacao no botao de carregando, ou desabilita ate resposta do servidor.
-    if(this.dialogForm.valid) {
+    if (this.dialogForm.valid) {
       this.store.dispatch(new AuthActions.ForgotPassword(this.dialogForm.get('username').value));
     }
   }

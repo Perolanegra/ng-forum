@@ -25,6 +25,7 @@ import { HttpConfigInterceptor } from './core/http-config.interpcetor';
 import { ToastrModule } from 'ngx-toastr';
 import { AppState } from './shared/state/app.state';
 import { TesteComponent } from './modules/teste/teste.component';
+import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,13 @@ import { TesteComponent } from './modules/teste/teste.component';
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    // JwtModule.forRoot({
+    //   config: {
+        // tokenGetter: () => localStorage.getItem("meutoken"),
+        // whitelistedDomains: ["example.com"],
+        // blacklistedRoutes: ["http://example.com/examplebadroute/"],
+      // },
+    // }),
   ],
   exports: [
     MaterialModule
@@ -63,7 +71,9 @@ import { TesteComponent } from './modules/teste/teste.component';
       multi: true
     },
     AppController,
-    MainNavStyle
+    MainNavStyle,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
   ],
   bootstrap: [AppComponent],
   schemas: [

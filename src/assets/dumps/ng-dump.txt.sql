@@ -24,6 +24,5 @@ CREATE TABLE IF NOT EXISTS user (
 	created_at TIMESTAMP DEFAULT current_timestamp,
     deleted_at VARCHAR(75) DEFAULT '',
     updated_at VARCHAR(75) DEFAULT '',
-    hasForgotPass VARCHAR(2) DEFAULT '0',
     FOREIGN KEY (id_nivel) REFERENCES `nivel` (`id`)
 ) ENGINE=INNODB;

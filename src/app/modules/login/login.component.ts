@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
 
   signIn() {
     if (this.isValidForm()) {
-
       const username = this.loginForm.get('username').value as string;
       const password = this.loginForm.get('password').value as string;
       const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', password);

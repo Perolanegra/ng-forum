@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { NgDefault } from 'src/app/core/ng-default';
@@ -17,9 +17,11 @@ export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
     protected router: Router,
     private store: Store,
     protected route: ActivatedRoute,
+    public routess: ActivatedRouteSnapshot,
     private appController: AppController,
   ) {
     super(route, router);
+
   }
   ngOnInit(): void {
   }

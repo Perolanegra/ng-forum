@@ -6,7 +6,7 @@ import { MaterialModule } from './modules/material.module';
 import { FormComponent } from './components/form/form.component';
 import { GlobalVars } from '../core/globalVars';
 import { ToastComponent } from './components/toast/toast.component';
-import { ForgetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from './components/reset-password/forget-password.component';
 import { AppOverBtnDirective } from '../core/app-over-btn.directive';
 
 

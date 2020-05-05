@@ -14,12 +14,13 @@ export class ResetPasswordGuard implements CanActivate {
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
 
         const url = window.location.href;
-        const token = url.slice(url.indexOf('bnag=') + 5, 999);
+        const token = url.slice(url.indexOf('bnag=') + 5, 99999);
             
         const tokenIsValid = this.authService.isAuthenticated(token);
         
         if (!tokenIsValid) {
             this.router.navigate(['/login']);
+            // jogar um toast pro cara
             return false;
         }
 

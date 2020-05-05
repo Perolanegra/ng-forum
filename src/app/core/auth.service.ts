@@ -37,6 +37,12 @@ export class AuthService {
     return this.http.get(url, { headers });
   }
 
+  setForgotPass(payload): Observable<any> {
+    const url = `${environment.server}/auth/forgot-pass`;
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(url, { payload }, {});
+  }
+
   public isAuthenticated(token): boolean {
     return !this.jwtHelper.isTokenExpired(token);
   }

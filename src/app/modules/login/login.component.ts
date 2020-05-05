@@ -4,7 +4,7 @@ import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { AppController } from 'src/app/core/appController';
-import { ForgetPasswordComponent } from 'src/app/shared/components/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from 'src/app/shared/components/reset-password/forget-password.component';
 
 @Component({
   selector: 'app-login',
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.valid;
   }
 
-  openResetPass() {
+  openForgotPass() {
     this.appController.showToastPopUp({ style: {} }, ForgetPasswordComponent);
   }
 

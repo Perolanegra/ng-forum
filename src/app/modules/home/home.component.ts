@@ -23,6 +23,7 @@ export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
     super(route, router);
 
   }
+
   ngOnInit(): void {
   }
 
@@ -32,7 +33,6 @@ export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
   signOut() {
     this.store.dispatch(new AuthActions.RemoveAccess()).subscribe(() => this.appController.navigate('login'));
     this.store.dispatch(new AppActions.RemoveRouteState());
-    
   }
 
 }

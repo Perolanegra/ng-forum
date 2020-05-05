@@ -9,11 +9,17 @@ import { GlobalVars } from 'src/app/core/globalVars';
 
 export class AuthStateModel {
     token: string;
-    user: UserModel
+    user: UserModel;
+    forgotPassResponse: any;
 }
 
 @State<AuthStateModel>({
-    name: 'auth'
+    name: 'auth',
+    defaults: {
+        token: null,
+        user: null,
+        forgotPassResponse: null
+    }
 })
 
 @Injectable()
@@ -31,14 +37,21 @@ export class AuthState {
         return state.user;
     }
 
+    @Selector()
+    static forgotPassResponse(state: AuthStateModel): UserModel {
+        return state.forgotPassResponse;
+    }
+
     @Action(AuthActions.Signin)
     async login({ getState, setState }: StateContext<AuthStateModel>, { username, password }: AuthActions.Signin) {
 
         const data: any = await this.authService.getAccessToken(username, password).toPromise();
 
-        if(data) {
+        if (data) {
             const user = await this.authService.getUserByToken(data.access_token).toPromise();
+            const state = getState();
             setState({
+                ...state,
                 token: data.access_token,
                 user: user
             });
@@ -49,22 +62,24 @@ export class AuthState {
     removeAccess({ setState }: StateContext<AuthStateModel>) {
         setState({
             token: null,
-            user: null
+            user: null,
+            forgotPassResponse: null
         });
     }
 
-    @Action(AuthActions.ResetPassword)
-    async resetPassword({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.ResetPassword) {
+    @Action(AuthActions.ForgotPassword)
+    async forgotPassword({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.ForgotPassword) {
 
-        // const data: any = await this.authService.resetPassword(username, password).toPromise();
+        const data: any = await this.authService.setForgotPass(payload).toPromise();
 
-        // if(data) {
-        //     const user = await this.authService.getUserByToken(data.access_token).toPromise();
-        //     setState({
-        //         token: data.access_token,
-        //         user: user
-        //     });
-        // }
+        if (data) {
+            console.log('data: ', data);
+            const state = getState();
+            setState({
+                ...state,
+                forgotPassResponse: data
+            });
+        }
     }
 
 

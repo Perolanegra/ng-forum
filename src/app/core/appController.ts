@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ToastComponent } from '../shared/components/toast/toast.component';
 import { AppActions } from '../shared/state/app.actions';
 import { Store } from '@ngxs/store';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -20,10 +21,11 @@ export class AppController {
 
     constructor(public dialog: MatDialog,
         private rendererFactory: RendererFactory2,
+        private spinner: NgxSpinnerService,
         private toastr: ToastrService,
         private _store: Store,
         private router: Router) {
-        this.renderer = rendererFactory.createRenderer(null, null);
+        this.renderer = this.rendererFactory.createRenderer(null, null);
     }
 
     tratarErro(err): void {
@@ -84,14 +86,14 @@ export class AppController {
     showToastPopUp(paylaod: any, component): MatDialogRef<any> {
         let dialogRef = null;
         const { positionTop, positionBottom, positionLeft, positionRight } = paylaod.style;
-        
+
         dialogRef = this.dialog.open(component, {
             data: paylaod,
             hasBackdrop: true,
             disableClose: true,
-            position: { 
+            position: {
                 top: positionTop ? positionTop : '',
-                bottom: positionBottom ? positionBottom : '' ,
+                bottom: positionBottom ? positionBottom : '',
                 left: positionLeft ? positionLeft : '',
                 right: positionRight ? positionRight : ''
             }
@@ -198,14 +200,9 @@ export class AppController {
     * @author igor.alves
     */
     public navigate(path: string) {
-        // let lDialogAguarde = this.openDialogAguarde();
-        this.router.navigate(['/' + path]).then(
-            pResp => {
-            }).catch(
-                error => {
-                    // this.tratarErro(error);
-                    console.log('error: ', error);
-                });
+        this.router.navigate(['/' + path])
+            .catch(error => console.log('error: ', error))
+            .finally(() => this.spinner.hide());
     }
     /**
     * Retorna um novo Array ordenado de Objetos com os atributos que foram passados e parâmetro de ordenação.

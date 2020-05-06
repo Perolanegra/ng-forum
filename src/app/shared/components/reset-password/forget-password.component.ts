@@ -7,6 +7,7 @@ import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { Observable, Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ng-reset-password',
@@ -24,6 +25,7 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
     protected dialog: MatDialog,
     protected appController: AppController,
     private store: Store,
+    private spinner: NgxSpinnerService,
     protected renderer: Renderer2,
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialog, formBuilder, renderer, appController);
@@ -43,6 +45,7 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
     this.fPassResponseSubscription$ = this.fPassResponse$.subscribe(async (data) => {
       console.log('data subscribe dialog: ', data);
       if (data) {
+        this.spinner.hide();
         this.close();
       }
     });
@@ -50,6 +53,7 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
 
   reset() { // setar uma animacao no botao de carregando, ou desabilita ate resposta do servidor.
     if (this.dialogForm.valid) {
+      this.spinner.show();
       this.store.dispatch(new AuthActions.ForgotPassword(this.dialogForm.get('username').value));
     }
   }

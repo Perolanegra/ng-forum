@@ -26,6 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppState } from './shared/state/app.state';
 import { TesteComponent } from './modules/teste/teste.component';
 import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    NgxSpinnerModule
     // JwtModule.forRoot({
     //   config: {
         // tokenGetter: () => localStorage.getItem("meutoken"),

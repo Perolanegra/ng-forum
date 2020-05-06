@@ -53,6 +53,8 @@ export class AuthState {
                 token: data.access_token,
                 user: user
             });
+
+            return { success: true }; // parametrizar dps
         }
     }
 

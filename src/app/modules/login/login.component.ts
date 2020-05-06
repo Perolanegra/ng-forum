@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Store, Select } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { AppController } from 'src/app/core/appController';
 import { ForgetPasswordComponent } from 'src/app/shared/components/reset-password/forget-password.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AuthState } from 'src/app/state/auth/auth.state';
-import { Observable, Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -50,6 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.spinner.show();
       this.store.dispatch(new AuthActions.Signin(username, encrypted)).subscribe((state) => {
         if(state.auth && state.auth.token) {
+          this.appController.setMenuActiveLink('home');
           this.appController.navigate('home');
         }
       });

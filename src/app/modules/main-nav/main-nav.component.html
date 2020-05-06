@@ -41,11 +41,11 @@
       </div>
     </div>
 
-    <div id="sideNav" class="div-side-nav" *ngIf="!hasMobileMatches; else navMobile" style="overflow-y: auto; overflow-x: hidden;">
+    <div id="sideNav" class="div-side-nav" *ngIf="!hasMobileMatches && routes; else navMobile" style="overflow-y: auto; overflow-x: hidden;">
       <div #navListRoutes id="sideNavContainer" class="div-side-nav-container" style="cursor: pointer;"
         (click)="navigate(nav?.path);"
         [ngClass]="[ hasEnterMenuRef && nav?.isActive ? 'div-nav-item--active' : 'div-nav-item--colapsed', hasEnterMenuRef ? 'div-align-nav-item--active' : '' ]"
-        class="fade-transition-in" *ngFor="let nav of routes">
+        class="fade-transition-in" *ngFor="let nav of routes | async">
         <div [title]="nav?.name" [ngClass]="[ hasEnterMenuRef ? 'nav-item' : 'nav-item-colapsed' ]">
 
           <div [ngClass]="[ !hasEnterMenuRef && nav?.isActive ? 'div-img-closed-icons--active' : '' ]">
@@ -61,9 +61,9 @@
     </div>
 
     <ng-template #navMobile>
-      <div class="div-side-nav">
+      <div class="div-side-nav" *ngIf="routes">
         <div style="overflow-y: auto; overflow-x: hidden;">
-          <button *ngFor="let item of routes" mat-raised-button
+          <button *ngFor="let item of routes | async" mat-raised-button
             [ngClass]="[ hasEnterMenuRef && item?.isActive ? 'nav-mobile--active' : 'nav-mobile--default' ]"
             (click)="navigate(item?.path)" class="btn font" cdkFocusInitial>
             <div id="euagr" class="div-nav-item-mobile">

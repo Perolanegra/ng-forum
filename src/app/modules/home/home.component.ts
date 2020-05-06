@@ -12,10 +12,8 @@ import { Subscription } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
+export class HomeComponent extends NgDefault implements OnInit {
  
-  private signOutSubscription$: Subscription;
-
   constructor(
     protected router: Router,
     private store: Store,
@@ -29,12 +27,8 @@ export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  ngOnDestroy() {
-    this.signOutSubscription$.unsubscribe();
-  }
-
   signOut() {
-    this.signOutSubscription$ = this.store.dispatch(new AuthActions.RemoveAccess()).subscribe(() => this.appController.navigate('login'));
+    this.store.dispatch(new AuthActions.RemoveAccess()).subscribe(() => this.appController.navigate('login'));
     this.store.dispatch(new AppActions.RemoveRouteState());
   }
 

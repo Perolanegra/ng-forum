@@ -25,7 +25,6 @@ export class MainNavComponent implements OnInit {
 
     @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
 
-    private fillerSubscription$: Subscription;
     private stateMobileMatchesSubscription$: Subscription;
 
     constructor(
@@ -35,16 +34,11 @@ export class MainNavComponent implements OnInit {
 
 
     ngOnInit() {
-        this.appController.setMenuActiveLink('home');
-        this.fillerSubscription$ = this.appController.getFillerNav().subscribe(routes => {
-            this.routes = routes;
-        });
-
+        this.routes = this.appController.getFillerNav();
         this.stateMobileMatchesSubscription$ = this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
     }
 
     ngOnDestroy(): void {
-        this.fillerSubscription$.unsubscribe();
         this.stateMobileMatchesSubscription$.unsubscribe();
     }
 

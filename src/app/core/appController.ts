@@ -204,6 +204,10 @@ export class AppController {
             .catch(error => console.log('error: ', error))
             .finally(() => this.spinner.hide());
     }
+
+    public hideSpinner(): void {
+        this.spinner.hide();
+    }
     /**
     * Retorna um novo Array ordenado de Objetos com os atributos que foram passados e parâmetro de ordenação.
     * @param pArray Recebe o array iterável original o qual quer se capturar os atributos.

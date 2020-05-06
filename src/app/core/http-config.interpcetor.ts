@@ -38,6 +38,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             this._store.dispatch(new AuthActions.RemoveAccess());
           }
           
+          this.appController.hideSpinner();
           this.appController.showToastPopUp({ title, message, type, style }, ToastComponent);
          
           return throwError(error);

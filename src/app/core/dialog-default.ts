@@ -25,7 +25,7 @@ export abstract class DialogDefault {
         return this.hasMobileMatches ? trueValue : falseValue;
     }
 
-    close(): void {
+    closeAll(): void {
         this.hasClosed = true;
         this.dialog.closeAll();
     }

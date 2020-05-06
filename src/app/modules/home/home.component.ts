@@ -5,6 +5,7 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { NgDefault } from 'src/app/core/ng-default';
 import { AppActions } from 'src/app/shared/state/app.actions';
 import { AppController } from 'src/app/core/appController';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,8 @@ import { AppController } from 'src/app/core/appController';
 })
 export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
  
+  private signOutSubscription$: Subscription;
+
   constructor(
     protected router: Router,
     private store: Store,
@@ -27,10 +30,11 @@ export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.signOutSubscription$.unsubscribe();
   }
 
   signOut() {
-    this.store.dispatch(new AuthActions.RemoveAccess()).subscribe(() => this.appController.navigate('login'));
+    this.signOutSubscription$ = this.store.dispatch(new AuthActions.RemoveAccess()).subscribe(() => this.appController.navigate('login'));
     this.store.dispatch(new AppActions.RemoveRouteState());
   }
 

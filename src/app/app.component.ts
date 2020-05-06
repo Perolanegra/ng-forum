@@ -18,6 +18,7 @@ export class AppComponent {
   @Select(AuthState.token) token$: Observable<string>;
 
   private mobileQuery: MediaQueryList;
+  private fillerNavSubscription$: Subscription;
 
   constructor(private globalVars: GlobalVars,
     private appController: AppController,
@@ -43,7 +44,7 @@ export class AppComponent {
   title = 'ng-forum';
 
   setRoutesLocalStorage(): void {
-    this.appController.getFillerNav().subscribe(routes => {
+    this.fillerNavSubscription$ = this.appController.getFillerNav().subscribe(routes => {
       if (!routes) {
         this.appController.fillerNavs().then((filler: any) => {
           this.store.dispatch(new AppActions.SetRouteState(filler));
@@ -54,6 +55,7 @@ export class AppComponent {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.fillerNavSubscription$.unsubscribe();
   }
 
 }

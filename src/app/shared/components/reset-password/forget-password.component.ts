@@ -8,6 +8,7 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { Observable, Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
   selector: 'ng-reset-password',
@@ -43,10 +44,10 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
 
   getResponse() {
     this.fPassResponseSubscription$ = this.fPassResponse$.subscribe(async (data) => {
-      console.log('data subscribe dialog: ', data);
       if (data) {
+        this.appController.showToastPopUp(data, ToastComponent);
         this.spinner.hide();
-        this.close();
+        this.dialogRef.close();
       }
     });
   }
@@ -56,6 +57,11 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
       this.spinner.show();
       this.store.dispatch(new AuthActions.ForgotPassword(this.dialogForm.get('username').value));
     }
+  }
+
+  close() {
+    this.hasClosed = true;
+    this.dialogRef.close();
   }
 
 

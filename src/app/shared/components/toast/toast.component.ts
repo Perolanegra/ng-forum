@@ -36,4 +36,9 @@ export class ToastComponent extends DialogDefault implements OnInit, AfterViewIn
     this.title = title;
   }
 
+  close() {
+    this.hasClosed = true;
+    this.dialogRef.close();
+  }
+
 }

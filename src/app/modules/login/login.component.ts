@@ -16,10 +16,6 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  @Select(AuthState.token) token$: Observable<string>;
-
-  private tokenSubscription$: Subscription;
-
 
   public loginForm: FormGroup;
   hide = true;
@@ -36,7 +32,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.tokenSubscription$.unsubscribe();
   }
 
   setLoginForm() {
@@ -51,11 +46,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       const username = this.loginForm.get('username').value as string;
       const password = this.loginForm.get('password').value as string;
       const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', password);
-
+      
       this.spinner.show();
-      this.store.dispatch(new AuthActions.Signin(username, encrypted));
-
-      this.tokenSubscription$ = this.token$.subscribe((token) => token ? this.appController.navigate('home') : '');
+      this.store.dispatch(new AuthActions.Signin(username, encrypted)).subscribe((state) => {
+        if(state.auth && state.auth.token) {
+          this.appController.navigate('home');
+        }
+      });
     }
   }
 

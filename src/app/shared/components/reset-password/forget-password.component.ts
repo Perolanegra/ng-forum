@@ -52,7 +52,7 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
     });
   }
 
-  reset(): void { // centralizar no DialogDefault
+  submit(): void { // centralizar no DialogDefault
     if (this.dialogForm.valid) { 
       this.hasClickSubmit = this.dialogForm.valid;
       this.spinner.show();

@@ -11,6 +11,7 @@ export abstract class DialogDefault {
     @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
 
     public hasMobileMatches: boolean;
+    public hasClickSubmit: boolean = false;
     public hasClosed: boolean = false;
     public dialogForm: FormGroup;
     

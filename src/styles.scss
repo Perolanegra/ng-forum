@@ -63,3 +63,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #22262e;
     outline: none !important;
 }
+
+.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.enabled {
+    opacity: 1;
+    pointer-events: auto;
+}

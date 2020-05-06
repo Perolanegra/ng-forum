@@ -10,11 +10,8 @@ import { LoginComponent } from './modules/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainNavComponent } from './modules/main-nav/main-nav.component';
-import { AppMenuOverDirective } from './core/app-menu-over.directive';
-import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
 import { AppController } from './core/appController';
 import { MainNavStyle } from './modules/main-nav/main-nav.style';
-import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -25,8 +22,11 @@ import { HttpConfigInterceptor } from './core/http-config.interpcetor';
 import { ToastrModule } from 'ngx-toastr';
 import { AppState } from './shared/state/app.state';
 import { TesteComponent } from './modules/teste/teste.component';
-import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { AppMenuOverDirective } from './core/app-menu-over.directive';
+import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
+import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
 
 @NgModule({
   declarations: [

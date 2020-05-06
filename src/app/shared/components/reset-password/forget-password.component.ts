@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Renderer2, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, Renderer2, OnDestroy, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DialogDefault } from 'src/app/core/dialog-default';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -52,10 +52,13 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
     });
   }
 
-  reset() { // setar uma animacao no botao de carregando, ou desabilita ate resposta do servidor.
-    if (this.dialogForm.valid) {
+  reset(): void { // centralizar no DialogDefault
+    if (this.dialogForm.valid) { 
+      this.hasClickSubmit = this.dialogForm.valid;
       this.spinner.show();
       this.store.dispatch(new AuthActions.ForgotPassword(this.dialogForm.get('username').value));
+      this.dialogForm.reset();
+      setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit , 2000);
     }
   }
 
@@ -63,6 +66,5 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
     this.hasClosed = true;
     this.dialogRef.close();
   }
-
 
 }

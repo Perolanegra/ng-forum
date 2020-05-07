@@ -8,6 +8,8 @@ import { AuthState } from 'src/app/state/auth/auth.state';
 import { AppController } from 'src/app/core/appController';
 import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
+import { AppState } from 'src/app/shared/state/app.state';
+import { EncryptionService } from 'src/app/core/encryption.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -21,22 +23,28 @@ export class ResetPasswordComponent implements OnInit {
   @Select(AuthState.resetPassResponse) rPassResponse$: Observable<any>;
   private rPassResponseSubscription$: Subscription;
 
+  @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
+  private stateMobileMatchesSubscription$: Subscription;
+
+
   public resetForm: FormGroup;
   public hasClickSubmit: boolean = false;
-  public hasMobileMatches = false; // recuperar esse kra
+  public hasMobileMatches: boolean;
   public errorMsgs;
 
   constructor(private formBuilder: FormBuilder,
     private store: Store,
     private spinner: NgxSpinnerService,
+    private encryptService: EncryptionService,
     public appController: AppController) { }
 
   ngOnInit(): void {
     this.resetForm = this.formBuilder.group({
       new_password: new FormControl(null, [Validators.required, CustomValidators.whitespace]),
       verify_password: new FormControl(null, Validators.compose([Validators.required, CustomValidators.whitespace, this.matchValues.bind(this)])),
-
     });
+
+    this.stateMobileMatchesSubscription$ = this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
 
     this.getResponse();
     this.getErrorValidation();
@@ -44,6 +52,7 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnDestroy() {
     this.rPassResponseSubscription$.unsubscribe();
+    this.stateMobileMatchesSubscription$.unsubscribe();
   }
 
   getResponse() {
@@ -59,7 +68,8 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetForm.valid) {
       this.hasClickSubmit = this.resetForm.valid;
       this.spinner.show();
-      this.store.dispatch(new AuthActions.ResetPass(this.resetForm.get('verify_password').value));
+      const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', this.resetForm.get('verify_password').value);
+      this.store.dispatch(new AuthActions.ResetPass(encrypted));
       this.resetForm.reset();
       setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
     }

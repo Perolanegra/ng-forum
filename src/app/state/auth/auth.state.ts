@@ -9,6 +9,7 @@ export class AuthStateModel {
     token: string;
     user: UserModel;
     forgotPassResponse: any;
+    resetedPassword: any;
 }
 
 @State<AuthStateModel>({
@@ -16,7 +17,8 @@ export class AuthStateModel {
     defaults: {
         token: null,
         user: null,
-        forgotPassResponse: null
+        forgotPassResponse: null,
+        resetedPassword: false
     }
 })
 
@@ -36,8 +38,13 @@ export class AuthState {
     }
 
     @Selector()
-    static forgotPassResponse(state: AuthStateModel): UserModel {
+    static forgotPassResponse(state: AuthStateModel) {
         return state.forgotPassResponse;
+    }
+
+    @Selector()
+    static resetPassResponse(state: AuthStateModel) {
+        return state.resetedPassword;
     }
 
     @Action(AuthActions.Signin)
@@ -58,11 +65,7 @@ export class AuthState {
 
     @Action(AuthActions.RemoveAccess)
     removeAccess({ setState }: StateContext<AuthStateModel>) {
-        setState({
-            token: null,
-            user: null,
-            forgotPassResponse: null
-        });
+        setState(null);
     }
 
     @Action(AuthActions.ForgotPassword)
@@ -75,6 +78,20 @@ export class AuthState {
             setState({
                 ...state,
                 forgotPassResponse: data
+            });
+        }
+    }
+
+    @Action(AuthActions.ResetPass)
+    async resetPass({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.ForgotPassword) {
+
+        const data: any = await this.authService.resetPass(payload).toPromise();
+
+        if (data) {
+            const state = getState();
+            setState({
+                ...state,
+                resetedPassword: data
             });
         }
     }

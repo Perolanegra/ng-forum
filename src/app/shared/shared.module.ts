@@ -8,6 +8,7 @@ import { GlobalVars } from '../core/globalVars';
 import { ToastComponent } from './components/toast/toast.component';
 import { ForgetPasswordComponent } from './components/reset-password/forget-password.component';
 import { AppOverBtnDirective } from '../core/app-over-btn.directive';
+import { ReactiveInputErrorComponent } from './components/reactive-input-error/reactive-input-error.component';
 
 
 @NgModule({
@@ -26,10 +27,12 @@ import { AppOverBtnDirective } from '../core/app-over-btn.directive';
         FormComponent,
         ToastComponent,
         ForgetPasswordComponent,
-        AppOverBtnDirective
+        AppOverBtnDirective,
+        ReactiveInputErrorComponent
     ],
     exports: [
         FormComponent,
+        ReactiveInputErrorComponent,
         MaterialModule,
         ReactiveFormsModule,
     ],

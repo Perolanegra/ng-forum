@@ -29,7 +29,7 @@ export class AuthService {
     return this.http.post(url, body, { headers });
   }
 
-  getUserByToken(token): Observable<any> {
+  getUserByToken(token: string): Observable<any> {
     const url = `${environment.server}/userByToken`;
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -37,8 +37,14 @@ export class AuthService {
     return this.http.get(url, { headers });
   }
 
-  setForgotPass(payload): Observable<any> {
+  setForgotPass(payload: string): Observable<any> {
     const url = `${environment.server}/auth/forgot-pass`;
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(url, { payload }, {});
+  }
+
+  resetPass(payload: string): Observable<any> {
+    const url = `${environment.server}/auth/reset-pass`;
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post(url, { payload }, {});
   }

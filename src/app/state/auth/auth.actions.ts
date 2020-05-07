@@ -14,5 +14,9 @@ export namespace AuthActions {
         constructor(public payload: string) { }
     }
 
+    export class ResetPass {
+        static readonly type = '[Auth] ResetPass';
+        constructor(public payload: string) { }
+    }
 
 }

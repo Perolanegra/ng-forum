@@ -35,7 +35,7 @@ import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.direct
     MainNavComponent,
     AppMenuOverDirective,
     AppAutofillOffDirective,
-    AppNavNameBehaviorDirective,
+    AppNavNameBehaviorDirective,    
     // TesteComponent,
   ],
   imports: [

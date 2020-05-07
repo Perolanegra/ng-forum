@@ -96,5 +96,16 @@ export class AuthState {
         }
     }
 
+    @Action(AuthActions.SetResetToken)
+    async storeResetToken({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.ForgotPassword) {
+        if (payload) {
+            const state = getState();
+            setState({
+                ...state,
+                token: payload
+            });
+        }
+    }
+
 
 }

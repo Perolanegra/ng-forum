@@ -16,6 +16,11 @@ export namespace AuthActions {
 
     export class ResetPass {
         static readonly type = '[Auth] ResetPass';
+        constructor(public payload: { access_token: string, password: string }) { }
+    }
+
+    export class SetResetToken {
+        static readonly type = '[Auth] Set Reset Token';
         constructor(public payload: string) { }
     }
 

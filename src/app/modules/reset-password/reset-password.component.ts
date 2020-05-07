@@ -26,6 +26,7 @@ export class ResetPasswordComponent implements OnInit {
   @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
   private stateMobileMatchesSubscription$: Subscription;
 
+  @Select(AuthState.token) token$: Observable<string>;
 
   public resetForm: FormGroup;
   public hasClickSubmit: boolean = false;
@@ -60,16 +61,18 @@ export class ResetPasswordComponent implements OnInit {
       if (data) {
         this.spinner.hide();
         this.appController.showToastPopUp(data, ToastComponent);
+        setTimeout(() => this.appController.navigate('login'), 1500);
       }
     });
   }
 
-  submit(): void {
+  async submit(): Promise<void> {
     if (this.resetForm.valid) {
       this.hasClickSubmit = this.resetForm.valid;
       this.spinner.show();
-      const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', this.resetForm.get('verify_password').value);
-      this.store.dispatch(new AuthActions.ResetPass(encrypted));
+      const access_token = await this.token$.toPromise();
+      const password = this.encryptService.set('10610433IA$#@$^@1ERF', this.resetForm.get('verify_password').value);
+      this.store.dispatch(new AuthActions.ResetPass({ access_token, password }));
       this.resetForm.reset();
       setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
     }

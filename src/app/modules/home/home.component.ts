@@ -5,7 +5,6 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { NgDefault } from 'src/app/core/ng-default';
 import { AppActions } from 'src/app/shared/state/app.actions';
 import { AppController } from 'src/app/core/appController';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',

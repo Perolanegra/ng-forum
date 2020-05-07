@@ -26,11 +26,6 @@ export abstract class DialogDefault {
         return this.hasMobileMatches ? trueValue : falseValue;
     }
 
-    closeAll(): void {
-        this.hasClosed = true;
-        this.dialog.closeAll();
-    }
-
     public setDialogForm() {
         this.dialogForm = this.formBuilder.group({});
     }

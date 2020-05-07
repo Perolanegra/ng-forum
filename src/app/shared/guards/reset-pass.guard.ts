@@ -4,29 +4,39 @@ import { Observable } from "rxjs";
 import { AuthService } from 'src/app/core/auth.service';
 import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
+import { AppController } from 'src/app/core/appController';
+import { ToastComponent } from '../components/toast/toast.component';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ResetPasswordGuard implements CanActivate {
 
-    constructor(private store: Store, private authService: AuthService, private router: Router) {}
+    constructor(private store: Store, private authService: AuthService, private router: Router, private appController: AppController) { }
 
     canActivate(route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
 
         const url = window.location.href;
-        const token = url.slice(url.indexOf('bnag=') + 5, 99999);
-            
-        const tokenIsValid = this.authService.isAuthenticated(token);
-        
-        if (tokenIsValid) { // se o token for válido, eu guardo ele.
-            this.store.dispatch(new AuthActions.SetResetToken(token));
-            return true;
+        const index = url.indexOf('bnag=');
+
+        if (index != -1) {
+            const token = url.slice(index + 5, 99999);
+
+            const tokenIsValid = this.authService.isAuthenticated(token);
+
+            if (tokenIsValid) { // se o token for válido, eu guardo ele.
+                this.store.dispatch(new AuthActions.SetResetToken(token));
+                return tokenIsValid;
+            }
+            else {
+                const style = { positionTop: '5vh', positionBottom: null, positionLeft: null, positionRight: null };
+                const paylaod = { message: 'Token expirado. Por favor, realize uma nova solitição.', title: 'Acesso Expirado.', type: 'error', style }
+                this.appController.showToastPopUp(paylaod, ToastComponent);
+            }
         }
-        
+
         this.router.navigate(['/login']);
-        // jogar um toast pro cara
         return false;
     }
 }

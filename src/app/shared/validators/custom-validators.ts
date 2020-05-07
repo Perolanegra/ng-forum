@@ -26,7 +26,6 @@ export class CustomValidators {
         return { whitespace: true };
     }
 
-
     static cnpj(pControl: FormControl): ValidationErrors {
         if (pControl.value != undefined && pControl.value != null && pControl.value.toString() != '') {
             if (!pControl.value.match("^[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}\\/[0-9]{4}\\-[0-9]{2}$")

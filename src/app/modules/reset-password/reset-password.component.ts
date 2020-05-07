@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -15,13 +15,15 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
+  public hide1 = true;
+  public hide2 = true;
 
   @Select(AuthState.resetPassResponse) rPassResponse$: Observable<any>;
   private rPassResponseSubscription$: Subscription;
 
   public resetForm: FormGroup;
   public hasClickSubmit: boolean = false;
-  hasMobileMatches = false;
+  public hasMobileMatches = false; // recuperar esse kra
   public errorMsgs;
 
   constructor(private formBuilder: FormBuilder,
@@ -32,7 +34,8 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.resetForm = this.formBuilder.group({
       new_password: new FormControl(null, [Validators.required, CustomValidators.whitespace]),
-      verify_password: new FormControl(null, [Validators.required, CustomValidators.whitespace]),
+      verify_password: new FormControl(null, Validators.compose([Validators.required, CustomValidators.whitespace, this.matchValues.bind(this)])),
+
     });
 
     this.getResponse();
@@ -67,12 +70,29 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   getErrorValidation(): void {
-    const types = ['required', 'minlength', 'whitespace'];
-    const msgs = ['O campo é obrigatório.', 'Mínimo de 8 caracteres.', 'Não pode conter espaços em branco.']
+    let types = ['required', 'minlength', 'whitespace'];
+    let msgs = ['O campo é obrigatório.', 'Mínimo de 8 caracteres.', 'Não pode conter espaços em branco.']
+
+    let msgAux = [], typesAux = [];
+    msgAux.push(...msgs); msgAux.push('Senhas não coincidem.');
+    typesAux.push(...types); typesAux.push('matchValues');
+
     const { new_password } = this.appController.getErrorValidation('new_password', types, msgs);
-    const { verify_password } = this.appController.getErrorValidation('verify_password', types, msgs);
+    const { verify_password } = this.appController.getErrorValidation('verify_password', typesAux, msgAux);
 
     this.errorMsgs = { new_password, verify_password };
   }
+
+  matchValues(pControl: FormControl): ValidationErrors {
+    if (this.resetForm) {
+      const controls = this.resetForm.controls;
+      if (pControl.value === controls.verify_password.value) {
+        return { matchValues: true };
+      }
+    }
+
+    return null;
+  }
+
 
 }

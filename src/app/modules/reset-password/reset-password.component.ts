@@ -86,7 +86,7 @@ export class ResetPasswordComponent implements OnInit {
   matchValues(pControl: FormControl): ValidationErrors {
     if (this.resetForm) {
       const controls = this.resetForm.controls;
-      if (pControl.value === controls.verify_password.value) {
+      if (pControl.value?.length >= 8 && pControl.value === controls.verify_password.value) {
         return { matchValues: true };
       }
     }

@@ -33,6 +33,17 @@ export namespace AuthActions {
         static readonly type = '[Auth] Set Reseted Password ';
         constructor(public payload: boolean) { }
     }
-    
+
+    export class RemoveHasReset {
+        static readonly type = '[Auth] Remove Has Reset';
+    }
+
+    export class RemoveToken {
+        static readonly type = '[Auth] Remove Token';
+    }
+
+    export class RemoveNotAuth {
+        static readonly type = '[Auth] Remove Not Auth';
+    }
 
 }

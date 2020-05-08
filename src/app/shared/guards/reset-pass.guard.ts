@@ -12,10 +12,12 @@ import { ToastComponent } from '../components/toast/toast.component';
 })
 export class ResetPasswordGuard implements CanActivate {
     dataFilled: boolean;
+    token;
 
     constructor(private store: Store, private authService: AuthService, private router: Router, private appController: AppController) { 
         this.store.select(state => {
             this.dataFilled = state.auth.hasResetPass;
+            this.token = state.auth.token;
         });
     }
 
@@ -44,7 +46,10 @@ export class ResetPasswordGuard implements CanActivate {
             }
         }
 
-        this.router.navigate(['/login']);
+        if(!this.token) {
+            this.router.navigate(['/login']);
+        }
+        this.router.navigate([this.router.routerState.snapshot.url]);
         return false;
     }
 }

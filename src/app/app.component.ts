@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, NgZone } from '@angular/core';
 import { GlobalVars } from './core/globalVars';
 import { AppController } from './core/appController';
 import { AuthState } from './state/auth/auth.state';
@@ -17,6 +17,7 @@ export class AppComponent {
 
   @Select(AuthState.token) token$: Observable<string>;
   @Select(AuthState.notAuth) notAuth$: Observable<string>;
+
   hasToken; notAuth;
   private mobileQuery: MediaQueryList;
   private fillerNavSubscription$: Subscription;
@@ -41,6 +42,11 @@ export class AppComponent {
     this.store.dispatch(new AppActions.SetMediaScreen(this.mobileQuery.matches));
     this.actions.pipe(ofActionDispatched(AuthActions.RemoveAccess)).subscribe(() => this.appController.navigate('login'))
     this.getAuth();
+    this.getResetedPass();
+  }
+
+  getResetedPass() {
+   
   }
 
   title = 'ng-forum';

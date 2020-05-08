@@ -78,14 +78,15 @@ export class AuthState {
     }
 
     @Action(AuthActions.RemoveAccess)
-    removeAccess({ setState }: StateContext<AuthStateModel>) {
+    removeAccess({ setState, getState }: StateContext<AuthStateModel>) {
+        const state = getState();
         setState({
+            ...state,
             token: null,
             notAuth: null,
             forgotPassResponse: null,
             user: null,
             rPassResponse: null,
-            hasResetPass: null
         });
     }
 
@@ -118,7 +119,7 @@ export class AuthState {
     }
 
     @Action(AuthActions.SetResetToken)
-    async setResetToken({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.ForgotPassword) {
+    async setResetToken({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.SetResetToken) {
         if (payload) {
             const state = getState();
             setState({
@@ -149,6 +150,33 @@ export class AuthState {
                 hasResetPass: payload
             });
         }
+    }
+
+    @Action(AuthActions.RemoveNotAuth)
+    async removeNotAuth({ getState, setState }: StateContext<AuthStateModel>) {
+        const state = getState();
+        setState({
+            ...state,
+            notAuth: null
+        });
+    }
+
+    @Action(AuthActions.RemoveHasReset)
+    removeHasReset({ setState, getState }: StateContext<AuthStateModel>) {
+        const state = getState();
+        setState({
+            ...state,
+            hasResetPass: null
+        });
+    }
+
+    @Action(AuthActions.RemoveToken)
+    removeToken({ setState, getState }: StateContext<AuthStateModel>) {
+        const state = getState();
+        setState({
+            ...state,
+            token: null
+        });
     }
 
 

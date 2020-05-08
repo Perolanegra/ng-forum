@@ -11,7 +11,6 @@ export class LoginAuthGuard implements CanActivate {
 
     constructor(private store: Store, private router: Router) {
         this.store.select(state => this.token = state.auth.token);
-
     }
 
     canActivate(route: ActivatedRouteSnapshot,

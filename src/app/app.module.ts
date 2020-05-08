@@ -27,6 +27,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
 import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
 import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.direct
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     // JwtModule.forRoot({
     //   config: {
         // tokenGetter: () => localStorage.getItem("meutoken"),

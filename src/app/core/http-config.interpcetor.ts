@@ -29,7 +29,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             // loader aqui
             return event;
         }),
-        catchError((error) => {          
+        catchError((error) => {      
            // setar interceptors específicos caso haja request para api externa.
           const { message, title, type, style } = error.error;
          

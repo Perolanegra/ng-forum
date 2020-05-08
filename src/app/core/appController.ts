@@ -404,7 +404,7 @@ export class AppController {
         return call[type]();
     }
 
-    public getErrorValidation(control: string, types: string[], msgs: string[]) {
+    public setErrorValidation(control: string, types: string[], msgs: string[]) {
         let errorResponse:any = {};
         errorResponse[control] = new Array<any>();
 

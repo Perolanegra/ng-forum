@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
@@ -16,7 +16,7 @@ import { EncryptionService } from 'src/app/core/encryption.service';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit, OnDestroy {
   public hide1 = true;
   public hide2 = true;
 
@@ -27,6 +27,7 @@ export class ResetPasswordComponent implements OnInit {
   private stateMobileMatchesSubscription$: Subscription;
 
   @Select(AuthState.token) token$: Observable<string>;
+  private tokenSubscription$: Subscription;
 
   public resetForm: FormGroup;
   public hasClickSubmit: boolean = false;
@@ -35,6 +36,7 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private store: Store,
+    private ngZone: NgZone,
     private spinner: NgxSpinnerService,
     private encryptService: EncryptionService,
     public appController: AppController) { }
@@ -48,22 +50,23 @@ export class ResetPasswordComponent implements OnInit {
     this.stateMobileMatchesSubscription$ = this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
 
     this.getResponse();
-    this.getErrorValidation();
+    this.setErrorValidation();
   }
 
   ngOnDestroy() {
-    if(this.rPassResponseSubscription$ && this.stateMobileMatchesSubscription$) {
+    if (this.rPassResponseSubscription$ && this.stateMobileMatchesSubscription$) {
       this.rPassResponseSubscription$.unsubscribe();
       this.stateMobileMatchesSubscription$.unsubscribe();
+      this.tokenSubscription$.unsubscribe();
       this.store.dispatch(new AuthActions.SetResetedPassword(true));
-      this.store.dispatch(new AuthActions.SetNotAuth(null));
-      this.store.dispatch(new AuthActions.SetResetToken(''));
     }
   }
 
   getResponse() {
     this.rPassResponseSubscription$ = this.rPassResponse$.subscribe(async (data) => {
       if (data) {
+        this.store.dispatch(new AuthActions.RemoveToken());
+        this.store.dispatch(new AuthActions.RemoveNotAuth());
         this.spinner.hide();
         this.appController.showToastPopUp(data, ToastComponent);
         setTimeout(() => this.appController.navigate('login'), 800);
@@ -76,12 +79,15 @@ export class ResetPasswordComponent implements OnInit {
       this.hasClickSubmit = this.resetForm.valid;
       this.spinner.show();
 
-      this.token$.subscribe(access_token => {
-        if(access_token) {
+      this.tokenSubscription$ = this.token$.subscribe(access_token => {
+        const passForm = this.resetForm.controls.verify_password.value;
+        if (access_token && passForm) {
           const password = this.encryptService.set('10610433IA$#@$^@1ERF', this.resetForm.get('verify_password').value);
           this.store.dispatch(new AuthActions.ResetPass({ access_token, password }));
           this.resetForm.reset();
-          setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
+          this.ngZone.runOutsideAngular(() => {
+            setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
+          });
         }
       });
     }
@@ -91,7 +97,7 @@ export class ResetPasswordComponent implements OnInit {
     return this.hasMobileMatches ? trueValue : falseValue;
   }
 
-  getErrorValidation(): void {
+  setErrorValidation(): void {
     let types = ['required', 'minlength', 'whitespace'];
     let msgs = ['O campo é obrigatório.', 'Mínimo de 8 caracteres.', 'Não pode conter espaços em branco.']
 
@@ -99,8 +105,8 @@ export class ResetPasswordComponent implements OnInit {
     msgAux.push(...msgs); msgAux.push('Senhas não coincidem.');
     typesAux.push(...types); typesAux.push('matchValues');
 
-    const { new_password } = this.appController.getErrorValidation('new_password', types, msgs);
-    const { verify_password } = this.appController.getErrorValidation('verify_password', typesAux, msgAux);
+    const { new_password } = this.appController.setErrorValidation('new_password', types, msgs);
+    const { verify_password } = this.appController.setErrorValidation('verify_password', typesAux, msgAux);
 
     this.errorMsgs = { new_password, verify_password };
   }

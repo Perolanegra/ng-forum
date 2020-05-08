@@ -24,4 +24,11 @@ export namespace AuthActions {
         constructor(public payload: string) { }
     }
 
+    export class SetNotAuth {
+        static readonly type = '[Auth] Set Not Auth ';
+        constructor(public payload: string) { }
+    }
+
+    
+
 }

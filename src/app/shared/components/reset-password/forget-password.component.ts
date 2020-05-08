@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Renderer2, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, Inject, Renderer2, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DialogDefault } from 'src/app/core/dialog-default';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -35,7 +35,6 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
   ngOnInit(): void {
     this.setDialogForm();
     this.dialogForm.addControl("username", new FormControl(null, Validators.required));
-    this.getResponse();
   }
 
   ngOnDestroy() {
@@ -45,26 +44,27 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
   getResponse() {
     this.fPassResponseSubscription$ = this.fPassResponse$.subscribe(async (data) => {
       if (data) {
-        this.appController.showToastPopUp(data, ToastComponent);
         this.spinner.hide();
-        this.dialogRef.close();
+        this.close();
+        this.appController.showToastPopUp(data, ToastComponent);
       }
     });
   }
 
   submit(): void { // centralizar no DialogDefault
-    if (this.dialogForm.valid) { 
+    if (this.dialogForm.valid) {
       this.hasClickSubmit = this.dialogForm.valid;
       this.spinner.show();
       this.store.dispatch(new AuthActions.ForgotPassword(this.dialogForm.get('username').value));
       this.dialogForm.reset();
-      setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit , 2000);
+      this.getResponse();
+      setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
     }
   }
 
   close() {
-    this.hasClosed = true;
     this.dialogRef.close();
+    this.hasClosed = true;
   }
 
 }

@@ -10,6 +10,7 @@ export class AuthStateModel {
     user: UserModel;
     forgotPassResponse: any;
     resetedPassword: any;
+    notAuth: string;
 }
 
 @State<AuthStateModel>({
@@ -18,7 +19,8 @@ export class AuthStateModel {
         token: null,
         user: null,
         forgotPassResponse: null,
-        resetedPassword: false
+        resetedPassword: false,
+        notAuth: null
     }
 })
 
@@ -47,6 +49,11 @@ export class AuthState {
         return state.resetedPassword;
     }
 
+    @Selector()
+    static notAuth(state: AuthStateModel): string {
+        return state.notAuth;
+    }
+    
     @Action(AuthActions.Signin)
     async login({ getState, setState }: StateContext<AuthStateModel>, { username, password }: AuthActions.Signin) {
 
@@ -65,7 +72,13 @@ export class AuthState {
 
     @Action(AuthActions.RemoveAccess)
     removeAccess({ setState }: StateContext<AuthStateModel>) {
-        setState(null);
+        setState({
+            token: null,
+            notAuth: null,
+            forgotPassResponse: null,
+            user: null,
+            resetedPassword: false
+        });
     }
 
     @Action(AuthActions.ForgotPassword)
@@ -103,6 +116,17 @@ export class AuthState {
             setState({
                 ...state,
                 token: payload
+            });
+        }
+    }
+
+    @Action(AuthActions.SetNotAuth)
+    async setNotAuth({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.SetNotAuth) {
+        if (payload) {
+            const state = getState();
+            setState({
+                ...state,
+                notAuth: payload
             });
         }
     }

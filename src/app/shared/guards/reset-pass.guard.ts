@@ -19,6 +19,8 @@ export class ResetPasswordGuard implements CanActivate {
 
         const url = window.location.href;
         const index = url.indexOf('bnag=');
+        
+        
 
         if (index != -1) {
             const token = url.slice(index + 5, 99999);
@@ -26,6 +28,7 @@ export class ResetPasswordGuard implements CanActivate {
             const tokenIsValid = this.authService.isAuthenticated(token);
 
             if (tokenIsValid) { // se o token for válido, eu guardo ele.
+                this.store.dispatch(new AuthActions.SetNotAuth('tokenIsValid'));
                 this.store.dispatch(new AuthActions.SetResetToken(token));
                 return tokenIsValid;
             }

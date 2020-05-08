@@ -52,8 +52,10 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.rPassResponseSubscription$.unsubscribe();
-    this.stateMobileMatchesSubscription$.unsubscribe();
+    if(this.rPassResponseSubscription$ && this.stateMobileMatchesSubscription$) {
+      this.rPassResponseSubscription$.unsubscribe();
+      this.stateMobileMatchesSubscription$.unsubscribe();
+    }
   }
 
   getResponse() {
@@ -99,13 +101,14 @@ export class ResetPasswordComponent implements OnInit {
   matchValues(pControl: FormControl): ValidationErrors {
     if (this.resetForm) {
       const controls = this.resetForm.controls;
-      if (pControl.value?.length >= 8 && pControl.value === controls.verify_password.value) {
-        return { matchValues: true };
+      if (pControl.value?.length >= 8 && controls.new_password.value === controls.verify_password.value) {
+        return null;
       }
     }
 
-    return null;
+    return { matchValues: true };
   }
+
 
 
 }

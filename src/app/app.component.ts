@@ -16,7 +16,8 @@ import { AppActions } from './shared/state/app.actions';
 export class AppComponent {
 
   @Select(AuthState.token) token$: Observable<string>;
-
+  @Select(AuthState.notAuth) notAuth$: Observable<string>;
+  hasToken; notAuth;
   private mobileQuery: MediaQueryList;
   private fillerNavSubscription$: Subscription;
 
@@ -39,6 +40,7 @@ export class AppComponent {
   ngOnInit() {
     this.store.dispatch(new AppActions.SetMediaScreen(this.mobileQuery.matches));
     this.actions.pipe(ofActionDispatched(AuthActions.RemoveAccess));
+    this.getAuth();
   }
 
   title = 'ng-forum';
@@ -56,6 +58,11 @@ export class AppComponent {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
     this.fillerNavSubscription$.unsubscribe();
+  }
+
+  getAuth() {
+    this.token$.subscribe(token => this.hasToken = token);
+    this.notAuth$.subscribe(notAuth => this.notAuth = notAuth);
   }
 
 }

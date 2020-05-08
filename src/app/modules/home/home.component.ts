@@ -27,7 +27,7 @@ export class HomeComponent extends NgDefault implements OnInit {
   }
 
   signOut() {
-    this.store.dispatch(new AuthActions.RemoveAccess()).subscribe(() => this.appController.navigate('login'));
+    this.store.dispatch(new AuthActions.RemoveAccess());
     this.store.dispatch(new AppActions.RemoveRouteState());
   }
 

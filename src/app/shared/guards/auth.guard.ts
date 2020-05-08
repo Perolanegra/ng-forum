@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { Store } from '@ngxs/store';
+import { AuthActions } from 'src/app/state/auth/auth.actions';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,7 @@ export class AuthGuard implements CanActivate {
         const token = !!this.store.selectSnapshot(state => state.auth.token);
 
         if (token) {
+            this.store.dispatch(new AuthActions.SetNotAuth(null));
             this.router.navigate(['/home']);
             return false;
         }

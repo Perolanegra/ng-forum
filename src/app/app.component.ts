@@ -39,7 +39,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.store.dispatch(new AppActions.SetMediaScreen(this.mobileQuery.matches));
-    this.actions.pipe(ofActionDispatched(AuthActions.RemoveAccess));
+    this.actions.pipe(ofActionDispatched(AuthActions.RemoveAccess)).subscribe(() => this.appController.navigate('login'))
     this.getAuth();
   }
 

@@ -55,6 +55,7 @@ export class ResetPasswordComponent implements OnInit {
     if(this.rPassResponseSubscription$ && this.stateMobileMatchesSubscription$) {
       this.rPassResponseSubscription$.unsubscribe();
       this.stateMobileMatchesSubscription$.unsubscribe();
+      this.store.dispatch(new AuthActions.RemoveAccess());
     }
   }
 
@@ -72,11 +73,16 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetForm.valid) {
       this.hasClickSubmit = this.resetForm.valid;
       this.spinner.show();
-      const access_token = await this.token$.toPromise();
-      const password = this.encryptService.set('10610433IA$#@$^@1ERF', this.resetForm.get('verify_password').value);
-      this.store.dispatch(new AuthActions.ResetPass({ access_token, password }));
-      this.resetForm.reset();
-      setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
+
+      this.token$.subscribe(access_token => {
+        if(access_token) {
+          console.log('im here: ', access_token);
+          const password = this.encryptService.set('10610433IA$#@$^@1ERF', this.resetForm.get('verify_password').value);
+          this.store.dispatch(new AuthActions.ResetPass({ access_token, password }));
+          this.resetForm.reset();
+          setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
+        }
+      });
     }
   }
 

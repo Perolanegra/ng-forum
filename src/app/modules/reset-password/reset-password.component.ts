@@ -12,7 +12,7 @@ import { AppState } from 'src/app/shared/state/app.state';
 import { EncryptionService } from 'src/app/core/encryption.service';
 
 @Component({
-  selector: 'app-reset-password',
+  selector: 'ng-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })

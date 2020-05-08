@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 
 
 @Component({
-  selector: 'app-login',
+  selector: 'ng-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

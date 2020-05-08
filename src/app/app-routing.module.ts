@@ -1,13 +1,13 @@
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './modules/login/login.component';
-import { AuthGuard } from './shared/guards/auth.guard';
-import { NoAuthGuard } from './shared/guards/no-auth.guard';
 import { TestGuard } from './shared/guards/test.guard';
+import { NoAuthGuard } from './shared/guards/no-auth.guard';
+import { LoginAuthGuard } from './shared/guards/login-auth.guard';
 import { ResetPasswordGuard } from './shared/guards/reset-pass.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard]  }, 
+  { path: 'login', component: LoginComponent, canActivate: [LoginAuthGuard]  }, 
   {
     path: 'home',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),

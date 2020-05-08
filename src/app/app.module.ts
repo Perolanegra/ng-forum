@@ -49,7 +49,7 @@ import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.direct
     ToastrModule.forRoot(),
     NgxsModule.forRoot([AuthState, AppState]), // , { developmentMode: !environment.production }
     NgxsStoragePluginModule.forRoot({
-      key: ['auth.token', 'auth.notAuth', 'app.hasMobileMatches', 'app.routes', 'app.user'],
+      key: ['auth.token', 'auth.notAuth', 'auth.hasResetPass', 'app.hasMobileMatches', 'app.routes', 'app.user'],
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

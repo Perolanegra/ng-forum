@@ -29,6 +29,10 @@ export namespace AuthActions {
         constructor(public payload: string) { }
     }
 
+    export class SetResetedPassword {
+        static readonly type = '[Auth] Set Reseted Password ';
+        constructor(public payload: boolean) { }
+    }
     
 
 }

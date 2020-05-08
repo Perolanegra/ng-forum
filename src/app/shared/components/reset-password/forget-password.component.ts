@@ -45,8 +45,8 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
     this.fPassResponseSubscription$ = this.fPassResponse$.subscribe(async (data) => {
       if (data) {
         this.spinner.hide();
-        this.close();
         this.appController.showToastPopUp(data, ToastComponent);
+        this.close();
       }
     });
   }

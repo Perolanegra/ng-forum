@@ -9,8 +9,9 @@ export class AuthStateModel {
     token: string;
     user: UserModel;
     forgotPassResponse: any;
-    resetedPassword: any;
+    rPassResponse: any;
     notAuth: string;
+    hasResetPass: boolean;
 }
 
 @State<AuthStateModel>({
@@ -19,8 +20,9 @@ export class AuthStateModel {
         token: null,
         user: null,
         forgotPassResponse: null,
-        resetedPassword: false,
-        notAuth: null
+        rPassResponse: null,
+        notAuth: null,
+        hasResetPass: false,
     }
 })
 
@@ -45,13 +47,18 @@ export class AuthState {
     }
 
     @Selector()
-    static resetPassResponse(state: AuthStateModel) {
-        return state.resetedPassword;
+    static rPassResponse(state: AuthStateModel) {
+        return state.rPassResponse;
     }
 
     @Selector()
     static notAuth(state: AuthStateModel): string {
         return state.notAuth;
+    }
+
+    @Selector()
+    static hasResetPass(state: AuthStateModel): boolean {
+        return state.hasResetPass;
     }
     
     @Action(AuthActions.Signin)
@@ -77,7 +84,8 @@ export class AuthState {
             notAuth: null,
             forgotPassResponse: null,
             user: null,
-            resetedPassword: false
+            rPassResponse: null,
+            hasResetPass: null
         });
     }
 
@@ -104,13 +112,13 @@ export class AuthState {
             const state = getState();
             setState({
                 ...state,
-                resetedPassword: data
+                rPassResponse: data
             });
         }
     }
 
     @Action(AuthActions.SetResetToken)
-    async storeResetToken({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.ForgotPassword) {
+    async setResetToken({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.ForgotPassword) {
         if (payload) {
             const state = getState();
             setState({
@@ -126,7 +134,19 @@ export class AuthState {
             const state = getState();
             setState({
                 ...state,
-                notAuth: payload
+                notAuth: payload,
+                rPassResponse: null
+            });
+        }
+    }
+
+    @Action(AuthActions.SetResetedPassword)
+    async setResetedPassword({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.SetResetedPassword) {
+        if (payload) {
+            const state = getState();
+            setState({
+                ...state,
+                hasResetPass: payload
             });
         }
     }

@@ -20,7 +20,7 @@ export class ResetPasswordComponent implements OnInit {
   public hide1 = true;
   public hide2 = true;
 
-  @Select(AuthState.resetPassResponse) rPassResponse$: Observable<any>;
+  @Select(AuthState.rPassResponse) rPassResponse$: Observable<any>;
   private rPassResponseSubscription$: Subscription;
 
   @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
@@ -55,7 +55,9 @@ export class ResetPasswordComponent implements OnInit {
     if(this.rPassResponseSubscription$ && this.stateMobileMatchesSubscription$) {
       this.rPassResponseSubscription$.unsubscribe();
       this.stateMobileMatchesSubscription$.unsubscribe();
-      this.store.dispatch(new AuthActions.RemoveAccess());
+      this.store.dispatch(new AuthActions.SetResetedPassword(true));
+      this.store.dispatch(new AuthActions.SetNotAuth(null));
+      this.store.dispatch(new AuthActions.SetResetToken(''));
     }
   }
 
@@ -64,7 +66,7 @@ export class ResetPasswordComponent implements OnInit {
       if (data) {
         this.spinner.hide();
         this.appController.showToastPopUp(data, ToastComponent);
-        setTimeout(() => this.appController.navigate('login'), 1500);
+        setTimeout(() => this.appController.navigate('login'), 800);
       }
     });
   }
@@ -76,7 +78,6 @@ export class ResetPasswordComponent implements OnInit {
 
       this.token$.subscribe(access_token => {
         if(access_token) {
-          console.log('im here: ', access_token);
           const password = this.encryptService.set('10610433IA$#@$^@1ERF', this.resetForm.get('verify_password').value);
           this.store.dispatch(new AuthActions.ResetPass({ access_token, password }));
           this.resetForm.reset();

@@ -46,7 +46,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     this.stateMobileMatchesSubscription$ ? this.stateMobileMatchesSubscription$.unsubscribe() : null;
   }
 
-  setErrorValidation(): void {
+  setErrorValidation(): void { // setar o resto do form
     const new_pass_msg = this.getErrorMessages(3, true, 3);
     const verify_pass_msg = this.getErrorMessages(4, true, -1);
 
@@ -56,7 +56,6 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     this.seErrorMsgs('new_password', new_pass_type, new_pass_msg);
     this.seErrorMsgs('verify_password', verify_pass_type, verify_pass_msg);
   }
-
 
   getResponse() {
     this.responseSubscription$ = this.rSignUpResponse$.subscribe(async (data) => {
@@ -79,4 +78,5 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
       this.stateSubmitHasChanged();
     }
   }
+  
 }

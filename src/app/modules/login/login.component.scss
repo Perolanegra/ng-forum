@@ -105,11 +105,12 @@ input:-webkit-autofill {
 }
 
 .sign-up:hover {
-    background: #e3dde3;
+    background: #fff;
 }
 
 svg:hover {
-    filter: invert(62%) sepia(40%) saturate(2709%) hue-rotate(295deg) brightness(101%) contrast(103%);
+    // filter: invert(62%) sepia(40%) saturate(2709%) hue-rotate(295deg) brightness(101%) contrast(103%); // bom
+    filter: invert(67%) sepia(33%) saturate(7288%) hue-rotate(299deg) brightness(103%) contrast(101%)
 }
 
 .btn-submit:hover {

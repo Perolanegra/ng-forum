@@ -50,10 +50,10 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
 
   setErrorValidation(): void {
     const new_pass_msg = this.getErrorMessages(3, true, 3);
-    const verify_pass_msg = this.getErrorMessages(4, true, -1);
+    const new_pass_type = this.getErrorTypes(3, true, 3);
 
-    const new_pass_type = this.getErrorMessages(3, true, 3);
-    const verify_pass_type = this.getErrorMessages(3, true, 3);
+    const verify_pass_msg = this.getErrorMessages(4, true, -1);
+    const verify_pass_type = this.getErrorTypes(4, true, -1);
 
     this.seErrorMsgs('new_password', new_pass_type, new_pass_msg);
     this.seErrorMsgs('verify_password', verify_pass_type, verify_pass_msg);

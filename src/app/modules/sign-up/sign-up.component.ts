@@ -36,7 +36,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   setForm(): void {
     this._form.addControl('name', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this._form.addControl('username', new FormControl(null, [Validators.required]));
-    this._form.addControl('email', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
+    this._form.addControl('email', new FormControl(null, [Validators.required, CustomValidators.whitespace])); // validar com emailMask dps
     this._form.addControl('password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this._form.addControl('verify_password', new FormControl(null, Validators.compose([Validators.required, CustomValidators.whitespace, this.matchValues.bind(this)])));
   }
@@ -46,15 +46,21 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     this.stateMobileMatchesSubscription$ ? this.stateMobileMatchesSubscription$.unsubscribe() : null;
   }
 
-  setErrorValidation(): void { // setar o resto do form
-    const new_pass_msg = this.getErrorMessages(3, true, 3);
+  setErrorValidation(): void {
+    const pass_msg = this.getErrorMessages(3, true, 3);
+    const pass_type = this.getErrorTypes(3, true, 3);
+    
     const verify_pass_msg = this.getErrorMessages(4, true, -1);
+    const verify_pass_type = this.getErrorTypes(4, true, -1);
 
-    const new_pass_type = this.getErrorMessages(3, true, 3);
-    const verify_pass_type = this.getErrorMessages(3, true, 3);
-
-    this.seErrorMsgs('new_password', new_pass_type, new_pass_msg);
+    const username_msg = this.getErrorMessages(0);
+    const username_type = this.getErrorTypes(0);
+    
+    this.seErrorMsgs('password', pass_type, pass_msg);
     this.seErrorMsgs('verify_password', verify_pass_type, verify_pass_msg);
+    this.seErrorMsgs('name', pass_type, pass_msg);
+    this.seErrorMsgs('username', username_type, username_msg);
+    this.seErrorMsgs('email', pass_type, pass_msg); // setar emailMask dps
   }
 
   getResponse() {

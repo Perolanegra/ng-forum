@@ -3,8 +3,13 @@ import { AbstractControl } from "@angular/forms";
 import { debounceTime, tap, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, from } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { ToastComponent } from '../shared/components/toast/toast.component';
+import { AppActions } from '../shared/state/app.actions';
+import { Store } from '@ngxs/store';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -15,107 +20,100 @@ export class AppController {
     private renderer: Renderer2;
 
     constructor(public dialog: MatDialog,
-    private rendererFactory: RendererFactory2,
-    private router: Router) { 
-        this.renderer = rendererFactory.createRenderer(null, null);
+        private rendererFactory: RendererFactory2,
+        private spinner: NgxSpinnerService,
+        private toastr: ToastrService,
+        private _store: Store,
+        private router: Router) {
+        this.renderer = this.rendererFactory.createRenderer(null, null);
     }
 
     tratarErro(err): void {
 
-
-        this.msg = err.message || err.error_description;
+        // this.msg = err.message || err.error_description;
 
         //Erros de Response(possuem status)
-        if (err.status != undefined && err.status != null) {
-            if (err.status == 401) {
+        // if (err.status != undefined && err.status != null) {
+        //     if (err.status == 401) {
 
-                if (err.error.error == "invalid_token") {
-                    // this.openDialogSessaoExpirada();
-                    this.msg = 'Sua sessão expirou, favor realizar o login novamente.';
+        //         if (err.error.error == "invalid_token") {
+        //             // this.openDialogSessaoExpirada();
+        //             this.msg = 'Sua sessão expirou, favor realizar o login novamente.';
 
-                } else {
-                    //Token expirado			
-                    this.msg = 'Acesso não autorizado, verifique seu login ou procure o suporte técnico.';
-                }
-            } else {
-                if (err.status == 500) {
-                    this.msg = 'Um problema não esperado ocorreu durante a execução do serviço. Por favor, tente novamente mais tarde.';
-                } else {
-                    if (err.status == 404) {
+        //         } else {
+        //             //Token expirado			
+        //             this.msg = 'Acesso não autorizado, verifique seu login ou procure o suporte técnico.';
+        //         }
+        //     } else {
+        //         if (err.status == 500) {
+        //             this.msg = 'Um problema não esperado ocorreu durante a execução do serviço. Por favor, tente novamente mais tarde.';
+        //         } else {
+        //             if (err.status == 404) {
 
-                        this.msg = 'O serviço solicitado encontra-se indisponível no momento. Por favor, tente novamente mais tarde.';
-                    } else {
+        //                 this.msg = 'O serviço solicitado encontra-se indisponível no momento. Por favor, tente novamente mais tarde.';
+        //             } else {
 
-                        if (err.status == 0) {
+        //                 if (err.status == 0) {
 
-                            this.msg = 'Foi impossível conectar com o servidor. Verifique sua conexão com a internet ou tente novamente mais tarde.';
-                        } else {
+        //                     this.msg = 'Foi impossível conectar com o servidor. Verifique sua conexão com a internet ou tente novamente mais tarde.';
+        //                 } else {
 
-                            if (err.status == 400) {
-                                if (err.error && err.error.error == 'invalid_grant') {
-                                    this.msg = 'Usuário ou senha não reconhecidos. Verifique os dados informados e o acionamento da tecla CAPSLOCK.';
-                                } else {
-                                    this.msg = err.error.message;
-                                }
-                            } else {
+        //                     if (err.status == 400) {
+        //                         if (err.error && err.error.error == 'invalid_grant') {
+        //                             this.msg = 'Usuário ou senha não reconhecidos. Verifique os dados informados e o acionamento da tecla CAPSLOCK.';
+        //                         } else {
+        //                             this.msg = err.error.message;
+        //                         }
+        //                     } else {
 
-                                if (err.json != undefined) {
-                                    let errJson = err.error.json();
-                                    this.msg = errJson.message || errJson.error_description
-                                } else {
-                                    this.msg = err.message || err.error_description
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        //                         if (err.json != undefined) {
+        //                             let errJson = err.error.json();
+        //                             this.msg = errJson.message || errJson.error_description
+        //                         } else {
+        //                             this.msg = err.message || err.error_description
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
 
-        }
-        // this.exibirErro(this.msg);
+        // }
+        this.exibirErro(err);
     }
 
-    // openDialogSessaoExpirada(): MatDialogRef<DialogSessaoExpiradaComponent> {
 
-    //     let dialogRef = this.dialog.open(DialogSessaoExpiradaComponent, {
-    //         width: '250px',
-    //         autoFocus: true
-    //     });
-    //     return dialogRef;
-    // }
+    showToastPopUp(paylaod: any, component): MatDialogRef<any> {
+        let dialogRef = null;
+        const { positionTop, positionBottom, positionLeft, positionRight } = paylaod.style;
 
-    // openDialogAguarde(): MatDialogRef<DialogAguardeComponent> {
+        dialogRef = this.dialog.open(component, {
+            data: paylaod,
+            hasBackdrop: true,
+            disableClose: true,
+            position: {
+                top: positionTop ? positionTop : '',
+                bottom: positionBottom ? positionBottom : '',
+                left: positionLeft ? positionLeft : '',
+                right: positionRight ? positionRight : ''
+            }
+        });
 
-    //     let dialogRef = this.dialog.open(DialogAguardeComponent, {
-    //         width: '250px', disableClose: true
-    //     }
-    //     );
-    //     return dialogRef;
-    // }
-
-
-    // openDialogConfirmacao(pMsg): MatDialogRef<any> {
-    //     let lMsg: string = pMsg;
-    //     //Verifica se tem ao menos um item selecionado e abre o modal para confirmar a exclusão
-    //     let dialogRef = null;
-
-    //     dialogRef = this.dialog.open(DialogConfirmacaoComponent, {
-    //         width: '250px',
-    //         data: { msg: lMsg },
-    //         autoFocus: true
-
-    //     });
-
-    //     return dialogRef;
-    // }
+        return dialogRef;
+    }
 
     // exibirSucesso(msg: string) {
     //     setTimeout(() => this.toastr.success(msg, ''));
     // }
 
-    // exibirErro(msg: string) {
-    //     setTimeout(() => this.toastr.error(msg, ''));
-    // }
+    exibirErro(msg: string) {
+        // this.toastr.error(msg, '', {
+        //     progressAnimation: 'decreasing',
+        //     progressBar: true,
+        //     closeButton: true,
+        //     tapToDismiss: true,
+        // });
+    }
 
     // exibirWarning(msg: string) {
     //     setTimeout(() => this.toastr.warning(msg, ''));
@@ -198,22 +196,18 @@ export class AppController {
 
     /**
     * Retorna para uma nova rota de navegação.
-    * @param pPage Recebe uma string como parâmetro que faz referência a rota a ser navegada.
-    * @author igor.silva
+    * @param path Recebe uma string como parâmetro que faz referência a rota a ser navegada.
+    * @author igor.alves
     */
-    // public navigate(pPage: string) {
-    //     let lDialogAguarde = this.openDialogAguarde();
+    public navigate(path: string) {
+        this.router.navigate(['/' + path])
+            .catch(error => console.log('error: ', error))
+            .finally(() => this.spinner.hide());
+    }
 
-    //     this.router.navigate(['/' + pPage]).then(
-    //         pResp => {
-    //             lDialogAguarde.close();
-    //         }).catch(
-    //         error => {
-    //             lDialogAguarde.close();
-    //             this.tratarErro(error);
-    //         });
-    // }
-
+    public hideSpinner(): void {
+        this.spinner.hide();
+    }
     /**
     * Retorna um novo Array ordenado de Objetos com os atributos que foram passados e parâmetro de ordenação.
     * @param pArray Recebe o array iterável original o qual quer se capturar os atributos.
@@ -305,9 +299,18 @@ export class AppController {
 
         return lObjRetorno;
     }
-    
+
+    async fillerNavs() {
+        return [
+            { name: 'Início', isActive: false, imgName: 'home.png', path: 'home', img: await this.getImg('home.png') },
+            { name: 'Configurações', isActive: false, imgName: 'configs.svg', path: 'profile', img: await this.getImg('configs.svg') },
+            { name: 'Meus Issues', isActive: false, imgName: 'my-issues.png', path: 'profile', img: await this.getImg('my-issues.png') },
+        ];
+
+    }
+
     /**
-     * Método que adiciona classe em determinado elemento.
+     * Método que adiciona classe passada como parâmetro em determinado elemento.
      * @param nativeElement Elemento a ser estilizado, nativeElement.
      * @param classOn Classe css a ser aplicada.
      * @returns void
@@ -318,6 +321,16 @@ export class AppController {
     }
 
     /**
+     * Método que remove a classe passada como parâmetro em determinado elemento.
+     * @param nativeElement Elemento o qual a classe será removida.
+     * @param classOff Classe que será removida.
+     * @author igor.alves
+     */
+    removeElementClass(nativeElement: ElementRef, classOff: string): void {
+        this.renderer.removeClass(nativeElement, classOff);
+    }
+
+    /**
      * Método que estiliza o elemento de acordo com a propriedade passada.
      * @param elementRef Elemento a ser estilizado, nativeElement.
      * @param key Propriedade css a ser aplicada.
@@ -325,18 +338,74 @@ export class AppController {
      * @returns void
      * @author igor.alves
      */
-    setElementStyle(element: Element, key: string, value: string) {
+    setElementStyle(element: Element, key: string, value: string): void {
         this.renderer.setStyle(element, key, value);
     }
 
     /**
-     * Método que remove a classe passada como parâmetro em determinado elemento.
-     * @param nativeElement Elemento o qual a classe será removida.
-     * @param classOff Classe que será removida.
+     * Método que retorna a referência da img, se existir, se não retorna nulo.
+     * @param nameSvg Nome da img passado como parâmetro para busca.
+     * @author igor.alves
      */
-    removeElementClass(nativeElement: ElementRef, classOff: string) {
-        this.renderer.removeClass(nativeElement, classOff);
-    }
-    
+    public getImg(nameSvg: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            let prefix = `../../assets/imgs/`;
 
+            let searchImg: string, isValidImg;
+
+            searchImg = prefix + nameSvg;
+            isValidImg = await this.verifyImg(searchImg);
+
+            if (isValidImg) {
+                resolve(searchImg);
+            }
+
+        });
+    }
+
+    verifyImg(img): Promise<any> {
+        return new Promise((resolve, reject) => {
+            let image = new Image();
+            image.onload = function () {
+                resolve(true);
+            };
+
+            image.onerror = function () {
+                resolve(false);
+            };
+
+            image.src = img;
+        });
+    }
+
+    setMenuActiveLink(path: string): void {
+        this.fillerNavs().then(routes => {
+            if (routes) {
+                routes.map((prop) => prop.isActive = prop.path === path);
+                this._store.dispatch(new AppActions.SetRouteState(routes));
+            }
+        });
+    }
+
+    getFillerNav(): Observable<any> {
+        return this._store.select(state => {
+            return state.app.routes;
+        });
+    }
+
+    public getColorRef(type): string {
+        const call = {
+            error: () => { return 'red' },
+            info: () => { return 'blue' },
+            warning: () => { return 'orange' },
+            success: () => { return 'green' },
+        }
+
+        return call[type]();
+    }
+
+    public hasSameValue(str1: string, str2: string): boolean {
+        return str1 === str2;
+    }
 }
+

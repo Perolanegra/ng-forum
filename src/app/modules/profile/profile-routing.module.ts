@@ -4,17 +4,11 @@ import { ProfileComponent } from './profile.component';
 
 
 const routes: Routes = [
+    { path: 'profile', pathMatch: 'full', redirectTo: '' },
     {
-        path:'profile', // rota/:param
+        path:'', // rota/:param
         component: ProfileComponent,
-        // resolve: {
-        // },
-        // canActivate: [NoAuthGuard],
-        data: {
-          breadcrumb: 'Perfil'
-        },
-        redirectTo: 'profile', 
-        pathMatch: 'full'
+    
     }
 ];
 

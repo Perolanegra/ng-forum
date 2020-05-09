@@ -4,7 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './modules/material.module';
 import { FormComponent } from './components/form/form.component';
-import { GlobalVars } from '../core/globalVars';
+import { ToastComponent } from './components/toast/toast.component';
+import { AppOverBtnDirective } from '../core/app-over-btn.directive';
+import { ReactiveInputErrorComponent } from './components/reactive-input-error/reactive-input-error.component';
+
 
 @NgModule({
     imports: [
@@ -19,18 +22,22 @@ import { GlobalVars } from '../core/globalVars';
         CUSTOM_ELEMENTS_SCHEMA
     ],
     declarations: [
-        FormComponent
+        FormComponent,
+        ToastComponent,
+        AppOverBtnDirective,
+        ReactiveInputErrorComponent
     ],
     exports: [
         FormComponent,
+        ReactiveInputErrorComponent,
         MaterialModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     entryComponents: [
-        
+        ToastComponent,
     ],
     providers: [
-        GlobalVars
+        
     ]
 })
 export class SharedModule { }

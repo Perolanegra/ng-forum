@@ -19,9 +19,8 @@ div.mat-form-field-infix ng-tns-c35-1 {
 .btn {
     margin-top: 10px;
     min-height: 44px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #000;
+    font-size: 20px;
+    color: #fff;
     background: #E91E63;
 }
 
@@ -41,12 +40,11 @@ div.mat-form-field-infix ng-tns-c35-1 {
 }
 
 ::ng-deep .mat-form-field-label {
-    // color: rgba(204, 198, 198, 0.6);
     color: #fff;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-    color: #E91E63;
+    color: #fff;
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
@@ -54,20 +52,68 @@ div.mat-form-field-infix ng-tns-c35-1 {
     opacity: 0.2 !important;
 }
 
-::ng-deep .mat-hint {
-    color: #fff;
-}
-
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     opacity: 0.3;
     color: #E91E63;
 }
 
-// ::ng-deep .mat-input:-webkit-autofill {
-//     background: yellow !important;
-// }
+::ng-deep .mat-hint {
+    color: #fff;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0px 1000px #303030 inset !important;
+    font-family: 'Montserrat' !important;
+}
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #303030 inset;
+    -webkit-text-fill-color: #fff !important;
     color: #E91E63 !important;
+    font-family: 'Montserrat' !important;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border: 1.4px solid #E91E63;
+}
+
+.forgot-pass {
+    color: #fff;
+    font-size: 75%;
+    font-family: 'Montserrat';
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.forgot-pass:hover {
+    color: #E91E63;
+}
+
+.sign-up {
+    position: relative;
+    top: 5%;
+    width: fit-content;
+    cursor: pointer;
+    background: #E91E63;
+    border-radius: 50%;
+    box-shadow: 5px 10px 9px #191919;
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.sign-up:hover {
+    background: #fff;
+}
+
+svg:hover {
+    // filter: invert(62%) sepia(40%) saturate(2709%) hue-rotate(295deg) brightness(101%) contrast(103%); // bom
+    filter: invert(67%) sepia(33%) saturate(7288%) hue-rotate(299deg) brightness(103%) contrast(101%)
+}
+
+.btn-submit:hover {
+    background: #fff;
+    color: #E91E63;
 }

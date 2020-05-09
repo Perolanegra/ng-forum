@@ -1,0 +1,72 @@
+.content {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: none !important;
+}
+
+.content-inside {
+    width: fit-content;
+    margin-top: 5%;
+}
+
+.square {
+    color: #fff;
+    background: #22262e;
+    width: fit-content;
+    padding: 6vh;
+    border-radius: 2%;
+    border: transparent;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-out {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.logo {
+    max-width: 13vw;
+}
+
+.label-info {
+    margin-bottom: 6%;
+}
+
+::ng-deep .mat-hint {
+    color: #fff;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border: 1.4px solid #fff;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+	color: #fff;
+}
+
+::ng-deep .mat-form-field-label {
+    color: #fff;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    color: #fff;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #fff !important;
+    opacity: 0.2 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    opacity: 0.3;
+    color: #fff;
+}

@@ -5,8 +5,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('./assets/fonts/Montserrat-Regular.ttf'); /* IE9 Compat Modes */
+    src: url('./assets/fonts/Montserrat-Regular.ttf'),
 }
+
+@font-face { font-family: 'Product Sans'; src: url('./assets/fonts/ProductSans-Regular.ttf') }
+@font-face { font-family: 'Product Sans Light Italic'; src: url('./assets/fonts/ProductSans-LightItalic.ttf') }
+@font-face { font-family: 'Product Sans Light Regular'; src: url('./assets/fonts/ProductSans-Light.ttf') }
+@font-face { font-family: 'Product Sans Black Regular'; src: url('./assets/fonts/ProductSans-Black.ttf') }
+@font-face { font-family: 'Product Sans Medium'; src: url('./assets/fonts/ProductSans-Medium.ttf') }
+@font-face { font-family: 'Montserrat Semi Bold'; src: url('./assets/fonts/Montserrat-SemiBold.ttf') }
+@font-face { font-family: 'Montserrat Medium'; src: url('./assets/fonts/Montserrat-Medium.ttf') }
+
+
 
 .accent-color {
     color: #E91E63;
@@ -26,4 +36,40 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .font {
     font-family: 'Montserrat';
+}
+
+.font-semi-bold {
+    font-family: 'Montserrat Semi Bold';
+}
+
+.product-sans-light {
+    font-family: 'Product Sans Light Regular';
+}
+
+.fade-transition-in {
+    transition: 0.4s;
+    transition-timing-function: ease-in-out;
+}
+  
+.fade-transition-out {
+    transition: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.btn-submit {
+    font-family: 'Product Sans Black Regular';
+    font-size: 1rem;
+    background: #E91E63;
+    color: #22262e;
+    outline: none !important;
+}
+
+.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.enabled {
+    opacity: 1;
+    pointer-events: auto;
 }

@@ -1,23 +1,34 @@
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './modules/login/login.component';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { TestGuard } from './shared/guards/test.guard';
 import { NoAuthGuard } from './shared/guards/no-auth.guard';
-
+import { LoginAuthGuard } from './shared/guards/login-auth.guard';
+import { ResetPasswordGuard } from './shared/guards/reset-pass.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' }, // voltar dps
-  { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard]  }, 
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: 'login', component: LoginComponent, canActivate: [LoginAuthGuard]  }, 
   {
     path: 'home',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
-    canActivate: [AuthGuard] 
+    canActivate: [NoAuthGuard] 
   },
   {
     path: 'profile',
     loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule),
-    canActivate: [AuthGuard] 
-  }
-
+    canActivate: [TestGuard] 
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule),
+    canActivate: [ResetPasswordGuard] 
+  },
+  {
+    path: 'sign-up',
+    loadChildren: () => import('./modules/sign-up/sign-up.module').then(m => m.SignUpModule),
+    canActivate: [NoAuthGuard] 
+  },
+  
 ];
 
 // @NgModule({

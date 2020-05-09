@@ -14,42 +14,32 @@ import { AppState } from 'src/app/shared/state/app.state';
 })
 export class MainNavComponent implements OnInit {
 
-    hasMobileMatches: boolean;
-    hasEnterMenuRef: boolean = false;
-    profileDefault: string = '../../../../assets/imgs/profile-default.jfif';
+    public routes;
+    public vistoPic = '../../assets/imgs/moderator-male.svg';
+    public hasMobileMatches: boolean;
+    public hasEnterMenuRef: boolean = false;
+    public profileDefault: string = '../../../../assets/imgs/profile-default.jfif';
 
     @ViewChild('userInfo') elRefUserInfo: ElementRef;
     @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;
-    
+
     @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
 
-    public vistoPic = '../../assets/imgs/moderator-male.svg';
-
-    fillerSubs: Subscription;
+    private stateMobileMatchesSubscription$: Subscription;
 
     constructor(
         public router: Router,
         private mainNavStyle: MainNavStyle,
-        public appController: AppController
-    ) {
-        
-    }
+        public appController: AppController) { }
 
-    public routes;
-
-    public state$: Observable<any>;
 
     ngOnInit() {
-        this.appController.setMenuActiveLink('home');
-        this.fillerSubs = this.appController.getFillerNav().subscribe(routes => {
-            this.routes = routes;
-        });
-
-        this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
+        this.routes = this.appController.getFillerNav();
+        this.stateMobileMatchesSubscription$ = this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
     }
 
     ngOnDestroy(): void {
-        this.fillerSubs.unsubscribe();
+        this.stateMobileMatchesSubscription$.unsubscribe();
     }
 
     onMenuBlur(hasEnterMenu) {

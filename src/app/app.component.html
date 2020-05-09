@@ -1,8 +1,11 @@
-<ng-main-nav *ngIf="token$ | async; else deslogado">
+<ng-main-nav *ngIf="hasToken && !notAuth; else deslogado">
     <router-outlet></router-outlet>
 </ng-main-nav>
 
 <ng-template #deslogado>
-    <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
 </ng-template>
-  
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.87)" size="large" color="#fff" type="ball-scale-multiple">
+    <p class="font" style="color: #fff; font-size: 18px;">Processando...</p>
+</ngx-spinner>

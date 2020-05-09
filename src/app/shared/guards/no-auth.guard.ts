@@ -15,13 +15,6 @@ export class NoAuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
 
-        const token = !!this.store.selectSnapshot(state => state.auth.token);
-
-        if (!token) {
-            this.router.navigate(['/login']);
-            return false;
-        }
-
         return true;
     }
 

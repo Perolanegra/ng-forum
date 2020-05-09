@@ -29,7 +29,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             // loader aqui
             return event;
         }),
-        catchError((error) => {          
+        catchError((error) => {      
            // setar interceptors específicos caso haja request para api externa.
           const { message, title, type, style } = error.error;
          
@@ -38,6 +38,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             this._store.dispatch(new AuthActions.RemoveAccess());
           }
           
+          this.appController.hideSpinner();
           this.appController.showToastPopUp({ title, message, type, style }, ToastComponent);
          
           return throwError(error);

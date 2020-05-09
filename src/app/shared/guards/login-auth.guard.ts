@@ -6,20 +6,21 @@ import { Store } from '@ngxs/store';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class LoginAuthGuard implements CanActivate {
+    token;
 
-    constructor(private store: Store, private router: Router) {}
+    constructor(private store: Store, private router: Router) {
+        this.store.select(state => this.token = state.auth.token);
+    }
 
     canActivate(route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
 
-        const token = !!this.store.selectSnapshot(state => state.auth.token);
-
-        if (token) {
+        if (this.token) {
             this.router.navigate(['/home']);
             return false;
         }
-        // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        
         return true;
     }
 }

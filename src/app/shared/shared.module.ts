@@ -4,10 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './modules/material.module';
 import { FormComponent } from './components/form/form.component';
-import { GlobalVars } from '../core/globalVars';
 import { ToastComponent } from './components/toast/toast.component';
-import { ForgetPasswordComponent } from './components/reset-password/forget-password.component';
 import { AppOverBtnDirective } from '../core/app-over-btn.directive';
+import { ReactiveInputErrorComponent } from './components/reactive-input-error/reactive-input-error.component';
 
 
 @NgModule({
@@ -25,20 +24,20 @@ import { AppOverBtnDirective } from '../core/app-over-btn.directive';
     declarations: [
         FormComponent,
         ToastComponent,
-        ForgetPasswordComponent,
-        AppOverBtnDirective
+        AppOverBtnDirective,
+        ReactiveInputErrorComponent
     ],
     exports: [
         FormComponent,
+        ReactiveInputErrorComponent,
         MaterialModule,
         ReactiveFormsModule,
     ],
     entryComponents: [
         ToastComponent,
-        ForgetPasswordComponent
     ],
     providers: [
-        GlobalVars
+        
     ]
 })
 export class SharedModule { }

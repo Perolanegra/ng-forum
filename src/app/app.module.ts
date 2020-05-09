@@ -10,11 +10,8 @@ import { LoginComponent } from './modules/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainNavComponent } from './modules/main-nav/main-nav.component';
-import { AppMenuOverDirective } from './core/app-menu-over.directive';
-import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
 import { AppController } from './core/appController';
 import { MainNavStyle } from './modules/main-nav/main-nav.style';
-import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -24,8 +21,13 @@ import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './core/http-config.interpcetor';
 import { ToastrModule } from 'ngx-toastr';
 import { AppState } from './shared/state/app.state';
-import { TesteComponent } from './modules/teste/teste.component';
-import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { AppMenuOverDirective } from './core/app-menu-over.directive';
+import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
+import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { ForgetPasswordComponent } from './modules/login/dialogs/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     AppMenuOverDirective,
     AppAutofillOffDirective,
     AppNavNameBehaviorDirective,
+    ForgetPasswordComponent,
     // TesteComponent,
   ],
   imports: [
@@ -48,10 +51,12 @@ import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     ToastrModule.forRoot(),
     NgxsModule.forRoot([AuthState, AppState]), // , { developmentMode: !environment.production }
     NgxsStoragePluginModule.forRoot({
-      key: ['auth.token', 'app.hasMobileMatches', 'app.routes', 'app.user'],
+      key: ['auth.token', 'auth.notAuth', 'auth.hasResetPass', 'app.hasMobileMatches', 'app.routes', 'app.user'],
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    NgxSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     // JwtModule.forRoot({
     //   config: {
         // tokenGetter: () => localStorage.getItem("meutoken"),
@@ -78,6 +83,9 @@ import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
+  ],
+  entryComponents: [
+    ForgetPasswordComponent
   ]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
-import { NgDefault } from 'src/app/core/ng-default';
+import { NgDefault } from 'src/app/core/pattern/ng-default';
 import { AppActions } from 'src/app/shared/state/app.actions';
 import { AppController } from 'src/app/core/appController';
 
@@ -11,27 +11,23 @@ import { AppController } from 'src/app/core/appController';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent extends NgDefault implements OnInit, OnDestroy {
+export class HomeComponent extends NgDefault implements OnInit {
  
   constructor(
     protected router: Router,
     private store: Store,
     protected route: ActivatedRoute,
-    public routess: ActivatedRouteSnapshot,
     private appController: AppController,
   ) {
-    super(route, router);
+    super();
 
   }
 
   ngOnInit(): void {
   }
 
-  ngOnDestroy() {
-  }
-
   signOut() {
-    this.store.dispatch(new AuthActions.RemoveAccess()).subscribe(() => this.appController.navigate('login'));
+    this.store.dispatch(new AuthActions.RemoveAccess());
     this.store.dispatch(new AppActions.RemoveRouteState());
   }
 

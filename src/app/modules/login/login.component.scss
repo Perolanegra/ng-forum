@@ -100,12 +100,19 @@ input:-webkit-autofill {
     background: #E91E63;
     border-radius: 50%;
     box-shadow: 5px 10px 9px #191919;
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
 }
 
 .sign-up:hover {
-    background: #df002b;
+    background: #e3dde3;
 }
 
-.sign-up-img {
-    max-width: 4vw;
+svg:hover {
+    filter: invert(62%) sepia(40%) saturate(2709%) hue-rotate(295deg) brightness(101%) contrast(103%);
+}
+
+.btn-submit:hover {
+    background: #fff;
+    color: #E91E63;
 }

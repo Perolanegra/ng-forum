@@ -1,6 +1,5 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { GlobalVars } from 'src/app/core/globalVars';
 import { AppActions } from './app.actions';
 
 export class AppStateModel {
@@ -19,7 +18,7 @@ export class AppStateModel {
 @Injectable()
 export class AppState {
 
-    constructor(private globalVars: GlobalVars) { }
+    constructor() { }
 
     @Selector()
     static hasMobileMatches(state: AppStateModel): boolean {

@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { AppController } from 'src/app/core/appController';
-import { ForgetPasswordComponent } from 'src/app/shared/components/reset-password/forget-password.component';
+import { ForgetPasswordComponent } from 'src/app/modules/login/dialogs/forget-password/forget-password.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit { // extends ngForm
 
   @Select(AuthState.hasResetPass) hasResetPass$: Observable<boolean>;
 
@@ -36,9 +36,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         setTimeout(() => this.store.dispatch(new AuthActions.RemoveHasReset()), 420000);
       }
     });
-  }
-
-  ngOnDestroy() {
   }
 
   setLoginForm() {
@@ -71,6 +68,5 @@ export class LoginComponent implements OnInit, OnDestroy {
   openForgotPass() {
     this.appController.showToastPopUp({ style: {} }, ForgetPasswordComponent);
   }
-
 
 }

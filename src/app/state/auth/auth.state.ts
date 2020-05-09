@@ -3,7 +3,6 @@ import { AuthService } from '../../core/auth.service';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthActions } from './auth.actions';
 import { Injectable } from '@angular/core';
-import { GlobalVars } from 'src/app/core/globalVars';
 
 export class AuthStateModel {
     token: string;
@@ -31,7 +30,7 @@ export class AuthStateModel {
 @Injectable()
 export class AuthState {
 
-    constructor(private authService: AuthService, private globalVars: GlobalVars) { }
+    constructor(private authService: AuthService) { }
 
     @Selector()
     static token(state: AuthStateModel) {

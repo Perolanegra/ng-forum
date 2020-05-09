@@ -1,5 +1,4 @@
-import { Component, ChangeDetectorRef, NgZone } from '@angular/core';
-import { GlobalVars } from './core/globalVars';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { AppController } from './core/appController';
 import { AuthState } from './state/auth/auth.state';
 import { Select, Store, Actions, ofActionDispatched } from '@ngxs/store';
@@ -14,6 +13,7 @@ import { AppActions } from './shared/state/app.actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  title = 'ng-forum';
 
   @Select(AuthState.token) token$: Observable<string>;
   @Select(AuthState.notAuth) notAuth$: Observable<string>;
@@ -22,8 +22,7 @@ export class AppComponent {
   private mobileQuery: MediaQueryList;
   private fillerNavSubscription$: Subscription;
 
-  constructor(private globalVars: GlobalVars,
-    private appController: AppController,
+  constructor(private appController: AppController,
     changeDetectorRef: ChangeDetectorRef,
     public media: MediaMatcher,
     private actions: Actions,
@@ -42,14 +41,7 @@ export class AppComponent {
     this.store.dispatch(new AppActions.SetMediaScreen(this.mobileQuery.matches));
     this.actions.pipe(ofActionDispatched(AuthActions.RemoveAccess)).subscribe(() => this.appController.navigate('login'))
     this.getAuth();
-    this.getResetedPass();
   }
-
-  getResetedPass() {
-   
-  }
-
-  title = 'ng-forum';
 
   setRoutesLocalStorage(): void {
     this.fillerNavSubscription$ = this.appController.getFillerNav().subscribe(routes => {

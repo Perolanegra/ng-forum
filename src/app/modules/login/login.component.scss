@@ -91,3 +91,21 @@ input:-webkit-autofill {
 .forgot-pass:hover {
     color: #E91E63;
 }
+
+.sign-up {
+    position: relative;
+    top: 5%;
+    width: fit-content;
+    cursor: pointer;
+    background: #E91E63;
+    border-radius: 50%;
+    box-shadow: 5px 10px 9px #191919;
+}
+
+.sign-up:hover {
+    background: #df002b;
+}
+
+.sign-up-img {
+    max-width: 4vw;
+}

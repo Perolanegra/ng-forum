@@ -8,7 +8,7 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { Observable, Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastComponent } from '../toast/toast.component';
+import { ToastComponent } from '../../../../shared/components/toast/toast.component';
 
 @Component({
   selector: 'ng-reset-password',
@@ -38,7 +38,7 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
   }
 
   ngOnDestroy() {
-    this.fPassResponseSubscription$.unsubscribe();
+    this.fPassResponseSubscription$ ? this.fPassResponseSubscription$.unsubscribe() : null;
   }
 
   getResponse() {

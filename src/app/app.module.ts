@@ -21,13 +21,13 @@ import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './core/http-config.interpcetor';
 import { ToastrModule } from 'ngx-toastr';
 import { AppState } from './shared/state/app.state';
-import { TesteComponent } from './modules/teste/teste.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
 import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.directive';
 import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ForgetPasswordComponent } from './modules/login/dialogs/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MainNavComponent,
     AppMenuOverDirective,
     AppAutofillOffDirective,
-    AppNavNameBehaviorDirective,    
+    AppNavNameBehaviorDirective,
+    ForgetPasswordComponent,
     // TesteComponent,
   ],
   imports: [
@@ -82,6 +83,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
+  ],
+  entryComponents: [
+    ForgetPasswordComponent
   ]
 })
 export class AppModule { }

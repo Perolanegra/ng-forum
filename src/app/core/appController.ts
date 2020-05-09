@@ -404,17 +404,6 @@ export class AppController {
         return call[type]();
     }
 
-    public setErrorValidation(control: string, types: string[], msgs: string[]) {
-        let errorResponse:any = {};
-        errorResponse[control] = new Array<any>();
-
-        types.map((type, key) => {
-            errorResponse[control].push({ type: type, msg: msgs[key] });
-        });
-
-        return errorResponse;
-    }
-
     public hasSameValue(str1: string, str2: string): boolean {
         return str1 === str2;
     }

@@ -22,7 +22,12 @@ const routes: Routes = [
     path: 'reset-password',
     loadChildren: () => import('./modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule),
     canActivate: [ResetPasswordGuard] 
-  }
+  },
+  {
+    path: 'sign-up',
+    loadChildren: () => import('./modules/sign-up/sign-up.module').then(m => m.SignUpModule),
+    canActivate: [NoAuthGuard] 
+  },
   
 ];
 

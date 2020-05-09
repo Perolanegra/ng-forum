@@ -5,6 +5,11 @@ export namespace AuthActions {
         constructor(public username: string, public password: string) { }
     }
 
+    export class Signup {
+        static readonly type = '[Auth] Signup';
+        constructor(public payload: any) { }
+    }
+
     export class RemoveAccess {
         static readonly type = '[Auth] Signout';
     }

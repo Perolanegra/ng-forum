@@ -12,8 +12,10 @@ export class AuthService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
 
-  signUp(username, email, password) {
-
+  signUp(payload: any): Observable<any> {
+    const url = `${environment.server}/auth/sign-up`;
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(url, { payload }, {});
   }
 
   getAccessToken(username: string, password: string): Observable<any> { // por o token no headers em toda request

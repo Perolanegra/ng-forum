@@ -1,105 +1,82 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { AppController } from 'src/app/core/appController';
 import { Select, Store } from '@ngxs/store';
-import { AppState } from 'src/app/shared/state/app.state';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthState } from 'src/app/state/auth/auth.state';
+import { NgForm } from 'src/app/core/ng-form';
+import { EncryptionService } from 'src/app/core/encryption.service';
+import { AuthActions } from 'src/app/state/auth/auth.actions';
 
 @Component({
-    selector: 'ng-sign-up',
-    template: './sign-up.component.html',
-    styleUrls: ['./sign-up.component.scss']
+  selector: 'ng-sign-up',
+  template: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit, OnDestroy {
+export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
 
-    @Select(AuthState.rPassResponse) rPassResponse$: Observable<any>;
-    private rPassResponseSubscription$: Subscription;
-    
-    @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
-    private stateMobileMatchesSubscription$: Subscription;
+  @Select(AuthState.signUpResponse) rSignUpResponse$: Observable<any>;
 
-    public hide1 = true;
-    public hide2 = true;
-    public hasClickedSubmit: boolean = false;
-    public errorMsgs: any;
-    public signupForm: FormGroup;
-    hasMobileMatches: boolean;
+  constructor(protected formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private store: Store,
+    private encryptService: EncryptionService,
+    protected ngZone: NgZone,
+    protected appController: AppController) {
+    super(formBuilder, appController, ngZone, false);
+  }
 
-    constructor(private formBuilder: FormBuilder,
-        private spinner: NgxSpinnerService,
-        private store: Store,
-        private appController: AppController) {
+  ngOnInit() {
+    this.setErrorValidation();
+    this.getResponse();
+  }
 
-    }
+  setForm(): void {
+    this._form.addControl('name', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
+    this._form.addControl('username', new FormControl(null, [Validators.required]));
+    this._form.addControl('email', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
+    this._form.addControl('password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
+    this._form.addControl('verify_password', new FormControl(null, Validators.compose([Validators.required, CustomValidators.whitespace, this.matchValues.bind(this)])));
+  }
 
-    ngOnInit() {
-        this.signupForm = this.formBuilder.group({
-            passwrod: new FormControl(null, [Validators.required, CustomValidators.whitespace]),
-            verify_password: new FormControl(null, Validators.compose([Validators.required, CustomValidators.whitespace, this.matchValues.bind(this)])),
-        });
+  ngOnDestroy() {
+    this.responseSubscription$ ? this.responseSubscription$.unsubscribe() : null;
+    this.stateMobileMatchesSubscription$ ? this.stateMobileMatchesSubscription$.unsubscribe() : null;
+  }
 
-        this.stateMobileMatchesSubscription$ = this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
+  setErrorValidation(): void {
+    const new_pass_msg = this.getErrorMessages(3, true, 3);
+    const verify_pass_msg = this.getErrorMessages(4, true, -1);
 
-    }
+    const new_pass_type = this.getErrorMessages(3, true, 3);
+    const verify_pass_type = this.getErrorMessages(3, true, 3);
 
-    ngOnDestroy() {
-        if (this.rPassResponseSubscription$ && this.stateMobileMatchesSubscription$) {
-          this.rPassResponseSubscription$.unsubscribe();
-          this.stateMobileMatchesSubscription$.unsubscribe();
-        //   this.tokenSubscription$.unsubscribe();
-          this.store.dispatch(new AuthActions.SetResetedPassword(true));
-        }
+    this.seErrorMsgs('new_password', new_pass_type, new_pass_msg);
+    this.seErrorMsgs('verify_password', verify_pass_type, verify_pass_msg);
+  }
+
+
+  getResponse() {
+    this.responseSubscription$ = this.rSignUpResponse$.subscribe(async (data) => {
+      if (data) {
+        this.spinner.hide();
+        this.showToast(data);
+        setTimeout(() => this.appController.navigate('login'), 800);
       }
+    });
+  }
 
-    setErrorValidation(): void {
-        let types = ['required', 'minlength', 'whitespace'];
-        let msgs = ['O campo é obrigatório.', 'Mínimo de 8 caracteres.', 'Não pode conter espaços em branco.']
-
-        let msgAux = [], typesAux = [];
-        msgAux.push(...msgs); msgAux.push('Senhas não coincidem.');
-        typesAux.push(...types); typesAux.push('matchValues');
-
-        const { new_password } = this.appController.setErrorValidation('new_password', types, msgs);
-        const { verify_password } = this.appController.setErrorValidation('verify_password', typesAux, msgAux);
-
-        this.errorMsgs = { new_password, verify_password };
+  async submit(): Promise<void> { // centralizar mais dps
+    if (this.isValidForm()) {
+      this.spinner.show();
+      const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', this.formControls.verify_password.value);
+      this.formControls.verify_password.setValue(encrypted);
+      const payload = this._form.value;
+      this.store.dispatch(new AuthActions.Signup(payload));
+      this._form.reset();
+      this.stateSubmitHasChanged();
     }
-
-    public getStyle(trueValue, falseValue) {
-        return this.hasMobileMatches ? trueValue : falseValue;
-    }
-
-    getResponse() {
-        this.rPassResponseSubscription$ = this.rPassResponse$.subscribe(async (data) => {
-          if (data) {
-            this.store.dispatch(new AuthActions.RemoveToken());
-            this.store.dispatch(new AuthActions.RemoveNotAuth());
-            this.spinner.hide();
-            this.appController.showToastPopUp(data, ToastComponent);
-            setTimeout(() => this.appController.navigate('login'), 800);
-          }
-        });
-      }
-    
-    //   async submit(): Promise<void> {
-    //     if (this.resetForm.valid) {
-    //       this.hasClickSubmit = this.resetForm.valid;
-    //       this.spinner.show();
-    
-    //       this.tokenSubscription$ = this.token$.subscribe(access_token => {
-    //         const passForm = this.resetForm.controls.verify_password.value;
-    //         if (access_token && passForm) {
-    //           const password = this.encryptService.set('10610433IA$#@$^@1ERF', this.resetForm.get('verify_password').value);
-    //           this.store.dispatch(new AuthActions.ResetPass({ access_token, password }));
-    //           this.resetForm.reset();
-    //           this.ngZone.runOutsideAngular(() => {
-    //             setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
-    //           });
-    //         }
-    //       });
-    //     }
-    //   }
+  }
 }

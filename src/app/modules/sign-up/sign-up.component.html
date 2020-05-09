@@ -9,24 +9,24 @@
                 <div class="font label-info" [ngStyle]="{'max-width': getStyle('64vw', '15vw') }">
                     Informe dados abaixo para realizar o cadastro.
                 </div>
-                <form [formGroup]="signupForm" (ngSubmit)="submit()">
+                <form [formGroup]="_form" (ngSubmit)="submit()">
                     <div class="form-content">
                         <mat-form-field appearance="outline" class="font" style="margin-bottom: 4%;">
                             <mat-label>Primeiro nome</mat-label>
-                            <input matInput #inputPass class="font" autocomplete='off' formControlName="firstname"
+                            <input matInput #inputPass class="font" autocomplete='off' formControlName="name"
                                 required ngAutofillOff maxlength="25" minlength="2" type="text" />
                                 <mat-error>
-                                    <ng-input-error [control]="signupForm.controls.firstname"
-                                    [errorMsgs]="errorMsgs.firstname"></ng-input-error>
+                                    <ng-input-error [control]="_form.controls.name"
+                                    [errorMsgs]="errorMsgs.name"></ng-input-error>
                                 </mat-error>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" class="font" style="margin-bottom: 4%;">
                             <mat-label>Username</mat-label>
                             <input matInput #inputPass class="font" autocomplete='off' formControlName="username"
-                                required ngAutofillOff maxlength="25" minlength="3" type="text" />
+                                required ngAutofillOff maxlength="35" minlength="3" type="text" />
                                 <mat-error>
-                                    <ng-input-error [control]="signupForm.controls.username"
+                                    <ng-input-error [control]="_form.controls.username"
                                     [errorMsgs]="errorMsgs.username"></ng-input-error>
                                 </mat-error>
                         </mat-form-field>
@@ -36,7 +36,7 @@
                             <input matInput #inputPass class="font" autocomplete='off' formControlName="email"
                                 required ngAutofillOff maxlength="120" minlength="4" type="text" />
                                 <mat-error>
-                                    <ng-input-error [control]="signupForm.controls.email"
+                                    <ng-input-error [control]="_form.controls.email"
                                     [errorMsgs]="errorMsgs.email"></ng-input-error>
                                 </mat-error>
                         </mat-form-field>
@@ -49,7 +49,7 @@
                                     <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </mat-icon-button>
                                 <mat-error>
-                                    <ng-input-error [control]="signupForm.controls.password"
+                                    <ng-input-error [control]="_form.controls.password"
                                     [errorMsgs]="errorMsgs.password"></ng-input-error>
                                 </mat-error>
                         </mat-form-field>
@@ -66,7 +66,7 @@
                             </mat-hint>
 
                             <mat-error>
-                                <ng-input-error [control]="signupForm.controls.verify_password"
+                                <ng-input-error [control]="_form.controls.verify_password"
                                 [errorMsgs]="errorMsgs.verify_password"></ng-input-error>
                             </mat-error>
                         </mat-form-field>
@@ -74,7 +74,7 @@
 
                         <button style="margin-top: 0.2rem;" mat-raised-button
                             [ngClass]="[ hasClickSubmit ? 'disabled' : 'enabled' ]"
-                            class="product-sans-light btn-submit fade-transition-in" cdkFocusInitial>Redefinir</button>
+                            class="product-sans-light btn-submit fade-transition-in" cdkFocusInitial>Registrar</button>
                     </div>
                 </form>
             </div>

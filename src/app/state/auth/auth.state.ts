@@ -12,6 +12,7 @@ export class AuthStateModel {
     rPassResponse: any;
     notAuth: string;
     hasResetPass: boolean;
+    signUpResponse: any;
 }
 
 @State<AuthStateModel>({
@@ -21,6 +22,7 @@ export class AuthStateModel {
         user: null,
         forgotPassResponse: null,
         rPassResponse: null,
+        signUpResponse: null,
         notAuth: null,
         hasResetPass: false,
     }
@@ -52,6 +54,11 @@ export class AuthState {
     }
 
     @Selector()
+    static signUpResponse(state: AuthStateModel) {
+        return state.signUpResponse;
+    }
+
+    @Selector()
     static notAuth(state: AuthStateModel): string {
         return state.notAuth;
     }
@@ -60,9 +67,9 @@ export class AuthState {
     static hasResetPass(state: AuthStateModel): boolean {
         return state.hasResetPass;
     }
-    
+
     @Action(AuthActions.Signin)
-    async login({ getState, setState }: StateContext<AuthStateModel>, { username, password }: AuthActions.Signin) {
+    async signIn({ getState, setState }: StateContext<AuthStateModel>, { username, password }: AuthActions.Signin) {
 
         const data: any = await this.authService.getAccessToken(username, password).toPromise();
 
@@ -77,16 +84,30 @@ export class AuthState {
         }
     }
 
+    @Action(AuthActions.Signup)
+    async signUp({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.Signup) {
+
+        const data: any = await this.authService.signUp(payload).toPromise();
+
+        if (data) {
+            const state = getState();
+            setState({
+                ...state,
+                signUpResponse: data
+            });
+        }
+    }
+
     @Action(AuthActions.RemoveAccess)
     removeAccess({ setState, getState }: StateContext<AuthStateModel>) {
         const state = getState();
         setState({
             ...state,
+            signUpResponse: null,
+            forgotPassResponse: null, // tenho q ver o fluxo desse kra antes de remover
+            notAuth: null, // tenho q ver o fluxo desse kra antes de remover
             token: null,
-            notAuth: null,
-            forgotPassResponse: null,
             user: null,
-            rPassResponse: null,
         });
     }
 

@@ -2,7 +2,7 @@
 
 E aí galera, tamo aqui na luta pra esse fórum ficar massinha. A idéia é pra gente juntar tudo num lugar só e ficar mais fácil pra tirar dúvidas e etc.
 
-Tecs de hoje por enquanto só Angular mesmo xD, até backend ser implementado.
+Tecs por enquanto Angular, Nestjs e MySql.
 Se interessou e quer ajudar ? 
 
 # Steps:

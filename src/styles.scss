@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; background: #303030; }
+html, body { height: 100%; background: #303030; overflow: hidden; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @font-face {
@@ -76,4 +76,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 div .ng-star-inserted {
     margin-bottom: 2px;
+}
+
+.text-link {
+    color: #fff;
+    font-family: 'Montserrat';
+    cursor: pointer;
+}
+
+.text-link:hover {
+    color: #E91E63;
 }

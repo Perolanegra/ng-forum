@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit { // extends ngForm
-
+  hasMobileMatches
   @Select(AuthState.hasResetPass) hasResetPass$: Observable<boolean>;
 
   public loginForm: FormGroup;
@@ -67,6 +67,14 @@ export class LoginComponent implements OnInit { // extends ngForm
 
   openForgotPass() {
     this.appController.showToastPopUp({ style: {} }, ForgetPasswordComponent);
+  }
+
+  onClickSignUp(target: ElementRef<any>) {
+    this.appController.setElementClass(target, 'btn-sign-up--clicked');
+    document.querySelectorAll('span').forEach((element: any) => { 
+      this.appController.setElementClass(element, 'expanded');
+    });
+    setTimeout(() => this.appController.navigate('sign-up'), 1200);
   }
 
 }

@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%; background: #303030; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @font-face {
@@ -72,4 +72,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .enabled {
     opacity: 1;
     pointer-events: auto;
+}
+
+div .ng-star-inserted {
+    margin-bottom: 2px;
 }

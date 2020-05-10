@@ -12,7 +12,7 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
 
 @Component({
   selector: 'ng-sign-up',
-  template: './sign-up.component.html',
+  templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent extends NgForm implements OnInit, OnDestroy {

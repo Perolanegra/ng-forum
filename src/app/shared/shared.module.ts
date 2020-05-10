@@ -6,8 +6,7 @@ import { MaterialModule } from './modules/material.module';
 import { FormComponent } from './components/form/form.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { AppOverBtnDirective } from '../core/app-over-btn.directive';
-import { ReactiveInputErrorComponent } from './components/reactive-input-error/reactive-input-error.component';
-
+import { NgInputErrorComponent } from './components/ng-input-error/ng-input-error.component';
 
 @NgModule({
     imports: [
@@ -25,11 +24,11 @@ import { ReactiveInputErrorComponent } from './components/reactive-input-error/r
         FormComponent,
         ToastComponent,
         AppOverBtnDirective,
-        ReactiveInputErrorComponent
+        NgInputErrorComponent
     ],
     exports: [
         FormComponent,
-        ReactiveInputErrorComponent,
+        NgInputErrorComponent,
         MaterialModule,
         ReactiveFormsModule,
     ],

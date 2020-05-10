@@ -1,6 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; background: #303030; }
+html, body { height: 100%; background: #303030; overflow: hidden; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @font-face {
@@ -74,6 +72,38 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     pointer-events: auto;
 }
 
-div .ng-star-inserted {
+div#msg-error-ng-default {
     margin-bottom: 2px;
 }
+
+.text-link {
+    color: #fff;
+    font-family: 'Montserrat';
+    cursor: pointer;
+}
+
+.text-link:hover {
+    color: #E91E63;
+}
+
+// .animate {
+//     animation-name: slide-right;
+//     animation-duration: 2s;
+//     animation-fill-mode: forwards;
+// }
+
+// @keyframes slide-right { // nome animacao
+//     from {
+//         margin-left: 0px;
+//     }
+
+//     50% {
+//         margin-left: 110px;
+//         opacity: 0.5;
+//     }
+
+//     to {
+//         margin-left: 200px;
+//         opacity: 0.2;
+//     }
+// }

@@ -79,7 +79,7 @@ input:-webkit-autofill {
     border: 1.4px solid #E91E63;
 }
 
-.forgot-pass {
+.text-link {
     color: #fff;
     font-size: 75%;
     font-family: 'Montserrat';
@@ -88,7 +88,7 @@ input:-webkit-autofill {
     cursor: pointer;
 }
 
-.forgot-pass:hover {
+.text-link:hover {
     color: #E91E63;
 }
 
@@ -108,9 +108,15 @@ input:-webkit-autofill {
     background: #fff;
 }
 
+svg { 
+    padding: 2px 0px 0px 7px; 
+    filter: invert(13%) sepia(18%) saturate(544%) hue-rotate(181deg) brightness(93%) contrast(95%);
+}
+
 svg:hover {
     // filter: invert(62%) sepia(40%) saturate(2709%) hue-rotate(295deg) brightness(101%) contrast(103%); // bom
-    filter: invert(67%) sepia(33%) saturate(7288%) hue-rotate(299deg) brightness(103%) contrast(101%)
+    // filter: invert(67%) sepia(33%) saturate(7288%) hue-rotate(299deg) brightness(103%) contrast(101%)
+    filter: invert(26%) sepia(53%) saturate(5839%) hue-rotate(326deg) brightness(92%) contrast(98%);
 }
 
 .btn-submit:hover {

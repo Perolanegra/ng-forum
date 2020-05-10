@@ -10,28 +10,33 @@
                 <input matInput class="font" autocomplete='off' formControlName="username" required ngAutofillOff>
                 <mat-error *ngIf="!loginForm.get('username').valid">O Campo é obrigatório.</mat-error>
             </mat-form-field>
-    
-            <mat-form-field class="font" appearance="outline" hintLabel="Mínimo de 8 caracteres" style="display: flex;" >
+
+            <mat-form-field class="font" appearance="outline" hintLabel="Mínimo de 8 caracteres" style="display: flex;">
                 <mat-label>Password</mat-label>
-                <input matInput #input type="password" required [type]="hide ? 'password' : 'text'" formControlName="password"
-                maxlength="10" minlength="8"/> 
-                <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <input matInput #input type="password" required [type]="hide ? 'password' : 'text'"
+                    formControlName="password" maxlength="10" minlength="8" />
+                <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-icon-button>
                 <mat-hint class="primary-color" align="end">{{input.value?.length || 0}} / 8</mat-hint>
                 <mat-error *ngIf="!loginForm.get('password').valid">O Campo é obrigatório.</mat-error>
             </mat-form-field>
 
-            <div class="forgot-pass fade-transition-in" (click)="openForgotPass()">
+            <div class="text-link fade-transition-in" (click)="openForgotPass()">
                 Esqueceu a senha?
             </div>
 
-            <button mat-raised-button class="btn-submit" cdkFocusInitial>Entrar</button>
+            <button mat-raised-button class="btn-submit" cdkFocusInitial>Acessar</button>
         </div>
     </form>
 
+    <div class="text-link fade-transition-in" (click)="openForgotPass()">
+        Registrar
+    </div>
+
     <div class="sign-up">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="4vw" height="4vw" fill="blue">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="4vw" height="4vw" fill="blue">
             <defs>
                 <image width="200" height="200" id="img1" href="data:image/png;base64,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"/>
             </defs>
@@ -39,6 +44,12 @@
                 tspan { white-space:pre; }
             </style>
             <use id="Layer 0" href="#img1" x="0" y="0" />
-        </svg>
+        </svg> -->
+        <svg id="Solid" viewBox="0 0 550 550" width="4vw" height="4vw" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="m272 384a96 96 0 1 0 96-96 96.108 96.108 0 0 0 -96 96zm40-8h48v-48a8 8 0 0 1 16 0v48h48a8 8 0 0 1 0 16h-48v48a8 8 0 0 1 -16 0v-48h-48a8 8 0 0 1 0-16z" />
+            <path
+                d="m272.6 442.613a111.947 111.947 0 0 1 71.217-167.976c-31.117-42.497-77.107-66.637-127.817-66.637-45.522 0-87.578 19.485-118.42 54.865-31.063 35.633-48.567 85.3-49.538 140.291 18.365 9.261 93.77 44.844 167.958 44.844a312.1 312.1 0 0 0 56.6-5.387z" />
+            <circle cx="216" cy="112" r="80" /></svg>
     </div>
 </div>

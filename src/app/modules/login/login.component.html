@@ -3,31 +3,40 @@
         <img class="logo" src="assets/imgs/logo.png">
     </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+    <form [formGroup]="_form" (ngSubmit)="submit()">
         <div class="login">
             <mat-form-field appearance="outline" class="font">
                 <mat-label>Username</mat-label>
-                <input matInput class="font" autocomplete='off' formControlName="username" required ngAutofillOff>
-                <mat-error *ngIf="!loginForm.get('username').valid">O Campo é obrigatório.</mat-error>
+                <input matInput class="font" autocomplete='off' formControlName="username" maxlength="35" minlength="2"
+                    type="text" required ngAutofillOff>
+                <mat-error>
+                    <ng-input-error [control]="_form.controls?.username" [errorMsgs]="errorMsgs?.username">
+                    </ng-input-error>
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field class="font" appearance="outline" hintLabel="Mínimo de 8 caracteres" style="display: flex;">
                 <mat-label>Password</mat-label>
-                <input matInput #input type="password" required [type]="hide ? 'password' : 'text'"
-                    formControlName="password" maxlength="10" minlength="8" />
-                <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide = !hide"
-                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <input matInput #input type="password" required [type]="hide1 ? 'password' : 'text'"
+                    formControlName="password" maxlength="10"/>
+                <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide1 = !hide1"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+                    <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-icon-button>
                 <mat-hint class="primary-color" align="end">{{input.value?.length || 0}} / 8</mat-hint>
-                <mat-error *ngIf="!loginForm.get('password').valid">O Campo é obrigatório.</mat-error>
+                <mat-error>
+                    <ng-input-error [control]="_form.controls?.password" [errorMsgs]="errorMsgs?.password">
+                    </ng-input-error>
+                </mat-error>
             </mat-form-field>
 
             <div class="fade-transition-in text-link text-link-size forget-pass" (click)="openForgotPass()">
                 Esqueceu a senha?
             </div>
 
-            <button mat-raised-button class="btn-submit" cdkFocusInitial>Acessar</button>
+            <button mat-raised-button class="btn-submit fade-transition-in" cdkFocusInitial
+                [ngClass]="[ hasClickSubmit && input.value?.length >= 8 ? 'disabled' : 'enabled' ]">Acessar</button>
+
             <span class='color color--red' data-value='1'></span>
             <span class='color color--pink' data-value='1'></span>
             <span class='color color--white' data-value='1'></span>
@@ -35,7 +44,8 @@
         </div>
     </form>
 
-    <div *ngIf="hasMobileMatches; else itsWeb" #signupMobile class="fade-transition-in text-link text-link-size register" (click)="onClickSignUp(signupMobile)">
+    <div *ngIf="hasMobileMatches; else itsWeb" #signupMobile
+        class="fade-transition-in text-link text-link-size register" (click)="onClickSignUp(signupMobile)">
         Registrar
     </div>
 

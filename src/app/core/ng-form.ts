@@ -11,7 +11,7 @@ import { NgZone } from '@angular/core';
 export abstract class NgForm extends NgDefault {
 
     _form: FormGroup;
-    public errorMsgs: { [key: string]: any };
+    public errorMsgs: { [key: string]: any } = {};
     public hide1 = true;
     public hide2 = true;
     public hasClickedSubmit: boolean = false;
@@ -31,17 +31,17 @@ export abstract class NgForm extends NgDefault {
 
     public abstract getResponse(): any;
 
-    public isValidForm(): boolean {
+    public isValidForm(payload?: any): boolean {
         this.hasClickSubmit = this._form.valid;
         return this._form.valid;
     }
 
     public seErrorMsgs(control: string, types: string[], msgs: string[]): void {
-        const payload = this.setErrorValidation(control, types, msgs);
-        this.errorMsgs[control] = payload[control];
+        const payload = this.setErrors(control, types, msgs);
+        this.errorMsgs[control] = payload[control];      
     }
 
-    public setErrorValidation(control: string, types: string[], msgs: string[]) {
+    public setErrors(control: string, types: string[], msgs: string[]) {
         let errorResponse: any = {};
         errorResponse[control] = new Array<any>();
 
@@ -143,7 +143,9 @@ export abstract class NgForm extends NgDefault {
         return this._form.controls;
     }
 
-    abstract submit(): void
+    public abstract submit(): void
+
+    public abstract setErrorValidation();
 
     // patchValues(pRegistro: any) {
     //     let lValores = {}

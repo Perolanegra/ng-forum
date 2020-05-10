@@ -4,7 +4,8 @@ export class NgFormErrorMesssage {
             'O campo é obrigatório.', // id: 0
             'Mínimo de 8 caracteres.', // id: 1
             'Não pode conter espaços em branco.',  // id: 2
-            'Senhas não coincidem.' // id: 3
+            'Senhas não coincidem.', // id: 3,
+            'Mínimo de 2 caracteres.' // id: 4,
         ];
     }
 }

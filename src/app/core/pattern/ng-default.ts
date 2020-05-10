@@ -5,6 +5,8 @@ import { Observable, Subscription } from 'rxjs';
 
 export abstract class NgDefault {
 
+    public readonly lastIndex = 9999;
+
     public hasClickSubmit: boolean = false;
 
     @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;

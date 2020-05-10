@@ -29,6 +29,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.setForm();
     this.setErrorValidation();
     this.getResponse();
   }

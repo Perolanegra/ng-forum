@@ -32,7 +32,6 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     super(formBuilder, appController, ngZone, false);
   }
 
-
   ngOnInit(): void {
     this.setForm();
     this.setResetPass();

@@ -81,7 +81,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
 
   submit(): void {
     const password = this.formControls.password.value as string;
-    if (this.isValidForm(password.length)) {
+    if (this.isValidForm(password?.length)) {
       this.spinner.show();
       const username = this.formControls.username.value as string;
       const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', password);

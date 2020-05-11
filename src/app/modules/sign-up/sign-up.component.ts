@@ -38,8 +38,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     this._form.addControl('name', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this._form.addControl('username', new FormControl(null, [Validators.required]));
     this._form.addControl('email', new FormControl(null, [Validators.required, CustomValidators.whitespace])); // validar com emailMask dps
-    this._form.addControl('password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
-    this._form.addControl('verify_password', new FormControl(null, Validators.compose([Validators.required, CustomValidators.whitespace, this.matchValues.bind(this)])));
+    this._form.addControl('pass', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
   }
 
   ngOnDestroy() {
@@ -48,19 +47,18 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   setErrorValidation(): void {
-    const pass_msg = this.getErrorMessages(3, true, 3);
-    const pass_type = this.getErrorTypes(3, true, 3);
-    
-    const verify_pass_msg = this.getErrorMessages(4, true, -1);
-    const verify_pass_type = this.getErrorTypes(4, true, -1);
+    const pass_msg = this.getErrorMessages(4, true, this.lastIndex);
+    const pass_type = this.getErrorTypes(3, true, this.lastIndex);
 
-    const username_msg = this.getErrorMessages(0);
-    const username_type = this.getErrorTypes(0);
+    const username_msg = this.getErrorMessages(1, true, 3);
+    const username_type = this.getErrorTypes(2, true, this.lastIndex);
     
-    this.seErrorMsgs('password', pass_type, pass_msg);
-    this.seErrorMsgs('verify_password', verify_pass_type, verify_pass_msg);
-    this.seErrorMsgs('name', pass_type, pass_msg);
+    const name_msg = [ ...this.getErrorMessages(0), ...this.getErrorMessages(2), ...this.getErrorMessages(4) ];
+    const name_type = this.getErrorTypes(3, true, this.lastIndex);
+
+    this.seErrorMsgs('pass', pass_type, pass_msg);
     this.seErrorMsgs('username', username_type, username_msg);
+    this.seErrorMsgs('name', name_type, name_msg);
     this.seErrorMsgs('email', pass_type, pass_msg); // setar emailMask dps
   }
 
@@ -77,8 +75,8 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   async submit(): Promise<void> { // centralizar mais dps
     if (this.isValidForm()) {
       this.spinner.show();
-      const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', this.formControls.verify_password.value);
-      this.formControls.verify_password.setValue(encrypted);
+      const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', this.formControls.pass.value);
+      this.formControls.pass.setValue(encrypted);
       const payload = this._form.value;
       this.store.dispatch(new AuthActions.Signup(payload));
       this._form.reset();

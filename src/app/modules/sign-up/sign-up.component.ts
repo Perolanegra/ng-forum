@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, AfterContentInit, AfterViewChecked, AfterContentChecked } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { AppController } from 'src/app/core/appController';
@@ -37,7 +37,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   setForm(): void {
     this._form.addControl('name', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this._form.addControl('username', new FormControl(null, [Validators.required]));
-    this._form.addControl('email', new FormControl(null, [Validators.required, CustomValidators.whitespace])); // validar com emailMask dps
+    this._form.addControl('email', new FormControl(null, [Validators.required, Validators.email]));
     this._form.addControl('pass', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
   }
 
@@ -47,7 +47,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   setErrorValidation(): void {
-    const pass_msg = this.getErrorMessages(4, true, this.lastIndex);
+    const pass_msg = this.getErrorMessages(3, true, this.lastIndex);
     const pass_type = this.getErrorTypes(3, true, this.lastIndex);
 
     const username_msg = this.getErrorMessages(1, true, 3);
@@ -56,10 +56,13 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     const name_msg = [ ...this.getErrorMessages(0), ...this.getErrorMessages(2), ...this.getErrorMessages(4) ];
     const name_type = this.getErrorTypes(3, true, this.lastIndex);
 
+    const email_msg = [ ...this.getErrorMessages(0), ...this.getErrorMessages(5) ];
+    const email_type = [ ...this.getErrorTypes(0), ...this.getErrorTypes(4) ];
+
     this.seErrorMsgs('pass', pass_type, pass_msg);
     this.seErrorMsgs('username', username_type, username_msg);
     this.seErrorMsgs('name', name_type, name_msg);
-    this.seErrorMsgs('email', pass_type, pass_msg); // setar emailMask dps
+    this.seErrorMsgs('email', email_type, email_msg);
   }
 
   getResponse() {

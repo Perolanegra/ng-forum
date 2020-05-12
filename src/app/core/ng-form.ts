@@ -38,7 +38,7 @@ export abstract class NgForm extends NgDefault {
 
     public seErrorMsgs(control: string, types: string[], msgs: string[]): void {
         const payload = this.setErrors(control, types, msgs);
-        this.errorMsgs[control] = payload[control];      
+        this.errorMsgs[control] = payload[control];   
     }
 
     public setErrors(control: string, types: string[], msgs: string[]) {

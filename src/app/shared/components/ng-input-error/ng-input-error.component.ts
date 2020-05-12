@@ -11,14 +11,19 @@ import { BehaviorSubject } from 'rxjs';
 export class NgInputErrorComponent {
 
     @Input() control: AbstractControl;
+    @Input() controlName: string;
     @Input() errorMsgs: [];
 
-    @Output() indexLastErrorField: BehaviorSubject<boolean> = new BehaviorSubject(null);
+    @Output() indexLastErrorField: BehaviorSubject<any> = new BehaviorSubject(null);
 
     constructor() { }
 
     emitLastErrorField(index) {
-        this.indexLastErrorField.next(index);
+        const dataResp = {
+            controlName: this.controlName,
+            index: index
+        };
+        this.indexLastErrorField.next(dataResp);
         return 'unset';
     }
 }

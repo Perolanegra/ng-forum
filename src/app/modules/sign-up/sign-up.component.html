@@ -18,39 +18,47 @@
                 <form [formGroup]="_form" (ngSubmit)="submit()">
                     <div class="form-content">
                         <!-- <div class="form-content-inside"> -->
-                        <mat-form-field appearance="outline" class="font">
+                        <mat-form-field appearance="outline" class="fade-transition-in font"
+                            [style.padding-bottom]="styleFormFieldObject?.name?.paddingBottom">
                             <mat-label>Primeiro nome</mat-label>
                             <input matInput class="font" autocomplete='off' formControlName="name" required
                                 ngAutofillOff maxlength="20" minlength="2" type="text" />
                             <mat-error>
-                                <ng-input-error [control]="_form.controls?.name" [errorMsgs]="errorMsgs?.name">
+                                <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                    [control]="_form.controls?.name" [controlName]="'name'"
+                                    [errorMsgs]="errorMsgs?.name">
                                 </ng-input-error>
                             </mat-error>
                         </mat-form-field>
 
-                        <mat-form-field appearance="outline" class="font">
+                        <mat-form-field appearance="outline" class="fade-transition-in font"
+                            [style.padding-bottom]="styleFormFieldObject?.username?.paddingBottom">
                             <mat-label>Username</mat-label>
                             <input matInput class="font" autocomplete='off' formControlName="username" required
                                 ngAutofillOff maxlength="35" minlength="3" type="text" />
                             <mat-error>
-                                <ng-input-error [control]="_form.controls?.username" [errorMsgs]="errorMsgs?.username">
+                                <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                    [control]="_form.controls?.username" [controlName]="'username'" [errorMsgs]="errorMsgs?.username">
                                 </ng-input-error>
                             </mat-error>
                         </mat-form-field>
 
-                        <mat-form-field appearance="outline" class="font">
+                        <mat-form-field appearance="outline" class="fade-transition-in font"
+                            [style.padding-bottom]="styleFormFieldObject?.email?.paddingBottom">
                             <mat-label>Email</mat-label>
                             <input matInput class="font" autocomplete='off' formControlName="email" required
                                 ngAutofillOff maxlength="120" minlength="4" type="text" />
                             <mat-error>
-                                <ng-input-error [control]="_form.controls?.email" [errorMsgs]="errorMsgs?.email">
+                                <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                    [control]="_form.controls?.email" [controlName]="'email'" [errorMsgs]="errorMsgs?.email">
                                 </ng-input-error>
                             </mat-error>
                         </mat-form-field>
 
                         <mat-form-field id="inputPassword" appearance="outline" class="fade-transition-in font"
-                            [style.padding-bottom]="paddingElementField">
-                            <mat-label>Senha</mat-label> <!--setar as props do calculo acima e passar as props para uma var e setar la pq esse metodo calc n eh reconhecido no ngStyle    -->
+                            [style.padding-bottom]="styleFormFieldObject?.pass?.paddingBottom">
+                            <mat-label>Senha</mat-label>
+                            <!--setar as props do calculo acima e passar as props para uma var e setar la pq esse metodo calc n eh reconhecido no ngStyle    -->
                             <input matInput class="font" autocomplete='off' formControlName="pass" required
                                 ngAutofillOff maxlength="20" minlength="8" [type]="hide1 ? 'password' : 'text'" />
                             <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide1 = !hide1"
@@ -59,7 +67,7 @@
                             </mat-icon-button>
                             <mat-error>
                                 <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
-                                    [control]="_form.controls?.pass" [errorMsgs]="errorMsgs?.pass">
+                                    [control]="_form.controls?.pass" [controlName]="'pass'" [errorMsgs]="errorMsgs?.pass">
                                 </ng-input-error>
                             </mat-error>
                         </mat-form-field>

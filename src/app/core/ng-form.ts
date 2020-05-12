@@ -15,7 +15,7 @@ export abstract class NgForm extends NgDefault {
     public hide1 = true;
     public hide2 = true;
     public hasClickedSubmit: boolean = false;
-    public paddingElementField: string = '0%';
+    public styleFormFieldObject: any = {} ;
     public responseSubscription$: Subscription;
 
     constructor(protected formBuilder: FormBuilder,
@@ -51,6 +51,14 @@ export abstract class NgForm extends NgDefault {
         });
 
         return errorResponse;
+    }
+
+    public initStyleFormErrorMsg() {
+        const controls = Object.keys(this._form.value);
+        controls.forEach(control => {
+            this.styleFormFieldObject[control] = {};
+            this.styleFormFieldObject[control].paddingBottom = '0%';
+        });
     }
 
     /**

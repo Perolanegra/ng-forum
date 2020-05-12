@@ -15,6 +15,7 @@ export abstract class NgForm extends NgDefault {
     public hide1 = true;
     public hide2 = true;
     public hasClickedSubmit: boolean = false;
+    public paddingElementField: string = '0%';
     public responseSubscription$: Subscription;
 
     constructor(protected formBuilder: FormBuilder,

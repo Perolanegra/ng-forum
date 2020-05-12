@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone, AfterContentInit, AfterViewChecked, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, AfterContentInit, AfterViewChecked, AfterContentChecked, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { AppController } from 'src/app/core/appController';
@@ -13,7 +13,8 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
 @Component({
   selector: 'ng-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
 
@@ -23,6 +24,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private store: Store,
     private encryptService: EncryptionService,
+    private ref: ChangeDetectorRef,
     protected ngZone: NgZone,
     protected appController: AppController) {
     super(formBuilder, appController, ngZone, false);
@@ -52,17 +54,21 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
 
     const username_msg = this.getErrorMessages(1, true, 3);
     const username_type = this.getErrorTypes(2, true, this.lastIndex);
-    
-    const name_msg = [ ...this.getErrorMessages(0), ...this.getErrorMessages(2), ...this.getErrorMessages(4) ];
+
+    const name_msg = [...this.getErrorMessages(0), ...this.getErrorMessages(2), ...this.getErrorMessages(4)];
     const name_type = this.getErrorTypes(3, true, this.lastIndex);
 
-    const email_msg = [ ...this.getErrorMessages(0), ...this.getErrorMessages(5) ];
-    const email_type = [ ...this.getErrorTypes(0), ...this.getErrorTypes(4) ];
+    const email_msg = [...this.getErrorMessages(0), ...this.getErrorMessages(5)];
+    const email_type = [...this.getErrorTypes(0), ...this.getErrorTypes(4)];
 
     this.seErrorMsgs('pass', pass_type, pass_msg);
     this.seErrorMsgs('username', username_type, username_msg);
     this.seErrorMsgs('name', name_type, name_msg);
     this.seErrorMsgs('email', email_type, email_msg);
+  }
+
+  setStyleLastErrorField(index: number) {
+    this.setPadding(index);
   }
 
   getResponse() {
@@ -86,5 +92,16 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
       this.stateSubmitHasChanged();
     }
   }
-  
+
+  setPadding(index: number) {
+    if (!index || index < 2) {
+      this.paddingElementField = '0%';
+      return;
+    }
+
+    const basePadding = 2.5; // base é 2.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
+    const resultPadding = basePadding * index;
+    this.paddingElementField = `${resultPadding}%`
+  }
+
 }

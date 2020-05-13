@@ -1,11 +1,7 @@
 <div class="content base-color">
     <div class="content-inside">
-
-        <div class="logo-out" *ngIf="!hasMobileMatches">
-            <img class="logo" src="assets/imgs/logo.png">
-        </div>
         <div class="square">
-            <div class="logo-out" *ngIf="hasMobileMatches">
+            <div class="logo-out">
                 <img class="logo" src="assets/imgs/logo.png">
             </div>
 
@@ -23,7 +19,7 @@
                                 <input matInput class="font" autocomplete='off' formControlName="name" required
                                     ngAutofillOff maxlength="20" minlength="2" type="text" />
                                 <mat-error>
-                                    <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
                                         [control]="_form.controls?.name" [controlName]="'name'"
                                         [errorMsgs]="errorMsgs?.name">
                                     </ng-input-error>
@@ -36,7 +32,7 @@
                                 <input matInput class="font" autocomplete='off' formControlName="username" required
                                     ngAutofillOff maxlength="35" minlength="3" type="text" />
                                 <mat-error>
-                                    <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
                                         [control]="_form.controls?.username" [controlName]="'username'"
                                         [errorMsgs]="errorMsgs?.username">
                                     </ng-input-error>
@@ -49,7 +45,7 @@
                                 <input matInput class="font" autocomplete='off' formControlName="email" required
                                     ngAutofillOff maxlength="120" minlength="4" type="text" />
                                 <mat-error>
-                                    <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
                                         [control]="_form.controls?.email" [controlName]="'email'"
                                         [errorMsgs]="errorMsgs?.email">
                                     </ng-input-error>
@@ -66,7 +62,7 @@
                                     <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </mat-icon-button>
                                 <mat-error>
-                                    <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
                                         [control]="_form.controls?.pass" [controlName]="'pass'"
                                         [errorMsgs]="errorMsgs?.pass">
                                     </ng-input-error>

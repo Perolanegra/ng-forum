@@ -1,12 +1,10 @@
 import { Injectable, Renderer2, ElementRef, RendererFactory2 } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
-import { debounceTime, tap, map } from "rxjs/operators";
+import { debounceTime, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
-import { Observable, from } from "rxjs";
+import { Observable } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
-import { ToastComponent } from '../shared/components/toast/toast.component';
 import { AppActions } from '../shared/state/app.actions';
 import { Store } from '@ngxs/store';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -15,73 +13,19 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable()
 export class AppController {
-    public msg = "";
-    private _ambiente = null;
     private renderer: Renderer2;
 
     constructor(public dialog: MatDialog,
         private rendererFactory: RendererFactory2,
         private spinner: NgxSpinnerService,
-        private toastr: ToastrService,
         private _store: Store,
         private router: Router) {
         this.renderer = this.rendererFactory.createRenderer(null, null);
     }
 
     tratarErro(err): void {
-
-        // this.msg = err.message || err.error_description;
-
-        //Erros de Response(possuem status)
-        // if (err.status != undefined && err.status != null) {
-        //     if (err.status == 401) {
-
-        //         if (err.error.error == "invalid_token") {
-        //             // this.openDialogSessaoExpirada();
-        //             this.msg = 'Sua sessão expirou, favor realizar o login novamente.';
-
-        //         } else {
-        //             //Token expirado			
-        //             this.msg = 'Acesso não autorizado, verifique seu login ou procure o suporte técnico.';
-        //         }
-        //     } else {
-        //         if (err.status == 500) {
-        //             this.msg = 'Um problema não esperado ocorreu durante a execução do serviço. Por favor, tente novamente mais tarde.';
-        //         } else {
-        //             if (err.status == 404) {
-
-        //                 this.msg = 'O serviço solicitado encontra-se indisponível no momento. Por favor, tente novamente mais tarde.';
-        //             } else {
-
-        //                 if (err.status == 0) {
-
-        //                     this.msg = 'Foi impossível conectar com o servidor. Verifique sua conexão com a internet ou tente novamente mais tarde.';
-        //                 } else {
-
-        //                     if (err.status == 400) {
-        //                         if (err.error && err.error.error == 'invalid_grant') {
-        //                             this.msg = 'Usuário ou senha não reconhecidos. Verifique os dados informados e o acionamento da tecla CAPSLOCK.';
-        //                         } else {
-        //                             this.msg = err.error.message;
-        //                         }
-        //                     } else {
-
-        //                         if (err.json != undefined) {
-        //                             let errJson = err.error.json();
-        //                             this.msg = errJson.message || errJson.error_description
-        //                         } else {
-        //                             this.msg = err.message || err.error_description
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-
-        // }
         this.exibirErro(err);
     }
-
 
     showToastPopUp(paylaod: any, component): MatDialogRef<any> {
         let dialogRef = null;
@@ -114,14 +58,6 @@ export class AppController {
         //     tapToDismiss: true,
         // });
     }
-
-    // exibirWarning(msg: string) {
-    //     setTimeout(() => this.toastr.warning(msg, ''));
-    // }
-
-    // exibirInformacao(msg: string) {
-    //     setTimeout(() => this.toastr.info(msg, ''));
-    // }
 
     orderBy(records: Array<any>, atributos: string[], direction: string): any {
         let directions;
@@ -186,12 +122,8 @@ export class AppController {
 
     }
 
-    // public get versao() {
-    //     return environment.versao;
-    // }
-
-    public get ambiente() {
-        return this._ambiente;
+    public get release() {
+        return environment.release;
     }
 
     /**

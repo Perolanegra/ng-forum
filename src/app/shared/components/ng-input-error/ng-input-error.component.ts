@@ -18,12 +18,15 @@ export class NgInputErrorComponent {
 
     constructor() { }
 
-    emitLastErrorField(index) {
-        const dataResp = {
-            controlName: this.controlName,
-            index: index
-        };
-        this.indexLastErrorField.next(dataResp);
+    emitLastErrorField(index, type) {
+        if(this.control.hasError(type)) {
+            const dataResp = {
+                controlName: this.controlName,
+                index: index
+            };
+            this.indexLastErrorField.next(dataResp);
+        }
+
         return 'unset';
     }
 }

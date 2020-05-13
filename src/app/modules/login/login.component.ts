@@ -93,7 +93,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
 
   // A validação minlength nesse componente não é um erro, é uma informação obrigatória.
   public isValidForm(passLength: number): boolean {
-    return passLength <= 8 ? false : this.hasClickSubmit = this._form.valid;
+    return passLength < 8 ? false : this.hasClickSubmit = this._form.valid;
   }
 
   openForgotPass() {

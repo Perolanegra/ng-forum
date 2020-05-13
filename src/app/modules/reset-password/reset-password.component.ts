@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, NgZone, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
@@ -13,7 +13,8 @@ import { NgForm } from 'src/app/core/ng-form';
 @Component({
   selector: 'ng-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['./reset-password.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy {
 
@@ -32,13 +33,16 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
   }
 
   ngOnInit(): void {
+    this.setForm();
     this.setErrorValidation();
     this.getResponse();
   }
 
   public setForm(): void {
+    this.setComparableFormValues('new_password', 'verify_password');
     this._form.addControl('new_password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this._form.addControl('verify_password', new FormControl(null, [Validators.required, CustomValidators.whitespace, this.matchValues.bind(this)]));
+    this.initStyleFormErrorMsg();
   }
 
   ngOnDestroy() {
@@ -49,8 +53,8 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
   }
 
   setErrorValidation(): void {
-    const new_pass_msg = this.getErrorMessages(3, true, 3);
-    const new_pass_type = this.getErrorTypes(3, true, 3);
+    const new_pass_msg = this.getErrorMessages(3, true, this.lastIndex);
+    const new_pass_type = this.getErrorTypes(3, true, this.lastIndex);
 
     const verify_pass_msg = this.getErrorMessages(4, true, -1);
     const verify_pass_type = this.getErrorTypes(4, true, -1);

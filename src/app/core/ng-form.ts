@@ -165,7 +165,6 @@ export abstract class NgForm extends NgDefault {
         if (!response) {
             return;
         }
-        console.log('response: ', response);
         
         if (!response?.index || response?.index < 2) {
             this.styleFormFieldObject[response.controlName].paddingBottom = '0%';

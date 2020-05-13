@@ -37,6 +37,8 @@
     display: flex;
     width: 100%;
     justify-content: center;
+    position: relative;
+    bottom: 2vh;
 }
 
 .logo {
@@ -77,17 +79,12 @@
     color: #fff;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1024px) {
     
     .square {
         max-width: 85vw;
     }
-
-    .logo-out {
-        position: relative;
-        bottom: 2vh;
-    }
-
+    
     .logo {
         max-width: 45%;
     }

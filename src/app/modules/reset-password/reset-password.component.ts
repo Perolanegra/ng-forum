@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, NgZone, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
@@ -13,7 +13,8 @@ import { NgForm } from 'src/app/core/ng-form';
 @Component({
   selector: 'ng-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['./reset-password.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy {
 
@@ -38,6 +39,7 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
   }
 
   public setForm(): void {
+    this.setComparableFormValues('new_password', 'verify_password');
     this._form.addControl('new_password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this._form.addControl('verify_password', new FormControl(null, [Validators.required, CustomValidators.whitespace, this.matchValues.bind(this)]));
     this.initStyleFormErrorMsg();

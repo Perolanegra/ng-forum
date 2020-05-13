@@ -16,6 +16,7 @@ export abstract class NgForm extends NgDefault {
     public hide2 = true;
     public hasClickedSubmit: boolean = false;
     public styleFormFieldObject: any = {};
+    public comparableControls: { control1: string, control2: string } = { control1: '', control2: '' };
     public responseSubscription$: Subscription;
 
     constructor(protected formBuilder: FormBuilder,
@@ -127,14 +128,21 @@ export abstract class NgForm extends NgDefault {
 
     public matchValues(pControl: FormControl): ValidationErrors {
         if (this._form) {
-            if (pControl.value?.length >= 8 &&
-                this.formControls.new_password.value ===
-                this.formControls.verify_password.value) {
+            if(pControl.value?.length < 8) return null;
+
+            if (this.formControls[this.comparableControls.control1]?.value ===
+                this.formControls[this.comparableControls.control2]?.value) {
                 return null;
             }
+
+            return { matchValues: true };
         }
 
-        return { matchValues: true };
+        return null;
+    }
+
+    public setComparableFormValues(control1: string, control2: string) {
+        this.comparableControls = { control1: control1, control2: control2 };
     }
 
     public showToast(data): void {
@@ -157,7 +165,8 @@ export abstract class NgForm extends NgDefault {
         if (!response) {
             return;
         }
-
+        console.log('response: ', response);
+        
         if (!response?.index || response?.index < 2) {
             this.styleFormFieldObject[response.controlName].paddingBottom = '0%';
             return;

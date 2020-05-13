@@ -1,5 +1,5 @@
 <div *ngFor="let item of errorMsgs; let i = index;">
-    <div id="msg-error-ng-default" [ngStyle]="{ 'padding-bottom': emitLastErrorField(i) }"
+    <div id="msg-error-ng-default" [ngStyle]="{ 'padding-bottom': emitLastErrorField(i, item?.type) }"
     *ngIf="control?.hasError(item?.type)">
         {{ item?.msg }}
     </div>

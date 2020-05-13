@@ -9,8 +9,8 @@ import { NgZone } from '@angular/core';
 
 
 export abstract class NgForm extends NgDefault {
-
     _form: FormGroup;
+    
     public errorMsgs: { [key: string]: any } = {};
     public hide1 = true;
     public hide2 = true;
@@ -117,7 +117,6 @@ export abstract class NgForm extends NgDefault {
     }
 
     public setFormValid(): boolean {
-
         this._form.markAsTouched({ onlySelf: true });
         Object.keys(this._form.controls).forEach(key => {
             this._form.controls[key].markAsTouched({ onlySelf: true });
@@ -143,9 +142,7 @@ export abstract class NgForm extends NgDefault {
     }
 
     public stateSubmitHasChanged() {
-        this.ngZone.runOutsideAngular(() => {
-            setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
-        });
+        this.ngZone.runOutsideAngular(() => setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000));
     }
 
     get formControls(): { [key: string]: AbstractControl } {

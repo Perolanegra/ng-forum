@@ -67,10 +67,6 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     this.seErrorMsgs('email', email_type, email_msg);
   }
 
-  setStyleLastErrorField(response: any) {
-    this.setPadding(response);
-  }
-
   getResponse() {
     this.responseSubscription$ = this.rSignUpResponse$.subscribe(async (data) => {
       if (data) {

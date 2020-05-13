@@ -86,6 +86,27 @@ div#msg-error-ng-default {
     color: #E91E63;
 }
 
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
 // .animate {
 //     animation-name: slide-right;
 //     animation-duration: 2s;

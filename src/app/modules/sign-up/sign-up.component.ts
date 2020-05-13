@@ -93,19 +93,4 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     }
   }
 
-  setPadding(response: any) {
-    if(!response) {
-      return;
-    }
-
-    if (!response?.index || response?.index < 2) {
-      this.styleFormFieldObject[response.controlName].paddingBottom = '0%';
-      return;
-    }
-
-    const basePadding = 2.5; // base é 2.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
-    const resultPadding = basePadding * response.index;
-    this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`
-  }
-
 }

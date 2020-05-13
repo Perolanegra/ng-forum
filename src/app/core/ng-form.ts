@@ -15,7 +15,7 @@ export abstract class NgForm extends NgDefault {
     public hide1 = true;
     public hide2 = true;
     public hasClickedSubmit: boolean = false;
-    public styleFormFieldObject: any = {} ;
+    public styleFormFieldObject: any = {};
     public responseSubscription$: Subscription;
 
     constructor(protected formBuilder: FormBuilder,
@@ -39,7 +39,7 @@ export abstract class NgForm extends NgDefault {
 
     public seErrorMsgs(control: string, types: string[], msgs: string[]): void {
         const payload = this.setErrors(control, types, msgs);
-        this.errorMsgs[control] = payload[control];   
+        this.errorMsgs[control] = payload[control];
     }
 
     public setErrors(control: string, types: string[], msgs: string[]) {
@@ -155,6 +155,21 @@ export abstract class NgForm extends NgDefault {
     public abstract submit(): void
 
     public abstract setErrorValidation();
+
+    public setPadding(response: any) {
+        if (!response) {
+            return;
+        }
+
+        if (!response?.index || response?.index < 2) {
+            this.styleFormFieldObject[response.controlName].paddingBottom = '0%';
+            return;
+        }
+
+        const basePadding = 2.5; // base é 2.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
+        const resultPadding = basePadding * response.index;
+        this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`
+    }
 
     // patchValues(pRegistro: any) {
     //     let lValores = {}

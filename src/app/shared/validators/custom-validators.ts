@@ -16,16 +16,16 @@ export class CustomValidators {
     }
 
     static whitespace(pControl: FormControl): ValidationErrors {
-        const inValid = new RegExp('^[_A-z0-9]{1,}$');
-        const hasWhiteSpace = inValid.test(pControl.value);
 
-        if(hasWhiteSpace) {
-            return null;
+        if(pControl.value != undefined && pControl.value != null && pControl.value.toString() != '') {
+            if(pControl.value.indexOf(' ') >= 0) { // Tem espaço em branco se entrar
+                return { whitespace: true };
+            }
         }
 
-        return { whitespace: true };
+        return null;
     }
-
+    // !str.replace(/\s/g, '').length contain only white spaces
     static cnpj(pControl: FormControl): ValidationErrors {
         if (pControl.value != undefined && pControl.value != null && pControl.value.toString() != '') {
             if (!pControl.value.match("^[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}\\/[0-9]{4}\\-[0-9]{2}$")

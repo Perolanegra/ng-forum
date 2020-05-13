@@ -190,7 +190,7 @@ svg:hover {
     white: #f9f9f9,
     default: #303030,
   );
-  $i:0.25s;
+  $i:0.20s;
   @each $colorName, $color in $colors {
     
     .color--#{''+$colorName} {
@@ -198,7 +198,7 @@ svg:hover {
       transition-delay:($i);
       
     }
-    $i: $i + 0.25s;
+    $i: $i + 0.20s;
   }
   
 

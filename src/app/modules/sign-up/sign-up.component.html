@@ -1,83 +1,85 @@
 <div class="content base-color">
     <div class="content-inside">
-        <div class="logo-out">
+
+        <div class="logo-out" *ngIf="!hasMobileMatches">
             <img class="logo" src="assets/imgs/logo.png">
         </div>
-
         <div class="square">
-            <div class="square-inside">
-                <div class="font label-info" [ngStyle]="{'max-width': getStyle('64vw', '15vw') }">
-                    Informe dados abaixo para realizar o cadastro.
-                </div>
+            <div class="logo-out" *ngIf="hasMobileMatches">
+                <img class="logo" src="assets/imgs/logo.png">
+            </div>
+
+            <div class="font label-info" style="width: 100%;">
+                Informe dados abaixo para realizar o cadastro.
+            </div>
+
+            <div>
                 <form [formGroup]="_form" (ngSubmit)="submit()">
                     <div class="form-content">
-                        <mat-form-field appearance="outline" class="font" style="margin-bottom: 4%;">
-                            <mat-label>Primeiro nome</mat-label>
-                            <input matInput class="font" autocomplete='off' formControlName="name"
-                                required ngAutofillOff maxlength="25" minlength="2" type="text" />
+                        <div class="form-content-inside">
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.name?.paddingBottom">
+                                <mat-label>Primeiro nome</mat-label>
+                                <input matInput class="font" autocomplete='off' formControlName="name" required
+                                    ngAutofillOff maxlength="20" minlength="2" type="text" />
                                 <mat-error>
-                                    <ng-input-error [control]="_form.controls?.name"
-                                    [errorMsgs]="errorMsgs?.name"></ng-input-error>
+                                    <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                        [control]="_form.controls?.name" [controlName]="'name'"
+                                        [errorMsgs]="errorMsgs?.name">
+                                    </ng-input-error>
                                 </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" class="font" style="margin-bottom: 4%;">
-                            <mat-label>Username</mat-label>
-                            <input matInput class="font" autocomplete='off' formControlName="username"
-                                required ngAutofillOff maxlength="35" minlength="3" type="text" />
+                            </mat-form-field>
+    
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.username?.paddingBottom">
+                                <mat-label>Username</mat-label>
+                                <input matInput class="font" autocomplete='off' formControlName="username" required
+                                    ngAutofillOff maxlength="35" minlength="3" type="text" />
                                 <mat-error>
-                                    <ng-input-error [control]="_form.controls?.username"
-                                    [errorMsgs]="errorMsgs?.username"></ng-input-error>
+                                    <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                        [control]="_form.controls?.username" [controlName]="'username'"
+                                        [errorMsgs]="errorMsgs?.username">
+                                    </ng-input-error>
                                 </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" class="font" style="margin-bottom: 4%;">
-                            <mat-label>Email</mat-label>
-                            <input matInput class="font" autocomplete='off' formControlName="email"
-                                required ngAutofillOff maxlength="120" minlength="4" type="text" />
+                            </mat-form-field>
+    
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.email?.paddingBottom">
+                                <mat-label>Email</mat-label>
+                                <input matInput class="font" autocomplete='off' formControlName="email" required
+                                    ngAutofillOff maxlength="120" minlength="4" type="text" />
                                 <mat-error>
-                                    <ng-input-error [control]="_form.controls?.email"
-                                    [errorMsgs]="errorMsgs?.email"></ng-input-error>
+                                    <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                        [control]="_form.controls?.email" [controlName]="'email'"
+                                        [errorMsgs]="errorMsgs?.email">
+                                    </ng-input-error>
                                 </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" class="font" style="margin-bottom: 4%;">
-                            <mat-label>Escolha uma senha</mat-label>
-                            <input matInput class="font" autocomplete='off' formControlName="password"
-                                required ngAutofillOff maxlength="20" minlength="8" [type]="hide1 ? 'password' : 'text'" />
-                                <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+                            </mat-form-field>
+    
+                            <mat-form-field id="inputPassword" appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.pass?.paddingBottom">
+                                <mat-label>Senha</mat-label>
+                                <input matInput class="font" autocomplete='off' formControlName="pass" required
+                                    ngAutofillOff maxlength="20" minlength="8" [type]="hide1 ? 'password' : 'text'" />
+                                <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide1 = !hide1"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
                                     <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </mat-icon-button>
                                 <mat-error>
-                                    <ng-input-error [control]="_form.controls?.password"
-                                    [errorMsgs]="errorMsgs?.password"></ng-input-error>
+                                    <ng-input-error (indexLastErrorField)="setStyleLastErrorField($event);"
+                                        [control]="_form.controls?.pass" [controlName]="'pass'"
+                                        [errorMsgs]="errorMsgs?.pass">
+                                    </ng-input-error>
                                 </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" hintLabel="Mínimo de 8 caracteres" style="margin-bottom: 4%;" class="font fade-transition-in">
-                            <mat-label>Confirme a senha</mat-label>
-                            <input matInput #inputVerify class="font" autocomplete='off' 
-                                formControlName="verify_password" required ngAutofillOff maxlength="20" minlength="8" [type]="hide2 ? 'password' : 'text'" />
-                                <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
-                                    <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </mat-icon-button>
-
-                            <mat-hint class="primary-color" align="end">{{inputVerify.value?.length || 0}} / 8
-                            </mat-hint>
-
-                            <mat-error>
-                                <ng-input-error [control]="_form.controls?.verify_password"
-                                [errorMsgs]="errorMsgs?.verify_password"></ng-input-error>
-                            </mat-error>
-                        </mat-form-field>
-
-
-                        <button style="margin-top: 0.2rem;" mat-raised-button
+                            </mat-form-field>
+                        </div>
+                            <button style="margin-top: 0.2rem;" mat-raised-button
                             [ngClass]="[ hasClickSubmit ? 'disabled' : 'enabled' ]"
                             class="btn-submit fade-transition-in" cdkFocusInitial>Registrar</button>
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
-import { Component, Input, AfterContentInit } from "@angular/core";
+import { Component, Input, Output } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -8,11 +9,21 @@ import { AbstractControl } from "@angular/forms";
     styleUrls: ['./ng-input-error.component.scss']
 })
 export class NgInputErrorComponent {
-    
+
     @Input() control: AbstractControl;
+    @Input() controlName: string;
     @Input() errorMsgs: [];
-    
-    constructor() {}
-    
-    
+
+    @Output() indexLastErrorField: BehaviorSubject<any> = new BehaviorSubject(null);
+
+    constructor() { }
+
+    emitLastErrorField(index) {
+        const dataResp = {
+            controlName: this.controlName,
+            index: index
+        };
+        this.indexLastErrorField.next(dataResp);
+        return 'unset';
+    }
 }

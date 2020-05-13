@@ -9,12 +9,13 @@ import { NgZone } from '@angular/core';
 
 
 export abstract class NgForm extends NgDefault {
-
     _form: FormGroup;
+    
     public errorMsgs: { [key: string]: any } = {};
     public hide1 = true;
     public hide2 = true;
     public hasClickedSubmit: boolean = false;
+    public styleFormFieldObject: any = {};
     public responseSubscription$: Subscription;
 
     constructor(protected formBuilder: FormBuilder,
@@ -38,7 +39,7 @@ export abstract class NgForm extends NgDefault {
 
     public seErrorMsgs(control: string, types: string[], msgs: string[]): void {
         const payload = this.setErrors(control, types, msgs);
-        this.errorMsgs[control] = payload[control];      
+        this.errorMsgs[control] = payload[control];
     }
 
     public setErrors(control: string, types: string[], msgs: string[]) {
@@ -50,6 +51,14 @@ export abstract class NgForm extends NgDefault {
         });
 
         return errorResponse;
+    }
+
+    public initStyleFormErrorMsg() {
+        const controls = Object.keys(this._form.value);
+        controls.forEach(control => {
+            this.styleFormFieldObject[control] = {};
+            this.styleFormFieldObject[control].paddingBottom = '0%';
+        });
     }
 
     /**
@@ -108,7 +117,6 @@ export abstract class NgForm extends NgDefault {
     }
 
     public setFormValid(): boolean {
-
         this._form.markAsTouched({ onlySelf: true });
         Object.keys(this._form.controls).forEach(key => {
             this._form.controls[key].markAsTouched({ onlySelf: true });
@@ -134,9 +142,7 @@ export abstract class NgForm extends NgDefault {
     }
 
     public stateSubmitHasChanged() {
-        this.ngZone.runOutsideAngular(() => {
-            setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
-        });
+        this.ngZone.runOutsideAngular(() => setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000));
     }
 
     get formControls(): { [key: string]: AbstractControl } {
@@ -146,6 +152,21 @@ export abstract class NgForm extends NgDefault {
     public abstract submit(): void
 
     public abstract setErrorValidation();
+
+    public setPadding(response: any) {
+        if (!response) {
+            return;
+        }
+
+        if (!response?.index || response?.index < 2) {
+            this.styleFormFieldObject[response.controlName].paddingBottom = '0%';
+            return;
+        }
+
+        const basePadding = 2.5; // base é 2.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
+        const resultPadding = basePadding * response.index;
+        this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`
+    }
 
     // patchValues(pRegistro: any) {
     //     let lValores = {}

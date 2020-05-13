@@ -16,7 +16,6 @@ export class CustomValidators {
     }
 
     static whitespace(pControl: FormControl): ValidationErrors {
-
         if(pControl.value != undefined && pControl.value != null && pControl.value.toString() != '') {
             if(pControl.value.indexOf(' ') >= 0) { // Tem espaço em branco se entrar
                 return { whitespace: true };
@@ -25,7 +24,17 @@ export class CustomValidators {
 
         return null;
     }
-    // !str.replace(/\s/g, '').length contain only white spaces
+
+    static allblank(pControl: FormControl): ValidationErrors {
+        if(pControl.value != undefined && pControl.value != null && pControl.value.toString() != '') {
+            if(!pControl.value.trim()) { // é tudo espaço em branco se entrar
+                return { allblank: true };
+            }
+        }
+
+        return null;
+    }
+
     static cnpj(pControl: FormControl): ValidationErrors {
         if (pControl.value != undefined && pControl.value != null && pControl.value.toString() != '') {
             if (!pControl.value.match("^[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}\\/[0-9]{4}\\-[0-9]{2}$")
@@ -38,7 +47,6 @@ export class CustomValidators {
     }
 
     static cep(pControl: FormControl): ValidationErrors {
-
         if (pControl.value != undefined && pControl.value != null && pControl.value.toString() != '') {
             if (!pControl.value.match("^[0-9]{2}\\.[0-9]{3}\\-[0-9]{3}$")
                 && !pControl.value.match("^[0-9]{8}$")) {

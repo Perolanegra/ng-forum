@@ -57,15 +57,15 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     const pass_msg = this.getErrorMessages(4, true, this.lastIndex);
     const pass_type = this.getErrorTypes(3, true, this.lastIndex);
 
-    const username_msg = this.getErrorMessages(1, true, 3);
-    const username_type = this.getErrorTypes(2, true, this.lastIndex);
+    const username_msg = [...this.getErrorMessages(0), ...this.getErrorMessages(4), ...this.getErrorMessages(6)];
+    const username_type = [...this.getErrorTypes(0), ...this.getErrorTypes(1), ...this.getErrorTypes(5)];
 
     this.seErrorMsgs('username', username_type, username_msg);
     this.seErrorMsgs('password', pass_type, pass_msg);
   }
 
   setForm() {
-    this._form.addControl('username', new FormControl(null, [Validators.required]));
+    this._form.addControl('username', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
   }
 

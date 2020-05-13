@@ -6,7 +6,8 @@ export class NgFormErrorMesssage {
             'Não pode conter espaços em branco.',  // id: 2
             'Senhas não coincidem.', // id: 3,
             'Mínimo de 2 caracteres.', // id: 4,
-            'E-mail inválido.' // id: 5,
+            'E-mail inválido.', // id: 5,
+            'O campo não pode ser em branco.' // id: 6,
         ];
     }
 }

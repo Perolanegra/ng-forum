@@ -11,6 +11,7 @@
 .content-inside {
     width: fit-content;
     font-size: 85%;
+    overflow: auto;
 }
 
 .square {
@@ -74,4 +75,21 @@
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     opacity: 0.3;
     color: #fff;
+}
+
+@media only screen and (max-width: 767px) {
+    
+    .square{
+        max-width: 85vw;
+    }
+
+    .logo-out {
+        position: relative;
+        bottom: 2vh;
+    }
+
+    .logo {
+        max-width: 45%;
+    }
+
 }

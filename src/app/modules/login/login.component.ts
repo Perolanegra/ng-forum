@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, NgZone, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
@@ -15,7 +15,8 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 @Component({
   selector: 'ng-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent extends NgForm implements OnInit, OnDestroy {
 
@@ -67,6 +68,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   setForm() {
     this._form.addControl('username', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
+    this.initStyleFormErrorMsg();
   }
 
   getResponse() {

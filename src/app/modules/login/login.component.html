@@ -5,27 +5,31 @@
 
     <form [formGroup]="_form" (ngSubmit)="submit()">
         <div class="login">
-            <mat-form-field appearance="outline" class="font">
+            <mat-form-field appearance="outline" class="fade-transition-in font"
+                [style.padding-bottom]="styleFormFieldObject?.username?.paddingBottom">
                 <mat-label>Username</mat-label>
                 <input matInput class="font" autocomplete='off' formControlName="username" maxlength="35" minlength="2"
                     type="text" required ngAutofillOff>
                 <mat-error>
-                    <ng-input-error [control]="_form.controls?.username" [errorMsgs]="errorMsgs?.username">
+                    <ng-input-error (indexLastErrorField)="setPadding($event);" [control]="_form.controls?.username"
+                        [controlName]="'username'" [errorMsgs]="errorMsgs?.username">
                     </ng-input-error>
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="font" appearance="outline" hintLabel="Mínimo de 8 caracteres" style="display: flex;">
+            <mat-form-field class="fade-transition-in font" appearance="outline" hintLabel="Mínimo de 8 caracteres"
+                style="display: flex;" [style.padding-bottom]="styleFormFieldObject?.password?.paddingBottom">
                 <mat-label>Password</mat-label>
                 <input matInput #input type="password" required [type]="hide1 ? 'password' : 'text'"
-                    formControlName="password" maxlength="10"/>
+                    formControlName="password" maxlength="10" />
                 <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide1 = !hide1"
                     [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
                     <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-icon-button>
                 <mat-hint class="primary-color" align="end">{{input.value?.length || 0}} / 8</mat-hint>
                 <mat-error>
-                    <ng-input-error [control]="_form.controls?.password" [errorMsgs]="errorMsgs?.password">
+                    <ng-input-error (indexLastErrorField)="setPadding($event);" [control]="_form.controls?.password"
+                        [controlName]="'password'" [errorMsgs]="errorMsgs?.password">
                     </ng-input-error>
                 </mat-error>
             </mat-form-field>

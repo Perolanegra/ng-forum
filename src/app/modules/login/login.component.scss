@@ -202,3 +202,6 @@ svg:hover {
   }
   
 
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+    padding: unset !important;
+}

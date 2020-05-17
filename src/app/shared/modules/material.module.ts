@@ -22,7 +22,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatRippleModule} from '@angular/material/core';
-
+import {MatTableModule} from '@angular/material/table';
 
 export const MY_FORMATS = {
   parse: {
@@ -41,14 +41,13 @@ export const MY_FORMATS = {
     CommonModule,
     MatButtonModule,
     MatCheckboxModule,
-    // MatTableModule,
+    MatTableModule,
     MatInputModule,
     MatDialogModule,
     ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    
     MatListModule,
     MatMenuModule,
     MatProgressSpinnerModule,
@@ -67,7 +66,7 @@ export const MY_FORMATS = {
     CommonModule,
     MatButtonModule,
     MatCheckboxModule,
-    // MatTableModule,
+    MatTableModule,
     MatInputModule,
     MatDialogModule,
     ReactiveFormsModule,

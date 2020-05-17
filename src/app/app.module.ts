@@ -28,6 +28,7 @@ import { AppAutofillOffDirective } from './shared/directives/app-autofill-off.di
 import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ForgetPasswordComponent } from './modules/login/dialogs/forget-password/forget-password.component';
+import { TesteComponent } from './modules/teste/teste.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { ForgetPasswordComponent } from './modules/login/dialogs/forget-password
     AppAutofillOffDirective,
     AppNavNameBehaviorDirective,
     ForgetPasswordComponent,
-    // TesteComponent,
+    TesteComponent,
   ],
   imports: [
     BrowserModule,

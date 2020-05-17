@@ -1,0 +1,52 @@
+<ng-content select="[filtro]"></ng-content>
+
+<div id="igor">
+    <ng-table-header cabecalhotabela [dataSource]="registros" [qtdSelecionados]="selection.selected.length"
+        [selection]="selection" (atualizar)="atualizarClick()" (alterar)="alterarClick()" (excluir)="excluirClick()"
+        (inserir)="inserirClick()" [botaoAtualizarVisivel]="botaoAtualizarVisivel"
+        [botaoExcluirVisivel]="botaoExcluirVisivel" [botaoInserirVisivel]="botaoInserirVisivel"
+        [botaoAlterarVisivel]="botaoAlterarVisivel" [botaoOpcoesVisivel]="botaoOpcoesVisivel">
+        <ng-content select="[botoesOpcoes]"></ng-content>
+    </ng-table-header>
+
+    <div class="table-scroll" [style.height]="height">
+        <table mat-table [dataSource]="registros" matSort
+            matSortActive="{{ ordenaColuna ? ordenaColuna : colunasConfig[0].nome }}" matSortDirection="{{ direcao }}">
+
+            <!--- Note that these columns can be defined in any order.
+                                The actual rendered columns are set as a property on the row definition" -->
+            <!-- Checkbox Column -->
+
+            <ng-container matColumnDef="select" *ngIf="checkboxVisivel">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()" matTooltip="Selecionar todos/nenhum">
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation();" (change)="$event ? checkBoxClicked(row) : null"
+                        [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <!-- For das colunas que foram baseadas na configuração do atributo colunasConfig-->
+            <ng-container matColumnDef="{{ coluna.nome }}" *ngFor="let coluna of colunasConfig;">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="coluna.headerClass">{{ coluna.titulo }}
+                </th>
+                <td mat-cell *matCellDef="let element"
+                    (click)="coluna.click ? coluna.click(element) + $event.stopPropagation() : null"
+                    [innerHTML]="coluna.cell(element) | safeHtml" [ngClass]="coluna.class"></td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <!-- <ng-content></ng-content> -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row [ngClass]="{'selected-row': selection.isSelected(row)}" class="cursor-pointer mouseover"
+                *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
+        </table>
+    </div>
+</div>

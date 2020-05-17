@@ -1,0 +1,30 @@
+.table-scroll { 
+    overflow: auto;
+}
+  
+table {
+    width: 100%;
+}
+  
+.selected-row {
+    background-color: rgb(59, 147, 248);
+}
+  
+.mouseover:hover {   
+    border-top: solid 2px lightgray;
+    border-bottom: solid 4px lightgray;
+    border-left: solid 2px lightgray;
+    border-right: solid 2px lightgray;
+}
+
+
+td.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+td.mat-cell, th.mat-header-cell {
+    padding: 10px !important;
+}
+  
+  

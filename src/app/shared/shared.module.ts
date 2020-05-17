@@ -7,6 +7,9 @@ import { FormComponent } from './components/form/form.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { AppOverBtnDirective } from '../core/app-over-btn.directive';
 import { NgInputErrorComponent } from './components/ng-input-error/ng-input-error.component';
+import { TableComponent } from './components/table/table.component';
+import { SafeHtmlPipe } from './pipes/safeHtml.pipe';
+import { TableHeaderComponent } from './components/table-header/table-header.component';
 
 @NgModule({
     imports: [
@@ -24,19 +27,23 @@ import { NgInputErrorComponent } from './components/ng-input-error/ng-input-erro
         FormComponent,
         ToastComponent,
         AppOverBtnDirective,
-        NgInputErrorComponent
+        NgInputErrorComponent,
+        TableComponent,
+        TableHeaderComponent,
+        SafeHtmlPipe
     ],
     exports: [
         FormComponent,
         NgInputErrorComponent,
         MaterialModule,
         ReactiveFormsModule,
+        TableComponent,
+        TableHeaderComponent,
+        SafeHtmlPipe
     ],
     entryComponents: [
         ToastComponent,
     ],
-    providers: [
-        
-    ]
+  
 })
 export class SharedModule { }

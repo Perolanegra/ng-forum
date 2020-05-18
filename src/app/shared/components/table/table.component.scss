@@ -1,5 +1,5 @@
 .table-scroll { 
-    overflow: auto;
+    overflow-x: hidden;
 }
   
 table {
@@ -7,16 +7,13 @@ table {
 }
   
 .selected-row {
-    background-color: rgb(59, 147, 248);
+    background: #E91E63;
 }
   
-.mouseover:hover {   
+.table-row:hover {   
     border-top: solid 2px lightgray;
-    border-bottom: solid 4px lightgray;
-    border-left: solid 2px lightgray;
-    border-right: solid 2px lightgray;
+    border-bottom: solid 3px lightgray;
 }
-
 
 td.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {
     padding-left: 24px;
@@ -26,5 +23,14 @@ td.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:firs
 td.mat-cell, th.mat-header-cell {
     padding: 10px !important;
 }
-  
-  
+
+.content-out {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    width: 75vw;
+}
+
+::ng-deep .mat-checkbox-checked  .mat-checkbox-background {
+    background-color: #303030 !important;
+}

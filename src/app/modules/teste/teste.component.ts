@@ -9,9 +9,15 @@ export class TesteComponent implements OnInit {
 
 
   public colunasConfig = [
-    { nome: 'nome', titulo: 'Nome', cell: (registro: any) => `igo` },
-    { nome: 'siglaFantasia', titulo: 'Sigla Fantasia', cell: (registro: any) => `igo` },
-    { nome: 'sigla', titulo: 'Sigla', cell: (registro: any) => `igo` }
+    { nome: 'nome', titulo: 'Nome', cell: (registro: any) => `${registro.nome}` },
+    { nome: 'siglaFantasia', titulo: 'Sigla Fantasia', cell: (registro: any) => `${registro.sigla}` },
+    { nome: 'sigla', titulo: 'Sigla', cell: (registro: any) => `${registro.lastname}` }
+  ];
+
+  public registros = [
+    { nome: 'Igor', sigla: 'IG', lastname: 'Alves' },
+    { nome: 'Roberto', sigla: 'testesss', lastname: 'Alves' },
+    { nome: 'Robertinha', sigla: 'teste', lastname: 'Alves' },
   ];
 
   constructor() { }

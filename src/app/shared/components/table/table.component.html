@@ -1,6 +1,6 @@
 <ng-content select="[filtro]"></ng-content>
 
-<div id="igor">
+<div class="content-out">
     <ng-table-header cabecalhotabela [dataSource]="registros" [qtdSelecionados]="selection.selected.length"
         [selection]="selection" (atualizar)="atualizarClick()" (alterar)="alterarClick()" (excluir)="excluirClick()"
         (inserir)="inserirClick()" [botaoAtualizarVisivel]="botaoAtualizarVisivel"
@@ -45,7 +45,7 @@
             <!-- <ng-content></ng-content> -->
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row [ngClass]="{'selected-row': selection.isSelected(row)}" class="cursor-pointer mouseover"
+            <tr mat-row [ngClass]="{'selected-row': selection.isSelected(row)}" class="table-row"
                 *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
         </table>
     </div>

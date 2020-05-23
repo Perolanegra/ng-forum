@@ -281,7 +281,7 @@ export class AppController {
      */
     public getImg(nameSvg: string): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            let prefix = 'assets/imgs/';
+            let prefix = 'ng-forum/assets/imgs/';
 
             let searchImg: string, isValidImg;
 

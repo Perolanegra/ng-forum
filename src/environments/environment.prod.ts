@@ -10,6 +10,6 @@ export const environment = {
   //   appId: "1:701159976222:web:ad48eb8652bde1046aad0f",
   //   measurementId: "G-8684DCEZWZ"
   // },
-  server: 'http://localhost:3000',
-  release: '0.0.2'
+  server: 'https://ngba-rest.herokuapp.com/',
+  release: '1.0.0'
 };

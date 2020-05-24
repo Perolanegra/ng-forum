@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --aot",
-    "build:optimize": "ng build --prod --aot --buildOptimizer=true --output-path dist/ng-forum/ --proxy-config proxy.conf.js --baseHref='https://perolanegra.github.io/ng-forum/'",
+    "build:optimize": "ng build --prod --aot --buildOptimizer=true --output-path dist/ng-forum/ --baseHref='https://perolanegra.github.io/ng-forum/'",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

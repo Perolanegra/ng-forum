@@ -50,6 +50,7 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
     this.stateMobileMatchesSubscription$ ? this.stateMobileMatchesSubscription$.unsubscribe() : null;
     this.tokenSubscription$ ? this.tokenSubscription$.unsubscribe() : null;
     this.store.dispatch(new AuthActions.SetResetedPassword(true));
+    window.location.reload();
   }
 
   setErrorValidation(): void {
@@ -70,7 +71,7 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
         this.store.dispatch(new AuthActions.RemoveNotAuth());
         this.spinner.hide();
         this.showToast(data);
-        setTimeout(() => this.appController.navigate('login'), 800);
+        setTimeout(() => this.appController.navigate('login'), 300);
       }
     });
   }

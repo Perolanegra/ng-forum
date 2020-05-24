@@ -15,7 +15,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
     const token = !!this._store.selectSnapshot(state => state.auth.token);
-    
+
     if (token) {
       req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
     }
@@ -23,6 +23,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     if (!req.headers.has('Content-Type')) {
         req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
     }
+
+    req = req.clone({ headers: req.headers.set('Access-Control-Allow-Headers', '*') });
+    req = req.clone({ headers: req.headers.set('Access-Control-Allow-Origin', '*') });
+
 
     return next.handle(req).pipe(
         map((event: HttpEvent<any>) => {

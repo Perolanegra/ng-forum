@@ -15,10 +15,10 @@ import { AppState } from 'src/app/shared/state/app.state';
 export class MainNavComponent implements OnInit {
 
     public routes;
-    public vistoPic = '../../assets/imgs/moderator-male.svg';
+    public vistoPic = '/ng-forum/assets/imgs/moderator-male.svg';
     public hasMobileMatches: boolean;
     public hasEnterMenuRef: boolean = false;
-    public profileDefault: string = '../../../../assets/imgs/profile-default.jfif';
+    public profileDefault: string = '/ng-forum/assets/imgs/profile-default.jfif';
 
     @ViewChild('userInfo') elRefUserInfo: ElementRef;
     @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;

@@ -13,13 +13,13 @@ export class AuthService {
 
 
   signUp(payload: any): Observable<any> {
-    const url = `${environment.prefix}/auth/sign-up`;
+    const url = `${environment.server}/auth/sign-up`;
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post(url, { payload }, {});
   }
 
   getAccessToken(username: string, password: string): Observable<any> { // por o token no headers em toda request
-    const url = `${environment.prefix}/auth/login`;
+    const url = `${environment.server}/auth/login`;
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   getUserByToken(token: string): Observable<any> {
-    const url = `${environment.prefix}/userByToken`;
+    const url = `${environment.server}/userByToken`;
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
@@ -40,13 +40,13 @@ export class AuthService {
   }
 
   setForgotPass(payload: string): Observable<any> {
-    const url = `${environment.prefix}/auth/forgot-pass`;
+    const url = `${environment.server}/auth/forgot-pass`;
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post(url, { payload }, {});
   }
 
   resetPass(payload: string): Observable<any> {
-    const url = `${environment.prefix}/auth/reset-pass`;
+    const url = `${environment.server}/auth/reset-pass`;
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post(url, { payload }, {});
   }

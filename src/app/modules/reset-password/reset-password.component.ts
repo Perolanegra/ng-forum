@@ -70,7 +70,7 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
         this.store.dispatch(new AuthActions.RemoveNotAuth());
         this.spinner.hide();
         this.showToast(data);
-        setTimeout(() => this.appController.navigate('login'), 800);
+        setTimeout(() => this.appController.navigate('login'), 300);
       }
     });
   }

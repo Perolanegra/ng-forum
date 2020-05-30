@@ -1,10 +1,10 @@
 {
   "name": "ng-forum",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --aot",
-    "build:optimize": "ng build --es5-browser-support=false",
+    "start": "ng serve --aot --proxy-config src/proxy.conf.json",
+    "build:optimize": "ng build --prod --aot --buildOptimizer=true --output-path dist/ng-forum/ --baseHref='https://perolanegra.github.io/ng-forum/'",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

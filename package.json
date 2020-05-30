@@ -29,6 +29,7 @@
     "@ngxs/logger-plugin": "^3.6.2-dev.master-7118f7e",
     "@ngxs/storage-plugin": "^3.6.2",
     "@ngxs/store": "^3.6.2-dev.master-7118f7e",
+    "@syncfusion/ej2-angular-richtexteditor": "^18.1.54",
     "@types/crypto-js": "^3.1.44",
     "bootstrap": "^4.4.1",
     "crypto-es": "^1.2.4",

@@ -7,9 +7,9 @@ import { FormComponent } from './components/form/form.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { AppOverBtnDirective } from '../core/app-over-btn.directive';
 import { NgInputErrorComponent } from './components/ng-input-error/ng-input-error.component';
-import { TableComponent } from './components/table/table.component';
 import { SafeHtmlPipe } from './pipes/safeHtml.pipe';
 import { TableHeaderComponent } from './components/table-header/table-header.component';
+import { TableComponent } from './components/ng-table/ng-table.component';
 
 @NgModule({
     imports: [

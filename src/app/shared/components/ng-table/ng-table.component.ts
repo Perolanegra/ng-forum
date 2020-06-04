@@ -7,8 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'ng-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  templateUrl: './ng-table.component.html',
+  styleUrls: ['./ng-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit, OnChanges {
@@ -37,7 +37,7 @@ export class TableComponent implements OnInit, OnChanges {
   
   ngOnInit(): void {
     this.displayedColumns = this.colunasConfig.map(c => c.nome);
-    this.checkboxVisivel ?? this.displayedColumns.unshift('select');
+    this.checkboxVisivel ? this.displayedColumns.unshift('select') : null;
   }
 
   inserirClick() {

@@ -1,15 +1,8 @@
-<!-- <div style="display: flex; justify-content: center;">
-     <ng-table [colunasConfig]="colunasConfig" [botaoOpcoesVisivel]="false" [registros]="registros" [height]="'60vh'">
+<div style="display: flex; justify-content: center;">
+     <ng-table [colunasConfig]="colunasConfig" [botaoOpcoesVisivel]="false" [registros]="registros">
      </ng-table>
-</div> -->
+</div>
 
 <!--  (atualizar)="atualizar()" (alterar)="alterar($event)" (excluir)="excluir($event)" (inserir)="inserir()"
      [registros]="registros" (rowClicked)="rowClicked($event)"
     -->
-
-    <ejs-richtexteditor id='defaultRTE' [toolbarSettings]='tools' [iframeSettings]='iframe' [height]='height'>
-     <ng-template #valueTemplate>
-          <ul><li><p>Provides &lt;IFRAME&gt; and &lt;DIV&gt; modes.</p></li>
-               <li><p>Capable of handling markdown editing.</p></li></ul>
-     </ng-template>
-    </ejs-richtexteditor>

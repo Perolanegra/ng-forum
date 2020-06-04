@@ -29,11 +29,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/sign-up/sign-up.module').then(m => m.SignUpModule),
     canActivate: [NoAuthGuard] 
   },
+  {
+    path: 'issues',
+    loadChildren: () => import('./modules/issues/issues.module').then(m => m.IssuesModule),
+    canActivate: [NoAuthGuard] 
+  },
   
 ];
 
-// @NgModule({
-//   imports: [RouterModule.forRoot(routes)],
-//   exports: [RouterModule]
-// })
 export const AppRoutingModule = RouterModule.forRoot(routes, { useHash: true, onSameUrlNavigation: 'reload' });

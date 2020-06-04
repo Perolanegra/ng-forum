@@ -37,7 +37,7 @@ export class TableComponent implements OnInit, OnChanges {
   
   ngOnInit(): void {
     this.displayedColumns = this.colunasConfig.map(c => c.nome);
-    this.checkboxVisivel ? this.displayedColumns.unshift('select') : null;
+    this.checkboxVisivel ?? this.displayedColumns.unshift('select');
   }
 
   inserirClick() {

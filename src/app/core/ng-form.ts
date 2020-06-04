@@ -26,7 +26,7 @@ export abstract class NgForm extends NgDefault {
 
         super();
         this._form = this.formBuilder.group({});
-        hasKeepRegister ? this._form.addControl("keepRegister", new FormControl(false)) : null;
+        hasKeepRegister ?? this._form.addControl("keepRegister", new FormControl(false));
     }
 
     public abstract setForm(): void;

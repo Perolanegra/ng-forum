@@ -44,8 +44,8 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.responseSubscription$ ? this.responseSubscription$.unsubscribe() : null;
-    this.stateMobileMatchesSubscription$ ? this.stateMobileMatchesSubscription$.unsubscribe() : null;
+    this.responseSubscription$ ?? this.responseSubscription$.unsubscribe();
+    this.stateMobileMatchesSubscription$ ?? this.stateMobileMatchesSubscription$.unsubscribe();
   }
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg

@@ -38,7 +38,7 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
   }
 
   ngOnDestroy() {
-    this.fPassResponseSubscription$ ? this.fPassResponseSubscription$.unsubscribe() : null;
+    this.fPassResponseSubscription$ ?? this.fPassResponseSubscription$.unsubscribe();
   }
 
   getResponse() {

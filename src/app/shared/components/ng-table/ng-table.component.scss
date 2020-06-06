@@ -23,20 +23,38 @@ tr {
 }
 
 .table-row {
-    transition-duration: 0.3s;
-    background-color: #4CAF50;
+    animation-fill-mode: forwards;
+    transition: all .4s;
     &:hover {
-        // border-top: solid 5px #c00845;
-        // border-bottom: solid 5px #c00845;
-        transform: translateY(-3px);
+        td:first-child {
+            color: #fff;
+        }
+        animation: moveInFoward .4s ease-out;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         background: linear-gradient(
             90deg,
             rgba(233, 30, 97, 0.9136029411764706) 0%,
-            rgba(237, 237, 237, 0.9164040616246498) 0%,
+            #303030 0%,
             rgba(218, 31, 93, 0.8939950980392157) 60%,
             rgba(217, 38, 97, 0.8575805322128851) 100%
         );
+    }
+}
+
+@keyframes moveInFoward {
+    0% {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+
+    25% {
+        opacity: 0.5;
+        transform: translateX(-7px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
     }
 }
 

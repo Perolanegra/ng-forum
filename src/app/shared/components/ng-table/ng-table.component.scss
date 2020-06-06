@@ -12,7 +12,6 @@
 
 table {
     width: 100%;
-    // border-collapse:collapse;
 }
 
 tr {
@@ -23,16 +22,22 @@ tr {
     background: #e91e63;
 }
 
-.table-row:hover {
-    border-top: solid 2px rgba(233, 30, 97, 0.9136029411764706);
-    border-bottom: solid 2px rgba(233, 30, 97, 0.9136029411764706);
-    background: linear-gradient(
-        90deg,
-        rgba(233, 30, 97, 0.9136029411764706) 0%,
-        rgba(237, 237, 237, 0.9164040616246498) 0%,
-        rgba(218, 31, 93, 0.8939950980392157) 60%,
-        rgba(217, 38, 97, 0.8575805322128851) 100%
-    );
+.table-row {
+    transition-duration: 0.3s;
+    background-color: #4CAF50;
+    &:hover {
+        // border-top: solid 5px #c00845;
+        // border-bottom: solid 5px #c00845;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(
+            90deg,
+            rgba(233, 30, 97, 0.9136029411764706) 0%,
+            rgba(237, 237, 237, 0.9164040616246498) 0%,
+            rgba(218, 31, 93, 0.8939950980392157) 60%,
+            rgba(217, 38, 97, 0.8575805322128851) 100%
+        );
+    }
 }
 
 td.mat-cell:first-child,

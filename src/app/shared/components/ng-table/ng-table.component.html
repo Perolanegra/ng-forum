@@ -9,7 +9,10 @@
         <ng-content select="[botoesOpcoes]"></ng-content>
     </ng-table-header>
 
-    <div class="table-scroll" [style.height]="height">
+    <div class="table-scroll" >
+        <div class="ng-header-row">
+        </div>
+
         <table mat-table [dataSource]="registros" matSort
             matSortActive="{{ ordenaColuna ? ordenaColuna : colunasConfig[0].nome }}" matSortDirection="{{ direcao }}">
 
@@ -44,8 +47,8 @@
 
             <!-- <ng-content></ng-content> -->
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row [ngClass]="{'selected-row': selection.isSelected(row)}" class="table-row"
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;" [class.make-gold]="true"></tr>
+            <tr mat-row [ngClass]="{'selected-row': selection.isSelected(row) }" class="table-row" [class.last-row]="row.lastRow"
                 *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
         </table>
     </div>

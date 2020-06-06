@@ -1,40 +1,113 @@
-.table-scroll { 
+.table-scroll {
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75vw;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 31px 11px -11px rgba(30,33,41,1);
+    -moz-box-shadow: 0px 31px 11px -11px rgba(30,33,41,1);
+    box-shadow: 0px 31px 11px -11px rgba(30,33,41,1);
 }
-  
+
 table {
     width: 100%;
 }
-  
+
 .selected-row {
-    background: #E91E63;
+    background: #e91e63;
 }
-  
-.table-row:hover {   
+
+.table-row:hover {
     border-top: solid 2px lightgray;
     border-bottom: solid 3px lightgray;
 }
 
-td.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {
-    padding-left: 24px;
-    padding-right: 24px;
+td.mat-cell:first-child,
+td.mat-footer-cell:first-child,
+th.mat-header-cell:first-child {
+    padding-right: 11%;
+    max-width: 14vw;
+    overflow-wrap: break-word;
 }
 
-td.mat-cell, th.mat-header-cell {
-    padding: 10px !important;
+.ng-header-row {
+    width: 75vw;
+    height: 52px;
+    background: #e91e63;
+    position: fixed;
+}
+
+.column-outer {
+}
+
+// ::ng-deep div .mat-sort-header-container {
+
+// }
+
+th.mat-header-cell:first-child {
+    font-family: "Product Sans Black Regular" !important;
+    font-size: 1.4rem !important;
+    color: black !important;
+    position: relative !important;
+    right: 1% !important;
+}
+
+th.mat-header-cell:nth-child(2) {
+    font-family: "Product Sans Black Regular" !important;
+    font-size: 1.4rem !important;
+}
+
+th.mat-header-cell:nth-child(3) {
+    font-family: "Product Sans Black Regular" !important;
+    font-size: 1.4rem !important;
+}
+
+th.mat-header-cell:nth-child(4) {
+    font-family: "Product Sans Black Regular" !important;
+    font-size: 1.4rem !important;
+}
+
+th.mat-header-cell:nth-child(5) {
+    font-family: "Product Sans Black Regular" !important;
+    font-size: 1.5rem !important;
+}
+
+.mat-sort-header-arrow,
+.mat-sort-header-position-before .mat-sort-header-arrow {
+    opacity: 0 !important;
+}
+
+::ng-deep .highlight {
+    color: white;
+    background: #673ab7;
+}
+
+table.mat-table {
+    width: 99%;
+    background: #e91e63;
+}
+
+td.mat-cell,
+th.mat-header-cell {
+    padding: 10px;
 }
 
 .content-out {
     flex-direction: column;
     display: flex;
     justify-content: center;
-    width: 75vw;
+    width: fit-content;
 }
 
-::ng-deep .mat-checkbox-checked  .mat-checkbox-background {
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
     background-color: #303030 !important;
 }
 
 ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: #303030 !important;
+}
+
+.last-row {
+    border-radius: 150px !important;
 }

@@ -26,7 +26,7 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() botaoAlterarVisivel: boolean = true;
   @Input() botaoOpcoesVisivel: boolean = true;
   @Input() colunasConfig = [];
-  @Input() checkboxVisivel: boolean = true;
+  @Input() checkboxVisivel: boolean = false;
   @Input() registros;
   @Input() height:string='60vh';
   @ViewChild(MatSort) sort: MatSort;
@@ -37,7 +37,7 @@ export class TableComponent implements OnInit, OnChanges {
   
   ngOnInit(): void {
     this.displayedColumns = this.colunasConfig.map(c => c.nome);
-    this.checkboxVisivel ? this.displayedColumns.unshift('select') : null;
+    this.checkboxVisivel ? this.displayedColumns.unshift('select') : '';
   }
 
   inserirClick() {
@@ -75,9 +75,9 @@ export class TableComponent implements OnInit, OnChanges {
 
   //Quando é afetuado um click na linha ele captura a linha e direciona para tela de edição passando o ID da mesma
   onRowClicked(row) {
-    if (this.checkboxVisivel) {
-      this.rowClicked.emit(row);
-    }
+    console.log('row: ', row);
+    
+    // this.rowClicked.emit(row);
   }
 
   checkBoxClicked(row) {

@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teste.component.scss'],
 })
 export class TesteComponent implements OnInit {
-
+  widthset = '20px';
   public colunasConfig = [
-    { nome: 'issues', titulo: 'Issues', cell: (registro: any) => `<h1 style="cursor:pointer; width: fit-content;">${registro.nome}</h1>`, classes: ['make-gold'] },
+    { nome: 'issues', titulo: 'Issues', cell: (registro: any) => `<div style="cursor:pointer; width: fit-content;">${registro.nome}</div>`, classes: ['make-gold'] },
     { nome: 'post', titulo: 'Post', cell: (registro: any) => `${registro.sigla}`, classes: ['info-col'] },
     { nome: 'stars', titulo: 'Stars', cell: (registro: any) => `${registro.lastname}`, classes: ['stars-col'] },
     { nome: 'views', titulo: 'Views', cell: (registro: any) => `${registro.lastname}`, classes: ['views-col'] },

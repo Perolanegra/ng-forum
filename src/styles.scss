@@ -106,24 +106,18 @@ div#msg-error-ng-default {
     background: #555; 
 }
 
-// .animate {
-//     animation-name: slide-right;
-//     animation-duration: 2s;
-//     animation-fill-mode: forwards;
-// }
+.iss-content {
+    cursor:pointer; 
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 
-// @keyframes slide-right { // nome animacao
-//     from {
-//         margin-left: 0px;
-//     }
+.iss-title {
 
-//     50% {
-//         margin-left: 110px;
-//         opacity: 0.5;
-//     }
+}
 
-//     to {
-//         margin-left: 200px;
-//         opacity: 0.2;
-//     }
-// }
+.iss-author {
+    
+}

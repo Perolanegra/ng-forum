@@ -8,4 +8,5 @@ export interface IssuesModel {
     views: Number;
     tags: string;
     created_at: any;
+    posts: number;
 }

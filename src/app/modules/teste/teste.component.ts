@@ -7,7 +7,7 @@ import { IssuesModel } from '../issues/issues.model';
   styleUrls: ['./teste.component.scss'],
 })
 export class TesteComponent implements OnInit {
-  widthset = '20px';
+  
   public colunasConfig = [
     { nome: 'issues', titulo: 'Issues', cell: (registro: any) => this.getHtml(1, registro), classes: ['make-gold'] },
     { nome: 'post', titulo: 'Post', cell: (registro: any) => `${registro.posts}`, classes: ['info-col'] },

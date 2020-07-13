@@ -5,10 +5,11 @@ import { NoAuthGuard } from './shared/guards/no-auth.guard';
 import { LoginAuthGuard } from './shared/guards/login-auth.guard';
 import { ResetPasswordGuard } from './shared/guards/reset-pass.guard';
 import { TesteComponent } from './modules/teste/teste.component';
+import { ListIssueComponent } from './modules/issues/list-issue/list-issue.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: TesteComponent, canActivate: [TestGuard]  }, 
+  { path: 'login', component: ListIssueComponent, canActivate: [TestGuard]  }, 
   {
     path: 'home',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),

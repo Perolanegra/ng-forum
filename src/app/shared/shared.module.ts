@@ -10,6 +10,7 @@ import { NgInputErrorComponent } from './components/ng-input-error/ng-input-erro
 import { SafeHtmlPipe } from './pipes/safeHtml.pipe';
 import { TableHeaderComponent } from './components/table-header/table-header.component';
 import { TableComponent } from './components/ng-table/ng-table.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { TableComponent } from './components/ng-table/ng-table.component';
         MaterialModule,
         RouterModule,
         ReactiveFormsModule,
+        NgxSkeletonLoaderModule
         // MatAutocompleteModule,
         // NgxMaskModule.forRoot(),
     ],
@@ -37,6 +39,7 @@ import { TableComponent } from './components/ng-table/ng-table.component';
         NgInputErrorComponent,
         MaterialModule,
         ReactiveFormsModule,
+        NgxSkeletonLoaderModule,
         TableComponent,
         TableHeaderComponent,
         SafeHtmlPipe

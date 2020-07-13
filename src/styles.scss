@@ -114,10 +114,28 @@ div#msg-error-ng-default {
     flex-direction: column;
 }
 
+.iss-content-row {
+    flex-direction: row !important;
+    align-items: center;
+}
+
 .iss-title {
 
 }
 
 .iss-author {
-    
+    padding-bottom: 2px;
+}
+
+.iss-img-out {
+
+}
+
+.iss-img {
+    width: 3.5vw;
+    border-radius: 5px;
+}
+
+.iss-info {
+    padding-left: 15px;
 }

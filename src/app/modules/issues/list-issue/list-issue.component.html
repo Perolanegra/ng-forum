@@ -1,0 +1,22 @@
+<!-- <div style="display: flex; justify-content: center;">
+    <ng-table [colunasConfig]="colunasConfig" [botaoOpcoesVisivel]="false" [registros]="registros">
+    </ng-table>
+</div> -->
+
+
+<div class="content"> <!--fazer o state p chamar os registros e por o ngif aqui do skeleton com a tabela-->
+    <div class="skeleton-out">
+        <div class="skeleton-content">
+            <ngx-skeleton-loader count="1" animation="progress" [theme]="titleSkeletonTheme">
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader *ngFor="let i of [0,1,2,3,4]" count="1" 
+            animation="progress" [theme]="rowSkeletonTheme">
+            </ngx-skeleton-loader>
+        </div>
+    </div>
+</div>
+
+
+<!--  (atualizar)="atualizar()" (alterar)="alterar($event)" (excluir)="excluir($event)" (inserir)="inserir()"
+     [registros]="registros" (rowClicked)="rowClicked($event)"
+    -->

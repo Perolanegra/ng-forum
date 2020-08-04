@@ -41,8 +41,8 @@ export class ListIssueComponent implements OnInit {
       {
         id: 1,
         id_user: 12,
-        title: 'igor',
-        subtitle: 'igor',
+        title: 'Angular Elements',
+        subtitle: 'Gerando conteúdo dinamicamente com angular elements.',
         author: 'igor',
         stars: 3,
         views: 223,
@@ -53,8 +53,8 @@ export class ListIssueComponent implements OnInit {
       {
         id: 1,
         id_user: 12,
-        title: 'igor',
-        subtitle: 'igor',
+        title: 'Angular Schematics',
+        subtitle: 'Gerando components padrões pra sua aplicação.',
         author: 'igor',
         stars: 3,
         views: 223,
@@ -65,8 +65,8 @@ export class ListIssueComponent implements OnInit {
       {
         id: 1,
         id_user: 12,
-        title: 'igor',
-        subtitle: 'igor',
+        title: 'Interpolação e Property Binding',
+        subtitle: 'Iniciando em angular com interpolação e property binding.',
         author: 'igor',
         stars: 3,
         views: 223,
@@ -77,8 +77,8 @@ export class ListIssueComponent implements OnInit {
       {
         id: 1,
         id_user: 12,
-        title: 'igor',
-        subtitle: 'igor',
+        title: 'Angular Animations',
+        subtitle: 'Estilizando sua aplicação com angular animations.',
         author: 'igor',
         stars: 3,
         views: 223,
@@ -94,7 +94,7 @@ export class ListIssueComponent implements OnInit {
     const obj = {
       1: `<div class="iss-content">
             <span class="iss-title">${registro.title}</span>
-            <span class="iss-title">${registro.subtitle}</span>
+            <span class="iss-subtitle">${registro.subtitle.slice(0,29)}...</span>
             <div class="iss-author">@author ${registro.author}</div>
           </div>`,
       5: `<div class="iss-content iss-content-row">

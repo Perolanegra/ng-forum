@@ -14,6 +14,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @font-face { font-family: 'Montserrat Semi Bold'; src: url('./assets/fonts/Montserrat-SemiBold.ttf') }
 @font-face { font-family: 'Montserrat Medium'; src: url('./assets/fonts/Montserrat-Medium.ttf') }
 
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,500&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,500,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,500,500i,700,700i&display=swap");
 
 
 .accent-color {
@@ -120,7 +124,15 @@ div#msg-error-ng-default {
 }
 
 .iss-title {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-size: 16px;
+    overflow-wrap: anywhere;
+}
 
+.iss-subtitle {
+    max-width: 220px;
+    font-family: 'Product Sans Light Regular';
 }
 
 .iss-author {

@@ -29,7 +29,7 @@ import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.direct
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ForgetPasswordComponent } from './modules/login/dialogs/forget-password/forget-password.component';
 import { TesteComponent } from './modules/teste/teste.component';
-import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,9 +43,9 @@ import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
     TesteComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
-    RichTextEditorModule,
     BrowserAnimationsModule,
     MaterialModule,
     SharedModule,
@@ -85,7 +85,7 @@ import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
   ],
   bootstrap: [AppComponent],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
+    CUSTOM_ELEMENTS_SCHEMA,
   ],
   entryComponents: [
     ForgetPasswordComponent

@@ -103,7 +103,7 @@ export abstract class NgForm extends NgDefault {
                 return [types[id]];
             }
 
-            removeIndex === -1 ? types.splice(id, types.length) : types.splice(id, removeIndex);
+            removeIndex ? types.splice(id, removeIndex) : types.splice(id);
 
             return types;
 

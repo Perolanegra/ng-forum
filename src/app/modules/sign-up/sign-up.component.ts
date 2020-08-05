@@ -49,11 +49,11 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg
-    const pass_msg = this.getErrorMessages(3, true, this.lastIndex);
-    const pass_type = this.getErrorTypes(3, true, this.lastIndex);
+    const pass_msg = this.getErrorMessages(3, true);
+    const pass_type = this.getErrorTypes(3, true);
 
     const username_msg = this.getErrorMessages(1, true, 3);
-    const username_type = this.getErrorTypes(2, true, this.lastIndex);
+    const username_type = this.getErrorTypes(2, true);
 
     const email_msg = [...this.getErrorMessages(0), ...this.getErrorMessages(5)];
     const email_type = [...this.getErrorTypes(0), ...this.getErrorTypes(4)];

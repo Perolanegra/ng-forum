@@ -1,8 +1,14 @@
-<ejs-richtexteditor #defaultRTE id='defaultRTE' [toolbarSettings]='tools' [enablePersistence]='true' [iframeSettings]='iframe'
-     [quickToolbarSettings]='quickTools' [width]="'80%'" [height]="'50%'">
-     <ng-template>
-          <ng-container>
-                Descreva seu issue...
-          </ng-container>
-     </ng-template>
-</ejs-richtexteditor>
+<div class="content" *ngIf="!hasClosed">
+
+    <div style="width: fit-content; position: absolute; color:#ea4863;" (click)="close();">
+        <button mat-icon-button style="outline: none;" tabindex="-1">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <ckeditor (change)="onChange($event)" [config]="{ height: [ [ '60vh' ] ] }" [(ngModel)]="model.editorData">
+    </ckeditor>
+
+    <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"
+        class="product-sans-light btn-submit fade-transition-in" (click)="submit()" cdkFocusInitial>Anexar Conteúdo</button>
+</div>

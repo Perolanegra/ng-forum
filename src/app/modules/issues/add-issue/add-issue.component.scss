@@ -1,0 +1,157 @@
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: none;
+}
+
+.content-inside {
+    width: fit-content;
+    // font-size: 85%;
+    overflow: auto;
+}
+
+.square {
+    color: #fff;
+    background: #22262e;
+    padding: 5vh;
+    border-radius: 6px;
+    border: transparent;
+    width: 65vw;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-content-inside {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-out {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    bottom: 2vh;
+}
+
+.logo {
+    max-width: 13vw;
+}
+
+.label-info {
+    margin-bottom: 6%;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    color: #f36079;
+}
+
+::ng-deep .mat-hint {
+    color: #fff;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    
+    .square {
+        max-width: 85vw;
+    }
+    
+    .logo {
+        max-width: 45%;
+    }
+    
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+	color: #fff;
+}
+
+::ng-deep .mat-form-field-label {
+    color: #fff;
+}
+
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+    color: #E91E63 !important;
+    opacity: 0.3;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    color: #fff;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #E91E63 !important;
+    opacity: 0.2 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    opacity: 0.3;
+    color: #E91E63;
+}
+
+::ng-deep .mat-hint {
+    color: #fff;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0px 1000px #303030 inset !important;
+    font-family: 'Montserrat' !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
+    color: #E91E63 !important;
+    font-family: 'Montserrat' !important;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border: 1.4px solid #E91E63;
+}
+
+.text-link-size {
+    font-size: 75%;
+}
+
+.content-box-buttons {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.box-btn-inside {
+    width: 30%;
+    color: black;
+}
+
+::ng-deep .mat-option {
+    color: black !important;
+    font-family: 'Product Sans';
+    font-size: 16px !important;
+}
+
+::ng-deep .mat-select-panel {
+    background: #E91E63;
+}
+
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+    background: black;
+}
+
+::ng-deep .mat-select-value {
+    color: #fff !important;
+}

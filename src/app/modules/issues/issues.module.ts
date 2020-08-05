@@ -6,6 +6,8 @@ import { ListIssueComponent } from './list-issue/list-issue.component';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IssuesRoutingModule } from './issues-routing.module';
+import { CKEditorModule } from 'ckeditor4-angular';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,10 +19,13 @@ import { IssuesRoutingModule } from './issues-routing.module';
     CommonModule,
     MaterialModule,
     SharedModule,
-    IssuesRoutingModule
+    IssuesRoutingModule,
+    CKEditorModule,
+    FormsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
+  entryComponents: [NgRichTextEditorComponent]
 })
 export class IssuesModule { }

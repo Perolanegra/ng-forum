@@ -1,44 +1,72 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToolbarService, LinkService, ImageService, HtmlEditorService, RichTextEditor, IFrameSettingsModel } from '@syncfusion/ej2-angular-richtexteditor';
+import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { CKEditor4 } from 'ckeditor4-angular';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AppController } from 'src/app/core/appController';
+import { Store } from '@ngxs/store';
+import { DialogDefault } from 'src/app/core/dialog-default';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'ng-text-editor',
   templateUrl: './ng-text-editor.component.html',
   styleUrls: ['./ng-text-editor.component.scss'],
-  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService]
+  animations: [
+    trigger('btnSubmitState', [
+      state('disabled', style({
+        'opacity': '0.4',
+        'pointer-events': 'none'
+      })),
+      state('enabled', style({
+        'opacity': '1',
+        'pointer-events': 'auto',
+        'color': 'black'
+      })),
+      transition('disabled => enabled', animate(300)),
+      transition('enabled => disabled', animate(300))
+    ])
+  ]
 })
-export class NgRichTextEditorComponent implements OnInit {
+export class NgRichTextEditorComponent extends DialogDefault implements OnInit  {
 
-  @ViewChild('defaultRTE') editor: RichTextEditor;
+  public model = { editorData: '<h2 id="placeholder">Descreva seu Issue...</h2>' };
+  public stateBtnSubmit = 'disabled';
 
-  constructor() { }
+  constructor(public formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<NgRichTextEditorComponent>,
+    protected dialog: MatDialog,
+    protected appController: AppController,
+    private store: Store,
+    protected renderer: Renderer2,
+    @Inject(MAT_DIALOG_DATA) public data) {
+    super(dialog, formBuilder, renderer, appController);
+  }
 
-  public iframe: IFrameSettingsModel = {
-    enable: true,
-    resources: {
-      styles: ['width="1280"', 'height="629"']
+  ngOnInit(): void {
+    this.setDialogForm();
+    this.dialogForm.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
+   }
+
+  submit(): void { // centralizar no DialogDefault
+    if (this.dialogForm.valid) {
+      this.verifyDecision();
+      // this.spinner.show();
+      // this.store.dispatch(new AuthActions.ForgotPassword(this.dialogForm.get('username').value));
     }
-  };
+  }
 
-  public tools: object = {
-    type: 'MultiRow',
-    items: ['Undo', 'Redo', '|',
-      'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
-      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
-      'SubScript', 'SuperScript', '|',
-      'LowerCase', 'UpperCase', '|',
-      'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
-      'Indent', 'Outdent', '|', 'CreateLink',
-      'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
-  };
-  public height: number = 300;
+  verifyDecision() {
+    // chamar um alert perguntando se ele quer confirmar criar o Issue
+  }
 
-  public quickTools: object = {
-    image: [
-      'Replace', 'Align', 'Caption', 'Remove', 
-      'InsertLink', '-', 'Display', 'AltText', 'Dimension']
-  };
+  onChange(ev: CKEditor4.EventInfo) {
+    this.stateBtnSubmit = ev.editor.getData().length < 75 ? 'disabled' : 'enabled';
+    this.dialogForm.get('content').setValue(ev.editor.getData());
+  }
 
-  ngOnInit(): void { }
+  close() {
+    this.dialogRef.close();
+    this.hasClosed = true;
+  }
 
 }

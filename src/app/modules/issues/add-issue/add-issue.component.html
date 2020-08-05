@@ -1,1 +1,80 @@
-<ng-text-editor></ng-text-editor>
+<!-- <ng-text-editor></ng-text-editor> -->
+<div class="content base-color">
+    <div class="content-inside">
+        <div class="square">
+            <div class="logo-out">
+                <img class="logo" src="assets/imgs/logo.png">
+            </div>
+
+            <div class="font label-info" style="width: 100%;">
+                Criar nova Issue
+            </div>
+
+            <div>
+                <form [formGroup]="_form">
+                    <div class="form-content">
+
+                        <div class="form-content-inside">
+
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom">
+                                <mat-label>Título</mat-label>
+                                <input matInput class="font" autocomplete='off' formControlName="title" required
+                                    ngAutofillOff minlength="8" type="text" />
+                                <mat-error>
+                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
+                                        [control]="_form.controls?.title" [controlName]="'title'"
+                                        [errorMsgs]="errorMsgs?.title">
+                                    </ng-input-error>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.subtitle?.paddingBottom">
+                                <mat-label>Subtítulo</mat-label>
+                                <textarea matInput class="font" autocomplete='off' formControlName="subtitle" required
+                                    ngAutofillOff minlength="10" type="text"></textarea>
+                                <mat-error>
+                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
+                                        [control]="_form.controls?.subtitle" [controlName]="'subtitle'"
+                                        [errorMsgs]="errorMsgs?.subtitle">
+                                    </ng-input-error>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.tags?.paddingBottom">
+                                <mat-label>Tags</mat-label>
+                                <mat-select class="font" multiple matInput formControlName="tags" ngAutofillOff
+                                    required>
+                                    <mat-option *ngFor="let tag of tagList" [value]="tag">{{tag}}</mat-option>
+                                </mat-select>
+
+                                <mat-error>
+                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
+                                        [control]="_form.controls?.tags" [controlName]="'tags'"
+                                        [errorMsgs]="errorMsgs?.tags">
+                                    </ng-input-error>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <div class="content-box-buttons">
+                                <button style="margin-top: 0.2rem;" mat-raised-button (click)="openRichTextEditor()"
+                                    class="btn-submit box-btn-inside" cdkFocusInitial>Adicionar Conteúdo</button>
+
+                                <button style="margin-top: 0.2rem;" mat-raised-button 
+                                    class="btn-submit box-btn-inside" cdkFocusInitial>Adicionar Enquete</button>
+                            </div>
+
+
+                        </div>
+
+                        <button style="margin-top: 0.2rem;" mat-raised-button 
+                            [@btnSubmitState]="stateBtnSubmit" class="btn-submit" cdkFocusInitial>Criar Issue</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

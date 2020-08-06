@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AppController } from 'src/app/core/appController';
 import { NgRichTextEditorComponent } from './ng-text-editor/ng-text-editor.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -6,6 +6,7 @@ import { NgForm } from 'src/app/core/ng-form';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ng-add-issue',
@@ -25,13 +26,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
     ]),
-    
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddIssueComponent extends NgForm implements OnInit {
 
   public stateBtnSubmit: string = 'disabled';
+  public btnContentText: string = 'Adicionar';
   public tagListMock = [ 'bug', 'implementation', 'refactory' ];
   private count = 0;
   public hasContent = false;
@@ -39,14 +40,12 @@ export class AddIssueComponent extends NgForm implements OnInit {
   public getResponse() {
     throw new Error("Method not implemented.");
   }
-  public submit(): void {
-    throw new Error("Method not implemented.");
-  }
 
   constructor(protected appController: AppController,
     protected formBuilder: FormBuilder,
     protected ngZone: NgZone,
     private spinner: NgxSpinnerService,
+    private ref: ChangeDetectorRef
   ) {
     super(formBuilder, appController, ngZone, false);
   }
@@ -58,6 +57,9 @@ export class AddIssueComponent extends NgForm implements OnInit {
       formEmitted ? this.stateBtnSubmit = this._form.valid ? 'enabled' : 'disabled' : null;
     })
   }
+  // async setimg() {
+  //   await this.appController.getImg('content-issue.png');
+  // }
 
   openRichTextEditor(ev) {
     ev.preventDefault();
@@ -67,12 +69,18 @@ export class AddIssueComponent extends NgForm implements OnInit {
       dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600));
       this.count++;
     }
+
     dialogRef.afterClosed().subscribe(content => {
       if(content) {
         this.appController.removeElementClass(document.getElementById('tagField') as any, 'disabled');
-        this._form.get('contentIssue').setValue(content);
+        this._form.get('contentIssue').setValue(content); 
+        this.ref.markForCheck();
       }
     });
+  }
+
+  public submit(): void {
+    
   }
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg

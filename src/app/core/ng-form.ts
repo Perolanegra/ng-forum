@@ -22,7 +22,8 @@ export abstract class NgForm extends NgDefault {
     constructor(protected formBuilder: FormBuilder,
         protected appController: AppController,
         protected ngZone: NgZone,
-        protected hasKeepRegister: boolean) {
+        protected hasKeepRegister: boolean,
+        ) {
         super();
         this._form = this.formBuilder.group({});
         hasKeepRegister ?? this._form.addControl("keepRegister", new FormControl(false));
@@ -168,11 +169,10 @@ export abstract class NgForm extends NgDefault {
 
         if (!response?.index || response?.index < 2) {
             this.styleFormFieldObject[response.controlName].paddingBottom = '0%';
-            return;
         } else {
             const basePadding = 1; // base é 1.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
             const resultPadding = basePadding * response.index;
-            this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`
+            this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`;
         }
 
     }

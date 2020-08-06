@@ -41,11 +41,20 @@
                             </mat-form-field>
 
                             <div class="content-box-buttons">
-                                <button style="margin-top: 0.2rem;" mat-raised-button (click)="openRichTextEditor($event)"
-                                    class="btn-submit box-btn-inside" cdkFocusInitial>Adicionar Conteúdo</button>
+                                <div class="content-box-in">
+                                    <button style="margin-top: 0.2rem;" mat-raised-button
+                                        (click)="openRichTextEditor($event)" class="btn-submit box-btn-inside"
+                                        cdkFocusInitial>{{ formControls.contentIssue.valid ? 'Editar' : 'Adicionar' }} Conteúdo</button>
+                                    <img class="box-img-ing" src="assets/imgs/content-issue.png">
+                                </div>
 
-                                <button style="margin-top: 0.2rem;" mat-raised-button class="btn-submit box-btn-inside"
-                                    cdkFocusInitial (click)="$event.preventDefault();">Adicionar Enquete</button>
+                                <div class="content-box-in">
+                                    <button style="margin-top: 0.2rem;" mat-raised-button
+                                        class="btn-submit box-btn-inside" cdkFocusInitial
+                                        (click)="$event.preventDefault();">Adicionar Enquete</button>
+                                    <img class="box-img-ing" src="assets/imgs/content-issue.png">
+                                </div>
+
                             </div>
 
                             <mat-form-field appearance="outline" id="tagField" class="fade-transition-in font disabled"
@@ -66,7 +75,7 @@
                         </div>
 
                         <button style="margin-top: 0.2rem;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"
-                            class="btn-submit" cdkFocusInitial>Criar Issue</button>
+                            class="btn-submit" (click)="submit()" cdkFocusInitial>Criar Issue</button>
                     </div>
                 </form>
             </div>

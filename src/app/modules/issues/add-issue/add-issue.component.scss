@@ -134,7 +134,7 @@ input:-webkit-autofill {
 }
 
 .box-btn-inside {
-    width: 30%;
+    // width: 30%;
     color: black;
 }
 
@@ -154,4 +154,16 @@ input:-webkit-autofill {
 
 ::ng-deep .mat-select-value {
     color: #fff !important;
+}
+
+.content-box-in {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-img-ing {
+    width: 20px;
+    height: 20px;
 }

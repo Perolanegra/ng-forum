@@ -1,11 +1,11 @@
-import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, OnDestroy } from '@angular/core';
 import { CKEditor4 } from 'ckeditor4-angular';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppController } from 'src/app/core/appController';
-import { Store } from '@ngxs/store';
 import { DialogDefault } from 'src/app/core/dialog-default';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ng-text-editor',
@@ -27,7 +27,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ])
   ]
 })
-export class NgRichTextEditorComponent extends DialogDefault implements OnInit  {
+export class NgRichTextEditorComponent extends DialogDefault implements OnInit, OnDestroy  {
 
   public model = { editorData: '<h2 id="placeholder">Descreva seu Issue...</h2>' };
   public stateBtnSubmit = 'disabled';
@@ -36,8 +36,8 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit  
     public dialogRef: MatDialogRef<NgRichTextEditorComponent>,
     protected dialog: MatDialog,
     protected appController: AppController,
-    private store: Store,
     protected renderer: Renderer2,
+    private spinner: NgxSpinnerService,
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialog, formBuilder, renderer, appController);
   }
@@ -47,11 +47,15 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit  
     this.dialogForm.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
    }
 
+   ngOnDestroy() {
+    this.spinner.hide();
+   }
+
   submit(): void { // centralizar no DialogDefault
     if (this.dialogForm.valid) {
       this.verifyDecision();
-      // this.spinner.show();
-      // this.store.dispatch(new AuthActions.ForgotPassword(this.dialogForm.get('username').value));
+      this.spinner.show();
+      this.close(this.dialogForm.value.content);
     }
   }
 
@@ -64,8 +68,8 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit  
     this.dialogForm.get('content').setValue(ev.editor.getData());
   }
 
-  close() {
-    this.dialogRef.close();
+  close(data?: any) {
+    this.dialogRef.close(data);
     this.hasClosed = true;
   }
 

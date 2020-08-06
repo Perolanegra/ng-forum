@@ -23,7 +23,6 @@ export abstract class NgForm extends NgDefault {
         protected appController: AppController,
         protected ngZone: NgZone,
         protected hasKeepRegister: boolean) {
-
         super();
         this._form = this.formBuilder.group({});
         hasKeepRegister ?? this._form.addControl("keepRegister", new FormControl(false));

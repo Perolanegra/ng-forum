@@ -6,7 +6,6 @@ import { NgForm } from 'src/app/core/ng-form';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { tap, debounce, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ng-add-issue',
@@ -26,6 +25,7 @@ import { tap, debounce, debounceTime } from 'rxjs/operators';
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
     ]),
+    
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -34,6 +34,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
   public stateBtnSubmit: string = 'disabled';
   public tagListMock = [ 'bug', 'implementation', 'refactory' ];
   private count = 0;
+  public hasContent = false;
   
   public getResponse() {
     throw new Error("Method not implemented.");
@@ -45,7 +46,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
   constructor(protected appController: AppController,
     protected formBuilder: FormBuilder,
     protected ngZone: NgZone,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
   ) {
     super(formBuilder, appController, ngZone, false);
   }
@@ -58,7 +59,8 @@ export class AddIssueComponent extends NgForm implements OnInit {
     })
   }
 
-  openRichTextEditor() {
+  openRichTextEditor(ev) {
+    ev.preventDefault();
     const dialogRef = this.appController.showToastPopUp({ style: {} }, NgRichTextEditorComponent);
     if(this.count < 1) {
       this.spinner.show();
@@ -66,8 +68,10 @@ export class AddIssueComponent extends NgForm implements OnInit {
       this.count++;
     }
     dialogRef.afterClosed().subscribe(content => {
-      console.log('data content out: ', content);
-      this._form.get('contentIssue').setValue(content);
+      if(content) {
+        this.appController.removeElementClass(document.getElementById('tagField') as any, 'disabled');
+        this._form.get('contentIssue').setValue(content);
+      }
     });
   }
 
@@ -87,7 +91,6 @@ export class AddIssueComponent extends NgForm implements OnInit {
     this._form.addControl('subtitle', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('tags', new FormControl(null, [Validators.required]));
     this._form.addControl('contentIssue', new FormControl(null, [Validators.required]));
-    // this._form.addControl('contentEnquete', new FormControl(null, [Validators.required]));
     this.initStyleFormErrorMsg();
   }
 

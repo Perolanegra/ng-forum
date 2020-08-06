@@ -51,7 +51,8 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit, 
     this.spinner.hide();
    }
 
-  submit(): void { // centralizar no DialogDefault
+  submit(ev): void { // centralizar no DialogDefault
+    ev.preventDefault();
     if (this.dialogForm.valid) {
       this.verifyDecision();
       this.spinner.show();

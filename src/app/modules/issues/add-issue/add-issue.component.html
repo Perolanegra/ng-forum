@@ -13,10 +13,9 @@
             <div>
                 <form [formGroup]="_form">
                     <div class="form-content">
-
                         <div class="form-content-inside">
-                            <mat-form-field appearance="outline" class="fade-transition-in font" 
-                            [style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom">
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom">
                                 <mat-label>Título</mat-label>
                                 <input matInput class="font" autocomplete='off' formControlName="title" required
                                     ngAutofillOff minlength="8" type="text" />
@@ -28,8 +27,8 @@
                                 </mat-error>
                             </mat-form-field>
 
-                            <mat-form-field appearance="outline" class="fade-transition-in font" 
-                            [style.padding-bottom]="styleFormFieldObject?.subtitle?.paddingBottom">
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.subtitle?.paddingBottom">
                                 <mat-label>Subtítulo</mat-label>
                                 <textarea matInput class="font" autocomplete='off' formControlName="subtitle" required
                                     ngAutofillOff minlength="10" type="text"></textarea>
@@ -41,8 +40,16 @@
                                 </mat-error>
                             </mat-form-field>
 
-                            <mat-form-field appearance="outline" class="fade-transition-in font"
-                            [style.padding-bottom]="styleFormFieldObject?.tags?.paddingBottom">
+                            <div class="content-box-buttons">
+                                <button style="margin-top: 0.2rem;" mat-raised-button (click)="openRichTextEditor($event)"
+                                    class="btn-submit box-btn-inside" cdkFocusInitial>Adicionar Conteúdo</button>
+
+                                <button style="margin-top: 0.2rem;" mat-raised-button class="btn-submit box-btn-inside"
+                                    cdkFocusInitial (click)="$event.preventDefault();">Adicionar Enquete</button>
+                            </div>
+
+                            <mat-form-field appearance="outline" id="tagField" class="fade-transition-in font disabled"
+                                [style.padding-bottom]="styleFormFieldObject?.tags?.paddingBottom">
                                 <mat-label>Tags</mat-label>
                                 <mat-select class="font" multiple matInput formControlName="tags" ngAutofillOff
                                     required>
@@ -56,18 +63,10 @@
                                     </ng-input-error>
                                 </mat-error>
                             </mat-form-field>
-
-                            <div class="content-box-buttons">
-                                <button style="margin-top: 0.2rem;" mat-raised-button (click)="openRichTextEditor()"
-                                    class="btn-submit box-btn-inside" cdkFocusInitial>Adicionar Conteúdo</button>
-
-                                <button style="margin-top: 0.2rem;" mat-raised-button 
-                                    class="btn-submit box-btn-inside" cdkFocusInitial>Adicionar Enquete</button>
-                            </div>
                         </div>
 
-                        <button style="margin-top: 0.2rem;" mat-raised-button 
-                            [@btnSubmitState]="stateBtnSubmit" class="btn-submit" cdkFocusInitial>Criar Issue</button>
+                        <button style="margin-top: 0.2rem;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"
+                            class="btn-submit" cdkFocusInitial>Criar Issue</button>
                     </div>
                 </form>
             </div>

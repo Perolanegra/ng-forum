@@ -21,7 +21,6 @@ export class AppController {
         private _store: Store,
         private router: Router) {
         this.renderer = this.rendererFactory.createRenderer(null, null);
-        window['t'] = this;
     }
 
     tratarErro(err): void {

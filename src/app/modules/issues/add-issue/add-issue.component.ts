@@ -1,9 +1,11 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { AppController } from 'src/app/core/appController';
 import { NgRichTextEditorComponent } from './ng-text-editor/ng-text-editor.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgForm } from 'src/app/core/ng-form';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { CustomValidators } from 'src/app/shared/validators/custom-validators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ng-add-issue',
@@ -22,13 +24,15 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       })),
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
-    ])
-  ]
+    ]),
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddIssueComponent extends NgForm implements OnInit {
 
-  public stateBtnSubmit = 'disabled';
-  public tagList = [ 'bug', 'implementation', 'refactory' ];
+  public stateBtnSubmit: string = 'disabled';
+  public tagListMock = [ 'bug', 'implementation', 'refactory' ];
+  private count = 0;
   
   public getResponse() {
     throw new Error("Method not implemented.");
@@ -39,7 +43,8 @@ export class AddIssueComponent extends NgForm implements OnInit {
 
   constructor(protected appController: AppController,
     protected formBuilder: FormBuilder,
-    protected ngZone: NgZone
+    protected ngZone: NgZone,
+    private spinner: NgxSpinnerService
   ) {
     super(formBuilder, appController, ngZone, false);
   }
@@ -50,31 +55,32 @@ export class AddIssueComponent extends NgForm implements OnInit {
   }
 
   openRichTextEditor() {
-    this.appController.showToastPopUp({ style: {} }, NgRichTextEditorComponent);
+    const dialogRef = this.appController.showToastPopUp({ style: {} }, NgRichTextEditorComponent);
+    if(this.count < 1) {
+      this.spinner.show();
+      dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600));
+      this.count++;
+    }
+    dialogRef.afterClosed().subscribe(content => {
+      console.log('data content out: ', content);
+      this._form.get('contentIssue').setValue(content);
+    });
   }
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg
     const title_type = this.getErrorTypes(2, true);
     const title_msg = this.getErrorMessages(2, true);
 
-    // const username_msg = this.getErrorMessages(1, true, 3);
-    // const username_type = this.getErrorTypes(2, true);
-
-    // const email_msg = [...this.getErrorMessages(0), ...this.getErrorMessages(5)];
-    // const email_type = [...this.getErrorTypes(0), ...this.getErrorTypes(4)];
-
-    // const name_msg = [ ...this.getErrorMessages(0), ...this.getErrorMessages(4), ...this.getErrorMessages(2) ];
-    // const name_type = [ ...this.getErrorTypes(0), ...this.getErrorTypes(1), ...this.getErrorTypes(2) ];
+    const subtitle_type = this.getErrorTypes(2, true, 3);
+    const subtitle_msg = this.getErrorMessages(2, true, 4, 10);
 
     this.seErrorMsgs('title', title_type, title_msg);
-    // this.seErrorMsgs('username', username_type, username_msg);
-    // this.seErrorMsgs('name', name_type, name_msg);
-    // this.seErrorMsgs('email', email_type, email_msg);
+    this.seErrorMsgs('subtitle', subtitle_type, subtitle_msg);
   }
 
   setForm(): void {
-    this._form.addControl('title', new FormControl(null, [Validators.required]));
-    this._form.addControl('subtitle', new FormControl(null, [Validators.required]));
+    this._form.addControl('title', new FormControl(null, [Validators.required, CustomValidators.allblank]));
+    this._form.addControl('subtitle', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('tags', new FormControl(null, [Validators.required]));
     this._form.addControl('contentIssue', new FormControl(null, [Validators.required]));
     this._form.addControl('contentEnquete', new FormControl(null, [Validators.required]));

@@ -3,7 +3,7 @@ import { AppController } from './appController';
 import { NgDefault } from './pattern/ng-default';
 import { NgFormErrorMesssage } from './pattern/ng-form-error-msg';
 import { NgFormErrorType } from './pattern/ng-form-error-type';
-import { Subscription, Observable, BehaviorSubject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ToastComponent } from '../shared/components/toast/toast.component';
 import { NgZone } from '@angular/core';
 

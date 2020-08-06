@@ -21,6 +21,7 @@ export class AppController {
         private _store: Store,
         private router: Router) {
         this.renderer = this.rendererFactory.createRenderer(null, null);
+        window['t'] = this;
     }
 
     tratarErro(err): void {
@@ -336,8 +337,12 @@ export class AppController {
         return call[type]();
     }
 
-    public hasSameValue(str1: string, str2: string): boolean {
+    public hasSameValue(str1: string = this.isRequired('str1'), str2: string = this.isRequired('str2')): boolean {
         return str1 === str2;
+    }
+
+    public isRequired = text => {
+        throw new Error(`${text} é obrigatório.`);
     }
 }
 

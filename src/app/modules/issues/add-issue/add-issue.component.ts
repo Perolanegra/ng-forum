@@ -6,6 +6,7 @@ import { NgForm } from 'src/app/core/ng-form';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { tap, debounce, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ng-add-issue',
@@ -52,6 +53,9 @@ export class AddIssueComponent extends NgForm implements OnInit {
   ngOnInit(): void {
     this.setForm();
     this.setErrorValidation();
+    this._form.valueChanges.pipe().subscribe(formEmitted => {
+      formEmitted ? this.stateBtnSubmit = this._form.valid ? 'enabled' : 'disabled' : null;
+    })
   }
 
   openRichTextEditor() {
@@ -83,7 +87,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
     this._form.addControl('subtitle', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('tags', new FormControl(null, [Validators.required]));
     this._form.addControl('contentIssue', new FormControl(null, [Validators.required]));
-    this._form.addControl('contentEnquete', new FormControl(null, [Validators.required]));
+    // this._form.addControl('contentEnquete', new FormControl(null, [Validators.required]));
     this.initStyleFormErrorMsg();
   }
 

@@ -15,9 +15,8 @@
                     <div class="form-content">
 
                         <div class="form-content-inside">
-
-                            <mat-form-field appearance="outline" class="fade-transition-in font"
-                                [style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom">
+                            <mat-form-field appearance="outline" class="fade-transition-in font" 
+                            [style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom">
                                 <mat-label>Título</mat-label>
                                 <input matInput class="font" autocomplete='off' formControlName="title" required
                                     ngAutofillOff minlength="8" type="text" />
@@ -29,8 +28,8 @@
                                 </mat-error>
                             </mat-form-field>
 
-                            <mat-form-field appearance="outline" class="fade-transition-in font"
-                                [style.padding-bottom]="styleFormFieldObject?.subtitle?.paddingBottom">
+                            <mat-form-field appearance="outline" class="fade-transition-in font" 
+                            [style.padding-bottom]="styleFormFieldObject?.subtitle?.paddingBottom">
                                 <mat-label>Subtítulo</mat-label>
                                 <textarea matInput class="font" autocomplete='off' formControlName="subtitle" required
                                     ngAutofillOff minlength="10" type="text"></textarea>
@@ -43,11 +42,11 @@
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" class="fade-transition-in font"
-                                [style.padding-bottom]="styleFormFieldObject?.tags?.paddingBottom">
+                            [style.padding-bottom]="styleFormFieldObject?.tags?.paddingBottom">
                                 <mat-label>Tags</mat-label>
                                 <mat-select class="font" multiple matInput formControlName="tags" ngAutofillOff
                                     required>
-                                    <mat-option *ngFor="let tag of tagList" [value]="tag">{{tag}}</mat-option>
+                                    <mat-option *ngFor="let tag of tagListMock" [value]="tag">{{tag}}</mat-option>
                                 </mat-select>
 
                                 <mat-error>
@@ -65,8 +64,6 @@
                                 <button style="margin-top: 0.2rem;" mat-raised-button 
                                     class="btn-submit box-btn-inside" cdkFocusInitial>Adicionar Enquete</button>
                             </div>
-
-
                         </div>
 
                         <button style="margin-top: 0.2rem;" mat-raised-button 

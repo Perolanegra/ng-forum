@@ -3,14 +3,14 @@ import { AppController } from './appController';
 import { NgDefault } from './pattern/ng-default';
 import { NgFormErrorMesssage } from './pattern/ng-form-error-msg';
 import { NgFormErrorType } from './pattern/ng-form-error-type';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, BehaviorSubject } from 'rxjs';
 import { ToastComponent } from '../shared/components/toast/toast.component';
 import { NgZone } from '@angular/core';
 
 
 export abstract class NgForm extends NgDefault {
     _form: FormGroup;
-    
+
     public errorMsgs: { [key: string]: any } = {};
     public hide1 = true;
     public hide2 = true;
@@ -65,20 +65,21 @@ export abstract class NgForm extends NgDefault {
     /**
      * 
      * @param id index da string no array, caso for recuperar uma mensagem específica ou todas. Caso for remover, é o index do elemento inicial a ser removido.
-     * @param hasDelete booleano q decide se remove os elementos do array para retornar os elementos solicitados.
-     * @param removeIndex index até o qual serão removidos os elementos.
+     * @param hasDelete (param opcional) booleano q decide se remove os elementos do array para retornar os elementos solicitados.
+     * @param removeIndex (param opcional) index até o qual serão removidos os elementos.
+     * @param qtdCharRule (param opcional) quantidade de caracteres mínimos para validação minLength, param opcional, caso não passe o default é 8. Caso for passar, o 3 parametro, removeIndex deve ser passado como null.
      */
-    public getErrorMessages(id: number, hasDelete?: boolean, removeIndex?: number): Array<any> {
+    public getErrorMessages(id: number, hasDelete?: boolean, removeIndex?: number, qtdCharRule?: number): Array<any> {
         try {
             const ngFormMsgObj = new NgFormErrorMesssage();
-            const msgs = ngFormMsgObj.getMessages();
+            const msgs = qtdCharRule ? ngFormMsgObj.getMessages(qtdCharRule) : ngFormMsgObj.getMessages();
 
             if (!hasDelete) {
                 if (id < 0) return [...msgs];
                 return [msgs[id]];
             }
 
-            removeIndex === -1 ? msgs.splice(id, msgs.length) : msgs.splice(id, removeIndex);
+            removeIndex ? msgs.splice(id, removeIndex) : msgs.splice(id);
 
             return msgs;
 
@@ -128,7 +129,7 @@ export abstract class NgForm extends NgDefault {
 
     public matchValues(pControl: FormControl): ValidationErrors {
         if (this._form) {
-            if(pControl.value?.length < 8) return null;
+            if (pControl.value?.length < 8) return null;
 
             if (this.formControls[this.comparableControls.control1]?.value ===
                 this.formControls[this.comparableControls.control2]?.value) {
@@ -165,15 +166,16 @@ export abstract class NgForm extends NgDefault {
         if (!response) {
             return;
         }
-        
+
         if (!response?.index || response?.index < 2) {
             this.styleFormFieldObject[response.controlName].paddingBottom = '0%';
             return;
+        } else {
+            const basePadding = 1; // base é 1.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
+            const resultPadding = basePadding * response.index;
+            this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`
         }
 
-        const basePadding = 2.5; // base é 2.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
-        const resultPadding = basePadding * response.index;
-        this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`
     }
 
     // patchValues(pRegistro: any) {

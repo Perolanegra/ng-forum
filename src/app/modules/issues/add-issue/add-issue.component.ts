@@ -6,6 +6,7 @@ import { NgForm } from 'src/app/core/ng-form';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -42,14 +43,19 @@ import { Subscription } from 'rxjs';
 export class AddIssueComponent extends NgForm implements OnInit {
 
   public stateBtnSubmit: string = 'disabled';
-  public stateBtnAddContent: string = 'disabled';
-  public stateBtnSurvey: string = 'disabled';
+  public stateIconAddContent: string = 'disabled';
+  public stateIconAddSurvey: string = 'disabled';
   public tagListMock = ['bug', 'implementation', 'refactory'];
   private count = 0;
-  public hasContent = false;
 
   public getResponse() {
     throw new Error("Method not implemented.");
+  }
+
+  test(event) {
+    console.log('event: ', event);
+    this.ref.markForCheck();
+    console.log('value: ', this._form.value.typeContentIssue);
   }
 
   constructor(protected appController: AppController,
@@ -66,7 +72,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
     this.setErrorValidation();
     this._form.valueChanges.pipe().subscribe(formEmitted => {
       formEmitted ? this.stateBtnSubmit = this._form.valid ? 'enabled' : 'disabled' : null;
-    })
+    });
   }
   // async setimg() {
   //   await this.appController.getImg('content-issue.png');
@@ -74,7 +80,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
 
   openRichTextEditor(ev) {
     ev.preventDefault();
-    const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue }, NgRichTextEditorComponent);
+    const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue, count: this.count }, NgRichTextEditorComponent);
     if (this.count < 1) {
       this.spinner.show();
       dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600)); // fechar essa subscrição
@@ -82,15 +88,19 @@ export class AddIssueComponent extends NgForm implements OnInit {
     }
 
     dialogRef.afterClosed().subscribe(content => { // fechar essa subscrição
-      this.stateBtnAddContent = 'disabled';
       if (content) {
-        this.stateBtnAddContent = 'enabled';
         this.appController.removeElementClass(document.getElementById('tagField') as any, 'disabled');
         this._form.get('contentIssue').setValue(content);
       }
+      this.stateIconAddContent = this._form.value.contentIssue ? 'enabled' : 'disabled';
       this.ref.markForCheck();
     });
   }
+
+  // switchTypeContent() {
+  //   this._form.get('typeContentIssue').setValue()
+  //   this.isContentIssue = !this.isContentIssue;
+  // }
 
   public submit(): void {
 
@@ -112,13 +122,25 @@ export class AddIssueComponent extends NgForm implements OnInit {
     this._form.addControl('subtitle', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('tags', new FormControl(null, [Validators.required]));
     this._form.addControl('contentIssue', new FormControl(null, [Validators.required]));
+    this._form.addControl('typeContentIssue', new FormControl(true));
     this.initStyleFormErrorMsg();
   }
 
   confirmRemoveContent() {// chamar popup de confirmação passando dinamicamente a mensagem de pergunta e as opções.
-    // this.appController.showToastPopUp()
-    this._form.get('contentIssue').setValue('');
-    this.stateBtnAddContent = 'disabled';
+    const title = 'Atenção';
+    const message = 'Você realmente quer remover todo o conteúdo?';
+    const type = 'warning';
+    const style = {};
+    const dialogRef = this.appController.showToastPopUp({ title, message, type, style }, ConfirmDialogComponent);
+
+    dialogRef.afterClosed().subscribe(dataEmitted => { // desinscrever esse kra dps.
+      if (dataEmitted) {
+        this._form.get('contentIssue').setValue('');
+        this.stateIconAddContent = 'disabled';
+        this.ref.markForCheck();
+      }
+    });
+
   }
 
 }

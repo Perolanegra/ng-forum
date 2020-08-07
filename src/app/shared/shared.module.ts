@@ -11,6 +11,7 @@ import { SafeHtmlPipe } from './pipes/safeHtml.pipe';
 import { TableHeaderComponent } from './components/table-header/table-header.component';
 import { TableComponent } from './components/ng-table/ng-table.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
     imports: [
@@ -32,7 +33,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
         NgInputErrorComponent,
         TableComponent,
         TableHeaderComponent,
-        SafeHtmlPipe
+        SafeHtmlPipe,
+        ConfirmDialogComponent
     ],
     exports: [
         FormComponent,
@@ -46,6 +48,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     ],
     entryComponents: [
         ToastComponent,
+        ConfirmDialogComponent
     ],
   
 })

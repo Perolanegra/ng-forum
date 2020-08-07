@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   background: #22262e;
-  border-radius: 5px;
+  border-radius: 5px 5px 0px 0px;
 }
 .toast-in {
   display: flex;
@@ -20,7 +20,7 @@
   align-items: baseline;
   text-align: center;
   color: #fff;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   text-align: left;
   padding-left: 35px;
 }
@@ -57,7 +57,6 @@
   position: absolute;
   margin-left: 8%;
   top: 17px;
-
 }
 
 .msg {
@@ -66,7 +65,7 @@
 }
 
 .title-msg {
-  font-family: 'Product Sans Light Regular';
+  font-family: "Product Sans Light Regular";
   font-weight: 500;
   color: #fff;
   margin-bottom: 5px;
@@ -105,14 +104,16 @@
   right: 50%;
 }
 
-::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+::ng-deep .mat-icon-button i,
+.mat-icon-button .mat-icon {
   line-height: 24px;
+  margin-top: 4px;
   outline: none;
 }
 
-
 @media only screen and (max-width: 767px) {
-  ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+  ::ng-deep .mat-icon-button i,
+  .mat-icon-button .mat-icon {
     line-height: 24px;
     color: #fff;
     outline: none;
@@ -121,25 +122,68 @@
 }
 
 @media only screen and (width: 1024px) {
-
-  ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+  ::ng-deep .mat-icon-button i,
+  .mat-icon-button .mat-icon {
     line-height: 24px;
     color: #fff;
     outline: none;
     font-size: 20px;
   }
-  
-
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1023px)  {
-  ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  ::ng-deep .mat-icon-button i,
+  .mat-icon-button .mat-icon {
     line-height: 24px;
     color: #fff;
     outline: none;
     font-size: 20px;
   }
- 
-
 }
 
+.toast-box-btn {
+  border-radius: 0px 0px 5px 5px !important;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.full-width-ref {
+  width: 100%;
+}
+
+.btn-box {
+  height: 45px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Product Sans';
+  cursor: pointer;
+}
+
+.btn-yes {
+  background: #fff;
+  font-weight: bold;
+  color: #E91E63;
+  transition: .3s ease-in-out;
+}
+
+.btn-yes:hover {
+  background: #E91E63;
+  color: black;
+  transition: .3s ease-in-out;
+}
+
+.btn-no {
+  background: #303030;
+  color: #fff;
+  opacity: 0.7;
+  transition: .3s ease-in-out;
+}
+
+.btn-no:hover {
+  background: transparent;
+  color: red;
+  opacity: 0.6;
+  transition: .3s ease-in-out;
+}

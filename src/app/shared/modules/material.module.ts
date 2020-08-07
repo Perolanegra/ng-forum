@@ -23,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatRippleModule} from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 export const MY_FORMATS = {
   parse: {
@@ -58,7 +59,8 @@ export const MY_FORMATS = {
     MatChipsModule,
     MatDividerModule,
     CdkTreeModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSlideToggleModule
     // MatTreeModule,
     // MatProgressBarModule
   ],
@@ -83,7 +85,8 @@ export const MY_FORMATS = {
     MatChipsModule,
     MatDividerModule,
     CdkTreeModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSlideToggleModule
     // MatTreeModule,
     // MatProgressBarModule
   ],

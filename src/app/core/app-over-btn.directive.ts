@@ -10,11 +10,11 @@ export class AppOverBtnDirective {
   @Input() type: string;
 
   @HostListener('mouseover') onMouseOver(eventData: Event): void {
-    this.renderer.setStyle(this.elfRef.nativeElement, 'color', this.appController.getColorRef(this.type));
+    this.renderer.setStyle(this.elfRef.nativeElement, 'color', '#E91E63');
   }
 
   @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
-    this.renderer.setStyle(this.elfRef.nativeElement, 'color', '#fff');
+    this.renderer.setStyle(this.elfRef.nativeElement, 'color', this.appController.getColorRef(this.type));
   }
 
 

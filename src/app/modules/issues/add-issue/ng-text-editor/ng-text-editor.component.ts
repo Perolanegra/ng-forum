@@ -27,7 +27,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
     ])
   ]
 })
-export class NgRichTextEditorComponent extends DialogDefault implements OnInit, OnDestroy  {
+export class NgRichTextEditorComponent extends DialogDefault implements OnInit, OnDestroy {
 
   public model = { editorData: '' };
   public stateBtnSubmit: string = 'disabled';
@@ -46,15 +46,15 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit, 
     this.setDialogForm();
     this.setEditorData();
     this.dialogForm.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
-   }
+  }
 
-   setEditorData() {
+  setEditorData() {
     this.model.editorData = this.data?.content ? this.data.content : '<h2>Descreva seu Issue...</h2>';
-   }
+  }
 
-   ngOnDestroy() {
+  ngOnDestroy() {
     this.spinner.hide();
-   }
+  }
 
   submit(ev: any): void { // centralizar no DialogDefault
     ev.preventDefault();

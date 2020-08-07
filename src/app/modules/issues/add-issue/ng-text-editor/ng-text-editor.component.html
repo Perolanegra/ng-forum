@@ -10,5 +10,6 @@
     </ckeditor>
 
     <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"
-        class="product-sans-light btn-submit fade-transition-in" (click)="submit($event);" cdkFocusInitial>Anexar Conteúdo</button>
+        class="product-sans-light btn-submit fade-transition-in" (click)="submit($event);"
+        cdkFocusInitial>{{ data?.count > 0 && data?.content ? 'Salvar' : 'Anexar' }} Conteúdo</button>
 </div>

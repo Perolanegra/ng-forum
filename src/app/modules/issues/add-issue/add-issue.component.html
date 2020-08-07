@@ -41,18 +41,28 @@
                             </mat-form-field>
 
                             <div class="content-box-buttons">
-                                <div class="content-box-in" (click)="confirmRemoveContent()">
+                                <div class="content-box-in">
                                     <button style="margin-top: 0.2rem;" mat-raised-button
+                                        [ngClass]="[ _form?.value?.typeContentIssue ? 'enabled' : 'disabled' ]"
                                         (click)="openRichTextEditor($event)" class="btn-submit box-btn-inside"
-                                        cdkFocusInitial>{{ formControls.contentIssue.valid ? 'Editar' : 'Adicionar' }} Conteúdo</button>
-                                    <img class="box-img-in" src="assets/imgs/content-issue.png" [@removeIconState]="stateBtnAddContent">
+                                        cdkFocusInitial>{{ formControls.contentIssue.valid ? 'Editar' : 'Adicionar' }}
+                                        Conteúdo</button>
+                                    <img (click)="confirmRemoveContent()" class="box-img-in"
+                                        src="assets/imgs/content-issue.png" [@removeIconState]="stateIconAddContent">
                                 </div>
+
+                                <mat-slide-toggle (change)="test($event)" [ngClass]="[ _form.value.contentIssue ? 'disabled' : 'enabled' ]"
+                                    [checked]="true" formControlName="typeContentIssue">
+                                </mat-slide-toggle>
+
 
                                 <div class="content-box-in">
                                     <button style="margin-top: 0.2rem;" mat-raised-button
+                                        [ngClass]="[ _form?.value?.typeContentIssue ? 'disabled' : 'enabled' ]"
                                         class="btn-submit box-btn-inside" cdkFocusInitial
-                                        (click)="$event.preventDefault();">Adicionar Enquete</button>
-                                    <img class="box-img-in" src="assets/imgs/content-issue.png" [@removeIconState]="stateBtnSurvey">
+                                        (click)="$event?.preventDefault();">Adicionar Enquete</button>
+                                    <img class="box-img-in" src="assets/imgs/content-issue.png"
+                                        [@removeIconState]="stateIconAddSurvey">
                                 </div>
 
                             </div>

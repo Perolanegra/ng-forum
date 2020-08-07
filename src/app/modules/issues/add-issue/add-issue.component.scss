@@ -59,30 +59,28 @@
     color: #fff;
 }
 
-
 @media only screen and (max-width: 1024px) {
-    
     .square {
         max-width: 85vw;
     }
-    
+
     .logo {
         max-width: 45%;
     }
-    
 }
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-	color: #fff;
+    color: #fff;
 }
 
 ::ng-deep .mat-form-field-label {
     color: #fff;
 }
 
-
-::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
-    color: #E91E63 !important;
+::ng-deep
+    .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+    .mat-form-field-outline-thick {
+    color: #e91e63 !important;
     opacity: 0.3;
 }
 
@@ -91,13 +89,13 @@
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: #E91E63 !important;
+    color: #e91e63 !important;
     opacity: 0.2 !important;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     opacity: 0.3;
-    color: #E91E63;
+    color: #e91e63;
 }
 
 ::ng-deep .mat-hint {
@@ -105,21 +103,21 @@
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0px 1000px #303030 inset !important;
-    font-family: 'Montserrat' !important;
+    font-family: "Montserrat" !important;
 }
 
 input:-webkit-autofill {
     -webkit-text-fill-color: #fff !important;
-    color: #E91E63 !important;
-    font-family: 'Montserrat' !important;
+    color: #e91e63 !important;
+    font-family: "Montserrat" !important;
 }
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
-    border: 1.4px solid #E91E63;
+    border: 1.4px solid #e91e63;
 }
 
 .text-link-size {
@@ -129,6 +127,7 @@ input:-webkit-autofill {
 .content-box-buttons {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     flex-direction: row;
     margin-bottom: 15px;
 }
@@ -140,15 +139,16 @@ input:-webkit-autofill {
 
 ::ng-deep .mat-option {
     color: black !important;
-    font-family: 'Product Sans';
+    font-family: "Product Sans";
     font-size: 16px !important;
 }
 
 ::ng-deep .mat-select-panel {
-    background: #E91E63;
+    background: #e91e63;
 }
 
-::ng-deep .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked,
+.mat-primary .mat-pseudo-checkbox-indeterminate {
     background: black;
 }
 
@@ -174,7 +174,7 @@ input:-webkit-autofill {
     &:hover,
     &:active,
     &:focus {
-        animation: upLift ease-in-out .2s;
+        animation: upLift ease-in-out 0.2s;
         position: relative;
         animation-fill-mode: both;
     }
@@ -182,10 +182,20 @@ input:-webkit-autofill {
 
 @keyframes upLift {
     0% {
-       top: -1px;
+        top: -1px;
     }
 
     100% {
-       top: -5px;
+        top: -5px;
     }
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: #1b171c;
+    box-shadow: 0px 4px 39px 0px #e91e63;
+}
+
+::ng-deep .mat-slide-toggle-thumb {
+    background-color: blue;
+    box-shadow: 0px 4px 39px 0px #e91e63;
 }

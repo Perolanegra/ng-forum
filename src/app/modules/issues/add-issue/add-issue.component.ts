@@ -26,17 +26,28 @@ import { Subscription } from 'rxjs';
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
     ]),
+    trigger('removeIconState', [
+      state('disabled', style({
+        'opacity': '0.4',
+        'pointer-events': 'none'
+      })),
+      state('enabled', style({
+        'opacity': '1',
+        'pointer-events': 'auto'
+      }))
+    ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddIssueComponent extends NgForm implements OnInit {
 
   public stateBtnSubmit: string = 'disabled';
-  public btnContentText: string = 'Adicionar';
-  public tagListMock = [ 'bug', 'implementation', 'refactory' ];
+  public stateBtnAddContent: string = 'disabled';
+  public stateBtnSurvey: string = 'disabled';
+  public tagListMock = ['bug', 'implementation', 'refactory'];
   private count = 0;
   public hasContent = false;
-  
+
   public getResponse() {
     throw new Error("Method not implemented.");
   }
@@ -63,24 +74,26 @@ export class AddIssueComponent extends NgForm implements OnInit {
 
   openRichTextEditor(ev) {
     ev.preventDefault();
-    const dialogRef = this.appController.showToastPopUp({ style: {} }, NgRichTextEditorComponent);
-    if(this.count < 1) {
+    const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue }, NgRichTextEditorComponent);
+    if (this.count < 1) {
       this.spinner.show();
       dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600));
       this.count++;
     }
 
     dialogRef.afterClosed().subscribe(content => {
-      if(content) {
+      this.stateBtnAddContent = 'disabled';
+      if (content) {
+        this.stateBtnAddContent = 'enabled';
         this.appController.removeElementClass(document.getElementById('tagField') as any, 'disabled');
-        this._form.get('contentIssue').setValue(content); 
-        this.ref.markForCheck();
+        this._form.get('contentIssue').setValue(content);
       }
+      this.ref.markForCheck();
     });
   }
 
   public submit(): void {
-    
+
   }
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg

@@ -45,14 +45,14 @@
                                     <button style="margin-top: 0.2rem;" mat-raised-button
                                         (click)="openRichTextEditor($event)" class="btn-submit box-btn-inside"
                                         cdkFocusInitial>{{ formControls.contentIssue.valid ? 'Editar' : 'Adicionar' }} Conteúdo</button>
-                                    <img class="box-img-ing" src="assets/imgs/content-issue.png">
+                                    <img class="box-img-in" src="assets/imgs/content-issue.png" [@removeIconState]="stateBtnAddContent">
                                 </div>
 
                                 <div class="content-box-in">
                                     <button style="margin-top: 0.2rem;" mat-raised-button
                                         class="btn-submit box-btn-inside" cdkFocusInitial
                                         (click)="$event.preventDefault();">Adicionar Enquete</button>
-                                    <img class="box-img-ing" src="assets/imgs/content-issue.png">
+                                    <img class="box-img-in" src="assets/imgs/content-issue.png" [@removeIconState]="stateBtnSurvey">
                                 </div>
 
                             </div>

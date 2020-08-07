@@ -134,7 +134,7 @@ input:-webkit-autofill {
 }
 
 .box-btn-inside {
-    // width: 30%;
+    width: 15vw;
     color: black;
 }
 
@@ -163,7 +163,29 @@ input:-webkit-autofill {
     align-items: center;
 }
 
-.box-img-ing {
-    width: 20px;
-    height: 20px;
+.box-img-in {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.box-img-in:hover {
+    overflow: hidden;
+    &:hover,
+    &:active,
+    &:focus {
+        animation: upLift ease-in-out .2s;
+        position: relative;
+        animation-fill-mode: both;
+    }
+}
+
+@keyframes upLift {
+    0% {
+       top: -1px;
+    }
+
+    100% {
+       top: -5px;
+    }
 }

@@ -29,8 +29,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class NgRichTextEditorComponent extends DialogDefault implements OnInit, OnDestroy  {
 
-  public model = { editorData: '<h2 id="placeholder">Descreva seu Issue...</h2>' };
-  public stateBtnSubmit = 'disabled';
+  public model = { editorData: '' };
+  public stateBtnSubmit: string = 'disabled';
 
   constructor(public formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<NgRichTextEditorComponent>,
@@ -44,14 +44,19 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit, 
 
   ngOnInit(): void {
     this.setDialogForm();
+    this.setEditorData();
     this.dialogForm.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
+   }
+
+   setEditorData() {
+    this.model.editorData = this.data?.content ? this.data.content : '<h2>Descreva seu Issue...</h2>';
    }
 
    ngOnDestroy() {
     this.spinner.hide();
    }
 
-  submit(ev): void { // centralizar no DialogDefault
+  submit(ev: any): void { // centralizar no DialogDefault
     ev.preventDefault();
     if (this.dialogForm.valid) {
       this.verifyDecision();

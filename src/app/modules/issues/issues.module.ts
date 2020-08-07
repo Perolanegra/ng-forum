@@ -8,12 +8,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { IssuesRoutingModule } from './issues-routing.module';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { FormsModule } from '@angular/forms';
+import { AddSurveyDialogComponent } from './add-issue/add-survey-dialog/add-survey-dialog.component';
 
 @NgModule({
   declarations: [
     NgRichTextEditorComponent,
     AddIssueComponent,
-    ListIssueComponent
+    ListIssueComponent,
+    AddSurveyDialogComponent
   ],
   imports: [
     CommonModule,

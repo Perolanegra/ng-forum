@@ -59,14 +59,9 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit, 
   submit(ev: any): void { // centralizar no DialogDefault
     ev.preventDefault();
     if (this.dialogForm.valid) {
-      this.verifyDecision();
       this.spinner.show();
       this.close(this.dialogForm.value.content);
     }
-  }
-
-  verifyDecision() {
-    // chamar um alert perguntando se ele quer confirmar criar o Issue
   }
 
   onChange(ev: CKEditor4.EventInfo) {

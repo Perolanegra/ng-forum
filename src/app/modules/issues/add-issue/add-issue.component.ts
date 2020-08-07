@@ -52,12 +52,6 @@ export class AddIssueComponent extends NgForm implements OnInit {
     throw new Error("Method not implemented.");
   }
 
-  test(event) {
-    console.log('event: ', event);
-    this.ref.markForCheck();
-    console.log('value: ', this._form.value.typeContentIssue);
-  }
-
   constructor(protected appController: AppController,
     protected formBuilder: FormBuilder,
     protected ngZone: NgZone,
@@ -77,6 +71,10 @@ export class AddIssueComponent extends NgForm implements OnInit {
   // async setimg() {
   //   await this.appController.getImg('content-issue.png');
   // }
+
+  addSurvey() {
+    // const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue, count: this.count }, NgRichTextEditorComponent);
+  }
 
   openRichTextEditor(ev) {
     ev.preventDefault();

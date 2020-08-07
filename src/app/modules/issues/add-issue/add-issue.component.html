@@ -41,7 +41,7 @@
                             </mat-form-field>
 
                             <div class="content-box-buttons">
-                                <div class="content-box-in">
+                                <div class="content-box-in" (click)="confirmRemoveContent()">
                                     <button style="margin-top: 0.2rem;" mat-raised-button
                                         (click)="openRichTextEditor($event)" class="btn-submit box-btn-inside"
                                         cdkFocusInitial>{{ formControls.contentIssue.valid ? 'Editar' : 'Adicionar' }} Conteúdo</button>

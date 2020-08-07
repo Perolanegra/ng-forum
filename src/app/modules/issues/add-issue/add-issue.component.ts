@@ -77,11 +77,11 @@ export class AddIssueComponent extends NgForm implements OnInit {
     const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue }, NgRichTextEditorComponent);
     if (this.count < 1) {
       this.spinner.show();
-      dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600));
+      dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600)); // fechar essa subscrição
       this.count++;
     }
 
-    dialogRef.afterClosed().subscribe(content => {
+    dialogRef.afterClosed().subscribe(content => { // fechar essa subscrição
       this.stateBtnAddContent = 'disabled';
       if (content) {
         this.stateBtnAddContent = 'enabled';
@@ -113,6 +113,12 @@ export class AddIssueComponent extends NgForm implements OnInit {
     this._form.addControl('tags', new FormControl(null, [Validators.required]));
     this._form.addControl('contentIssue', new FormControl(null, [Validators.required]));
     this.initStyleFormErrorMsg();
+  }
+
+  confirmRemoveContent() {// chamar popup de confirmação passando dinamicamente a mensagem de pergunta e as opções.
+    // this.appController.showToastPopUp()
+    this._form.get('contentIssue').setValue('');
+    this.stateBtnAddContent = 'disabled';
   }
 
 }

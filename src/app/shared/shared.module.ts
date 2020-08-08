@@ -19,9 +19,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
         MaterialModule,
         RouterModule,
         ReactiveFormsModule,
-        NgxSkeletonLoaderModule
+        NgxSkeletonLoaderModule,
         // MatAutocompleteModule,
-        // NgxMaskModule.forRoot(),
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
@@ -34,7 +33,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
         TableComponent,
         TableHeaderComponent,
         SafeHtmlPipe,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
     ],
     exports: [
         FormComponent,
@@ -44,7 +43,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
         NgxSkeletonLoaderModule,
         TableComponent,
         TableHeaderComponent,
-        SafeHtmlPipe
+        SafeHtmlPipe,
     ],
     entryComponents: [
         ToastComponent,

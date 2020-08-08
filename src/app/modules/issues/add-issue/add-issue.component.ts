@@ -8,6 +8,7 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { Subscription } from 'rxjs';
+import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
 
 @Component({
   selector: 'ng-add-issue',
@@ -46,7 +47,8 @@ export class AddIssueComponent extends NgForm implements OnInit {
   public stateIconAddContent: string = 'disabled';
   public stateIconAddSurvey: string = 'disabled';
   public tagListMock = ['bug', 'implementation', 'refactory'];
-  private count = 0;
+  private countSurvey = 0;
+  private countEditor = 0;
 
   public getResponse() {
     throw new Error("Method not implemented.");
@@ -73,16 +75,30 @@ export class AddIssueComponent extends NgForm implements OnInit {
   // }
 
   addSurvey() {
-    // const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue, count: this.count }, NgRichTextEditorComponent);
+    const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue, count: this.countSurvey }, AddSurveyDialogComponent);
+    if (this.countSurvey < 1) {
+      this.spinner.show();
+      dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600)); // fechar essa subscrição
+      this.countSurvey++;
+    }
+
+    dialogRef.afterClosed().subscribe(content => { // fechar essa subscrição
+      if (content) {
+        this.appController.removeElementClass(document.getElementById('tagField') as any, 'disabled');
+        this._form.get('contentIssue').setValue(content);
+      }
+      this.stateIconAddSurvey = this._form.value.contentIssue ? 'enabled' : 'disabled';
+      this.ref.markForCheck();
+    });
   }
 
   openRichTextEditor(ev) {
     ev.preventDefault();
-    const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue, count: this.count }, NgRichTextEditorComponent);
-    if (this.count < 1) {
+    const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue, count: this.countEditor }, NgRichTextEditorComponent);
+    if (this.countEditor < 1) {
       this.spinner.show();
       dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600)); // fechar essa subscrição
-      this.count++;
+      this.countEditor++;
     }
 
     dialogRef.afterClosed().subscribe(content => { // fechar essa subscrição
@@ -120,7 +136,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
     this._form.addControl('subtitle', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('tags', new FormControl(null, [Validators.required]));
     this._form.addControl('contentIssue', new FormControl(null, [Validators.required]));
-    this._form.addControl('typeContentIssue', new FormControl(true));
+    this._form.addControl('typeContentIssue', new FormControl(false));
     this.initStyleFormErrorMsg();
   }
 

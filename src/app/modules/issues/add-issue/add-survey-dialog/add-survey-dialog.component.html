@@ -1,1 +1,64 @@
-<p>add-survey-dialog works!</p>
+<div class="content" *ngIf="!hasClosed">
+    <div>
+        <form [formGroup]="dialogForm">
+            <div class="flexbox-column">
+                <div class="flexbox-column">
+                    <div class="flexbox-column">
+                        <mat-form-field appearance="outline" class="fade-transition-in font">
+                            <!--[style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom"-->
+                            <mat-label>Título Enquete</mat-label>
+                            <input matInput class="font" autocomplete='off' formControlName="title" required
+                                ngAutofillOff minlength="8" type="text" />
+                            <!-- <mat-error>
+                                <ng-input-error (indexLastErrorField)="setPadding($event);"
+                                    [control]="dialogForm.controls?.title" [controlName]="'title'"
+                                    [errorMsgs]="errorMsgs?.title">
+                                </ng-input-error>
+                            </mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <div class="flexbox-row">
+                        <mat-checkbox formControlName="hasWhoVoted" [checked]="false" matTooltip="Mostrar quem votou">
+                            Mostrar quem votou na enquete
+                        </mat-checkbox>
+
+                        <mat-checkbox style="margin-left: 15px;" formControlName="hasClosingDate" [checked]="false"
+                            matTooltip="Data Fechamento">
+                            Data de fechamento
+                        </mat-checkbox>
+                    </div>
+
+                    <div class="flexbox-row space-beetween">
+                        <mat-form-field class="input-text" color="accent" appearance="outline">
+                            <mat-label>Data Fechamento</mat-label>
+                            <input matInput [matDatepicker]="closingDatePicker">
+                            <mat-datepicker-toggle matSuffix [for]="closingDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #closingDatePicker></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="fade-transition-in font">
+                            <!--[style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom"-->
+                            <mat-label>Horário fim</mat-label>
+                            <input matInput class="font" autocomplete='off' (keyup)="maskHour($event.target.value)"
+                                formControlName="filterHour" type="number" required />
+                            <!-- <mat-error>
+                                <ng-input-error (indexLastErrorField)="setPadding($event);"
+                                    [control]="dialogForm.controls?.title" [controlName]="'title'"
+                                    [errorMsgs]="errorMsgs?.title">
+                                </ng-input-error>
+                            </mat-error> -->
+                        </mat-form-field>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"
+        class="product-sans-light btn-submit fade-transition-in" (click)="submit($event);"
+        cdkFocusInitial>{{ data?.count > 0 && data?.content ? 'Salvar' : 'Anexar' }} Enquete</button>
+</div>

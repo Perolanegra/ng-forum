@@ -28,6 +28,6 @@ import { AddSurveyDialogComponent } from './add-issue/add-survey-dialog/add-surv
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  entryComponents: [NgRichTextEditorComponent]
+  entryComponents: [NgRichTextEditorComponent, AddSurveyDialogComponent]
 })
 export class IssuesModule { }

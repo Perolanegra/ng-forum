@@ -43,7 +43,7 @@
                             <div class="content-box-buttons">
                                 <div class="content-box-in">
                                     <button style="margin-top: 0.2rem;" mat-raised-button
-                                        [ngClass]="[ _form?.value?.typeContentIssue ? 'enabled' : 'disabled' ]"
+                                        [ngClass]="[ _form?.value?.typeContentIssue ? 'disabled' : 'enabled' ]"
                                         (click)="openRichTextEditor($event)" class="btn-submit box-btn-inside"
                                         cdkFocusInitial>{{ formControls.contentIssue.valid ? 'Editar' : 'Adicionar' }}
                                         Conteúdo</button>
@@ -52,13 +52,13 @@
                                 </div>
 
                                 <mat-slide-toggle [ngClass]="[ _form.value.contentIssue ? 'disabled' : 'enabled' ]"
-                                    [checked]="true" formControlName="typeContentIssue">
+                                    [checked]="false" formControlName="typeContentIssue">
                                 </mat-slide-toggle>
 
 
                                 <div class="content-box-in">
                                     <button style="margin-top: 0.2rem;" mat-raised-button
-                                        [ngClass]="[ _form?.value?.typeContentIssue ? 'disabled' : 'enabled' ]"
+                                        [ngClass]="[ _form?.value?.typeContentIssue ? 'enabled' : 'disabled' ]"
                                         class="btn-submit box-btn-inside" cdkFocusInitial
                                         (click)="$event?.preventDefault();addSurvey();">Adicionar Enquete</button>
                                     <img class="box-img-in" src="assets/imgs/content-issue.png"

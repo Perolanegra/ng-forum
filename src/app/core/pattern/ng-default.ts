@@ -1,6 +1,7 @@
 import { Select } from '@ngxs/store';
 import { AppState } from 'src/app/shared/state/app.state';
 import { Observable, Subscription } from 'rxjs';
+import { AbstractControl } from '@angular/forms';
 
 
 export abstract class NgDefault {
@@ -21,6 +22,8 @@ export abstract class NgDefault {
     public getStyle(trueValue, falseValue): string {
         return this.hasMobileMatches ? trueValue : falseValue;
     }
+
+    
 
 
 }

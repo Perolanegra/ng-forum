@@ -1,0 +1,105 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+::ng-deep .mat-dialog-container {
+    background: #22262e;
+}
+
+::ng-deep .cdk-overlay-dark-backdrop {
+    background: black;
+}
+
+::ng-deep .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0.7;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border: 1.7px solid #E91E63;
+    opacity: 0.5;
+}
+
+// configs p centralizar o checkbox dps
+::ng-deep .mat-checkbox-checkmark-path {
+    stroke-width: 4px !important;
+}
+
+::ng-deep .mat-checkbox-checkmark-path {
+    stroke: black !important;
+}
+
+.mat-checkbox {
+    font-family: "Montserrat";
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 1.125;
+    color: #fff;
+}
+
+// ******** Configurações Calendário ****************
+
+::ng-deep .mat-form-field-suffix .mat-icon-button {
+    outline: none;
+}
+
+::ng-deep .mat-datepicker-toggle, .mat-datepicker-content .mat-calendar-next-button, .mat-datepicker-content .mat-calendar-previous-button {
+    color: #fff;
+    opacity: 0.7;
+}
+
+::ng-deep .mat-calendar-body-cell-content {
+    color: #fff;
+}
+
+::ng-deep .mat-datepicker-content .mat-calendar {
+    background: #22262e;
+}
+
+::ng-deep .mat-datepicker-content.mat-accent .mat-calendar-body-today.mat-calendar-body-selected {
+    border-radius: 6px !important;
+    box-shadow: 0px 1px 3px 1px rgb(255, 64, 129, 0.75) !important
+}
+
+::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border-color: rgb(233, 30, 99, 0.45) !important;
+    border-radius: 6px !important;
+}
+
+::ng-deep .mat-datepicker-content.mat-accent .mat-calendar-body-selected {
+    border-radius: 6px !important;
+    box-shadow: 0px 1px 3px 1px rgb(255, 64, 129, 0.75) !important
+}
+
+::ng-deep .mat-calendar-body-label {
+    color: #fff;
+}
+
+::ng-deep .mat-calendar-table-header {
+    color: #fff;
+    opacity: 0.6;
+}
+
+::ng-deep .mat-calendar-period-button {
+    opacity: 0.8;
+    color: #fff;
+}
+
+::ng-deep .mat-calendar-arrow {
+    border-top-color: #E91E63;
+    opacity: 0.7;
+}
+
+::ng-deep .mat-datepicker-content .mat-calendar-previous-button {
+    color: #E91E63;
+    opacity: 0.7;
+}
+
+::ng-deep .mat-datepicker-content .mat-calendar-next-button {
+    color: #E91E63;
+    opacity: 0.7;
+}
+
+// ***************** Fim Configurações Calendário ***************************
+

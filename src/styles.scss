@@ -36,6 +36,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	color: #E91E63;
 }
 
+.flexbox-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexbox-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.space-beetween {
+    justify-content: space-between;
+}
+
 .font {
     font-family: 'Montserrat';
 }
@@ -56,6 +70,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .fade-transition-out {
     transition: 0.3s;
     transition-timing-function: ease-in-out;
+}
+
+.input-text {
+    font-family: "Montserrat";
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 1.125;
+    color: #fff;
 }
 
 .btn-submit {

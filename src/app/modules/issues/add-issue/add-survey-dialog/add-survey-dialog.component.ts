@@ -27,6 +27,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
   public stateBtnSubmit: string = 'disabled';
+  public hasTimePicker: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<AddSurveyDialogComponent>,
     protected formBuilder: FormBuilder,
@@ -36,15 +37,11 @@ export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialog, formBuilder, renderer, appController);
   }
-  teste;
+
   ngOnInit(): void {
     this.setDialogForm();
     this.setFormControls();
     this.setData();
-  }
-
-  public maskHour(value: string): void {
-    // this.teste = value?.length >= 2 ? value.substr(0, 2).concat(':'.concat(value.substr(2))) : value;
   }
 
   setFormControls() {
@@ -74,7 +71,7 @@ export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
   }
 
   @HostListener('window:keyup.esc') onKeyUp() {
-    this.close();
+    !this.hasTimePicker ? this.close() : null;
   }
 
   close(data?: any) {

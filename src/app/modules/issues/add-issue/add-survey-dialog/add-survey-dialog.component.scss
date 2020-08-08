@@ -42,6 +42,7 @@
 
 ::ng-deep .mat-form-field-suffix .mat-icon-button {
     outline: none;
+    opacity: 0.7;
 }
 
 ::ng-deep .mat-datepicker-toggle, .mat-datepicker-content .mat-calendar-next-button, .mat-datepicker-content .mat-calendar-previous-button {
@@ -103,3 +104,56 @@
 
 // ***************** Fim Configurações Calendário ***************************
 
+
+// *************** Configurações timePicker *************************
+::ng-deep .timepicker-overlay {
+    z-index: 9999999999 !important;
+    pointer-events: auto !important;
+}
+
+.timepickerIcon {
+    color: #fff;
+    opacity: 0.7;
+}
+
+::ng-deep .timepicker__actions {
+    background-color: #22262e !important;
+}
+
+::ng-deep .clock-face {
+    background-color: #22262e !important;
+}
+
+::ng-deep .timepicker__header {
+    background-color: #22262e !important;
+}
+
+::ng-deep .timepicker__body {
+    background-color: #303030 !important;
+}
+
+::ng-deep .timepicker-button {
+    color: #E91E63 !important;
+    opacity: 0.7;
+}
+
+::ng-deep .clock-face__number > span {
+    border-radius: 40px !important;
+    color: black !important;
+}
+
+::ng-deep .clock-face__number > span.active {
+    background-color: #E91E63 !important;
+    color: black !important;
+}
+
+::ng-deep .clock-face__number--outer {
+    filter: drop-shadow(2px 4px 6px black);
+    color: black !important;
+}
+
+::ng-deep .clock-face__number--outer > span {
+    color: #fff !important;
+}
+
+// ********************** Fim Configurações timePicker ************************

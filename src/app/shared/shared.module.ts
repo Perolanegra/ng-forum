@@ -12,6 +12,9 @@ import { TableHeaderComponent } from './components/table-header/table-header.com
 import { TableComponent } from './components/ng-table/ng-table.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
     imports: [
@@ -20,6 +23,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
         RouterModule,
         ReactiveFormsModule,
         NgxSkeletonLoaderModule,
+        NgxMaterialTimepickerModule,
+        MatIconModule
         // MatAutocompleteModule,
     ],
     schemas: [
@@ -41,9 +46,11 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
         MaterialModule,
         ReactiveFormsModule,
         NgxSkeletonLoaderModule,
+        NgxMaterialTimepickerModule,
         TableComponent,
         TableHeaderComponent,
         SafeHtmlPipe,
+        MatIconModule
     ],
     entryComponents: [
         ToastComponent,

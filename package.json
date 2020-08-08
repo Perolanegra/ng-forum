@@ -37,6 +37,7 @@
     "crypto-js": "^3.3.0",
     "material-icons": "^0.3.1",
     "moment": "^2.24.0",
+    "ngx-material-timepicker": "^5.5.3",
     "ngx-skeleton-loader": "^2.2.1",
     "ngx-spinner": "^9.0.2",
     "ngx-toastr": "^12.0.1",

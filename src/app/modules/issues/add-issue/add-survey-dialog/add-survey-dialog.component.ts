@@ -62,6 +62,13 @@ export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
     }
   }
 
+  modalHasOpened() {
+    setTimeout(() => {
+      this.renderer.setProperty(document.querySelector('.timepicker-dial__hint'), 'innerHTML', 
+      `* use setas (<span>⇅</span>) para alterar a hora.`);
+    }, 300);
+  }
+
   setData() {
     // const { title, message, btnYes, btnNo } = this.data.formControls;
     // this.title = title || 'Atenção';

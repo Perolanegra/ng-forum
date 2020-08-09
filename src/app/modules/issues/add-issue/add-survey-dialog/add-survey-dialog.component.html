@@ -43,8 +43,9 @@
                             <input matInput readonly class="font" autocomplete='off' formControlName="filterHour"
                                 type="text" required />
                             <mat-icon matSuffix class="timepickerIcon">access_time</mat-icon>
-                            <ngx-material-timepicker timepickerClass="teste" #ngHourPicker (opened)="hasTimePicker = !hasTimePicker;"
-                                (closed)="hasTimePicker = !hasTimePicker;" [appendToInput]="true">
+                            <ngx-material-timepicker timepickerClass="teste" #ngHourPicker
+                                (opened)="hasTimePicker = !hasTimePicker;modalHasOpened();"
+                                (closed)="hasTimePicker = !hasTimePicker;" [appendToInput]="true" [enableKeyboardInput]="true">
                             </ngx-material-timepicker>
                             <!-- <mat-error>
                                 <ng-input-error (indexLastErrorField)="setPadding($event);"

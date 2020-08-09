@@ -16,9 +16,6 @@ import { ToastComponent } from '../../../../shared/components/toast/toast.compon
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent extends DialogDefault implements OnInit, OnDestroy {
-  public setErrorValidation() {
-    throw new Error("Method not implemented.");
-  }
 
   @Select(AuthState.forgotPassResponse) fPassResponse$: Observable<any>;
   private fPassResponseSubscription$: Subscription;
@@ -32,15 +29,15 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
     private spinner: NgxSpinnerService,
     protected renderer: Renderer2,
     @Inject(MAT_DIALOG_DATA) public data) {
-    super(dialog, formBuilder, renderer, appController);
+    super(dialogRef, formBuilder, appController, false);
   }
 
   ngOnInit(): void {
-    this.setDialogForm();
+    this.setForm();
   }
 
-  setDialogForm() {
-    this.dialogForm.addControl("username", new FormControl(null, Validators.required));
+  setForm() {
+    this._form.addControl("username", new FormControl(null, Validators.required));
   }
 
   ngOnDestroy() {
@@ -57,20 +54,19 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
     });
   }
 
-  submit(): void { // centralizar no DialogDefault
-    if (this.dialogForm.valid) {
-      this.hasClickSubmit = this.dialogForm.valid;
+  submit(): void {
+    if (this._form.valid) {
+      this.hasClickSubmit = this._form.valid;
       this.spinner.show();
-      this.store.dispatch(new AuthActions.ForgotPassword(this.dialogForm.get('username').value));
-      this.dialogForm.reset();
+      this.store.dispatch(new AuthActions.ForgotPassword(this._form.get('username').value));
+      this._form.reset();
       this.getResponse();
       setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
     }
   }
 
-  close() {
-    this.dialogRef.close();
-    this.hasClosed = true;
+  public setErrorValidation() {
+    throw new Error("Method not implemented.");
   }
 
 }

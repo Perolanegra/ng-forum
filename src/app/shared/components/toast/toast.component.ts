@@ -22,7 +22,7 @@ export class ToastComponent extends DialogDefault implements OnInit, AfterViewIn
     protected dialog: MatDialog,
     protected renderer: Renderer2,
     @Inject(MAT_DIALOG_DATA) public data) {
-    super(dialog, formBuilder, renderer, appController);
+    super(dialogRef, formBuilder, appController, false);
   }
 
   ngAfterViewInit() {
@@ -31,21 +31,32 @@ export class ToastComponent extends DialogDefault implements OnInit, AfterViewIn
   }
 
   ngOnInit(): void {
+    this.setData();
+  }
+
+  setData(): void {
     const { title, message } = this.data;
     this.message = message;
     this.title = title;
   }
 
-  close() {
-    this.hasClosed = true;
-    this.dialogRef.close();
-  }
-
-  public setDialogForm() {
+  public setDialogForm(): void {
     throw new Error("Method not implemented.");
   }
-  
-  public setErrorValidation() {
+
+  public setErrorValidation(): void {
+    throw new Error("Method not implemented.");
+  }
+
+  public setForm(): void {
+    throw new Error("Method not implemented.");
+  }
+
+  public getResponse() {
+    throw new Error("Method not implemented.");
+  }
+
+  public submit(): void {
     throw new Error("Method not implemented.");
   }
 

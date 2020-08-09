@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { AppController } from 'src/app/core/appController';
@@ -24,9 +24,8 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private store: Store,
     private encryptService: EncryptionService,
-    protected ngZone: NgZone,
     protected appController: AppController) {
-    super(formBuilder, appController, ngZone, false);
+    super(formBuilder, appController, false);
   }
 
   ngOnInit() {

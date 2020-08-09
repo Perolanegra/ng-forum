@@ -28,42 +28,39 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
   ]
 })
 export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
-  public stateBtnSubmit: string = 'disabled';
-  public hasTimePicker: boolean = false;
 
-  constructor(public dialogRef: MatDialogRef<AddSurveyDialogComponent>,
+  constructor(protected dialogRef: MatDialogRef<AddSurveyDialogComponent>,
     protected formBuilder: FormBuilder,
     public appController: AppController,
     protected dialog: MatDialog,
     protected renderer: Renderer2,
     @Inject(MAT_DIALOG_DATA) public data) {
-    super(dialog, formBuilder, renderer, appController);
+    super(dialogRef, formBuilder, appController, false);
   }
 
   ngOnInit(): void {
-    this.setDialogForm();
+    this.setForm();
   }
 
-  setDialogForm() {
+  setForm(): void {
     this.setFormControls();
     this.setData();
   }
 
   setFormControls() {
-    this.dialogForm.addControl("title", new FormControl('', [Validators.required, Validators.minLength(5), CustomValidators.allblank]));
-    this.dialogForm.addControl("hasWhoVoted", new FormControl(false));
-    this.dialogForm.addControl("hasClosingDate", new FormControl(false));
-    this.dialogForm.addControl("closingDate", new FormControl(null));
-    this.dialogForm.addControl("closingTime", new FormControl(null));
-    this.dialogForm.addControl("question", new FormControl('', [Validators.required, Validators.minLength(8)]));
-    this.dialogForm.addControl("opt1", new FormControl('', [Validators.required, Validators.minLength(2)]));
-    this.dialogForm.addControl("opt2", new FormControl('', [Validators.required, Validators.minLength(2)]));
+    this._form.addControl("title", new FormControl('', [Validators.required, Validators.minLength(5), CustomValidators.allblank]));
+    this._form.addControl("hasWhoVoted", new FormControl(false));
+    this._form.addControl("hasClosingDate", new FormControl(false));
+    this._form.addControl("closingDate", new FormControl(null));
+    this._form.addControl("closingTime", new FormControl(null));
+    this._form.addControl("question", new FormControl('', [Validators.required, Validators.minLength(8)]));
+    this._form.addControl("opt1", new FormControl('', [Validators.required, Validators.minLength(2)]));
+    this._form.addControl("opt2", new FormControl('', [Validators.required, Validators.minLength(2)]));
   }
 
-  submit(ev: any): void { // centralizar no DialogDefault
-    ev.preventDefault();
-    if (this.dialogForm.valid) {
-      this.close(this.dialogForm.value);
+  submit(): void {
+    if (this._form.valid) {
+      this.close(this._form.value);
     }
   }
 
@@ -75,20 +72,16 @@ export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
   }
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg
-    const title_type = this.getErrorTypes(2, true);
-    const title_msg = this.getErrorMessages(2, true);
-
-    const subtitle_type = this.getErrorTypes(2, true, 3);
-    const subtitle_msg = this.getErrorMessages(2, true, 4, 10);
+    const title_type = this.getErrorTypes(2, true, 4);
+    const title_msg = this.getErrorMessages(2, true, 5, 5);
 
     this.setErrorMsgs('title', title_type, title_msg);
-    this.setErrorMsgs('subtitle', subtitle_type, subtitle_msg);
   }
 
   setDateState(ev: MatCheckboxChange) {
     if (!ev.checked) {
-      this.dialogForm.get('closingDate').reset();
-      this.dialogForm.get('closingTime').reset();
+      this._form.get('closingDate').reset();
+      this._form.get('closingTime').reset();
       this.appController.removeElementClass(document.querySelector('#closingDate') as any, 'enabled');
       this.appController.setElementClass(document.querySelector('#closingDate') as any, 'disabled');
       setTimeout(() => {
@@ -113,13 +106,10 @@ export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
     // this.btnYes = btnYes || 'Sim';
   }
 
-  @HostListener('window:keyup.esc') onKeyUp() {
-    !this.hasTimePicker ? this.close() : null;
+  public getResponse() {
+    throw new Error("Method not implemented.");
   }
 
-  close(data?: any) {
-    this.dialogRef.close(data);
-    this.hasClosed = true;
-  }
+
 
 }

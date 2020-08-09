@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AppController } from 'src/app/core/appController';
 import { NgRichTextEditorComponent } from './ng-text-editor/ng-text-editor.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -7,7 +7,6 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
-import { Subscription } from 'rxjs';
 import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
 
 @Component({
@@ -56,11 +55,10 @@ export class AddIssueComponent extends NgForm implements OnInit {
 
   constructor(protected appController: AppController,
     protected formBuilder: FormBuilder,
-    protected ngZone: NgZone,
     private spinner: NgxSpinnerService,
     private ref: ChangeDetectorRef
   ) {
-    super(formBuilder, appController, ngZone, false);
+    super(formBuilder, appController, false);
   }
 
   ngOnInit(): void {

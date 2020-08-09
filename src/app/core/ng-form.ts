@@ -1,15 +1,18 @@
-import { FormGroup, FormBuilder, FormControl, AbstractControl, ValidationErrors } from "@angular/forms";
+import { FormGroup, FormBuilder, AbstractControl, ValidationErrors, FormControl } from "@angular/forms";
 import { AppController } from './appController';
 import { NgDefault } from './pattern/ng-default';
 import { NgFormErrorMesssage } from './pattern/ng-form-error-msg';
 import { Subscription } from 'rxjs';
 import { ToastComponent } from '../shared/components/toast/toast.component';
 import { NgZone } from '@angular/core';
+import { NgFormErrorType } from './pattern/ng-form-error-type';
 
 
 export abstract class NgForm extends NgDefault {
     _form: FormGroup;
-
+    
+    public stateBtnSubmit: string = 'disabled';
+    public errorMsgs: { [key: string]: any } = {};
     public hide1 = true;
     public hide2 = true;
     public hasClickedSubmit: boolean = false;
@@ -19,12 +22,12 @@ export abstract class NgForm extends NgDefault {
 
     constructor(protected formBuilder: FormBuilder,
         protected appController: AppController,
-        protected ngZone: NgZone,
         protected hasKeepRegister: boolean,
-        ) {
+        protected ngZone?: NgZone,
+    ) {
         super();
         this._form = this.formBuilder.group({});
-        hasKeepRegister ?? this._form.addControl("keepRegister", new FormControl(false));
+        hasKeepRegister ? this._form.addControl("keepRegister", new FormControl(false)) : null;
     }
 
     public abstract setForm(): void;
@@ -106,6 +109,73 @@ export abstract class NgForm extends NgDefault {
             this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`;
         }
 
+    }
+
+    /**
+  * 
+  * @param id index da string no array, caso for recuperar uma tipo específico ou todos. Caso for remover, é o index do elemento inicial a ser removido.
+  * @param hasDelete booleano q decide se remove os elementos do array para retornar os elementos solicitados.
+  * @param removeIndex index até o qual serão removidos os elementos.
+  */
+    public getErrorTypes(id: number, hasDelete?: boolean, removeIndex?: number): Array<any> {
+        try {
+            const ngFormTypeObj = new NgFormErrorType();
+            const types = ngFormTypeObj.getTypes();
+
+            if (!hasDelete) {
+                if (id < 0) return [...types];
+                return [types[id]];
+            }
+
+            removeIndex ? types.splice(id, removeIndex) : types.splice(id);
+
+            return types;
+
+        } catch (error) {
+            console.log('Erro recuperando types Validation: ', error);
+        }
+    }
+
+    /**
+     * 
+     * @param id index da string no array, caso for recuperar uma mensagem específica ou todas. Caso for remover, é o index do elemento inicial a ser removido.
+     * @param hasDelete (param opcional) booleano q decide se remove os elementos do array para retornar os elementos solicitados.
+     * @param removeIndex (param opcional) index até o qual serão removidos os elementos.
+     * @param qtdCharRule (param opcional) quantidade de caracteres mínimos para validação minLength, param opcional, caso não passe o default é 8. Caso for passar, o 3 parametro, removeIndex deve ser passado como null.
+     */
+    public getErrorMessages(id: number, hasDelete?: boolean, removeIndex?: number, qtdCharRule?: number): Array<any> {
+        try {
+            const ngFormMsgObj = new NgFormErrorMesssage();
+            const msgs = qtdCharRule ? ngFormMsgObj.getMessages(qtdCharRule) : ngFormMsgObj.getMessages();
+
+            if (!hasDelete) {
+                if (id < 0) return [...msgs];
+                return [msgs[id]];
+            }
+
+            removeIndex ? msgs.splice(id, removeIndex) : msgs.splice(id);
+
+            return msgs;
+
+        } catch (error) {
+            console.log('Erro recuperando msgs Validation: ', error);
+        }
+    }
+
+    public setErrorMsgs(control: string, types: string[], msgs: string[]): void {
+        const payload = this.setErrors(control, types, msgs);
+        this.errorMsgs[control] = payload[control];
+    }
+
+    public setErrors(control: string, types: string[], msgs: string[]) {
+        let errorResponse: any = {};
+        errorResponse[control] = new Array<any>();
+
+        types.map((type, key) => {
+            errorResponse[control].push({ type: type, msg: msgs[key] });
+        });
+
+        return errorResponse;
     }
 
     // patchValues(pRegistro: any) {

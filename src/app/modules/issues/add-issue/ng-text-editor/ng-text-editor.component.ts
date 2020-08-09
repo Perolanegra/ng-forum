@@ -39,16 +39,16 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit, 
     protected renderer: Renderer2,
     private spinner: NgxSpinnerService,
     @Inject(MAT_DIALOG_DATA) public data) {
-    super(dialog, formBuilder, renderer, appController);
+    super(dialogRef, formBuilder, appController, false);
   }
 
   ngOnInit(): void {
-    this.setDialogForm();
+    this.setForm();
     this.setEditorData();
   }
 
-  setDialogForm() {
-    this.dialogForm.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
+  setForm() {
+    this._form.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
   }
 
   setEditorData() {
@@ -59,17 +59,16 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit, 
     this.spinner.hide();
   }
 
-  submit(ev: any): void { // centralizar no DialogDefault
-    ev.preventDefault();
-    if (this.dialogForm.valid) {
+  submit(): void { // centralizar no DialogDefault
+    if (this._form.valid) {
       this.spinner.show();
-      this.close(this.dialogForm.value.content);
+      this.close(this._form.value.content);
     }
   }
 
   onChange(ev: CKEditor4.EventInfo) {
     this.stateBtnSubmit = ev.editor.getData().length < 75 ? 'disabled' : 'enabled';
-    this.dialogForm.get('content').setValue(ev.editor.getData());
+    this._form.get('content').setValue(ev.editor.getData());
   }
 
   close(data?: any) {
@@ -78,6 +77,10 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit, 
   }
 
   public setErrorValidation() {
+    throw new Error("Method not implemented.");
+  }
+
+  public getResponse() {
     throw new Error("Method not implemented.");
   }
 

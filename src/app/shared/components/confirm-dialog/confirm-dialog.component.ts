@@ -26,7 +26,7 @@ export class ConfirmDialogComponent extends DialogDefault implements OnInit {
     protected dialog: MatDialog,
     protected renderer: Renderer2,
     @Inject(MAT_DIALOG_DATA) public data) {
-    super(dialog, formBuilder, renderer, appController);
+    super(dialogRef, formBuilder, appController, false);
   }
 
   ngOnInit(): void {
@@ -46,16 +46,19 @@ export class ConfirmDialogComponent extends DialogDefault implements OnInit {
     this.btnYes = btnYes || 'Sim';
   }
 
-  close(data?: any) {
-    this.dialogRef.close(data);
-    this.hasClosed = true;
-  }
-
-  public setDialogForm() {
+  public setErrorValidation() {
     throw new Error("Method not implemented.");
   }
-  
-  public setErrorValidation() {
+
+  public setForm(): void {
+    throw new Error("Method not implemented.");
+  }
+
+  public getResponse() {
+    throw new Error("Method not implemented.");
+  }
+
+  public submit(): void {
     throw new Error("Method not implemented.");
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
@@ -25,11 +25,10 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
 
   constructor(protected formBuilder: FormBuilder,
     protected store: Store,
-    protected ngZone: NgZone,
     private spinner: NgxSpinnerService,
     private encryptService: EncryptionService,
     public appController: AppController) {
-    super(formBuilder, appController, ngZone, false);
+    super(formBuilder, appController, false);
   }
 
   ngOnInit(): void {

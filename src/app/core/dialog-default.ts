@@ -1,37 +1,34 @@
-import { Select } from '@ngxs/store';
-import { AppState } from '../shared/state/app.state';
-import { Observable } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { AppController } from './appController';
-import { Renderer2 } from '@angular/core';
-import { NgDefault } from './pattern/ng-default';
+import { NgForm } from './ng-form';
+import { HostListener } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
-export abstract class DialogDefault extends NgDefault {
-
-    @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
+export abstract class DialogDefault extends NgForm {
 
     public hasClosed: boolean = false;
-    public dialogForm: FormGroup;
-    
-    constructor(protected dialog: MatDialog,
+    public hasTimePicker: boolean = false;
+
+    constructor(protected dialogRef: MatDialogRef<any>,
         protected formBuilder: FormBuilder,
-        protected renderer: Renderer2,
-        protected appController: AppController) {
-        super();
-        this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
-        this.dialogForm = this.formBuilder.group({});
+        protected appController: AppController,
+        protected hasKeepRegister: boolean) {
+        super(formBuilder, appController, hasKeepRegister);
     }
 
-
-    public abstract setDialogForm();
-
     setCloseColor(btnCloseElement, data) {
-        if(!this.hasMobileMatches && btnCloseElement) {
-            this.renderer.setStyle(btnCloseElement, 'color', this.appController.getColorRef(data.type));
+        if (!this.hasMobileMatches && btnCloseElement) {
+            this.appController.setElementStyle(btnCloseElement, 'color', this.appController.getColorRef(data.type));
         }
     }
 
-    public abstract setErrorValidation();
+    @HostListener('window:keyup.esc') onKeyUp() {
+        !this.hasTimePicker ? this.close() : null;
+    }
+
+    close(data?: any) {
+        this.dialogRef.close(data);
+        this.hasClosed = true;
+    }
 
 }

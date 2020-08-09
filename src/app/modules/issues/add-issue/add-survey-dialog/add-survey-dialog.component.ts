@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2, Inject, HostListener, ElementRef } from '@angular/core';
-import { NgDialog } from 'src/app/core/ng-dialog';
+import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
@@ -27,7 +27,7 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
     ]),
   ]
 })
-export class AddSurveyDialogComponent extends NgDialog implements OnInit {
+export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit {
 
   constructor(protected dialogRef: MatDialogRef<AddSurveyDialogComponent>,
     protected formBuilder: FormBuilder,
@@ -95,7 +95,11 @@ export class AddSurveyDialogComponent extends NgDialog implements OnInit {
       this.appController.removeElementClass(document.querySelector('#closingDate') as any, 'disabled');
       this.appController.setElementClass(document.querySelector('#closingDate') as any, 'enabled');
     }, 50);
+  }
 
+
+  @HostListener('window:keyup.esc') onKeyUp() {
+    !this.hasTimePicker ? this.close() : null;
   }
 
   setData() {
@@ -109,6 +113,7 @@ export class AddSurveyDialogComponent extends NgDialog implements OnInit {
   public getResponse() {
     throw new Error("Method not implemented.");
   }
+
 
 
 

@@ -3,14 +3,14 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ToastComponent } from '../toast/toast.component';
 import { FormBuilder } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
-import { NgDialog } from 'src/app/core/ng-dialog';
+import { NgDialogDefault } from 'src/app/core/ng-dialog';
 
 @Component({
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
   styleUrls: ['./confirm-dialog.component.scss']
 })
-export class ConfirmDialogComponent extends NgDialog implements OnInit {
+export class ConfirmDialogComponent extends NgDialogDefault implements OnInit {
 
   public message: string;
   public title: string;

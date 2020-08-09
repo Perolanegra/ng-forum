@@ -1,6 +1,6 @@
 <div class="content" *ngIf="!hasClosed">
     <div>
-        <form [formGroup]="dialogForm">
+        <form [formGroup]="_form">
             <div class="flexbox-column">
                 <div class="flexbox-column">
                     <div class="flexbox-column">
@@ -12,7 +12,7 @@
                                 ngAutofillOff minlength="8" type="text" />
                             <!-- <mat-error>
                                 <ng-input-error (indexLastErrorField)="setPadding($event);"
-                                    [control]="dialogForm.controls?.title" [controlName]="'title'"
+                                    [control]="_form.controls?.title" [controlName]="'title'"
                                     [errorMsgs]="errorMsgs?.title">
                                 </ng-input-error>
                             </mat-error> -->
@@ -51,7 +51,7 @@
                             </ngx-material-timepicker>
                             <!-- <mat-error>
                                 <ng-input-error (indexLastErrorField)="setPadding($event);"
-                                    [control]="dialogForm.controls?.title" [controlName]="'title'"
+                                    [control]="_form.controls?.title" [controlName]="'title'"
                                     [errorMsgs]="errorMsgs?.title">
                                 </ng-input-error>
                             </mat-error> -->

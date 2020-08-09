@@ -2,7 +2,7 @@ import { Component, OnInit, Renderer2, Inject, OnDestroy } from '@angular/core';
 import { CKEditor4 } from 'ckeditor4-angular';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppController } from 'src/app/core/appController';
-import { NgDialog } from 'src/app/core/ng-dialog';
+import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -27,7 +27,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
     ])
   ]
 })
-export class NgRichTextEditorComponent extends NgDialog implements OnInit, OnDestroy {
+export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit, OnDestroy {
 
   public model = { editorData: '' };
   public stateBtnSubmit: string = 'disabled';
@@ -59,7 +59,7 @@ export class NgRichTextEditorComponent extends NgDialog implements OnInit, OnDes
     this.spinner.hide();
   }
 
-  submit(): void { // centralizar no NgDialog
+  submit(): void { // centralizar no NgDialogDefault
     if (this._form.valid) {
       this.spinner.show();
       this.close(this._form.value.content);

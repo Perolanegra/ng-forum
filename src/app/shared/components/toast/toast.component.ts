@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject, AfterViewInit, Renderer2 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { NgDialog } from 'src/app/core/ng-dialog';
 import { FormBuilder } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
+import { NgDialogDefault } from 'src/app/core/ng-dialog';
 
 @Component({
   selector: 'ng-toast',
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })
-export class ToastComponent extends NgDialog implements OnInit, AfterViewInit {
+export class ToastComponent extends NgDialogDefault implements OnInit, AfterViewInit {
 
   public message: string;
   public title: string;
@@ -38,10 +38,6 @@ export class ToastComponent extends NgDialog implements OnInit, AfterViewInit {
     const { title, message } = this.data;
     this.message = message;
     this.title = title;
-  }
-
-  public setDialogForm(): void {
-    throw new Error("Method not implemented.");
   }
 
   public setErrorValidation(): void {

@@ -24,28 +24,29 @@
                         </mat-checkbox>
 
                         <mat-checkbox style="margin-left: 15px;" formControlName="hasClosingDate" [checked]="false"
-                            matTooltip="Data Fechamento">
+                            matTooltip="Data Fechamento" (change)="setDateState($event)">
                             Data de fechamento
                         </mat-checkbox>
                     </div>
 
-                    <div class="flexbox-row space-beetween">
+                    <div id="closingDate" class="flexbox-row space-beetween fade-transition-in disabled none">
                         <mat-form-field class="input-text" color="accent" appearance="outline">
                             <mat-label>Data Fechamento</mat-label>
-                            <input matInput [matDatepicker]="closingDatePicker">
+                            <input matInput [matDatepicker]="closingDatePicker" class="font" autocomplete='off'
+                                formControlName="closingDate" required ngAutofillOff minlength="8" type="text" />
                             <mat-datepicker-toggle matSuffix [for]="closingDatePicker"></mat-datepicker-toggle>
                             <mat-datepicker #closingDatePicker></mat-datepicker>
                         </mat-form-field>
 
-                        <mat-form-field appearance="outline" style="cursor: pointer;" class="fade-transition-in font"
-                            [ngxTimepicker]="ngHourPicker">
+                        <mat-form-field appearance="outline" style="cursor: pointer;" class="fade-transition-in font">
                             <mat-label>Horário fim</mat-label>
-                            <input matInput readonly class="font" autocomplete='off' formControlName="filterHour"
-                                type="text" required />
-                            <mat-icon matSuffix class="timepickerIcon">access_time</mat-icon>
+                            <input matInput readonly class="font" autocomplete='off' formControlName="closingTime"
+                                type="text" required [ngxTimepicker]="ngHourPicker" />
+                            <mat-icon matSuffix [ngxTimepicker]="ngHourPicker" class="timepickerIcon">access_time</mat-icon>
                             <ngx-material-timepicker timepickerClass="teste" #ngHourPicker
-                                (opened)="hasTimePicker = !hasTimePicker;modalHasOpened();"
-                                (closed)="hasTimePicker = !hasTimePicker;" [appendToInput]="true" [enableKeyboardInput]="true">
+                                (opened)="hasTimePicker = !hasTimePicker;timepickerHasOpened();"
+                                (closed)="hasTimePicker = !hasTimePicker;" [appendToInput]="true"
+                                [enableKeyboardInput]="true">
                             </ngx-material-timepicker>
                             <!-- <mat-error>
                                 <ng-input-error (indexLastErrorField)="setPadding($event);"

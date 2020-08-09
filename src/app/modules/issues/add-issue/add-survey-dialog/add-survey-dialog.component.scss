@@ -17,7 +17,7 @@
 }
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
-    border: 1.7px solid #E91E63;
+    border: 1.7px solid #e91e63;
     opacity: 0.5;
 }
 
@@ -45,7 +45,9 @@
     opacity: 0.7;
 }
 
-::ng-deep .mat-datepicker-toggle, .mat-datepicker-content .mat-calendar-next-button, .mat-datepicker-content .mat-calendar-previous-button {
+::ng-deep .mat-datepicker-toggle,
+.mat-datepicker-content .mat-calendar-next-button,
+.mat-datepicker-content .mat-calendar-previous-button {
     color: #fff;
     opacity: 0.7;
 }
@@ -60,7 +62,7 @@
 
 ::ng-deep .mat-datepicker-content.mat-accent .mat-calendar-body-today.mat-calendar-body-selected {
     border-radius: 6px !important;
-    box-shadow: 0px 1px 3px 1px rgb(255, 64, 129, 0.75) !important
+    box-shadow: 0px 1px 3px 1px rgb(255, 64, 129, 0.75) !important;
 }
 
 ::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
@@ -70,7 +72,7 @@
 
 ::ng-deep .mat-datepicker-content.mat-accent .mat-calendar-body-selected {
     border-radius: 6px !important;
-    box-shadow: 0px 1px 3px 1px rgb(255, 64, 129, 0.75) !important
+    box-shadow: 0px 1px 3px 1px rgb(255, 64, 129, 0.75) !important;
 }
 
 ::ng-deep .mat-calendar-body-label {
@@ -88,22 +90,21 @@
 }
 
 ::ng-deep .mat-calendar-arrow {
-    border-top-color: #E91E63;
+    border-top-color: #e91e63;
     opacity: 0.7;
 }
 
 ::ng-deep .mat-datepicker-content .mat-calendar-previous-button {
-    color: #E91E63;
+    color: #e91e63;
     opacity: 0.7;
 }
 
 ::ng-deep .mat-datepicker-content .mat-calendar-next-button {
-    color: #E91E63;
+    color: #e91e63;
     opacity: 0.7;
 }
 
 // ***************** Fim Configurações Calendário ***************************
-
 
 // *************** Configurações timePicker *************************
 ::ng-deep .timepicker-overlay {
@@ -143,7 +144,7 @@
 }
 
 ::ng-deep .clock-face__number > span.active {
-    background-color: #E91E63 !important;
+    background-color: #e91e63 !important;
     color: black !important;
     filter: drop-shadow(2px 4px 6px rgb(233, 30, 99, 0.8));
 }
@@ -157,13 +158,13 @@
 }
 
 ::ng-deep .clock-face__clock-hand {
-    background: #E91E63 !important;
+    background: #e91e63 !important;
     box-shadow: 0px 0px 10px 3px rgba(233, 30, 99, 0.25);
 }
 
 ::ng-deep .clock-face__clock-hand_minute:before {
     box-shadow: 0px 0px 10px 3px rgb(233, 30, 99, 0.45);
-    border: 4.4px solid #E91E63 !important;
+    border: 4.4px solid #e91e63 !important;
 }
 
 ::ng-deep .clock-face__clock-hand:after {
@@ -177,3 +178,9 @@
 }
 
 // ********************** Fim Configurações timePicker ************************
+
+//********************* Configs Animation closingDateTime ******************
+
+.disabled {
+    opacity: 0.1;
+}

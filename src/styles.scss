@@ -98,6 +98,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     pointer-events: auto;
 }
 
+.none {
+    display: none;
+}
+
 div#msg-error-ng-default {
     margin-bottom: 2px;
 }

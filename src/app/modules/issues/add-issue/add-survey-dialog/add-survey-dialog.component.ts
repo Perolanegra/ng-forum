@@ -4,6 +4,7 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dial
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-add-survey-dialog',
@@ -22,7 +23,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       })),
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
-    ])
+    ]),
   ]
 })
 export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
@@ -45,14 +46,14 @@ export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
   }
 
   setFormControls() {
-    this.dialogForm.addControl("title", new FormControl(null, [Validators.required, Validators.minLength(5)]));
-    this.dialogForm.addControl("hasWhoVoted", new FormControl(null));
-    this.dialogForm.addControl("hasClosingDate", new FormControl(null));
+    this.dialogForm.addControl("title", new FormControl('', [Validators.required, Validators.minLength(5)]));
+    this.dialogForm.addControl("hasWhoVoted", new FormControl(false));
+    this.dialogForm.addControl("hasClosingDate", new FormControl(false));
     this.dialogForm.addControl("closingDate", new FormControl(null));
-    this.dialogForm.addControl("filterHour", new FormControl(null));
-    this.dialogForm.addControl("question", new FormControl(null, [Validators.required, Validators.minLength(8)]));
-    this.dialogForm.addControl("opt1", new FormControl(null, [Validators.required, Validators.minLength(2)]));
-    this.dialogForm.addControl("opt2", new FormControl(null, [Validators.required, Validators.minLength(2)]));
+    this.dialogForm.addControl("closingTime", new FormControl(null));
+    this.dialogForm.addControl("question", new FormControl('', [Validators.required, Validators.minLength(8)]));
+    this.dialogForm.addControl("opt1", new FormControl('', [Validators.required, Validators.minLength(2)]));
+    this.dialogForm.addControl("opt2", new FormControl('', [Validators.required, Validators.minLength(2)]));
   }
 
   submit(ev: any): void { // centralizar no DialogDefault
@@ -62,11 +63,31 @@ export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
     }
   }
 
-  modalHasOpened() {
+  timepickerHasOpened() {
     setTimeout(() => {
-      this.renderer.setProperty(document.querySelector('.timepicker-dial__hint'), 'innerHTML', 
-      `* use setas (<span>⇅</span>) para alterar a hora.`);
+      this.renderer.setProperty(document.querySelector('.timepicker-dial__hint'), 'innerHTML',
+        `* use setas (<span>⇅</span>) para alterar a hora.`);
     }, 300);
+  }
+
+  setDateState(ev: MatCheckboxChange) {
+    if (!ev.checked) {
+      this.dialogForm.get('closingDate').reset();
+      this.dialogForm.get('closingTime').reset();
+      this.appController.removeElementClass(document.querySelector('#closingDate') as any, 'enabled');
+      this.appController.setElementClass(document.querySelector('#closingDate') as any, 'disabled');
+      setTimeout(() => {
+        this.appController.setElementClass(document.querySelector('#closingDate') as any, 'none');
+      }, 320);
+      return;
+    }
+
+    this.appController.removeElementClass(document.querySelector('#closingDate') as any, 'none');
+    setTimeout(() => {
+      this.appController.removeElementClass(document.querySelector('#closingDate') as any, 'disabled');
+      this.appController.setElementClass(document.querySelector('#closingDate') as any, 'enabled');
+    }, 50);
+
   }
 
   setData() {

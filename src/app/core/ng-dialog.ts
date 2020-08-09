@@ -4,7 +4,7 @@ import { NgForm } from './ng-form';
 import { HostListener } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
-export abstract class DialogDefault extends NgForm {
+export abstract class NgDialog extends NgForm {
 
     public hasClosed: boolean = false;
     public hasTimePicker: boolean = false;

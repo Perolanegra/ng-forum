@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, AfterViewInit, Renderer2 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { DialogDefault } from 'src/app/core/dialog-default';
+import { NgDialog } from 'src/app/core/ng-dialog';
 import { FormBuilder } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
 
@@ -9,7 +9,7 @@ import { AppController } from 'src/app/core/appController';
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })
-export class ToastComponent extends DialogDefault implements OnInit, AfterViewInit {
+export class ToastComponent extends NgDialog implements OnInit, AfterViewInit {
 
   public message: string;
   public title: string;

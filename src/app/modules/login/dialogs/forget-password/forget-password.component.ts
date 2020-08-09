@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Renderer2, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { DialogDefault } from 'src/app/core/dialog-default';
+import { NgDialog } from 'src/app/core/ng-dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
 import { Store, Select } from '@ngxs/store';
@@ -15,7 +15,7 @@ import { ToastComponent } from '../../../../shared/components/toast/toast.compon
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.scss']
 })
-export class ForgetPasswordComponent extends DialogDefault implements OnInit, OnDestroy {
+export class ForgetPasswordComponent extends NgDialog implements OnInit, OnDestroy {
 
   @Select(AuthState.forgotPassResponse) fPassResponse$: Observable<any>;
   private fPassResponseSubscription$: Subscription;

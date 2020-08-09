@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2, Inject, HostListener, ElementRef } from '@angular/core';
-import { DialogDefault } from 'src/app/core/dialog-default';
+import { NgDialog } from 'src/app/core/ng-dialog';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
@@ -27,7 +27,7 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
     ]),
   ]
 })
-export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
+export class AddSurveyDialogComponent extends NgDialog implements OnInit {
 
   constructor(protected dialogRef: MatDialogRef<AddSurveyDialogComponent>,
     protected formBuilder: FormBuilder,

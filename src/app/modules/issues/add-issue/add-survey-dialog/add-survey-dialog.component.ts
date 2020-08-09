@@ -1,10 +1,11 @@
-import { Component, OnInit, Renderer2, Inject, HostListener } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, HostListener, ElementRef } from '@angular/core';
 import { DialogDefault } from 'src/app/core/dialog-default';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 
 @Component({
   selector: 'app-add-survey-dialog',
@@ -41,12 +42,15 @@ export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
 
   ngOnInit(): void {
     this.setDialogForm();
+  }
+
+  setDialogForm() {
     this.setFormControls();
     this.setData();
   }
 
   setFormControls() {
-    this.dialogForm.addControl("title", new FormControl('', [Validators.required, Validators.minLength(5)]));
+    this.dialogForm.addControl("title", new FormControl('', [Validators.required, Validators.minLength(5), CustomValidators.allblank]));
     this.dialogForm.addControl("hasWhoVoted", new FormControl(false));
     this.dialogForm.addControl("hasClosingDate", new FormControl(false));
     this.dialogForm.addControl("closingDate", new FormControl(null));
@@ -68,6 +72,17 @@ export class AddSurveyDialogComponent extends DialogDefault implements OnInit {
       this.renderer.setProperty(document.querySelector('.timepicker-dial__hint'), 'innerHTML',
         `* use setas (<span>⇅</span>) para alterar a hora.`);
     }, 300);
+  }
+
+  setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg
+    const title_type = this.getErrorTypes(2, true);
+    const title_msg = this.getErrorMessages(2, true);
+
+    const subtitle_type = this.getErrorTypes(2, true, 3);
+    const subtitle_msg = this.getErrorMessages(2, true, 4, 10);
+
+    this.setErrorMsgs('title', title_type, title_msg);
+    this.setErrorMsgs('subtitle', subtitle_type, subtitle_msg);
   }
 
   setDateState(ev: MatCheckboxChange) {

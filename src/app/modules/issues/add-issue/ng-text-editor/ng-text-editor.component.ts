@@ -45,6 +45,9 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit, 
   ngOnInit(): void {
     this.setDialogForm();
     this.setEditorData();
+  }
+
+  setDialogForm() {
     this.dialogForm.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
   }
 
@@ -72,6 +75,10 @@ export class NgRichTextEditorComponent extends DialogDefault implements OnInit, 
   close(data?: any) {
     this.dialogRef.close(data);
     this.hasClosed = true;
+  }
+
+  public setErrorValidation() {
+    throw new Error("Method not implemented.");
   }
 
 }

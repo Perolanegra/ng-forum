@@ -32,7 +32,7 @@
                     <div id="closingDate" class="flexbox-row space-beetween fade-transition-in disabled none">
                         <mat-form-field class="input-text" color="accent" appearance="outline">
                             <mat-label>Data Fechamento</mat-label>
-                            <input matInput [matDatepicker]="closingDatePicker" class="font" autocomplete='off'
+                            <input matInput readonly [matDatepicker]="closingDatePicker" (click)="closingDatePicker.open()" class="font" autocomplete='off'
                                 formControlName="closingDate" required ngAutofillOff minlength="8" type="text" />
                             <mat-datepicker-toggle matSuffix [for]="closingDatePicker"></mat-datepicker-toggle>
                             <mat-datepicker #closingDatePicker></mat-datepicker>

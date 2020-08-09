@@ -127,8 +127,8 @@ export class AddIssueComponent extends NgForm implements OnInit {
     const subtitle_type = this.getErrorTypes(2, true, 3);
     const subtitle_msg = this.getErrorMessages(2, true, 4, 10);
 
-    this.seErrorMsgs('title', title_type, title_msg);
-    this.seErrorMsgs('subtitle', subtitle_type, subtitle_msg);
+    this.setErrorMsgs('title', title_type, title_msg);
+    this.setErrorMsgs('subtitle', subtitle_type, subtitle_msg);
   }
 
   setForm(): void {

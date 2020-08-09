@@ -41,4 +41,12 @@ export class ToastComponent extends DialogDefault implements OnInit, AfterViewIn
     this.dialogRef.close();
   }
 
+  public setDialogForm() {
+    throw new Error("Method not implemented.");
+  }
+  
+  public setErrorValidation() {
+    throw new Error("Method not implemented.");
+  }
+
 }

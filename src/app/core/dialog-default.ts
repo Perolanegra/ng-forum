@@ -20,17 +20,18 @@ export abstract class DialogDefault extends NgDefault {
         protected appController: AppController) {
         super();
         this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
-    }
-
-
-    public setDialogForm() {
         this.dialogForm = this.formBuilder.group({});
     }
+
+
+    public abstract setDialogForm();
 
     setCloseColor(btnCloseElement, data) {
         if(!this.hasMobileMatches && btnCloseElement) {
             this.renderer.setStyle(btnCloseElement, 'color', this.appController.getColorRef(data.type));
         }
     }
+
+    public abstract setErrorValidation();
 
 }

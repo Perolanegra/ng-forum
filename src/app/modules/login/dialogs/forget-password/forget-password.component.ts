@@ -16,6 +16,9 @@ import { ToastComponent } from '../../../../shared/components/toast/toast.compon
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent extends DialogDefault implements OnInit, OnDestroy {
+  public setErrorValidation() {
+    throw new Error("Method not implemented.");
+  }
 
   @Select(AuthState.forgotPassResponse) fPassResponse$: Observable<any>;
   private fPassResponseSubscription$: Subscription;
@@ -34,6 +37,9 @@ export class ForgetPasswordComponent extends DialogDefault implements OnInit, On
 
   ngOnInit(): void {
     this.setDialogForm();
+  }
+
+  setDialogForm() {
     this.dialogForm.addControl("username", new FormControl(null, Validators.required));
   }
 

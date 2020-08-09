@@ -61,10 +61,10 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     const name_msg = [ ...this.getErrorMessages(0), ...this.getErrorMessages(4), ...this.getErrorMessages(2) ];
     const name_type = [ ...this.getErrorTypes(0), ...this.getErrorTypes(1), ...this.getErrorTypes(2) ];
 
-    this.seErrorMsgs('pass', pass_type, pass_msg);
-    this.seErrorMsgs('username', username_type, username_msg);
-    this.seErrorMsgs('name', name_type, name_msg);
-    this.seErrorMsgs('email', email_type, email_msg);
+    this.setErrorMsgs('pass', pass_type, pass_msg);
+    this.setErrorMsgs('username', username_type, username_msg);
+    this.setErrorMsgs('name', name_type, name_msg);
+    this.setErrorMsgs('email', email_type, email_msg);
   }
 
   getResponse() {

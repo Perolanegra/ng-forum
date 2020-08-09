@@ -51,4 +51,12 @@ export class ConfirmDialogComponent extends DialogDefault implements OnInit {
     this.hasClosed = true;
   }
 
+  public setDialogForm() {
+    throw new Error("Method not implemented.");
+  }
+  
+  public setErrorValidation() {
+    throw new Error("Method not implemented.");
+  }
+
 }

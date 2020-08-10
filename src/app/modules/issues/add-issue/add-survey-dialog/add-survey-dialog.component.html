@@ -84,10 +84,18 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="flexbox-column">
+                    <div class="flexbox-row align-items-center opt-label-out">
                         <span class="font opt-label">Opções</span>
+                        <button mat-icon-button style="outline: none;" tabindex="-1"
+                            (click)="$event.preventDefault();onAddControl();"
+                            class="product-sans-light btn-submit btn-remove-field fade-transition-in">
+                            +1
+                        </button>
+                    </div>
+
+                    <div class="flexbox-column opt-out">
                         <div class="flexbox-row align-items-baseline space-beetween" formArrayName="formArrOpt"
-                            *ngFor="let item of _form.get('formArrOpt')?.controls; let i = index">
+                            *ngFor="let item of _form.get('formArrOpt')?.controls; let i = index" style="padding-right: 10px;">
 
                             <mat-form-field appearance="outline" class="fade-transition-in font" style="width: 90%;"
                                 [style.padding-bottom]="styleFormFieldObject?.formArrOpt[i]?.paddingBottom">
@@ -97,13 +105,13 @@
                                 <mat-error>
                                     <ng-input-error (indexLastErrorField)="setPadding($event);"
                                         [control]="_form.controls[i]" [controlName]="i"
-                                        [errorMsgs]="errorMsgs[i]">
+                                        [errorMsgs]="errorMsgs[i]"> <!--mudar aq-->
                                     </ng-input-error>
                                 </mat-error>
                             </mat-form-field>
 
                             <button mat-icon-button style="outline: none;" tabindex="-1"
-                                (click)="$event.preventDefault();"
+                                (click)="$event.preventDefault();resetControl(i);"
                                 class="product-sans-light btn-submit btn-remove-field fade-transition-in">
                                 <mat-icon>close</mat-icon>
                             </button>

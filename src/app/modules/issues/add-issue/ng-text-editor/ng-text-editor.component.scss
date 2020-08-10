@@ -4,10 +4,6 @@
     align-items: flex-end;
 }
 
-::ng-deep .mat-dialog-container {
-    background: unset !important;
-}
-
 ::ng-deep .cdk-overlay-dark-backdrop {
     background: rgba(0, 0, 0, 0.81);
 }

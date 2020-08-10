@@ -45,6 +45,7 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
   ngOnInit(): void {
     this.setForm();
     this.setEditorData();
+    this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'background', 'unset');
   }
 
   setForm() {

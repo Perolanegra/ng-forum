@@ -58,7 +58,6 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
       new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]),
       new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank])
     ]));
-    this._form.get('formArrayOpts')
     this.setInitControlsPaddingFormArr('formArrOpt');
   }
 
@@ -123,7 +122,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     !this.hasTimePicker ? this.close() : null;
   }
 
-  setData() {
+  setData(): void {
     // const { title, message, btnYes, btnNo } = this.data.formControls;
     // this.title = title || 'Atenção';
     // this.message = message || 'Você confirma a operação a seguir?';
@@ -131,12 +130,20 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     // this.btnYes = btnYes || 'Sim';
   }
 
-  onAddControl() {
-    const formArray = this._form.get('formArrayOpts') as FormArray;
-    formArray.push(new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]))
+  onAddControl(): void {
+    const formArray = this._form.get('formArrOpt') as FormArray;
+    formArray.push(new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
   }
 
-  public getResponse() {
+  resetControl(index: string): void {
+    const formArray = this._form.get('formArrOpt') as FormArray;
+
+    if(formArray.length > 2) { // Pelo menos 2 fields de resposta precisam existir
+      formArray.controls.splice(Number(index), 1);
+    }
+  }
+
+  public getResponse(): void {
     throw new Error("Method not implemented.");
   }
 

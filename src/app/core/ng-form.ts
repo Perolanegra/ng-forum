@@ -121,7 +121,12 @@ export abstract class NgForm extends NgDefault {
 
     public abstract setErrorValidation();
 
-    public setPadding(response: any) {
+    /**
+     * @author igor.alves
+     * @param response objeto emitido do NgInputErrorComponent.
+     * @param padding Basepadding que será multiplicado pelo index do erro para aplicar espaçamento para as mensagens.
+     */
+    public setPadding(response: any, padding?: string) {
         if (!response || !response?.controlName) {
             return;
         }
@@ -129,11 +134,10 @@ export abstract class NgForm extends NgDefault {
         if (!response?.index || response?.index < 2) {
             this.styleFormFieldObject[response.controlName].paddingBottom = '0%';
         } else {
-            const basePadding = 1; // base é 1.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
+            const basePadding = padding ? Number(padding) : 1; // base é 1.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
             const resultPadding = basePadding * response.index;
             this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`;
         }
-
     }
 
     /**

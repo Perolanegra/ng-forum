@@ -76,7 +76,7 @@
                             <input matInput class="font" autocomplete='off' formControlName="question" required
                                 ngAutofillOff minlength="8" type="text" />
                             <mat-error>
-                                <ng-input-error (indexLastErrorField)="setPadding($event);"
+                                <ng-input-error (indexLastErrorField)="setPadding($event, '2');"
                                     [control]="_form.controls?.question" [controlName]="'question'"
                                     [errorMsgs]="errorMsgs?.question">
                                 </ng-input-error>
@@ -123,7 +123,6 @@
             </div>
         </form>
     </div>
-
 
 
     <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button

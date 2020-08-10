@@ -5,7 +5,7 @@
                 <div class="flexbox-column">
                     <div class="flexbox-column">
                         <mat-form-field appearance="outline" class="fade-transition-in font"
-                        [style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom">
+                            [style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom">
                             <mat-label>Título Enquete</mat-label>
                             <input matInput class="font" autocomplete='off' formControlName="title" required
                                 ngAutofillOff minlength="8" type="text" />
@@ -30,10 +30,12 @@
                     </div>
 
                     <div id="closingDate" class="flexbox-row space-beetween fade-transition-in disabled none">
-                        <mat-form-field class="input-text" color="accent" appearance="outline" *ngIf="_form.controls?.closingDate"
-                        [style.padding-bottom]="styleFormFieldObject?.closingDate?.paddingBottom">
+                        <mat-form-field class="input-text" color="accent" appearance="outline"
+                            *ngIf="_form.controls?.closingDate"
+                            [style.padding-bottom]="styleFormFieldObject?.closingDate?.paddingBottom">
                             <mat-label>Data Fechamento</mat-label>
-                            <input matInput readonly [matDatepicker]="closingDatePicker" (click)="closingDatePicker.open()" class="font" autocomplete='off'
+                            <input matInput readonly [matDatepicker]="closingDatePicker"
+                                (click)="closingDatePicker.open()" class="font" autocomplete='off'
                                 formControlName="closingDate" required ngAutofillOff minlength="8" type="text" />
                             <mat-datepicker-toggle matSuffix [for]="closingDatePicker"></mat-datepicker-toggle>
                             <mat-datepicker #closingDatePicker></mat-datepicker>
@@ -46,11 +48,13 @@
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" style="cursor: pointer;" class="fade-transition-in font"
-                        [style.padding-bottom]="styleFormFieldObject?.closingTime?.paddingBottom" *ngIf="_form.controls?.closingTime">
+                            [style.padding-bottom]="styleFormFieldObject?.closingTime?.paddingBottom"
+                            *ngIf="_form.controls?.closingTime">
                             <mat-label>Horário fim</mat-label>
                             <input matInput readonly class="font" autocomplete='off' formControlName="closingTime"
                                 type="text" required [ngxTimepicker]="ngHourPicker" />
-                            <mat-icon matSuffix [ngxTimepicker]="ngHourPicker" class="timepickerIcon">access_time</mat-icon>
+                            <mat-icon matSuffix [ngxTimepicker]="ngHourPicker" class="timepickerIcon">access_time
+                            </mat-icon>
                             <ngx-material-timepicker timepickerClass="teste" #ngHourPicker
                                 (opened)="hasTimePicker = !hasTimePicker;timepickerHasOpened();"
                                 (closed)="hasTimePicker = !hasTimePicker;" [appendToInput]="true"
@@ -63,9 +67,23 @@
                                 </ng-input-error>
                             </mat-error>
                         </mat-form-field>
-
-
                     </div>
+
+                    <div class="flexbox-column">
+                        <mat-form-field appearance="outline" class="fade-transition-in font"
+                            [style.padding-bottom]="styleFormFieldObject?.question?.paddingBottom">
+                            <mat-label>Pergunta</mat-label>
+                            <input matInput class="font" autocomplete='off' formControlName="question" required
+                                ngAutofillOff minlength="8" type="text" />
+                            <mat-error>
+                                <ng-input-error (indexLastErrorField)="setPadding($event);"
+                                    [control]="_form.controls?.question" [controlName]="'question'"
+                                    [errorMsgs]="errorMsgs?.question">
+                                </ng-input-error>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
                 </div>
             </div>
         </form>
@@ -73,7 +91,8 @@
 
 
 
-    <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button [@btnSubmitState]="_form.valid ? 'enabled' : 'disabled'"
+    <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button
+        [@btnSubmitState]="_form.valid ? 'enabled' : 'disabled'"
         class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit();"
         cdkFocusInitial>{{ data?.count > 0 && data?.content ? 'Salvar' : 'Anexar' }} Enquete</button>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Inject, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -53,10 +53,10 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     this._form.addControl("title", new FormControl('', [Validators.required, Validators.minLength(5), CustomValidators.allblank]));
     this._form.addControl("hasWhoVoted", new FormControl(false));
     this._form.addControl("hasClosingDate", new FormControl(false));
+    this._form.addControl("question", new FormControl('', [Validators.required, Validators.minLength(8), CustomValidators.allblank]));
+    this._form.addControl("opt1", new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
+    this._form.addControl("opt2", new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
     this.setInitControlsPadding();
-    // this._form.addControl("question", new FormControl('', [Validators.required, Validators.minLength(8)]));
-    // this._form.addControl("opt1", new FormControl('', [Validators.required, Validators.minLength(2)]));
-    // this._form.addControl("opt2", new FormControl('', [Validators.required, Validators.minLength(2)]));
   }
 
   submit(): void {
@@ -74,17 +74,26 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg
     const title_type = this.getErrorTypes(2, true, 3);
-    const title_msg = this.getErrorMessages(2, true, 4, 5);
+
+    const arr = [
+      { requiredParam: 5, control: 'title' },
+      { requiredParam: 8, control: 'question' },
+      { requiredParam: 2, control: 'opt1' },
+      { requiredParam: 2, control: 'opt2' }
+    ];
+    
+    arr.map(val => {
+      this.setErrorMsgs(val.control, title_type, this.getErrorMessages(2, true, 4, val.requiredParam));
+    });
 
     const closingDateTime_type = this.getErrorTypes(1, true);
     const closingDateTime_msg = this.getErrorMessages(1, true);
 
-    this.setErrorMsgs('title', title_type, title_msg);
     this.setErrorMsgs('closingDate', closingDateTime_type, closingDateTime_msg);
     this.setErrorMsgs('closingTime', closingDateTime_type, closingDateTime_msg);
   }
 
-  setDateState(ev: MatCheckboxChange) {
+  setDateState(ev: MatCheckboxChange): void {
     if (!ev.checked) {
       ['closingDate', 'closingTime'].map((control: string) => this._form.removeControl(control));
 
@@ -108,7 +117,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
   }
 
 
-  @HostListener('window:keyup.esc') onKeyUp() {
+  @HostListener('window:keyup.esc') exitByESC(): void {
     !this.hasTimePicker ? this.close() : null;
   }
 
@@ -123,8 +132,5 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
   public getResponse() {
     throw new Error("Method not implemented.");
   }
-
-
-
 
 }

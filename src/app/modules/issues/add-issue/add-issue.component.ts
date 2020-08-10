@@ -135,7 +135,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
     this._form.addControl('tags', new FormControl(null, [Validators.required]));
     this._form.addControl('contentIssue', new FormControl(null, [Validators.required]));
     this._form.addControl('typeContentIssue', new FormControl(false));
-    this.initStyleFormErrorMsg();
+    this.setInitControlsPadding();
   }
 
   confirmRemoveContent() {// chamar popup de confirmação passando dinamicamente a mensagem de pergunta e as opções.

@@ -9,6 +9,7 @@ import { AuthState } from 'src/app/state/auth/auth.state';
 import { NgForm } from 'src/app/core/ng-form';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
+import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
 
 @Component({
   selector: 'ng-sign-up',
@@ -39,7 +40,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     this._form.addControl('username', new FormControl(null, [Validators.required]));
     this._form.addControl('email', new FormControl(null, [Validators.required, Validators.email]));
     this._form.addControl('pass', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
-    this.initStyleFormErrorMsg();
+    this.setInitControlsPadding();
   }
 
   ngOnDestroy() {
@@ -70,7 +71,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     this.responseSubscription$ = this.rSignUpResponse$.subscribe(async (data) => {
       if (data) {
         this.spinner.hide();
-        this.showToast(data);
+        this.showToast(data, ToastComponent);
         setTimeout(() => this.appController.navigate('login'), 800);
       }
     });

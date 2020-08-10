@@ -9,6 +9,7 @@ import { AppController } from 'src/app/core/appController';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { NgForm } from 'src/app/core/ng-form';
+import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
 
 @Component({
   selector: 'ng-reset-password',
@@ -41,7 +42,7 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
     this.setComparableFormValues('new_password', 'verify_password');
     this._form.addControl('new_password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this._form.addControl('verify_password', new FormControl(null, [Validators.required, CustomValidators.whitespace, this.matchValues.bind(this)]));
-    this.initStyleFormErrorMsg();
+    this.setInitControlsPadding();
   }
 
   ngOnDestroy() {
@@ -68,7 +69,7 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
         this.store.dispatch(new AuthActions.RemoveToken());
         this.store.dispatch(new AuthActions.RemoveNotAuth());
         this.spinner.hide();
-        this.showToast(data);
+        this.showToast(data, ToastComponent);
         setTimeout(() => this.appController.navigate('login'), 300);
       }
     });

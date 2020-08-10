@@ -67,7 +67,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   setForm() {
     this._form.addControl('username', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
-    this.initStyleFormErrorMsg();
+    this.setInitControlsPadding();
   }
 
   getResponse() {

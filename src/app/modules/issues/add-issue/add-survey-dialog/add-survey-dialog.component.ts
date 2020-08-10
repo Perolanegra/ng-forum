@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Inject, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, HostListener, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
@@ -25,16 +25,36 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
     ]),
+    trigger('optContainerState', [
+      state('overflowDisabled', style({
+        'overflow-y': 'none'
+      })),
+      state('overflowEnabled', style({
+        'overflow-y': 'scroll'
+      })),
+    ]),
+    trigger('optContainerInState', [
+      state('paddingDisabled', style({
+        'padding-right': 'none'
+      })),
+      state('paddingEnabled', style({
+        'padding-right': '10px'
+      })),
+    ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit {
+
+  public containerState: string = 'overflowDisabled';
+  public containerInState: string = 'paddingDisabled';
 
   constructor(protected dialogRef: MatDialogRef<AddSurveyDialogComponent>,
     protected formBuilder: FormBuilder,
     public appController: AppController,
     protected dialog: MatDialog,
     protected renderer: Renderer2,
+    private ref: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialogRef, formBuilder, appController, false);
   }
@@ -132,14 +152,32 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
   onAddControl(): void {
     const formArray = this._form.get('formArrOpt') as FormArray;
     formArray.push(new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
+
+    if ((document.querySelector('#opt-container') as any).offsetHeight >= 266) {
+      this.containerState = 'overflowEnabled';
+      this.containerInState = 'paddingEnabled';
+      return;
+    }
+
+    this.containerState = 'overflowDisabled';
+    this.containerInState = 'paddingDisabled';
   }
 
-  resetControl(index: string): void {
-    const formArray = this._form.get('formArrOpt') as FormArray;
-    
-    if(formArray.length > 2) { // Pelo menos 2 fields de resposta precisam existir
-      formArray.controls.splice(Number(index), 1);
+  resetControl(index: any): void {
+    if ((document.querySelector('#opt-container') as any).offsetHeight <= 298) { // por esse height dinamico
+      this.containerState = 'overflowDisabled';
+      this.containerInState = 'paddingDisabled';
     }
+
+    const formArray = this._form.get('formArrOpt') as FormArray;
+
+    if (formArray.length > 2) { // Pelo menos 2 fields de resposta precisam existir
+      this._form.get('formArrOpt').get(index.toString()).setErrors(null);
+      formArray.controls.splice(Number(index), 1);
+      return;
+    }
+    
+    this._form.get('formArrOpt').get(index.toString()).reset();
   }
 
   public getResponse(): void {

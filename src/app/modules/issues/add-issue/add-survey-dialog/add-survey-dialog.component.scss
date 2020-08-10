@@ -187,7 +187,6 @@
 
 .opt-out {
     max-height: 40vh;
-    overflow-y: scroll;
 }
 
 .opt-label-out {
@@ -216,6 +215,5 @@
 @media only screen and (min-width: 720px) and (max-width: 960px) {
     .opt-out {
         max-height: 20vh;
-        overflow-y: scroll;
     }
 }

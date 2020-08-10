@@ -106,8 +106,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
       return;
     }
 
-    const requiredControl = new FormControl('', [Validators.required]);
-    ['closingDate', 'closingTime'].map((control: string) => this._form.addControl(control, requiredControl));
+    ['closingDate', 'closingTime'].map((control: string) => this._form.addControl(control, new FormControl('', [Validators.required])));
     this.resetControlPadding(['closingDate', 'closingTime']);
 
     this.appController.removeElementClass(document.querySelector('#closingDate') as any, 'none');
@@ -137,7 +136,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
 
   resetControl(index: string): void {
     const formArray = this._form.get('formArrOpt') as FormArray;
-
+    
     if(formArray.length > 2) { // Pelo menos 2 fields de resposta precisam existir
       formArray.controls.splice(Number(index), 1);
     }

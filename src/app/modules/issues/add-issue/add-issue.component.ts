@@ -74,11 +74,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
 
   addSurvey() {
     const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue, count: this.countSurvey }, AddSurveyDialogComponent);
-    if (this.countSurvey < 1) {
-      this.spinner.show();
-      dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600)); // fechar essa subscrição
-      this.countSurvey++;
-    }
+    this.countSurvey < 1 ? this.countSurvey++ : null;
 
     dialogRef.afterClosed().subscribe(content => { // fechar essa subscrição
       if (content) {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2, Inject, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatCheckboxChange } from '@angular/material/checkbox';
@@ -54,9 +54,12 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     this._form.addControl("hasWhoVoted", new FormControl(false));
     this._form.addControl("hasClosingDate", new FormControl(false));
     this._form.addControl("question", new FormControl('', [Validators.required, Validators.minLength(8), CustomValidators.allblank]));
-    this._form.addControl("opt1", new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
-    this._form.addControl("opt2", new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
-    this.setInitControlsPadding();
+    this._form.addControl('formArrOpt', new FormArray([
+      new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]),
+      new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank])
+    ]));
+    this._form.get('formArrayOpts')
+    this.setInitControlsPaddingFormArr('formArrOpt');
   }
 
   submit(): void {
@@ -81,7 +84,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
       { requiredParam: 2, control: 'opt1' },
       { requiredParam: 2, control: 'opt2' }
     ];
-    
+
     arr.map(val => {
       this.setErrorMsgs(val.control, title_type, this.getErrorMessages(2, true, 4, val.requiredParam));
     });
@@ -95,13 +98,12 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
 
   setDateState(ev: MatCheckboxChange): void {
     if (!ev.checked) {
-      ['closingDate', 'closingTime'].map((control: string) => this._form.removeControl(control));
-
       this.appController.removeElementClass(document.querySelector('#closingDate') as any, 'enabled');
       this.appController.setElementClass(document.querySelector('#closingDate') as any, 'disabled');
       setTimeout(() => {
         this.appController.setElementClass(document.querySelector('#closingDate') as any, 'none');
-      }, 320);
+        ['closingDate', 'closingTime'].map((control: string) => this._form.removeControl(control));
+      }, 310);
       return;
     }
 
@@ -127,6 +129,11 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     // this.message = message || 'Você confirma a operação a seguir?';
     // this.btnNo = btnNo || 'Não';
     // this.btnYes = btnYes || 'Sim';
+  }
+
+  onAddControl() {
+    const formArray = this._form.get('formArrayOpts') as FormArray;
+    formArray.push(new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]))
   }
 
   public getResponse() {

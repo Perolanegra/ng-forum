@@ -46,6 +46,25 @@ export abstract class NgForm extends NgDefault {
         });
     }
 
+    /**
+     * @author igor.alves
+     * @param controlArr string do control que é o formArray
+     */
+    public setInitControlsPaddingFormArr(controlArr: string): void {
+        const controls = Object.keys(this._form.value);
+        const constrolsArr = Object.keys(this._form.value[controlArr]);
+        controls.forEach(control => {
+            this.styleFormFieldObject[control] = {};
+            if (controlArr == control) {
+                constrolsArr.map(controlName => {
+                    this.styleFormFieldObject[control][controlName] = {};
+                    this.styleFormFieldObject[control][controlName].paddingBottom = '0%'
+                });
+            }
+            this.styleFormFieldObject[control].paddingBottom = '0%';
+        });
+    }
+
     public resetControlPadding(controls: string[]): void {
         controls.map(control => {
             this.styleFormFieldObject[control] = {};

@@ -184,3 +184,16 @@
 .disabled {
     opacity: 0.1;
 }
+
+.opt-label {
+    width: fit-content;
+    margin-left: 15px;
+    font-weight: bold;
+    color: #E91E63;
+    opacity: 0.9;
+}
+
+.btn-remove-field {
+    position: relative;
+    top: -3px;
+}

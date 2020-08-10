@@ -13,33 +13,18 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
   styleUrls: ['./add-survey-dialog.component.scss'],
   animations: [
     trigger('btnSubmitState', [
-      state('disabled', style({
-        'opacity': '0.4',
-        'pointer-events': 'none'
-      })),
-      state('enabled', style({
-        'opacity': '1',
-        'pointer-events': 'auto',
-        'color': 'black'
-      })),
+      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none'})),
+      state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto', 'color': 'black' })),
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
     ]),
     trigger('optContainerState', [
-      state('overflowDisabled', style({
-        'overflow-y': 'none'
-      })),
-      state('overflowEnabled', style({
-        'overflow-y': 'scroll'
-      })),
+      state('overflowDisabled', style({ 'overflow-y': 'none' })),
+      state('overflowEnabled', style({ 'overflow-y': 'scroll' })),
     ]),
     trigger('optContainerInState', [
-      state('paddingDisabled', style({
-        'padding-right': 'none'
-      })),
-      state('paddingEnabled', style({
-        'padding-right': '10px'
-      })),
+      state('paddingDisabled', style({ 'padding-right': 'none' })),
+      state('paddingEnabled', style({ 'padding-right': '10px' })),
     ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

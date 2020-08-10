@@ -138,7 +138,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     const formArray = this._form.get('formArrOpt') as FormArray;
     formArray.push(new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
 
-    if ((document.querySelector('#opt-container') as any).offsetHeight >= 266) {
+    if ((document.querySelector('#opt-container') as any).scrollHeight >= 265) {
       this.containerState = 'overflowEnabled';
       this.containerInState = 'paddingEnabled';
       return;
@@ -149,7 +149,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
   }
 
   resetControl(index: any): void {
-    if ((document.querySelector('#opt-container') as any).offsetHeight <= 298) { // por esse height dinamico
+    if ((document.querySelector('#opt-container') as any).scrollHeight <= 354) { // por esse height dinamico
       this.containerState = 'overflowDisabled';
       this.containerInState = 'paddingDisabled';
     }

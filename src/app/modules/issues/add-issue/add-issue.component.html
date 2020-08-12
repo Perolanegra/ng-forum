@@ -33,7 +33,7 @@
                                 <textarea matInput class="font" autocomplete='off' formControlName="subtitle" required
                                     ngAutofillOff minlength="10" type="text"></textarea>
                                 <mat-error>
-                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
+                                    <ng-input-error (indexLastErrorField)="setPadding($event, '2.3');"
                                         [control]="_form.controls?.subtitle" [controlName]="'subtitle'"
                                         [errorMsgs]="errorMsgs?.subtitle">
                                     </ng-input-error>
@@ -50,7 +50,7 @@
                                     <img (click)="confirmRemoveContent()" class="box-img-in"
                                         src="assets/imgs/content-issue.png" [@removeIconState]="stateIconAddContent">
                                 </div>
-
+                                
                                 <mat-slide-toggle [ngClass]="[ _form.value.contentIssue ? 'disabled' : 'enabled' ]"
                                     [checked]="false" formControlName="typeContentIssue">
                                 </mat-slide-toggle>
@@ -85,7 +85,7 @@
                         </div>
 
                         <button style="margin-top: 0.2rem;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"
-                            class="btn-submit" (click)="submit()" cdkFocusInitial>Criar Issue</button>
+                            class="btn-submit iss-submit" (click)="submit()" cdkFocusInitial>Criar Issue</button>
                     </div>
                 </form>
             </div>

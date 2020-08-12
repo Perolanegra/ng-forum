@@ -10,8 +10,6 @@
 
 .content-inside {
     width: fit-content;
-    // font-size: 85%;
-    overflow: auto;
 }
 
 .square {
@@ -60,12 +58,54 @@
 }
 
 @media only screen and (max-width: 1024px) {
+    .content-inside {
+        font-size: 80%;
+        width: 90%;
+    }
+
     .square {
-        max-width: 85vw;
+        font-size: 80%;
+        width: fit-content;
     }
 
     .logo {
         max-width: 45%;
+    }
+
+    .label-info {
+        font-size: 12px;
+    }
+
+    .content-box-buttons {
+        align-items: flex-end !important;
+        flex-direction: column !important;
+    }
+
+    .content-box-in {
+        width: 100%;
+    }
+
+    .box-btn-inside {
+        font-size: 14px;
+        width: 90% !important;
+    }
+
+    .box-img-in {
+        position: relative;
+        left: 5px;
+    }
+
+    .mat-slide-toggle {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .iss-submit {
+        font-size: 14px;
+    }
+
+    .mat-error {
+        font-size: 9px;
     }
 }
 

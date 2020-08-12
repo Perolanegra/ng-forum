@@ -1,11 +1,11 @@
 .content {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
 }
 
 ::ng-deep .mat-dialog-container {
     background: #22262e;
+    overflow: hidden;
 }
 
 ::ng-deep .cdk-overlay-dark-backdrop {
@@ -36,6 +36,10 @@
     font-weight: 400;
     line-height: 1.125;
     color: #fff;
+}
+
+.closing-date {
+    margin-left: 15px;
 }
 
 // ******** Configurações Calendário ****************
@@ -107,6 +111,12 @@
 // ***************** Fim Configurações Calendário ***************************
 
 // *************** Configurações timePicker *************************
+::ng-deep .timepicker {
+    position: fixed !important;
+    top: 23% !important;
+    left: 45% !important;
+}
+
 ::ng-deep .timepicker-overlay {
     z-index: 9999999999 !important;
     pointer-events: auto !important;
@@ -212,8 +222,42 @@
     border-radius: 13% !important;
 }
 
-@media only screen and (min-width: 720px) and (max-width: 960px) {
+@media only screen and (max-width: 1024px) {
+    .content {
+        font-size: 70%;
+    }
+
     .opt-out {
         max-height: 20vh;
+    }
+    
+    div#boxCheckbox {
+        flex-direction: column;
+    }
+
+    div#closingDate {
+        flex-direction: column !important;
+    }
+    
+    ::ng-deep .mat-dialog-container {
+        width: 95vw;
+    }
+
+    .closing-date {
+        margin-left: unset;
+    }
+
+    .btn-remove-field {
+        left: 10px;
+    }
+
+    .mat-icon-button {
+        border-radius: 50% !important;
+    }
+
+    ::ng-deep .timepicker {
+        position: fixed !important;
+        left: 15px !important;
+        top: 35px !important;
     }
 }

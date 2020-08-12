@@ -13,26 +13,25 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
   styleUrls: ['./add-survey-dialog.component.scss'],
   animations: [
     trigger('btnSubmitState', [
-      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none'})),
+      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none' })),
       state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto', 'color': 'black' })),
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
+
+
     ]),
     trigger('optContainerState', [
-      state('overflowDisabled', style({ 'overflow-y': 'none' })),
-      state('overflowEnabled', style({ 'overflow-y': 'scroll' })),
+      state('overflowDisabled', style({ 'overflow-y': 'none', 'padding-right': 'none' })),
+      state('overflowEnabled', style({ 'overflow': 'hidden scroll', 'padding-right': '10px' })),
+
+
     ]),
-    trigger('optContainerInState', [
-      state('paddingDisabled', style({ 'padding-right': 'none' })),
-      state('paddingEnabled', style({ 'padding-right': '10px' })),
-    ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit {
 
   public containerState: string = 'overflowDisabled';
-  public containerInState: string = 'paddingDisabled';
 
   constructor(protected dialogRef: MatDialogRef<AddSurveyDialogComponent>,
     protected formBuilder: FormBuilder,
@@ -138,32 +137,47 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     const formArray = this._form.get('formArrOpt') as FormArray;
     formArray.push(new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
 
-    if ((document.querySelector('#opt-container') as any).scrollHeight >= 265) {
-      this.containerState = 'overflowEnabled';
-      this.containerInState = 'paddingEnabled';
+    if (!this.hasMobileMatches) {
+      (document.querySelector('#opt-container') as any).scrollHeight >= 265 ? this.setPaddingContainerState(true) : this.setPaddingContainerState(false);
       return;
     }
 
-    this.containerState = 'overflowDisabled';
-    this.containerInState = 'paddingDisabled';
+    if (formArray.length > 2) {
+      this.setPaddingContainerState(true);
+      return;
+    }
+
+    this.setPaddingContainerState(false);
   }
 
   resetControl(index: any): void {
-    if ((document.querySelector('#opt-container') as any).scrollHeight <= 354) { // por esse height dinamico
-      this.containerState = 'overflowDisabled';
-      this.containerInState = 'paddingDisabled';
-    }
-
     const formArray = this._form.get('formArrOpt') as FormArray;
+
+    if (!this.hasMobileMatches) { // Se for web, ele vai verificar se tá na altura predeterminada.
+      if ((document.querySelector('#opt-container') as any).scrollHeight <= 354) {
+        this._form.get('formArrOpt').get(index.toString()).setErrors(null);
+        formArray.controls.splice(index, 1);
+        this.setPaddingContainerState(false);
+        return;
+      }
+
+      this.setPaddingContainerState(true);
+      return;
+    }
+    // Se for mobile ele faz isso.
 
     if (formArray.length > 2) { // Pelo menos 2 fields de resposta precisam existir
       this._form.get('formArrOpt').get(index.toString()).setErrors(null);
-      formArray.controls.splice(Number(index), 1);
+      formArray.controls.splice(index, 1);
+      this.setPaddingContainerState(true);
       return;
     }
-    
+
+    this.setPaddingContainerState(false);
     this._form.get('formArrOpt').get(index.toString()).reset();
   }
+
+  setPaddingContainerState = (isEnabled: boolean) => this.containerState = isEnabled ? 'overflowEnabled' : 'overflowDisabled';
 
   public getResponse(): void {
     throw new Error("Method not implemented.");

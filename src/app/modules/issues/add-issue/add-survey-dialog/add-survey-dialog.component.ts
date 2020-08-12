@@ -153,28 +153,16 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
   resetControl(index: any): void {
     const formArray = this._form.get('formArrOpt') as FormArray;
 
-    if (!this.hasMobileMatches) { // Se for web, ele vai verificar se tá na altura predeterminada.
-      if ((document.querySelector('#opt-container') as any).scrollHeight <= 354) {
-        this._form.get('formArrOpt').get(index.toString()).setErrors(null);
-        formArray.controls.splice(index, 1);
-        this.setPaddingContainerState(false);
-        return;
-      }
-
-      this.setPaddingContainerState(true);
-      return;
-    }
-    // Se for mobile ele faz isso.
-
     if (formArray.length > 2) { // Pelo menos 2 fields de resposta precisam existir
+      if(!this.hasMobileMatches) formArray.length <= 4 ? this.setPaddingContainerState(false) : this.setPaddingContainerState(true);
       this._form.get('formArrOpt').get(index.toString()).setErrors(null);
       formArray.controls.splice(index, 1);
-      this.setPaddingContainerState(true);
       return;
     }
 
-    this.setPaddingContainerState(false);
+    this.setPaddingContainerState(false); // atende o mobile
     this._form.get('formArrOpt').get(index.toString()).reset();
+    return;
   }
 
   setPaddingContainerState = (isEnabled: boolean) => this.containerState = isEnabled ? 'overflowEnabled' : 'overflowDisabled';

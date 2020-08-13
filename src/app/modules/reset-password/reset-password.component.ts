@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription, Observable } from 'rxjs';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { AppController } from 'src/app/core/appController';
@@ -10,6 +9,7 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { NgForm } from 'src/app/core/ng-form';
 import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ng-reset-password',
@@ -26,8 +26,8 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
 
   constructor(protected formBuilder: FormBuilder,
     protected store: Store,
-    private spinner: NgxSpinnerService,
     private encryptService: EncryptionService,
+    private spinner: NgxSpinnerService,
     public appController: AppController) {
     super(formBuilder, appController, false);
   }

@@ -4,12 +4,12 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { AppController } from 'src/app/core/appController';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { NgForm } from 'src/app/core/ng-form';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ng-sign-up',
@@ -22,9 +22,9 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   @Select(AuthState.signUpResponse) rSignUpResponse$: Observable<any>;
 
   constructor(protected formBuilder: FormBuilder,
-    private spinner: NgxSpinnerService,
     private store: Store,
     private encryptService: EncryptionService,
+    private spinner: NgxSpinnerService,
     protected appController: AppController) {
     super(formBuilder, appController, false);
   }

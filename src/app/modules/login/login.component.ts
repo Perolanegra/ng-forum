@@ -5,11 +5,11 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { EncryptionService } from 'src/app/core/encryption.service';
 import { AppController } from 'src/app/core/appController';
 import { ForgetPasswordComponent } from 'src/app/modules/login/dialogs/forget-password/forget-password.component';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { Observable, Subscription } from 'rxjs';
 import { NgForm } from 'src/app/core/ng-form';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -26,8 +26,8 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
 
   constructor(protected formBuilder: FormBuilder,
     private store: Store,
-    private spinner: NgxSpinnerService,
     protected appController: AppController,
+    private spinner: NgxSpinnerService,
     private encryptService: EncryptionService) {
     super(formBuilder, appController, false);
   }

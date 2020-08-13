@@ -1,13 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, Injector } from '@angular/core';
 import { AppController } from 'src/app/core/appController';
 import { NgRichTextEditorComponent } from './ng-text-editor/ng-text-editor.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgForm } from 'src/app/core/ng-form';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ng-add-issue',
@@ -15,27 +15,14 @@ import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.
   styleUrls: ['./add-issue.component.scss'],
   animations: [
     trigger('btnSubmitState', [
-      state('disabled', style({
-        'opacity': '0.4',
-        'pointer-events': 'none'
-      })),
-      state('enabled', style({
-        'opacity': '1',
-        'pointer-events': 'auto',
-        'color': 'black'
-      })),
+      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none' })),
+      state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto', 'color': 'black' })),
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
     ]),
     trigger('removeIconState', [
-      state('disabled', style({
-        'opacity': '0.4',
-        'pointer-events': 'none'
-      })),
-      state('enabled', style({
-        'opacity': '1',
-        'pointer-events': 'auto'
-      }))
+      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none' })),
+      state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto' }))
     ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -46,8 +33,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
   public stateIconAddContent: string = 'disabled';
   public stateIconAddSurvey: string = 'disabled';
   public tagListMock = ['bug', 'implementation', 'refactory'];
-  private countSurvey = 0;
-  private countEditor = 0;
+  private count = 0;
 
   public getResponse() {
     throw new Error("Method not implemented.");
@@ -55,8 +41,8 @@ export class AddIssueComponent extends NgForm implements OnInit {
 
   constructor(protected appController: AppController,
     protected formBuilder: FormBuilder,
-    private spinner: NgxSpinnerService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    public spinner: NgxSpinnerService
   ) {
     super(formBuilder, appController, false);
   }
@@ -68,40 +54,36 @@ export class AddIssueComponent extends NgForm implements OnInit {
       formEmitted ? this.stateBtnSubmit = this._form.valid ? 'enabled' : 'disabled' : null;
     });
   }
+
   // async setimg() {
   //   await this.appController.getImg('content-issue.png');
   // }
 
-  addSurvey() {
-    const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue, count: this.countSurvey }, AddSurveyDialogComponent);
-    this.countSurvey < 1 ? this.countSurvey++ : null;
+  addContent(componentId: string) {
+    const componentObj = { 1: NgRichTextEditorComponent, 2: AddSurveyDialogComponent };
+    const dialogRef = this.appController.showToastPopUp({
+      style: {}, value: this._form.value.contentIssue,
+      count: this.count
+    }, componentObj[Number(componentId)]);
 
-    dialogRef.afterClosed().subscribe(content => { // fechar essa subscrição
-      if (content) {
+    if (this.count < 1) {
+      this.count++;
+    } 
+
+    dialogRef.afterClosed().subscribe((data: any) => { // fechar essa subscrição
+      if (componentId == '1' && data?.content) {
         this.appController.removeElementClass(document.getElementById('tagField') as any, 'disabled');
-        this._form.get('contentIssue').setValue(content);
+        this._form.get('contentIssue').setValue(data?.content);
+        this.stateIconAddContent = this._form.value.contentIssue ? 'enabled' : 'disabled';
+        return;
       }
+
+      this._form.get('contentIssue').setValue(data);
       this.stateIconAddSurvey = this._form.value.contentIssue ? 'enabled' : 'disabled';
       this.ref.markForCheck();
-    });
-  }
-
-  openRichTextEditor(ev) {
-    ev.preventDefault();
-    const dialogRef = this.appController.showToastPopUp({ style: {}, content: this._form.value.contentIssue, count: this.countEditor }, NgRichTextEditorComponent);
-    if (this.countEditor < 1) {
-      this.spinner.show();
-      dialogRef.afterOpened().subscribe(() => setTimeout(() => this.spinner.hide(), 600)); // fechar essa subscrição
-      this.countEditor++;
-    }
-
-    dialogRef.afterClosed().subscribe(content => { // fechar essa subscrição
-      if (content) {
-        this.appController.removeElementClass(document.getElementById('tagField') as any, 'disabled');
-        this._form.get('contentIssue').setValue(content);
-      }
-      this.stateIconAddContent = this._form.value.contentIssue ? 'enabled' : 'disabled';
-      this.ref.markForCheck();
+      setTimeout(() => {
+        console.log('contentIssue: ', this._form.value.contentIssue);
+      }, 660);
     });
   }
 

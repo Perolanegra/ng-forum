@@ -1,6 +1,7 @@
 import { Select } from '@ngxs/store';
 import { AppState } from 'src/app/shared/state/app.state';
 import { Observable, Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export abstract class NgDefault {
 
@@ -10,7 +11,7 @@ export abstract class NgDefault {
     public stateMobileMatchesSubscription$: Subscription;
 
     public hasMobileMatches: boolean;
-
+    
     constructor() {
         this.stateMobileMatchesSubscription$ = this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
     }

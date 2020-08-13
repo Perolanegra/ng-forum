@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Renderer2, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -7,8 +7,8 @@ import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { Observable, Subscription } from 'rxjs';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastComponent } from '../../../../shared/components/toast/toast.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ng-reset-password',
@@ -26,8 +26,7 @@ export class ForgetPasswordComponent extends NgDialogDefault implements OnInit, 
     protected dialog: MatDialog,
     protected appController: AppController,
     private store: Store,
-    private spinner: NgxSpinnerService,
-    protected renderer: Renderer2,
+    protected spinner: NgxSpinnerService,
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialogRef, formBuilder, appController, false);
   }
@@ -66,6 +65,10 @@ export class ForgetPasswordComponent extends NgDialogDefault implements OnInit, 
   }
 
   public setErrorValidation() {
+    throw new Error("Method not implemented.");
+  }
+
+  public setComponentState() {
     throw new Error("Method not implemented.");
   }
 

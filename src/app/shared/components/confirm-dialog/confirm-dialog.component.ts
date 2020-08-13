@@ -30,7 +30,7 @@ export class ConfirmDialogComponent extends NgDialogDefault implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setData();
+    this.setComponentState();
   }
 
   ngAfterViewInit() {
@@ -38,7 +38,7 @@ export class ConfirmDialogComponent extends NgDialogDefault implements OnInit {
       this.elementHeight = ((<HTMLElement>document.getElementById('base-height')).offsetHeight).toString().concat('px'));
   }
 
-  setData() {
+  setComponentState() {
     const { title, message, btnYes, btnNo } = this.data;
     this.title = title || 'Atenção';
     this.message = message || 'Você confirma a operação a seguir?';

@@ -10,7 +10,6 @@ import { NgDialogDefault } from 'src/app/core/ng-dialog';
   styleUrls: ['./toast.component.scss']
 })
 export class ToastComponent extends NgDialogDefault implements OnInit, AfterViewInit {
-
   public message: string;
   public title: string;
   public elementHeight: string;
@@ -31,10 +30,10 @@ export class ToastComponent extends NgDialogDefault implements OnInit, AfterView
   }
 
   ngOnInit(): void {
-    this.setData();
+    this.setComponentState();
   }
 
-  setData(): void {
+  setComponentState(): void {
     const { title, message } = this.data;
     this.message = message;
     this.title = title;
@@ -49,10 +48,6 @@ export class ToastComponent extends NgDialogDefault implements OnInit, AfterView
   }
 
   public getResponse() {
-    throw new Error("Method not implemented.");
-  }
-
-  public submit(): void {
     throw new Error("Method not implemented.");
   }
 

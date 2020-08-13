@@ -1,4 +1,4 @@
-import { Injectable, Renderer2, ElementRef, RendererFactory2 } from "@angular/core";
+import { Injectable, Renderer2, ElementRef, RendererFactory2, TemplateRef } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
 import { debounceTime, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AppActions } from '../shared/state/app.actions';
 import { Store } from '@ngxs/store';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ComponentType } from '@angular/cdk/portal';
 
 
 
@@ -27,7 +28,7 @@ export class AppController {
         this.exibirErro(err);
     }
 
-    showToastPopUp(paylaod: any, component): MatDialogRef<any> {
+    showToastPopUp(paylaod: any, component: ComponentType<any> | TemplateRef<any>): MatDialogRef<any> {
         let dialogRef = null;
         const { positionTop, positionBottom, positionLeft, positionRight } = paylaod.style;
 
@@ -137,9 +138,10 @@ export class AppController {
             .finally(() => this.spinner.hide());
     }
 
-    public hideSpinner(): void {
+    public hideSpinner() {
         this.spinner.hide();
     }
+
     /**
     * Retorna um novo Array ordenado de Objetos com os atributos que foram passados e parâmetro de ordenação.
     * @param pArray Recebe o array iterável original o qual quer se capturar os atributos.
@@ -343,5 +345,6 @@ export class AppController {
     public isRequired = text => {
         throw new Error(`${text} é obrigatório.`);
     }
+
 }
 

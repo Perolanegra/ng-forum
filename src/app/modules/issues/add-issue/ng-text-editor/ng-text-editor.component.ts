@@ -13,15 +13,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./ng-text-editor.component.scss'],
   animations: [
     trigger('btnSubmitState', [
-      state('disabled', style({
-        'opacity': '0.4',
-        'pointer-events': 'none'
-      })),
-      state('enabled', style({
-        'opacity': '1',
-        'pointer-events': 'auto',
-        'color': 'black'
-      })),
+      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none' })),
+      state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto', 'color': 'black' })),
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
     ])
@@ -36,15 +29,15 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
     public dialogRef: MatDialogRef<NgRichTextEditorComponent>,
     protected dialog: MatDialog,
     protected appController: AppController,
+    protected spinner: NgxSpinnerService,
     protected renderer: Renderer2,
-    private spinner: NgxSpinnerService,
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialogRef, formBuilder, appController, false);
   }
 
   ngOnInit(): void {
     this.setForm();
-    this.setEditorData();
+    this.setComponentState();
     this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'background', 'unset');
   }
 
@@ -52,29 +45,23 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
     this._form.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
   }
 
-  setEditorData() {
-    this.model.editorData = this.data?.content ? this.data.content : '<h2>Descreva seu Issue...</h2>';
+  setComponentState() {
+    if(this.data?.value) {
+      this.model.editorData = this.data.value;
+      return;
+    }
+
+    this.model.editorData = '<h2>Descreva seu Issue...</h2>';
+    if(!this.data?.count) this.showEditLoader(850);
   }
 
   ngOnDestroy() {
     this.spinner.hide();
   }
 
-  submit(): void { // centralizar no NgDialogDefault
-    if (this._form.valid) {
-      this.spinner.show();
-      this.close(this._form.value.content);
-    }
-  }
-
   onChange(ev: CKEditor4.EventInfo) {
     this.stateBtnSubmit = ev.editor.getData().length < 75 ? 'disabled' : 'enabled';
     this._form.get('content').setValue(ev.editor.getData());
-  }
-
-  close(data?: any) {
-    this.dialogRef.close(data);
-    this.hasClosed = true;
   }
 
   public setErrorValidation() {

@@ -24,7 +24,7 @@
                         </mat-checkbox>
 
                         <mat-checkbox class="closing-date" formControlName="hasClosingDate" [checked]="false"
-                            matTooltip="Data Fechamento" (change)="setDateState($event)">
+                            matTooltip="Data Fechamento" (change)="setDateState($event?.checked)">
                             Data de fechamento
                         </mat-checkbox>
                     </div>
@@ -55,7 +55,7 @@
                                 type="text" required [ngxTimepicker]="ngHourPicker" />
                             <mat-icon matSuffix [ngxTimepicker]="ngHourPicker" class="timepickerIcon">access_time
                             </mat-icon>
-                            <ngx-material-timepicker #ngHourPicker 
+                            <ngx-material-timepicker #ngHourPicker
                                 (opened)="hasTimePicker = !hasTimePicker;timepickerHasOpened();"
                                 (closed)="hasTimePicker = !hasTimePicker;" [appendToInput]="true"
                                 [enableKeyboardInput]="true">
@@ -76,7 +76,7 @@
                             <input matInput class="font" autocomplete='off' formControlName="question" required
                                 ngAutofillOff minlength="8" type="text" />
                             <mat-error>
-                                <ng-input-error (indexLastErrorField)="setPadding($event, '2');"
+                                <ng-input-error (indexLastErrorField)="setPadding($event, '2.3');"
                                     [control]="_form.controls?.question" [controlName]="'question'"
                                     [errorMsgs]="errorMsgs?.question">
                                 </ng-input-error>
@@ -86,11 +86,15 @@
 
                     <div class="flexbox-row align-items-center opt-label-out">
                         <span class="font opt-label">Opções</span>
-                        <button mat-icon-button style="outline: none;" tabindex="-1"
+                        <button mat-icon-button style="outline: none; left: unset;" tabindex="-1"
                             (click)="$event.preventDefault();onAddControl();"
                             class="product-sans-light btn-submit btn-remove-field fade-transition-in">
                             +1
                         </button>
+
+                        <mat-checkbox formControlName="hasMultipleChoice" [checked]="false" matTooltip="Múltipla Escolha">
+                            Múltipla Escolha
+                        </mat-checkbox>
                     </div>
 
                     <div id="opt-container" class="flexbox-column opt-out" [@optContainerState]="containerState">
@@ -102,11 +106,11 @@
                                 <mat-label> {{ 'Resposta ' + (i + 1) }}</mat-label>
                                 <input matInput class="font" autocomplete='off' [formControlName]="i" required
                                     ngAutofillOff minlength="8" type="text" />
-                                <!-- <mat-error>
-                                    <ng-input-error (indexLastErrorField)="setPadding($event, '2')"
+                                <mat-error>
+                                    <ng-input-error (indexLastErrorField)="setPadding($event)"
                                         [control]="item" [controlName]="'formArrOpt'" [errorMsgs]="errorMsgs[i]">
                                     </ng-input-error>
-                                </mat-error> -->
+                                </mat-error>
                             </mat-form-field>
 
                             <button mat-icon-button style="outline: none;" tabindex="-1"
@@ -125,6 +129,6 @@
 
     <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button
         [@btnSubmitState]="_form.valid ? 'enabled' : 'disabled'"
-        class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit();"
+        class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit(false);"
         cdkFocusInitial>{{ data?.count > 0 && data?.content ? 'Salvar' : 'Anexar' }} Enquete</button>
 </div>

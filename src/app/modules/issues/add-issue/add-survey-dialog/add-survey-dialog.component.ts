@@ -1,11 +1,11 @@
-import { Component, OnInit, Renderer2, Inject, HostListener, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-survey-dialog',
@@ -20,13 +20,12 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
     ]),
     trigger('optContainerState', [
       state('overflowDisabled', style({ 'overflow-y': 'none', 'padding-right': 'none' })),
-      state('overflowEnabled', style({ 'overflow': 'hidden scroll', 'padding-right': '10px' })),
+      state('overflowEnabled', style({ 'overflow': 'hidden scroll', 'padding-right': '15px' })),
     ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit {
-
   public containerState: string = 'overflowDisabled';
 
   constructor(protected dialogRef: MatDialogRef<AddSurveyDialogComponent>,
@@ -34,10 +33,9 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     public appController: AppController,
     protected dialog: MatDialog,
     protected renderer: Renderer2,
-    private ref: ChangeDetectorRef,
+    protected spinner: NgxSpinnerService,
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialogRef, formBuilder, appController, false);
-    window['t'] = this;
   }
 
   ngOnInit(): void {
@@ -46,7 +44,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
 
   setForm(): void {
     this.setFormControls();
-    this.setData();
+    this.setComponentState();
     this.setErrorValidation();
   }
 
@@ -54,24 +52,15 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     this._form.addControl("title", new FormControl('', [Validators.required, Validators.minLength(5), CustomValidators.allblank]));
     this._form.addControl("hasWhoVoted", new FormControl(false));
     this._form.addControl("hasClosingDate", new FormControl(false));
+    this._form.addControl("hasMultipleChoice", new FormControl(false));
     this._form.addControl("question", new FormControl('', [Validators.required, Validators.minLength(8), CustomValidators.allblank]));
     this._form.addControl('formArrOpt', new FormArray([
-      new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]),
-      new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank])
+      new FormControl('', [Validators.required]),
+      new FormControl('', [Validators.required])
     ]));
     this.setInitControlsPaddingFormArr('formArrOpt');
-    // const opt_type = this.getErrorTypes(2, true, 3);
-    // ['0', '1'].map(item => this.setErrorMsgs(item, opt_type, this.getErrorMessages(2, true, 4, 2)));
-  }
-
-  test() {
-    console.log('valor formarr: ', this.styleFormFieldObject['formArrOpt']);
-  }
-
-  submit(): void {
-    if (this._form.valid) {
-      this.close(this._form.value);
-    }
+    const opt_type = this.getErrorTypes(1, true);
+    ['0', '1'].map(item => this.setErrorMsgs(item, opt_type, this.getErrorMessages(1, true)));
   }
 
   timepickerHasOpened() {
@@ -102,8 +91,8 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     this.setErrorMsgs('closingTime', closingDateTime_type, closingDateTime_msg);
   }
 
-  setDateState(ev: MatCheckboxChange): void {
-    if (!ev.checked) {
+  setDateState(isChecked: boolean): void {
+    if (!isChecked) {
       this.appController.removeElementClass(document.querySelector('#closingDate') as any, 'enabled');
       this.appController.setElementClass(document.querySelector('#closingDate') as any, 'disabled');
       setTimeout(() => {
@@ -128,20 +117,23 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     !this.hasTimePicker ? this.close() : null;
   }
 
-  setData(): void {
-    // const { title, message, btnYes, btnNo } = this.data.formControls;
-    // this.title = title || 'Atenção';
-    // this.message = message || 'Você confirma a operação a seguir?';
-    // this.btnNo = btnNo || 'Não';
-    // this.btnYes = btnYes || 'Sim';
+  setComponentState(): void {
+    if (this.data.value) {
+      this.showEditLoader();
+      this.data.value.formArrOpt.map((opt, index) => index > 1 ? this.onAddControl() : null);
+      Promise.resolve(null).then(() => {
+        this.setDateState(this.data.value.hasClosingDate);
+        this._form.patchValue(this.data.value);
+      });
+    }
   }
 
   onAddControl(): void {
     const formArray = this._form.get('formArrOpt') as FormArray;
     formArray.push(new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
 
-    // const opt_type = this.getErrorTypes(2, true, 3);
-    // this.setErrorMsgs((formArray.length - 1).toString(), opt_type, this.getErrorMessages(2, true, 4, 2));
+    const opt_type = this.getErrorTypes(1, true);
+    this.setErrorMsgs((formArray.length - 1).toString(), opt_type, this.getErrorMessages(1, true));
 
     if (!this.hasMobileMatches) {
       (document.querySelector('#opt-container') as any).scrollHeight >= 265 ? this.setPaddingContainerState(true) : this.setPaddingContainerState(false);

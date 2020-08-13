@@ -17,14 +17,10 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
       state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto', 'color': 'black' })),
       transition('disabled => enabled', animate(300)),
       transition('enabled => disabled', animate(300))
-
-
     ]),
     trigger('optContainerState', [
       state('overflowDisabled', style({ 'overflow-y': 'none', 'padding-right': 'none' })),
       state('overflowEnabled', style({ 'overflow': 'hidden scroll', 'padding-right': '10px' })),
-
-
     ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -41,6 +37,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     private ref: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialogRef, formBuilder, appController, false);
+    window['t'] = this;
   }
 
   ngOnInit(): void {
@@ -63,6 +60,12 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
       new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank])
     ]));
     this.setInitControlsPaddingFormArr('formArrOpt');
+    // const opt_type = this.getErrorTypes(2, true, 3);
+    // ['0', '1'].map(item => this.setErrorMsgs(item, opt_type, this.getErrorMessages(2, true, 4, 2)));
+  }
+
+  test() {
+    console.log('valor formarr: ', this.styleFormFieldObject['formArrOpt']);
   }
 
   submit(): void {
@@ -137,6 +140,9 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     const formArray = this._form.get('formArrOpt') as FormArray;
     formArray.push(new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.allblank]));
 
+    // const opt_type = this.getErrorTypes(2, true, 3);
+    // this.setErrorMsgs((formArray.length - 1).toString(), opt_type, this.getErrorMessages(2, true, 4, 2));
+
     if (!this.hasMobileMatches) {
       (document.querySelector('#opt-container') as any).scrollHeight >= 265 ? this.setPaddingContainerState(true) : this.setPaddingContainerState(false);
       return;
@@ -154,7 +160,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     const formArray = this._form.get('formArrOpt') as FormArray;
 
     if (formArray.length > 2) { // Pelo menos 2 fields de resposta precisam existir
-      if(!this.hasMobileMatches) formArray.length <= 4 ? this.setPaddingContainerState(false) : this.setPaddingContainerState(true);
+      if (!this.hasMobileMatches) formArray.length <= 4 ? this.setPaddingContainerState(false) : this.setPaddingContainerState(true);
       this._form.get('formArrOpt').get(index.toString()).setErrors(null);
       formArray.controls.splice(index, 1);
       return;

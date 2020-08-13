@@ -126,17 +126,21 @@ export abstract class NgForm extends NgDefault {
      * @param response objeto emitido do NgInputErrorComponent.
      * @param padding Basepadding que será multiplicado pelo index do erro para aplicar espaçamento para as mensagens.
      */
-    public setPadding(response: any, padding?: string) {
+    public setPadding(response: any, padding?: string, control?: string) {        
         if (!response || !response?.controlName) {
             return;
         }
 
         if (!response?.index || response?.index < 2) {
-            this.styleFormFieldObject[response.controlName].paddingBottom = '0%';
+            control ?
+                this.styleFormFieldObject[response.controlName][control].paddingBottom = '0%'
+                : this.styleFormFieldObject[response.controlName].paddingBottom = '0%';
         } else {
             const basePadding = padding ? Number(padding) : 1; // base é 1.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
             const resultPadding = basePadding * response.index;
-            this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`;
+            control ?
+                this.styleFormFieldObject[response.controlName][control].paddingBottom = `${resultPadding}%`
+                : this.styleFormFieldObject[response.controlName].paddingBottom = `${resultPadding}%`;
         }
     }
 

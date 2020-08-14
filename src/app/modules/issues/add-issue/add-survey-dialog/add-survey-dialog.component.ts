@@ -121,7 +121,6 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
       this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'box-shadow', 'none');
     }
     if (this.data.value) {
-      this.showEditLoader();
       this.data.value.formArrOpt.map((opt, index) => index > 1 ? this.onAddControl() : null);
       Promise.resolve(null).then(() => {
         this.setDateState(this.data.value.hasClosingDate);

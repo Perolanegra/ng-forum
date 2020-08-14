@@ -64,12 +64,12 @@ export class AddIssueComponent extends NgForm implements OnInit {
       count: this.count
     }, componentObj[Number(componentId)]);
 
-    if (this.count < 1) {
+    if (componentId === '1' && this.count < 1) {
       this.count++;
     }
 
     dialogRef.afterClosed().subscribe((data: any) => { // fechar essa subscrição
-      if (componentId == '1' && data?.content) {
+      if (componentId === '1' && data?.content) {
         this.appController.removeElementClass(document.getElementById('tagField') as any, 'disabled');
         this._form.get('contentIssue').setValue(data?.content);
         this.stateIconAddContent = this._form.value.contentIssue ? 'enabled' : 'disabled';
@@ -79,9 +79,6 @@ export class AddIssueComponent extends NgForm implements OnInit {
       this._form.get('contentIssue').setValue(data);
       this.stateIconAddSurvey = this._form.value.contentIssue ? 'enabled' : 'disabled';
       this.ref.markForCheck();
-      setTimeout(() => {
-        console.log('contentIssue: ', this._form.value.contentIssue);
-      }, 660);
     });
   }
 

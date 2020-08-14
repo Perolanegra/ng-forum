@@ -50,7 +50,7 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
       this.model.editorData = this.data.value;
       return;
     }
-
+    
     this.model.editorData = '<h2>Descreva seu Issue...</h2>';
     if(!this.data?.count) this.showEditLoader(850);
   }

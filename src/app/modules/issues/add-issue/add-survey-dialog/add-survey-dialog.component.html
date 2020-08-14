@@ -112,7 +112,7 @@
                                 [style.padding-bottom]="styleFormFieldObject?.formArrOpt?.paddingBottom">
                                 <mat-label> {{ 'Resposta ' + (i + 1) }}</mat-label>
                                 <input matInput class="font" autocomplete='off' [formControlName]="i" required
-                                    ngAutofillOff minlength="8" type="text" />
+                                    ngAutofillOff minlength="2" type="text" />
                                 <mat-error>
                                     <ng-input-error (indexLastErrorField)="setPadding($event)" [control]="item"
                                         [controlName]="'formArrOpt'" [errorMsgs]="errorMsgs[i]">
@@ -137,5 +137,5 @@
     <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button
         [@btnSubmitState]="_form.valid ? 'enabled' : 'disabled'"
         class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit(false);"
-        cdkFocusInitial>{{ data?.count > 0 && data?.value ? 'Salvar' : 'Anexar' }} Enquete</button>
+        cdkFocusInitial>{{  data?.value ? 'Salvar' : 'Anexar' }} Enquete</button>
 </div>

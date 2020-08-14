@@ -1,4 +1,7 @@
 <div class="content" *ngIf="!hasClosed">
+    <div *ngIf="!hasMobileMatches" class="logo-out">
+        <img class="logo-img" src="assets/imgs/logo.png">
+    </div>
     <div>
         <form [formGroup]="_form">
             <div class="flexbox-column">
@@ -86,18 +89,22 @@
 
                     <div class="flexbox-row align-items-center opt-label-out">
                         <span class="font opt-label">Opções</span>
-                        <button mat-icon-button style="outline: none; left: unset;" tabindex="-1"
-                            (click)="$event.preventDefault();onAddControl();"
+                        <button mat-icon-button style="outline: none;  margin-bottom: 6px;"
+                            [ngStyle]="{ 'left': hasMobileMatches ? 'unset' : '-5%' }"
+                            (click)="$event.preventDefault();onAddControl();" tabindex="-1"
                             class="product-sans-light btn-submit btn-remove-field fade-transition-in">
                             +1
                         </button>
 
-                        <mat-checkbox formControlName="hasMultipleChoice" [checked]="false" matTooltip="Múltipla Escolha">
+                        <mat-checkbox formControlName="hasMultipleChoice" [checked]="false"
+                            matTooltip="Múltipla Escolha">
                             Múltipla Escolha
                         </mat-checkbox>
                     </div>
 
-                    <div id="opt-container" class="flexbox-column opt-out" [@optContainerState]="containerState">
+                    <div id="opt-container" class="flexbox-column fade-transition-in"
+                        [@optContainerState]="containerState"
+                        [ngClass]="[ !hasMobileMatches && _form.value?.hasClosingDate ? 'opt-out--state-datetime' : 'opt-out' ]">
                         <div class="flexbox-row align-items-baseline space-beetween" formArrayName="formArrOpt"
                             *ngFor="let item of _form.get('formArrOpt')?.controls; let i = index">
 
@@ -107,8 +114,8 @@
                                 <input matInput class="font" autocomplete='off' [formControlName]="i" required
                                     ngAutofillOff minlength="8" type="text" />
                                 <mat-error>
-                                    <ng-input-error (indexLastErrorField)="setPadding($event)"
-                                        [control]="item" [controlName]="'formArrOpt'" [errorMsgs]="errorMsgs[i]">
+                                    <ng-input-error (indexLastErrorField)="setPadding($event)" [control]="item"
+                                        [controlName]="'formArrOpt'" [errorMsgs]="errorMsgs[i]">
                                     </ng-input-error>
                                 </mat-error>
                             </mat-form-field>
@@ -130,5 +137,5 @@
     <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button
         [@btnSubmitState]="_form.valid ? 'enabled' : 'disabled'"
         class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit(false);"
-        cdkFocusInitial>{{ data?.count > 0 && data?.content ? 'Salvar' : 'Anexar' }} Enquete</button>
+        cdkFocusInitial>{{ data?.count > 0 && data?.value ? 'Salvar' : 'Anexar' }} Enquete</button>
 </div>

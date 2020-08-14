@@ -25,14 +25,11 @@ div.mat-form-field-infix ng-tns-c35-1 {
 }
 
 .logo-out {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
+    bottom: unset !important;
 }
 
 .logo {
-    max-width: 250px;
+    max-width: 250px !important;
 }
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {

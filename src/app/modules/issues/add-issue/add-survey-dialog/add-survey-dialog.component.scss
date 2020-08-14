@@ -4,7 +4,7 @@
 }
 
 ::ng-deep .mat-dialog-container {
-    background: #22262e;
+    background: #22262e !important;
     overflow: hidden;
 }
 
@@ -196,7 +196,11 @@
 }
 
 .opt-out {
-    max-height: 40vh;
+    max-height: 33vh;
+}
+
+.opt-out--state-datetime {
+    max-height: 22vh;
 }
 
 .opt-label-out {
@@ -207,7 +211,7 @@
 .opt-label {
     width: fit-content;
     font-weight: bold;
-    color: #E91E63;
+    color: #e91e63;
     opacity: 0.9;
 }
 
@@ -229,7 +233,7 @@
     .opt-out {
         max-height: 20vh;
     }
-    
+
     div#boxCheckbox {
         flex-direction: column;
     }
@@ -237,7 +241,7 @@
     div#closingDate {
         flex-direction: column !important;
     }
-    
+
     ::ng-deep .mat-dialog-container {
         width: 95vw;
     }

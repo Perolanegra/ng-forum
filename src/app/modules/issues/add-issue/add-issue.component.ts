@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, Injector } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, Injector, ViewEncapsulation } from '@angular/core';
 import { AppController } from 'src/app/core/appController';
 import { NgRichTextEditorComponent } from './ng-text-editor/ng-text-editor.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -7,7 +7,6 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ng-add-issue',
@@ -25,7 +24,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
       state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto' }))
     ])
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddIssueComponent extends NgForm implements OnInit {
 
@@ -42,7 +41,6 @@ export class AddIssueComponent extends NgForm implements OnInit {
   constructor(protected appController: AppController,
     protected formBuilder: FormBuilder,
     private ref: ChangeDetectorRef,
-    public spinner: NgxSpinnerService
   ) {
     super(formBuilder, appController, false);
   }
@@ -68,7 +66,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
 
     if (this.count < 1) {
       this.count++;
-    } 
+    }
 
     dialogRef.afterClosed().subscribe((data: any) => { // fechar essa subscrição
       if (componentId == '1' && data?.content) {
@@ -127,6 +125,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
       if (dataEmitted) {
         this._form.get('contentIssue').setValue('');
         this.stateIconAddContent = 'disabled';
+        this.stateIconAddSurvey = 'disabled';
         this.ref.markForCheck();
       }
     });

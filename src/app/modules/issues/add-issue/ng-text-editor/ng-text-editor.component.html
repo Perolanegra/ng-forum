@@ -11,5 +11,5 @@
 
     <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"
         class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit();"
-        cdkFocusInitial>{{ data?.count > 0 && data?.content ? 'Salvar' : 'Anexar' }} Conteúdo</button>
+        cdkFocusInitial>{{ data?.count > 0 && data?.value ? 'Salvar' : 'Anexar' }} Conteúdo</button>
 </div>

@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, Validators, FormArray } from '@angular/forms'
 import { AppController } from 'src/app/core/appController';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-survey-dialog',
@@ -33,7 +32,6 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     public appController: AppController,
     protected dialog: MatDialog,
     protected renderer: Renderer2,
-    protected spinner: NgxSpinnerService,
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialogRef, formBuilder, appController, false);
   }
@@ -48,7 +46,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     this.setErrorValidation();
   }
 
-  setFormControls() {
+  setFormControls(): void {
     this._form.addControl("title", new FormControl('', [Validators.required, Validators.minLength(5), CustomValidators.allblank]));
     this._form.addControl("hasWhoVoted", new FormControl(false));
     this._form.addControl("hasClosingDate", new FormControl(false));
@@ -63,7 +61,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     ['0', '1'].map(item => this.setErrorMsgs(item, opt_type, this.getErrorMessages(1, true)));
   }
 
-  timepickerHasOpened() {
+  timepickerHasOpened(): void {
     setTimeout(() => {
       this.renderer.setProperty(document.querySelector('.timepicker-dial__hint'), 'innerHTML',
         `* use setas (<span>⇅</span>) para alterar a hora.`);
@@ -118,6 +116,10 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
   }
 
   setComponentState(): void {
+    if (!this.hasMobileMatches) {
+      this.appController.setElementStyle(document.querySelector('.cdk-global-overlay-wrapper'), 'background-color', '#22262e');
+      this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'box-shadow', 'none');
+    }
     if (this.data.value) {
       this.showEditLoader();
       this.data.value.formArrOpt.map((opt, index) => index > 1 ? this.onAddControl() : null);
@@ -135,11 +137,6 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     const opt_type = this.getErrorTypes(1, true);
     this.setErrorMsgs((formArray.length - 1).toString(), opt_type, this.getErrorMessages(1, true));
 
-    if (!this.hasMobileMatches) {
-      (document.querySelector('#opt-container') as any).scrollHeight >= 265 ? this.setPaddingContainerState(true) : this.setPaddingContainerState(false);
-      return;
-    }
-
     if (formArray.length > 2) {
       this.setPaddingContainerState(true);
       return;
@@ -152,13 +149,13 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     const formArray = this._form.get('formArrOpt') as FormArray;
 
     if (formArray.length > 2) { // Pelo menos 2 fields de resposta precisam existir
-      if (!this.hasMobileMatches) formArray.length <= 4 ? this.setPaddingContainerState(false) : this.setPaddingContainerState(true);
+      if (formArray.length === 3) this.setPaddingContainerState(false);
       this._form.get('formArrOpt').get(index.toString()).setErrors(null);
       formArray.controls.splice(index, 1);
       return;
     }
 
-    this.setPaddingContainerState(false); // atende o mobile
+    this.setPaddingContainerState(false);
     this._form.get('formArrOpt').get(index.toString()).reset();
     return;
   }

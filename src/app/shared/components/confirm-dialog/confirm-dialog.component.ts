@@ -8,7 +8,7 @@ import { NgDialogDefault } from 'src/app/core/ng-dialog';
 @Component({
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
-  styleUrls: ['./confirm-dialog.component.scss']
+  styleUrls: ['./confirm-dialog.component.scss'],
 })
 export class ConfirmDialogComponent extends NgDialogDefault implements OnInit {
 
@@ -17,7 +17,6 @@ export class ConfirmDialogComponent extends NgDialogDefault implements OnInit {
   public btnYes: string;
   public btnNo: string;
   public elementHeight: string;
-
 
   constructor(
     public dialogRef: MatDialogRef<ToastComponent>,
@@ -33,17 +32,17 @@ export class ConfirmDialogComponent extends NgDialogDefault implements OnInit {
     this.setComponentState();
   }
 
-  ngAfterViewInit() {
-    Promise.resolve(null).then(() =>
-      this.elementHeight = ((<HTMLElement>document.getElementById('base-height')).offsetHeight).toString().concat('px'));
-  }
-
   setComponentState() {
     const { title, message, btnYes, btnNo } = this.data;
     this.title = title || 'Atenção';
     this.message = message || 'Você confirma a operação a seguir?';
     this.btnNo = btnNo || 'Não';
     this.btnYes = btnYes || 'Sim';
+
+    Promise.resolve(null).then(() => {
+      this.elementHeight = ((<HTMLElement>document.getElementById('base-height')).offsetHeight).toString().concat('px');
+      this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'padding', '0px');
+    });
   }
 
   public setErrorValidation() {

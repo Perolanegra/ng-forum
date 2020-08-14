@@ -72,16 +72,7 @@
 }
 
 ::ng-deep .mat-dialog-container {
-  display: unset;
-  padding: unset;
-  border-radius: unset;
-  box-sizing: unset;
   overflow: hidden;
-  outline: unset;
-  width: unset;
-  height: unset;
-  min-height: unset;
-  max-height: unset;
   background: transparent;
 }
 
@@ -157,33 +148,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Product Sans';
+  font-family: "Product Sans";
   cursor: pointer;
 }
 
 .btn-yes {
   background: #fff;
   font-weight: bold;
-  color: #E91E63;
-  transition: .3s ease-in-out;
+  color: #e91e63;
+  transition: 0.3s ease-in-out;
 }
 
 .btn-yes:hover {
-  background: #E91E63;
+  background: #e91e63;
   color: black;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .btn-no {
   background: #303030;
   color: #fff;
   opacity: 0.7;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .btn-no:hover {
   background: transparent;
   color: red;
   opacity: 0.6;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }

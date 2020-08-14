@@ -31,18 +31,6 @@
     flex-direction: column;
 }
 
-.logo-out {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    position: relative;
-    bottom: 2vh;
-}
-
-.logo {
-    max-width: 13vw;
-}
-
 .label-info {
     margin-bottom: 6%;
     width: 100%;
@@ -60,12 +48,11 @@
 @media only screen and (max-width: 1024px) {
     .content-inside {
         font-size: 80%;
-        width: 90%;
     }
 
     .square {
         font-size: 80%;
-        width: fit-content;
+        width: 90vw;
     }
 
     .logo {

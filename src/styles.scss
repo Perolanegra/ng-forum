@@ -191,4 +191,16 @@ div#msg-error-ng-default {
     padding-left: 15px;
 }
 
+.logo-out {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    bottom: 2vh;
+}
+
+.logo-img {
+    max-width: 10vw;
+}
+
 // ************** TimePicker **********************

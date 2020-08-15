@@ -46,8 +46,8 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
   }
 
   setComponentState() {
-    if(this.data?.value) {
-      this.model.editorData = this.data.value;
+    if(this.data.value?.content) {
+      this.model.editorData = this.data.value?.content;
       return;
     }
     

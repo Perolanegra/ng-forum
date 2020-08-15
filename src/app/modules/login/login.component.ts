@@ -27,7 +27,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   constructor(protected formBuilder: FormBuilder,
     private store: Store,
     protected appController: AppController,
-    private spinner: NgxSpinnerService,
+    protected spinner: NgxSpinnerService,
     private encryptService: EncryptionService) {
     super(formBuilder, appController, false);
   }

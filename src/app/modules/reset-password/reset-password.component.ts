@@ -27,7 +27,7 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
   constructor(protected formBuilder: FormBuilder,
     protected store: Store,
     private encryptService: EncryptionService,
-    private spinner: NgxSpinnerService,
+    protected spinner: NgxSpinnerService,
     public appController: AppController) {
     super(formBuilder, appController, false);
   }

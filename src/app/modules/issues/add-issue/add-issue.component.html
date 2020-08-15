@@ -43,7 +43,7 @@
                             <div class="content-box-buttons">
                                 <div class="content-box-in">
                                     <button style="margin-top: 0.2rem;" mat-raised-button
-                                        [ngClass]="[ _form?.value?.typeContentIssue ? 'disabled' : 'enabled' ]"
+                                        [ngClass]="[ _form?.value?.typeSurveyContent ? 'disabled' : 'enabled' ]"
                                         (click)="$event.preventDefault();addContent('1');"
                                         class="btn-submit box-btn-inside"
                                         cdkFocusInitial>{{ stateIconAddContent === 'enabled' ? 'Editar' : 'Adicionar' }}
@@ -53,13 +53,13 @@
                                 </div>
 
                                 <mat-slide-toggle [ngClass]="[ _form.value.contentIssue ? 'disabled' : 'enabled' ]"
-                                    [checked]="false" formControlName="typeContentIssue">
+                                    [checked]="false" formControlName="typeSurveyContent">
                                 </mat-slide-toggle>
 
 
                                 <div class="content-box-in">
                                     <button style="margin-top: 0.2rem;" mat-raised-button
-                                        [ngClass]="[ _form?.value?.typeContentIssue ? 'enabled' : 'disabled' ]"
+                                        [ngClass]="[ _form?.value?.typeSurveyContent ? 'enabled' : 'disabled' ]"
                                         class="btn-submit box-btn-inside" cdkFocusInitial
                                         (click)="$event?.preventDefault();addContent('2');">{{ stateIconAddSurvey === 'enabled' ?  'Editar' : 'Adicionar' }}
                                         Enquete</button>
@@ -69,8 +69,9 @@
 
                             </div>
 
-                            <mat-form-field appearance="outline" id="tagField" class="fade-transition-in font disabled"
-                                [style.padding-bottom]="styleFormFieldObject?.tags?.paddingBottom">
+                            <mat-form-field appearance="outline" id="tagField" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.tags?.paddingBottom"
+                                [ngClass]="[ (stateIconAddSurvey === 'enabled' || stateIconAddContent === 'enabled') ? '' : 'disabled' ]">
                                 <mat-label>Tags</mat-label>
                                 <mat-select class="font" multiple matInput formControlName="tags" ngAutofillOff
                                     required>

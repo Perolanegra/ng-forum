@@ -5,6 +5,7 @@ import { NgFormErrorMesssage } from './pattern/ng-form-error-msg';
 import { Subscription } from 'rxjs';
 import { NgZone } from '@angular/core';
 import { NgFormErrorType } from './pattern/ng-form-error-type';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 export abstract class NgForm extends NgDefault {
@@ -23,6 +24,7 @@ export abstract class NgForm extends NgDefault {
         protected appController: AppController,
         protected hasKeepRegister: boolean,
         protected ngZone?: NgZone,
+        protected spinner?: NgxSpinnerService
     ) {
         super();
         this._form = this.formBuilder.group({});
@@ -117,7 +119,21 @@ export abstract class NgForm extends NgDefault {
         return this._form.controls;
     }
 
-    public abstract submit(): void
+    /**
+     * @author  igor.alves
+     * @description Método chamado após o form ser submetido e validado. Este método deve ser usado
+     * para setar um novo state pro componente em questão, logo após o form ser submetido e validado, 
+     * a lógica deve conter dentro dele respeitando as particularidades de cada component.
+     * @returns void
+     */
+    public submittedIsValid(): void {}
+
+    submit(hasSpinner: boolean = false): void { // centralizar no NgDialogDefault
+        if (this._form.valid) {
+            hasSpinner ? this.spinner.show() : null;
+            this.submittedIsValid();
+        }
+    }
 
     public abstract setErrorValidation();
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, Injector, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { AppController } from 'src/app/core/appController';
 import { NgRichTextEditorComponent } from './ng-text-editor/ng-text-editor.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -7,6 +7,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ng-add-issue',
@@ -26,13 +27,16 @@ import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddIssueComponent extends NgForm implements OnInit {
+export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
 
   public stateBtnSubmit: string = 'disabled';
   public stateIconAddContent: string = 'disabled';
   public stateIconAddSurvey: string = 'disabled';
   public tagListMock = ['bug', 'implementation', 'refactory'];
   private count = 0;
+
+  protected contentAfterClosedSubscription$: Subscription;
+  protected removeContentSubscription$: Subscription;
 
   public getResponse() {
     throw new Error("Method not implemented.");
@@ -53,11 +57,20 @@ export class AddIssueComponent extends NgForm implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.removeContentSubscription$ ? this.removeContentSubscription$.unsubscribe() : null;
+    this.contentAfterClosedSubscription$ ? this.contentAfterClosedSubscription$.unsubscribe() : null;
+  }
+
+  public submittedIsValid(): void {
+    console.log('sou válido: ', this._form.value);
+  }
+
   // async setimg() {
   //   await this.appController.getImg('content-issue.png');
   // }
 
-  addContent(componentId: string) {
+  addContent(componentId: string): void {
     const componentObj = { 1: NgRichTextEditorComponent, 2: AddSurveyDialogComponent };
     const dialogRef = this.appController.showToastPopUp({
       style: {}, value: this._form.value.contentIssue,
@@ -68,27 +81,13 @@ export class AddIssueComponent extends NgForm implements OnInit {
       this.count++;
     }
 
-    dialogRef.afterClosed().subscribe((data: any) => { // fechar essa subscrição
-      if (componentId === '1' && data?.content) {
-        this.appController.removeElementClass(document.getElementById('tagField') as any, 'disabled');
-        this._form.get('contentIssue').setValue(data?.content);
-        this.stateIconAddContent = this._form.value.contentIssue ? 'enabled' : 'disabled';
-        return;
+    this.contentAfterClosedSubscription$ = dialogRef.afterClosed().subscribe((data: JSON) => { // fechar essa subscrição
+      if (data) {
+        this._form.get('contentIssue').setValue(data);
+        componentId === '1' ? this.stateIconAddContent = 'enabled' : this.stateIconAddSurvey = 'enabled';
+        this.ref.markForCheck();
       }
-
-      this._form.get('contentIssue').setValue(data);
-      this.stateIconAddSurvey = this._form.value.contentIssue ? 'enabled' : 'disabled';
-      this.ref.markForCheck();
     });
-  }
-
-  // switchTypeContent() {
-  //   this._form.get('typeContentIssue').setValue()
-  //   this.isContentIssue = !this.isContentIssue;
-  // }
-
-  public submit(): void {
-
   }
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg
@@ -107,7 +106,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
     this._form.addControl('subtitle', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('tags', new FormControl(null, [Validators.required]));
     this._form.addControl('contentIssue', new FormControl(null, [Validators.required]));
-    this._form.addControl('typeContentIssue', new FormControl(false));
+    this._form.addControl('typeSurveyContent', new FormControl(false));
     this.setInitControlsPadding();
   }
 
@@ -118,7 +117,7 @@ export class AddIssueComponent extends NgForm implements OnInit {
     const style = {};
     const dialogRef = this.appController.showToastPopUp({ title, message, type, style }, ConfirmDialogComponent);
 
-    dialogRef.afterClosed().subscribe(dataEmitted => { // desinscrever esse kra dps.
+    this.removeContentSubscription$ = dialogRef.afterClosed().subscribe(dataEmitted => {
       if (dataEmitted) {
         this._form.get('contentIssue').setValue('');
         this.stateIconAddContent = 'disabled';

@@ -28,7 +28,7 @@ export abstract class NgDialogDefault extends NgForm {
         this.hasClosed = true;
     }
 
-    submit(hasSpinner: boolean = true): void { // centralizar no NgDialogDefault
+    submit(hasSpinner: boolean = false): void {
         if (this._form.valid) {
             hasSpinner ? this.spinner.show() : null;
             this.close(this._form.value);

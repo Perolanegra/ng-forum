@@ -136,6 +136,6 @@
 
     <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button
         [@btnSubmitState]="_form.valid ? 'enabled' : 'disabled'"
-        class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit(false);"
+        class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit();"
         cdkFocusInitial>{{  data?.value ? 'Salvar' : 'Anexar' }} Enquete</button>
 </div>

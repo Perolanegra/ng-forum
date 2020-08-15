@@ -24,7 +24,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   constructor(protected formBuilder: FormBuilder,
     private store: Store,
     private encryptService: EncryptionService,
-    private spinner: NgxSpinnerService,
+    protected spinner: NgxSpinnerService,
     protected appController: AppController) {
     super(formBuilder, appController, false);
   }

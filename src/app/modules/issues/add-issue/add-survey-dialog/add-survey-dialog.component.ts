@@ -120,6 +120,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
       this.appController.setElementStyle(document.querySelector('.cdk-global-overlay-wrapper'), 'background-color', '#22262e');
       this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'box-shadow', 'none');
     }
+    
     if (this.data.value) {
       this.data.value.formArrOpt.map((opt, index) => index > 1 ? this.onAddControl() : null);
       Promise.resolve(null).then(() => {

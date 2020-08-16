@@ -1,7 +1,6 @@
 import { Select } from '@ngxs/store';
 import { AppState } from 'src/app/shared/state/app.state';
 import { Observable, Subscription } from 'rxjs';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 export abstract class NgDefault {
 

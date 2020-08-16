@@ -33,15 +33,15 @@ export class ConfirmDialogComponent extends NgDialogDefault implements OnInit {
   }
 
   setComponentState() {
-    const { title, message, btnYes, btnNo } = this.data;
+    const { title, message, btnYes, btnNo, type } = this.data;
     this.title = title || 'Atenção';
     this.message = message || 'Você confirma a operação a seguir?';
     this.btnNo = btnNo || 'Não';
     this.btnYes = btnYes || 'Sim';
 
     Promise.resolve(null).then(() => {
-      this.elementHeight = ((<HTMLElement>document.getElementById('base-height')).offsetHeight).toString().concat('px');
       this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'padding', '0px');
+      this.appController.setElementStyle(document.querySelector('.mat-icon-button'), 'color', this.appController.getColorRef(type));
     });
   }
 

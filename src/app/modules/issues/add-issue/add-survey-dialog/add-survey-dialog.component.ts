@@ -150,8 +150,8 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
 
     if (formArray.length > 2) { // Pelo menos 2 fields de resposta precisam existir
       if (formArray.length === 3) this.setPaddingContainerState(false);
-      this._form.get('formArrOpt').get(index.toString()).setErrors(null);
       formArray.controls.splice(index, 1);
+      this._form.get('formArrOpt').patchValue(formArray.value);
       return;
     }
 

@@ -331,7 +331,18 @@ export class AppController {
         const call = {
             error: () => { return 'red' },
             info: () => { return 'blue' },
-            warning: () => { return 'orange' },
+            warning: () => { return '#ffbb33' },
+            success: () => { return 'green' },
+        }
+
+        return call[type]();
+    }
+
+    public getColorRefDark(type): string {
+        const call = {
+            error: () => { return 'red' },
+            info: () => { return 'blue' },
+            warning: () => { return '#FF8800' },
             success: () => { return 'green' },
         }
 

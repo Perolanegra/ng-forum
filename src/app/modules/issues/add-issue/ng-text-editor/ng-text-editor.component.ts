@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, OnDestroy, HostListener } from '@angular/core';
 import { CKEditor4 } from 'ckeditor4-angular';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppController } from 'src/app/core/appController';
@@ -39,6 +39,7 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
     this.setForm();
     this.setComponentState();
     this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'background', 'unset');
+    this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'box-shadow', 'unset');
   }
 
   setForm() {
@@ -70,6 +71,10 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
 
   public getResponse() {
     throw new Error("Method not implemented.");
+  }
+
+  @HostListener('window:keyup.esc') exitByESC(): void {
+    this.close();
   }
 
 }

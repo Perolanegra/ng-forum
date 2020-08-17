@@ -38,8 +38,6 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
   ngOnInit(): void {
     this.setForm();
     this.setComponentState();
-    this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'background', 'unset');
-    this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'box-shadow', 'unset');
   }
 
   setForm() {
@@ -47,6 +45,13 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
   }
 
   setComponentState() {
+    this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'background', 'unset');
+    this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'box-shadow', 'unset');
+
+    if(!this.hasMobileMatches) {
+      this.appController.setElementStyle(document.querySelector('.mat-slide-toggle'), 'height', '22px');
+    }
+
     if(this.data.value?.content) {
       this.model.editorData = this.data.value?.content;
       return;

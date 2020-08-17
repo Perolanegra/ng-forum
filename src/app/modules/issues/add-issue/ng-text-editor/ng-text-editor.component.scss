@@ -8,6 +8,36 @@
     background: rgba(0, 0, 0, 0.81);
 }
 
-@media only screen and (max-width: 768px) {
-   // ng text editor mobile
+// @media only screen and (max-width: 768px) {
+//    // ng text editor mobile
+// }
+
+.toggle-slide {
+    position: absolute;
+    top: 80%;
+    right: 60%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 450px;
+    background: rgb(0, 0, 0, 0.4);
+    font-family: "Montserrat";
+    border-radius: 5px;
+    padding: 5px;
+    animation: fadeIn ease-in-out 3s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

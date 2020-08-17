@@ -9,6 +9,14 @@
     <ckeditor (change)="onChange($event)" [config]="{ height: [ [ '60vh' ] ] }" [(ngModel)]="model.editorData">
     </ckeditor>
 
+    <div class="toggle-slide">
+        <mat-slide-toggle #checkBox [checked]="false">
+        </mat-slide-toggle>
+        <div [ngStyle]="{ 'color': checkBox?.checked ? '#f36079' : 'rgb(210, 196, 196)' }">
+            Enviar notificação quando outros responderem.
+        </div>
+    </div>
+
     <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"
         class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit();"
         cdkFocusInitial>{{ data?.count > 0 && data?.value ? 'Salvar' : 'Anexar' }} Conteúdo</button>

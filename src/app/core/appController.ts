@@ -329,10 +329,10 @@ export class AppController {
 
     public getColorRef(type): string {
         const call = {
-            error: () => { return 'red' },
-            info: () => { return 'blue' },
+            error: () => { return '#ff4444' },
+            info: () => { return '#33b5e5' },
             warning: () => { return '#ffbb33' },
-            success: () => { return 'green' },
+            success: () => { return '#00C851' },
         }
 
         return call[type]();
@@ -340,10 +340,10 @@ export class AppController {
 
     public getColorRefDark(type): string {
         const call = {
-            error: () => { return 'red' },
-            info: () => { return 'blue' },
+            error: () => { return '#CC0000' },
+            info: () => { return '#0099CC' },
             warning: () => { return '#FF8800' },
-            success: () => { return 'green' },
+            success: () => { return '#007E33' },
         }
 
         return call[type]();

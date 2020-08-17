@@ -258,9 +258,20 @@
         border-radius: 50% !important;
     }
 
+    .btn-submit {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
     ::ng-deep .timepicker {
         position: fixed !important;
         left: 15px !important;
         top: 35px !important;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .btn-submit {
+        font-size: 12px;
     }
 }

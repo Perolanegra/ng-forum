@@ -41,6 +41,7 @@ export class ConfirmDialogComponent extends NgDialogDefault implements OnInit {
 
     Promise.resolve(null).then(() => {
       this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'padding', '0px');
+      this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'background', 'transparent');
       this.appController.setElementStyle(document.querySelector('.mat-icon-button'), 'color', this.appController.getColorRef(type));
     });
   }

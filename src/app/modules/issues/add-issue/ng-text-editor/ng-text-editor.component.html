@@ -10,7 +10,8 @@
     </ckeditor>
 
     <div class="toggle-slide">
-        <mat-slide-toggle #checkBox [checked]="false">
+        <mat-slide-toggle [checked]="_form.get('enableNotifications')?.value" #checkBox
+            (change)="_form.get('enableNotifications').setValue($event?.checked)">
         </mat-slide-toggle>
         <div [ngStyle]="{ 'color': checkBox?.checked ? '#f36079' : 'rgb(210, 196, 196)' }">
             Enviar notificação quando outros responderem.

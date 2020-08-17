@@ -42,6 +42,7 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
 
   setForm() {
     this._form.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
+    this._form.addControl("enableNotifications", new FormControl(null));
   }
 
   setComponentState() {
@@ -54,6 +55,7 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
 
     if(this.data.value?.content) {
       this.model.editorData = this.data.value?.content;
+      this._form.get('enableNotifications').setValue(this.data.value.enableNotifications);
       return;
     }
     

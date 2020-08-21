@@ -54,7 +54,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     LayoutModule,
     ToastrModule.forRoot(),
-    NgxsModule.forRoot([AuthState, AppState]), // , { developmentMode: !environment.production }
+    NgxsModule.forRoot([AuthState, AppState], { developmentMode: !environment.production }),
     NgxsStoragePluginModule.forRoot({
       key: ['auth.token', 'auth.notAuth', 'auth.hasResetPass', 'app.hasMobileMatches', 'app.routes', 'app.user'],
     }),

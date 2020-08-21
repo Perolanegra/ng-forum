@@ -75,19 +75,16 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
     });
   }
 
-  async submit(): Promise<void> {
-    if (this.isValidForm()) {
-      this.spinner.show();
-      this.tokenSubscription$ = this.token$.subscribe(access_token => {
-        const passForm = this.formControls.verify_password.value;
-        if (access_token && passForm) {
-          const enrypted = this.encryptService.set('10610433IA$#@$^@1ERF', passForm);
-          this.store.dispatch(new AuthActions.ResetPass({ access_token, password: enrypted }));
-          this._form.reset();
-          this.stateSubmitHasChanged();
-        }
-      });
-    }
+  async submittedIsValid(): Promise<void> {
+    this.tokenSubscription$ = this.token$.subscribe(access_token => {
+      const passForm = this.formControls.verify_password.value;
+      if (access_token && passForm) {
+        const enrypted = this.encryptService.set('10610433IA$#@$^@1ERF', passForm);
+        this.store.dispatch(new AuthActions.ResetPass({ access_token, password: enrypted }));
+        this._form.reset();
+        this.stateSubmitHasChanged();
+      }
+    });
   }
 
 }

@@ -8,12 +8,15 @@ import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { IssueActions } from '../state/issue.actions';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'ng-add-issue',
   templateUrl: './add-issue.component.html',
   styleUrls: ['./add-issue.component.scss'],
-  animations: [
+  animations: [ // Angular Animations
     trigger('btnSubmitState', [
       state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none' })),
       state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto', 'color': 'black' })),
@@ -37,6 +40,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
 
   protected contentAfterClosedSubscription$: Subscription;
   protected removeContentSubscription$: Subscription;
+  protected formValueChangesSubscription$: Subscription;
 
   public getResponse() {
     throw new Error("Method not implemented.");
@@ -45,6 +49,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   constructor(protected appController: AppController,
     protected formBuilder: FormBuilder,
     private ref: ChangeDetectorRef,
+    private store: Store,
   ) {
     super(formBuilder, appController, false);
   }
@@ -52,7 +57,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setForm();
     this.setErrorValidation();
-    this._form.valueChanges.pipe().subscribe(formEmitted => {
+    this.formValueChangesSubscription$ = this._form.valueChanges.pipe().subscribe(formEmitted => {
       formEmitted ? this.stateBtnSubmit = this._form.valid ? 'enabled' : 'disabled' : null;
     });
   }
@@ -60,10 +65,15 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.removeContentSubscription$ ? this.removeContentSubscription$.unsubscribe() : null;
     this.contentAfterClosedSubscription$ ? this.contentAfterClosedSubscription$.unsubscribe() : null;
+    this.formValueChangesSubscription$ ? this.formValueChangesSubscription$.unsubscribe() : null;
   }
 
   public submittedIsValid(): void {
-    console.log('sou válido: ', this._form.value);
+    console.log('form: ', this._form.value);
+    this.store.dispatch(new IssueActions.Add(this._form.value)).pipe(map(() => {
+      this._form.reset();
+      this.stateSubmitHasChanged();
+    }));
   }
 
   // async setimg() {

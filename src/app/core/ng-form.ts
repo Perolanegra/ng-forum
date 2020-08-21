@@ -129,7 +129,7 @@ export abstract class NgForm extends NgDefault {
     public submittedIsValid(): void {}
 
     submit(hasSpinner: boolean = false): void { // centralizar no NgDialogDefault
-        if (this._form.valid) {
+        if (this.isValidForm()) {
             hasSpinner ? this.spinner.show() : null;
             this.submittedIsValid();
         }

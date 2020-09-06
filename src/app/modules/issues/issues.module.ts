@@ -12,7 +12,6 @@ import { AddSurveyDialogComponent } from './add-issue/add-survey-dialog/add-surv
 import { IssueState } from './state/issue.state';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
-import { IssuesService } from './issues.service'
 
 @NgModule({
   declarations: [

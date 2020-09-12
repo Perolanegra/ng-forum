@@ -47,9 +47,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   setResetPass() {
     this.hasResetPass$
       .subscribe(hasResetPass => {
-        if (hasResetPass) {
-          setTimeout(() => this.store.dispatch(new AuthActions.RemoveHasReset()), 420000); // 7min p fzr outra requisição.
-        }
+        if (hasResetPass) setTimeout(() => this.store.dispatch(new AuthActions.RemoveHasReset()), 420000); // 7min p fzr outra requisição.
       });
   }
 

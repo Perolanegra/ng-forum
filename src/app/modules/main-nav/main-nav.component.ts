@@ -39,7 +39,7 @@ export class MainNavComponent implements OnInit {
     }
 
     ngOnDestroy(): void {
-        this.stateMobileMatchesSubscription$.unsubscribe();
+        if (this.stateMobileMatchesSubscription$) this.stateMobileMatchesSubscription$.unsubscribe();
     }
 
     onMenuBlur(hasEnterMenu) {

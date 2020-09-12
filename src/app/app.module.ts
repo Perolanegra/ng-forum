@@ -31,8 +31,6 @@ import { ForgetPasswordComponent } from './modules/login/dialogs/forget-password
 import { TesteComponent } from './modules/teste/teste.component';
 import { FormsModule } from '@angular/forms';
 
-// export let options: Partial<IConfig> | (() => Partial<IConfig>);
-
 @NgModule({
   declarations: [
     AppComponent,

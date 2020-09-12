@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --aot --proxy-config src/proxy.conf.json",
     "build:optimize": "ng build --prod --aot --buildOptimizer=true --output-path dist/ng-forum/ --baseHref='https://perolanegra.github.io/ng-forum/'",
+    "deploy": "npx angular-cli-ghpages — dir=dist/ng-forum",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

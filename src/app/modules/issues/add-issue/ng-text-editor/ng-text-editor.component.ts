@@ -4,26 +4,19 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dial
 import { AppController } from 'src/app/core/appController';
 import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger } from '@angular/animations';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { BtnSubmitState } from '../../../../animations/btnSubmitState';
 
 @Component({
   selector: 'ng-text-editor',
   templateUrl: './ng-text-editor.component.html',
   styleUrls: ['./ng-text-editor.component.scss'],
-  animations: [
-    trigger('btnSubmitState', [
-      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none' })),
-      state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto', 'color': 'black' })),
-      transition('disabled => enabled', animate(300)),
-      transition('enabled => disabled', animate(300))
-    ])
-  ]
+  animations: [trigger('btnSubmitState', BtnSubmitState)]
 })
 export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit, OnDestroy {
 
   public model = { editorData: '' };
-  public stateBtnSubmit: string = 'disabled';
 
   constructor(public formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<NgRichTextEditorComponent>,
@@ -42,34 +35,47 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
 
   setForm() {
     this._form.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
-    this._form.addControl("enableNotifications", new FormControl(null));
+    this._form.addControl("enableNotifications", new FormControl(this.data.value?.enableNotifications));
   }
 
   setComponentState() {
     this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'background', 'unset');
     this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'box-shadow', 'unset');
 
-    if(!this.hasMobileMatches) {
+    if (!this.hasMobileMatches) {
       this.appController.setElementStyle(document.querySelector('.mat-slide-toggle'), 'height', '22px');
     }
 
-    if(this.data.value?.content) {
+    if (this.data.value?.content) {
       this.model.editorData = this.data.value?.content;
-      this._form.get('enableNotifications').setValue(this.data.value.enableNotifications);
       return;
     }
-    
+
     this.model.editorData = '<h2>Descreva seu Issue...</h2>';
-    if(!this.data?.count) this.showEditLoader(850);
+    if (!this.data?.count) this.showEditLoader(850);
   }
 
   ngOnDestroy() {
     this.spinner.hide();
   }
 
-  onChange(ev: CKEditor4.EventInfo) {
-    this.stateBtnSubmit = ev.editor.getData().length < 75 ? 'disabled' : 'enabled';
+  public onCheckChange = (checked: boolean) => {
+    this._form.get('enableNotifications').setValue(checked);
+    this._form.get('content').setValue(this.model.editorData);
+    this.setStateBtnSubmit(this.textEditorValid(this.model.editorData));
+  }
+
+  onTextEditorKeyup(ev: CKEditor4.EventInfo) {
     this._form.get('content').setValue(ev.editor.getData());
+    this.setStateBtnSubmit(this.data.value?.content ? true : this.textEditorValid(ev.editor.getData()));
+  }
+
+  /**
+   * @param value O parametro representa o conteúdo do TextEditor, o qual está sendo passado dinâmicamente, 
+   * pelo fato de estar sendo recuperado de duas formas.
+   */
+  public textEditorValid(value: string): boolean {
+    return value.length >= 75;
   }
 
   public setErrorValidation() {

@@ -3,7 +3,7 @@ import { AppController } from 'src/app/core/appController';
 import { NgRichTextEditorComponent } from './ng-text-editor/ng-text-editor.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgForm } from 'src/app/core/ng-form';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
@@ -11,22 +11,16 @@ import { Subscription } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';
 import { IssueActions } from 'src/app/state/issue/issue.actions';
+import { BtnSubmitState } from 'src/app/animations/btnSubmitState';
+import { RemoveIconState } from 'src/app/animations/removeIconState';
 
 @Component({
   selector: 'ng-add-issue',
   templateUrl: './add-issue.component.html',
   styleUrls: ['./add-issue.component.scss'],
   animations: [ // Angular Animations
-    trigger('btnSubmitState', [
-      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none' })),
-      state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto', 'color': 'black' })),
-      transition('disabled => enabled', animate(300)),
-      transition('enabled => disabled', animate(300))
-    ]),
-    trigger('removeIconState', [
-      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none' })),
-      state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto' }))
-    ])
+    trigger('btnSubmitState', BtnSubmitState),
+    trigger('removeIconState', RemoveIconState)
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -63,12 +57,12 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.removeContentSubscription$ ? this.removeContentSubscription$.unsubscribe() : null;
-    this.contentAfterClosedSubscription$ ? this.contentAfterClosedSubscription$.unsubscribe() : null;
-    this.formValueChangesSubscription$ ? this.formValueChangesSubscription$.unsubscribe() : null;
+    if (this.removeContentSubscription$) this.removeContentSubscription$.unsubscribe();
+    if (this.contentAfterClosedSubscription$) this.contentAfterClosedSubscription$.unsubscribe();
+    if (this.formValueChangesSubscription$) this.formValueChangesSubscription$.unsubscribe();
   }
 
-  public submittedIsValid(): void {
+  public submittedValid(): void {
     console.log('form: ', this._form.value);
     // this.store.dispatch(new IssueActions.Add(this._form.value)).pipe(map(() => {
     //   this._form.reset();

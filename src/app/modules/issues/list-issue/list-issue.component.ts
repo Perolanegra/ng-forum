@@ -94,7 +94,7 @@ export class ListIssueComponent implements OnInit {
     const obj = {
       1: `<div class="iss-content">
             <span class="iss-title">${registro.title}</span>
-            <span class="iss-subtitle">${registro.subtitle.slice(0,29)}...</span>
+            <span class="iss-subtitle">${registro.subtitle.slice(0, 30)}...</span>
             <div class="iss-author">@author ${registro.author}</div>
           </div>`,
       5: `<div class="iss-content iss-content-row">

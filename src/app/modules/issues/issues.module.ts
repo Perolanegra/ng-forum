@@ -12,6 +12,7 @@ import { AddSurveyDialogComponent } from './add-issue/add-survey-dialog/add-surv
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { IssueState } from '../../state/issue/issue.state';
+import { IssuesService } from './issues.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { IssueState } from '../../state/issue/issue.state';
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  entryComponents: [NgRichTextEditorComponent, AddSurveyDialogComponent]
+  entryComponents: [NgRichTextEditorComponent, AddSurveyDialogComponent],
+  providers: [IssuesService]
 })
 export class IssuesModule { }

@@ -126,12 +126,12 @@ export abstract class NgForm extends NgDefault {
      * a lógica deve conter dentro dele respeitando as particularidades de cada component.
      * @returns void
      */
-    public submittedIsValid(): void {}
+    public submittedValid(): void { }
 
     submit(hasSpinner: boolean = false): void { // centralizar no NgDialogDefault
         if (this.isValidForm()) {
             hasSpinner ? this.spinner.show() : null;
-            this.submittedIsValid();
+            this.submittedValid();
         }
     }
 
@@ -142,7 +142,7 @@ export abstract class NgForm extends NgDefault {
      * @param response objeto emitido do NgInputErrorComponent.
      * @param padding Basepadding que será multiplicado pelo index do erro para aplicar espaçamento para as mensagens.
      */
-    public setPadding(response: any, padding?: string, control?: string) {        
+    public setPadding(response: any, padding?: string, control?: string) {
         if (!response || !response?.controlName) {
             return;
         }
@@ -225,6 +225,15 @@ export abstract class NgForm extends NgDefault {
         });
 
         return errorResponse;
+    }
+
+    /**
+     * 
+     * @param param Paramêtro o qual define se o estado do botão submit está ativo ou não.
+     * Caso o valor seja true, o botão possui estado ativo, caso contrário inativo.
+     */
+    public setStateBtnSubmit(param: any) {
+        this.stateBtnSubmit = param ? 'enabled' : 'disabled';
     }
 
     // patchValues(pRegistro: any) {

@@ -7,15 +7,15 @@ import { AppController } from './appController';
 export class AppOverBtnDirective {
 
   constructor(private renderer: Renderer2, public elfRef: ElementRef, public appController: AppController) { }
-  @Input() type: string;
-
+  @Input() type?: string;
+  @Input() hoverColor?: string;
+  
   @HostListener('mouseover') onMouseOver(eventData: Event): void {
-    this.renderer.setStyle(this.elfRef.nativeElement, 'color', '#E91E63');
+    this.renderer.setStyle(this.elfRef.nativeElement, 'color', this.hoverColor);
   }
 
   @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
     this.renderer.setStyle(this.elfRef.nativeElement, 'color', this.appController.getColorRef(this.type));
   }
-
 
 }

@@ -3,29 +3,23 @@ import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
+import { BtnSubmitState } from 'src/app/animations/btnSubmitState';
+import { SurveyAnswersContainerState } from 'src/app/animations/surveyAnswersContainerState';
 
 @Component({
   selector: 'app-add-survey-dialog',
   templateUrl: './add-survey-dialog.component.html',
   styleUrls: ['./add-survey-dialog.component.scss'],
   animations: [
-    trigger('btnSubmitState', [
-      state('disabled', style({ 'opacity': '0.4', 'pointer-events': 'none' })),
-      state('enabled', style({ 'opacity': '1', 'pointer-events': 'auto', 'color': 'black' })),
-      transition('disabled => enabled', animate(300)),
-      transition('enabled => disabled', animate(300))
-    ]),
-    trigger('optContainerState', [
-      state('overflowDisabled', style({ 'overflow-y': 'none', 'padding-right': 'none' })),
-      state('overflowEnabled', style({ 'overflow': 'hidden scroll', 'padding-right': '15px' })),
-    ]),
+    trigger('btnSubmitState', BtnSubmitState),
+    trigger('surveyAnswersContainerState', SurveyAnswersContainerState),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit {
-  public containerState: string = 'overflowDisabled';
+  public stateAnswersContainer: string = 'overflowDisabled';
 
   constructor(protected dialogRef: MatDialogRef<AddSurveyDialogComponent>,
     protected formBuilder: FormBuilder,
@@ -120,7 +114,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
       this.appController.setElementStyle(document.querySelector('.cdk-global-overlay-wrapper'), 'background-color', '#22262e');
       this.appController.setElementStyle(document.querySelector('.mat-dialog-container'), 'box-shadow', 'none');
     }
-    
+
     if (this.data.value) {
       this.data.value.formArrOpt.map((opt, index) => index > 1 ? this.onAddControl() : null);
       Promise.resolve(null).then(() => {
@@ -160,7 +154,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     return;
   }
 
-  setPaddingContainerState = (isEnabled: boolean) => this.containerState = isEnabled ? 'overflowEnabled' : 'overflowDisabled';
+  setPaddingContainerState = (isEnabled: boolean) => this.stateAnswersContainer = isEnabled ? 'overflowEnabled' : 'overflowDisabled';
 
   public getResponse(): void {
     throw new Error("Method not implemented.");

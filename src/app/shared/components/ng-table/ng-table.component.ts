@@ -75,8 +75,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   //Quando é afetuado um click na linha ele captura a linha e direciona para tela de edição passando o ID da mesma
   onRowClicked(row) {
-    console.log('row: ', row);
-    
+    // console.log('row: ', row);
     // this.rowClicked.emit(row);
   }
 

@@ -75,7 +75,7 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
     });
   }
 
-  async submittedIsValid(): Promise<void> {
+  async submittedValid(): Promise<void> {
     this.tokenSubscription$ = this.token$.subscribe(access_token => {
       const passForm = this.formControls.verify_password.value;
       if (access_token && passForm) {

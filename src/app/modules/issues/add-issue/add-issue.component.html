@@ -33,7 +33,7 @@
                                 <textarea matInput class="font" autocomplete='off' formControlName="subtitle" required
                                     ngAutofillOff minlength="10" type="text"></textarea>
                                 <mat-error>
-                                    <ng-input-error (indexLastErrorField)="setPadding($event, '2.3');"
+                                    <ng-input-error (indexLastErrorField)="setPadding($event, '1.5');"
                                         [control]="_form.controls?.subtitle" [controlName]="'subtitle'"
                                         [errorMsgs]="errorMsgs?.subtitle">
                                     </ng-input-error>
@@ -49,7 +49,7 @@
                                         cdkFocusInitial>{{ stateIconAddContent === 'enabled' ? 'Editar' : 'Adicionar' }}
                                         Conteúdo</button>
                                     <img (click)="confirmRemoveContent()" class="box-img-in"
-                                        src="assets/imgs/content-issue.png" [@removeIconState]="stateIconAddContent">
+                                        src="assets/imgs/remove-icon.png" [@removeIconState]="stateIconAddContent">
                                 </div>
 
                                 <mat-slide-toggle [ngClass]="[ _form.value.contentIssue ? 'disabled' : 'enabled' ]"
@@ -64,7 +64,7 @@
                                         (click)="$event?.preventDefault();addContent('2');">{{ stateIconAddSurvey === 'enabled' ?  'Editar' : 'Adicionar' }}
                                         Enquete</button>
                                     <img (click)="confirmRemoveContent()" class="box-img-in"
-                                        src="assets/imgs/content-issue.png" [@removeIconState]="stateIconAddSurvey">
+                                        src="assets/imgs/remove-icon.png" [@removeIconState]="stateIconAddSurvey">
                                 </div>
 
                             </div>

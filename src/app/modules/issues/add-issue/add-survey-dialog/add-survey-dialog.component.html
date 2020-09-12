@@ -103,7 +103,7 @@
                     </div>
 
                     <div id="opt-container" class="flexbox-column fade-transition-in"
-                        [@optContainerState]="containerState"
+                        [@surveyAnswersContainerState]="stateAnswersContainer"
                         [ngClass]="[ !hasMobileMatches && _form.value?.hasClosingDate ? 'opt-out--state-datetime' : 'opt-out' ]">
                         <div class="flexbox-row align-items-baseline space-beetween" formArrayName="formArrOpt"
                             *ngFor="let item of _form.get('formArrOpt')?.controls; let i = index">

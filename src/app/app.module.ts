@@ -4,7 +4,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './shared/modules/material.module';
+import { MaterialModule } from './shared/material/material.module';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './modules/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -20,7 +20,7 @@ import { AuthState } from './state/auth/auth.state';
 import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './core/http-config.interpcetor';
 import { ToastrModule } from 'ngx-toastr';
-import { AppState } from './shared/state/app.state';
+import { AppState } from './state/app/app.state';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AppMenuOverDirective } from './core/app-menu-over.directive';
@@ -40,7 +40,7 @@ import { FormsModule } from '@angular/forms';
     AppAutofillOffDirective,
     AppNavNameBehaviorDirective,
     ForgetPasswordComponent,
-    TesteComponent,
+    // TesteComponent,
   ],
   imports: [
     FormsModule,

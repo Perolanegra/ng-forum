@@ -3,7 +3,8 @@
   "version": "0.0.6",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --aot --proxy-config src/proxy.conf.json",
+    "start": "ng serve --aot",
+    "start:dev": "ng s --host 0.0.0.0 -o",
     "build:optimize": "ng build --prod --aot --buildOptimizer=true --output-path dist/ng-forum/ --baseHref='https://perolanegra.github.io/ng-forum/'",
     "deploy": "npx angular-cli-ghpages — dir=dist/ng-forum",
     "build": "ng build",

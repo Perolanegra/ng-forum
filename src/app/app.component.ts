@@ -5,7 +5,7 @@ import { Select, Store, Actions, ofActionDispatched } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { AuthActions } from './state/auth/auth.actions';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { AppActions } from './shared/state/app.actions';
+import { AppActions } from './state/app/app.actions';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +21,8 @@ export class AppComponent {
   hasToken; notAuth;
   private mobileQuery: MediaQueryList;
   private fillerNavSubscription$: Subscription;
+  private tokenSubscription$?: Subscription;
+  private notAuthSubscription$?: Subscription;
 
   constructor(private appController: AppController,
     changeDetectorRef: ChangeDetectorRef,
@@ -32,7 +34,7 @@ export class AppComponent {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
   }
 
   private _mobileQueryListener: () => void;
@@ -55,12 +57,14 @@ export class AppComponent {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
-    this.fillerNavSubscription$.unsubscribe();
+    if (this.fillerNavSubscription$) this.fillerNavSubscription$.unsubscribe();
+    if (this.tokenSubscription$) this.tokenSubscription$.unsubscribe();
+    if (this.notAuthSubscription$) this.notAuthSubscription$.unsubscribe();
   }
 
   getAuth() {
-    this.token$.subscribe(token => this.hasToken = token);
-    this.notAuth$.subscribe(notAuth => this.notAuth = notAuth);
+    this.tokenSubscription$ = this.token$.subscribe(token => this.hasToken = token);
+    this.notAuthSubscription$ = this.notAuth$.subscribe(notAuth => this.notAuth = notAuth);
   }
 
 }

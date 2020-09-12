@@ -5,11 +5,10 @@ import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AppActions } from '../shared/state/app.actions';
 import { Store } from '@ngxs/store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponentType } from '@angular/cdk/portal';
-
+import { AppActions } from '../state/app/app.actions';
 
 
 @Injectable()
@@ -349,13 +348,13 @@ export class AppController {
         return call[type]();
     }
 
-    public hasSameValue(str1: string = this.isRequired('str1'), str2: string = this.isRequired('str2')): boolean {
-        return str1 === str2;
-    }
+    // public hasSameValue(str1: string = this.isRequired('str1'), str2: string = this.isRequired('str2')): boolean {
+    //     return str1 === str2;
+    // }
 
-    public isRequired = text => {
-        throw new Error(`${text} é obrigatório.`);
-    }
+    // public isRequired = text => {
+    //     throw new Error(`${text} é obrigatório.`);
+    // }
 
 }
 

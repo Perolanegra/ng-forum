@@ -1,5 +1,5 @@
-import { AddSurveyModel } from '../../../models/add-survey.model';
-import { AddContentModel } from '../../../models/add-content.model';
+import { AddSurveyModel } from '../../models/add-survey.model';
+import { AddContentModel } from '../../models/add-content.model';
 
 export namespace IssueActions {
 

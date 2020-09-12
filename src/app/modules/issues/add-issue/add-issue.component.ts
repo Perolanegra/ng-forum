@@ -9,8 +9,8 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { IssueActions } from '../state/issue.actions';
 import { map } from 'rxjs/operators';
+import { IssueActions } from 'src/app/state/issue/issue.actions';
 
 @Component({
   selector: 'ng-add-issue',
@@ -70,10 +70,10 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
 
   public submittedIsValid(): void {
     console.log('form: ', this._form.value);
-    this.store.dispatch(new IssueActions.Add(this._form.value)).pipe(map(() => {
-      this._form.reset();
-      this.stateSubmitHasChanged();
-    }));
+    // this.store.dispatch(new IssueActions.Add(this._form.value)).pipe(map(() => {
+    //   this._form.reset();
+    //   this.stateSubmitHasChanged();
+    // }));
   }
 
   // async setimg() {

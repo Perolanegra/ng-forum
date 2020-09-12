@@ -1,8 +1,8 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { IssuesModel } from '../issues.model';
+import { IssuesModel } from '../../modules/issues/issues.model';
 import { IssueActions } from './issue.actions';
-import { IssuesService } from '../issues.service';
+import { IssuesService } from '../../modules/issues/issues.service';
 
 @State<IssuesModel>({
     name: 'issue',

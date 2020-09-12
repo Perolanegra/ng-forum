@@ -4,7 +4,7 @@ import { MainNavStyle } from './main-nav.style';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Select } from '@ngxs/store';
-import { AppState } from 'src/app/shared/state/app.state';
+import { AppState } from 'src/app/state/app/app.state';
 
 @Component({
     selector: 'ng-main-nav',

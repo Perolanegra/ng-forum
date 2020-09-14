@@ -17,9 +17,9 @@ export class HomeComponent extends NgDefault implements OnInit {
     protected router: Router,
     private store: Store,
     protected route: ActivatedRoute,
-    private appController: AppController,
+    protected appController: AppController,
   ) {
-    super();
+    super(appController);
 
   }
 

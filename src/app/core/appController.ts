@@ -5,7 +5,7 @@ import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponentType } from '@angular/cdk/portal';
 import { AppActions } from '../state/app/app.actions';
@@ -13,6 +13,8 @@ import { AppActions } from '../state/app/app.actions';
 
 @Injectable()
 export class AppController {
+    @Select(state => state.app.hasMobileMatches) hasMobileMatches$: Observable<any>;
+    
     private renderer: Renderer2;
 
     constructor(public dialog: MatDialog,
@@ -21,6 +23,18 @@ export class AppController {
         private _store: Store,
         private router: Router) {
         this.renderer = this.rendererFactory.createRenderer(null, null);
+    }
+
+    public dipatchMobileMatches(hasMobileMatches: boolean): void {
+        this._store.dispatch(new AppActions.SetMediaScreen(hasMobileMatches));
+    }
+
+    public getMobileMatches(): Promise<any | undefined> {
+        return new Promise((resolve, reject) => {
+            this.hasMobileMatches$.subscribe(state => {
+                resolve(state);
+            })
+        });
     }
 
     tratarErro(err): void {

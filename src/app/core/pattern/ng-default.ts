@@ -1,22 +1,30 @@
-import { Select } from '@ngxs/store';
-import { Observable, Subscription } from 'rxjs';
-import { AppState } from 'src/app/state/app/app.state';
+import { Subscription } from 'rxjs';
+import { AppController } from '../appController';
 
 export abstract class NgDefault {
 
     public hasClickSubmit: boolean = false;
 
-    @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
     public stateMobileMatchesSubscription$: Subscription;
 
-    public hasMobileMatches: boolean;
-    
-    constructor() {
-        this.stateMobileMatchesSubscription$ = this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
+    private _hasMobileMatches: boolean;
+
+    constructor(protected appController: AppController) { 
+        this.appController.getMobileMatches().then(resp => {
+            this.hasMobileMatches = resp;
+        })
     }
 
     public getStyle(trueValue, falseValue): string {
         return this.hasMobileMatches ? trueValue : falseValue;
+    }
+
+    public set hasMobileMatches(value: boolean) {
+        this._hasMobileMatches = value;
+    }
+
+    public get hasMobileMatches() {
+        return this._hasMobileMatches;
     }
 
 }

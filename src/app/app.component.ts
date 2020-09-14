@@ -6,13 +6,14 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthActions } from './state/auth/auth.actions';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AppActions } from './state/app/app.actions';
+import { NgDefault } from './core/pattern/ng-default';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent extends NgDefault {
   title = 'ng-forum';
 
   @Select(AuthState.token) token$: Observable<string>;
@@ -24,12 +25,13 @@ export class AppComponent {
   private tokenSubscription$?: Subscription;
   private notAuthSubscription$?: Subscription;
 
-  constructor(private appController: AppController,
+  constructor(protected appController: AppController,
     changeDetectorRef: ChangeDetectorRef,
     public media: MediaMatcher,
     private actions: Actions,
     private store: Store
   ) {
+    super(appController);
     this.setRoutesLocalStorage();
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -40,7 +42,7 @@ export class AppComponent {
   private _mobileQueryListener: () => void;
 
   ngOnInit() {
-    this.store.dispatch(new AppActions.SetMediaScreen(this.mobileQuery.matches));
+    this.appController.dipatchMobileMatches(this.mobileQuery.matches);
     this.actions.pipe(ofActionDispatched(AuthActions.RemoveAccess)).subscribe(() => this.appController.navigate('login'))
     this.getAuth();
   }

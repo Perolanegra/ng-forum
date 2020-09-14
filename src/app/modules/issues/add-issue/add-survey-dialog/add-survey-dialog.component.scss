@@ -30,6 +30,10 @@
     stroke: black !important;
 }
 
+::ng-deep .cdk-overlay-pane {
+    font-size: 90%;
+}
+
 .mat-checkbox {
     font-family: "Montserrat";
     font-size: inherit;
@@ -263,15 +267,34 @@
         font-weight: bold;
     }
 
+    .opt-label-out {
+        margin-left: unset;
+    }
+
     ::ng-deep .timepicker {
         position: fixed !important;
         left: 15px !important;
         top: 35px !important;
     }
+
+    ::ng-deep .cdk-overlay-pane {
+        font-size: unset;
+    }
+    
 }
 
 @media only screen and (max-width: 320px) {
+
     .btn-submit {
         font-size: 12px;
     }
+
+    ::ng-deep .cdk-overlay-pane {
+        font-size: unset;
+    }
+
+    .opt-label-out {
+        margin-left: unset;
+    }
+    
 }

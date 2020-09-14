@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { NgZone } from '@angular/core';
 import { NgFormErrorType } from './pattern/ng-form-error-type';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Store } from '@ngxs/store';
 
 
 export abstract class NgForm extends NgDefault {
@@ -24,9 +25,9 @@ export abstract class NgForm extends NgDefault {
         protected appController: AppController,
         protected hasKeepRegister: boolean,
         protected ngZone?: NgZone,
-        protected spinner?: NgxSpinnerService
+        protected spinner?: NgxSpinnerService,
     ) {
-        super();
+        super(appController);
         this._form = this.formBuilder.group({});
         hasKeepRegister ? this._form.addControl("keepRegister", new FormControl(false)) : null;
     }

@@ -42,7 +42,7 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
 
   setFormControls(): void {
     this._form.addControl("title", new FormControl('', [Validators.required, Validators.minLength(5), CustomValidators.allblank]));
-    this._form.addControl("hasWhoVoted", new FormControl(false));
+    this._form.addControl("displayWhoVoted", new FormControl(false));
     this._form.addControl("hasClosingDate", new FormControl(false));
     this._form.addControl("hasMultipleChoice", new FormControl(false));
     this._form.addControl("question", new FormControl('', [Validators.required, Validators.minLength(8), CustomValidators.allblank]));
@@ -107,6 +107,11 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
 
   @HostListener('window:keyup.esc') exitByESC(): void {
     !this.hasTimePicker ? this.close() : null;
+  }
+
+  beforeSubmit(): void {
+    const { hasClosingDate, ...payload } = this._form.value;
+    this.submit(null, payload);
   }
 
   setComponentState(): void {

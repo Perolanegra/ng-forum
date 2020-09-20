@@ -52,7 +52,7 @@
                                         src="assets/imgs/remove-icon.png" [@removeIconState]="stateIconAddContent">
                                 </div>
 
-                                <mat-slide-toggle [ngClass]="[ _form.value.contentIssue ? 'disabled' : 'enabled' ]"
+                                <mat-slide-toggle [ngClass]="[ _form.value.content ? 'disabled' : 'enabled' ]"
                                     [checked]="false" formControlName="typeSurveyContent">
                                 </mat-slide-toggle>
 
@@ -70,18 +70,19 @@
                             </div>
 
                             <mat-form-field appearance="outline" id="tagField" class="fade-transition-in font"
-                                [style.padding-bottom]="styleFormFieldObject?.tags?.paddingBottom"
+                                [style.padding-bottom]="styleFormFieldObject?.id_tags?.paddingBottom"
                                 [ngClass]="[ (stateIconAddSurvey === 'enabled' || stateIconAddContent === 'enabled') ? '' : 'disabled' ]">
                                 <mat-label>Tags</mat-label>
-                                <mat-select class="font" multiple matInput formControlName="tags" ngAutofillOff
+                                <mat-select class="font" multiple matInput formControlName="id_tags" ngAutofillOff
                                     required>
-                                    <mat-option *ngFor="let tag of tagListMock" [value]="tag">{{tag}}</mat-option>
+                                    <mat-option *ngFor="let tag of tagListMock" [value]="tag?.id">{{tag?.value}}
+                                    </mat-option>
                                 </mat-select>
 
                                 <mat-error>
                                     <ng-input-error (indexLastErrorField)="setPadding($event);"
-                                        [control]="_form.controls?.tags" [controlName]="'tags'"
-                                        [errorMsgs]="errorMsgs?.tags">
+                                        [control]="_form.controls?.id_tags" [controlName]="'id_tags'"
+                                        [errorMsgs]="errorMsgs?.id_tags">
                                     </ng-input-error>
                                 </mat-error>
                             </mat-form-field>

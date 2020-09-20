@@ -5,7 +5,7 @@ export interface AddSurveyModel {
         formArrOpt: string[];
         hasClosingDate: boolean;
         hasMultipleChoice: boolean;
-        hasWhoVoted?: boolean;
+        displayWhoVoted?: boolean;
         question: string;
         title: string;
     };

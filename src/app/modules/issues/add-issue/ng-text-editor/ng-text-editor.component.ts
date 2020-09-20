@@ -34,8 +34,8 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
   }
 
   setForm() {
-    this._form.addControl("content", new FormControl(null, [Validators.required, Validators.minLength(5)]));
-    this._form.addControl("enableNotifications", new FormControl(this.data.value?.enableNotifications));
+    this._form.addControl("context", new FormControl(null, [Validators.required, Validators.minLength(5)]));
+    this._form.addControl("enableNotifications", new FormControl(this.data.value?.enableNotifications ? this.data.value?.enableNotifications : false));
   }
 
   setComponentState() {
@@ -46,8 +46,8 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
       this.appController.setElementStyle(document.querySelector('.mat-slide-toggle'), 'height', '22px');
     }
 
-    if (this.data.value?.content) {
-      this.model.editorData = this.data.value?.content;
+    if (this.data.value?.context) {
+      this.model.editorData = this.data.value?.context;
       return;
     }
 
@@ -61,13 +61,13 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
 
   public onCheckChange = (checked: boolean) => {
     this._form.get('enableNotifications').setValue(checked);
-    this._form.get('content').setValue(this.model.editorData);
+    this._form.get('context').setValue(this.model.editorData);
     this.setStateBtnSubmit(this.textEditorValid(this.model.editorData));
   }
 
   onTextEditorKeyup(ev: CKEditor4.EventInfo) {
-    this._form.get('content').setValue(ev.editor.getData());
-    this.setStateBtnSubmit(this.data.value?.content ? true : this.textEditorValid(ev.editor.getData()));
+    this._form.get('context').setValue(ev.editor.getData());
+    this.setStateBtnSubmit(this.data.value?.context ? true : this.textEditorValid(ev.editor.getData()));
   }
 
   /**

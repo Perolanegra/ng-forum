@@ -29,7 +29,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   public stateBtnSubmit: string = 'disabled';
   public stateIconAddContent: string = 'disabled';
   public stateIconAddSurvey: string = 'disabled';
-  public tagListMock = ['bug', 'implementation', 'refactory'];
+  public tagListMock;
   private count = 0;
 
   protected contentAfterClosedSubscription$: Subscription;
@@ -49,11 +49,21 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.setMock();
     this.setForm();
     this.setErrorValidation();
     this.formValueChangesSubscription$ = this._form.valueChanges.pipe().subscribe(formEmitted => {
       formEmitted ? this.stateBtnSubmit = this._form.valid ? 'enabled' : 'disabled' : null;
     });
+  }
+
+  setMock() {
+    this.tagListMock = [
+      {value: 'bug', id: 1},
+      {value: 'implementation', id: 2},
+      {value: 'created', id: 3},
+      {value: 'hot', id: 9},
+    ];
   }
 
   ngOnDestroy() {
@@ -63,11 +73,18 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   public submittedValid(): void {
-    console.log('form: ', this._form.value);
-    // this.store.dispatch(new IssueActions.Add(this._form.value)).pipe(map(() => {
-    //   this._form.reset();
-    //   this.stateSubmitHasChanged();
-    // }));
+    console.log('form Issue: ', this._form.value);
+    
+    // const payload = {
+    //   issue: {
+        
+    //   }
+    // }
+
+    this.store.dispatch(new IssueActions.Add(this._form.value)).pipe(map(() => {
+      this._form.reset();
+      // this.stateSubmitHasChanged();
+    }));
   }
 
   // async setimg() {
@@ -77,7 +94,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   addContent(componentId: string): void {
     const componentObj = { 1: NgRichTextEditorComponent, 2: AddSurveyDialogComponent };
     const dialogRef = this.appController.showToastPopUp({
-      style: {}, value: this._form.value.contentIssue,
+      style: {}, value: this._form.value.content,
       count: this.count
     }, componentObj[Number(componentId)]);
 
@@ -87,7 +104,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
 
     this.contentAfterClosedSubscription$ = dialogRef.afterClosed().subscribe((data: JSON) => { // fechar essa subscrição
       if (data) {
-        this._form.get('contentIssue').setValue(data);
+        this._form.get('content').setValue(data);
         componentId === '1' ? this.stateIconAddContent = 'enabled' : this.stateIconAddSurvey = 'enabled';
         this.ref.markForCheck();
       }
@@ -108,8 +125,8 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   setForm(): void {
     this._form.addControl('title', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('subtitle', new FormControl(null, [Validators.required, CustomValidators.allblank]));
-    this._form.addControl('tags', new FormControl(null, [Validators.required]));
-    this._form.addControl('contentIssue', new FormControl(null, [Validators.required]));
+    this._form.addControl('id_tags', new FormControl(null, [Validators.required]));
+    this._form.addControl('content', new FormControl(null, [Validators.required]));
     this._form.addControl('typeSurveyContent', new FormControl(false));
     this.setInitControlsPadding();
   }
@@ -123,7 +140,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
 
     this.removeContentSubscription$ = dialogRef.afterClosed().subscribe(dataEmitted => {
       if (dataEmitted) {
-        this._form.get('contentIssue').setValue('');
+        this._form.get('content').setValue('');
         this.stateIconAddContent = 'disabled';
         this.stateIconAddSurvey = 'disabled';
         this.ref.markForCheck();

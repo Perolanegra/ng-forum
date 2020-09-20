@@ -22,7 +22,7 @@
                     </div>
 
                     <div id="boxCheckbox" class="flexbox-row">
-                        <mat-checkbox formControlName="hasWhoVoted" [checked]="false" matTooltip="Mostrar quem votou">
+                        <mat-checkbox formControlName="displayWhoVoted" [checked]="false" matTooltip="Mostrar quem votou">
                             Mostrar quem votou na enquete
                         </mat-checkbox>
 
@@ -34,7 +34,7 @@
 
                     <div id="closingDate" class="flexbox-row space-beetween fade-transition-in disabled none">
                         <mat-form-field class="input-text" color="accent" appearance="outline"
-                            *ngIf="_form.controls?.closingDate"
+                            *ngIf="_form.controls?.closingDate" style="width: 48%;"
                             [style.padding-bottom]="styleFormFieldObject?.closingDate?.paddingBottom">
                             <mat-label>Data Fechamento</mat-label>
                             <input matInput readonly [matDatepicker]="closingDatePicker"
@@ -51,7 +51,7 @@
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" style="cursor: pointer;" class="fade-transition-in font"
-                            [style.padding-bottom]="styleFormFieldObject?.closingTime?.paddingBottom"
+                            [style.padding-bottom]="styleFormFieldObject?.closingTime?.paddingBottom" style="width: 48%;"
                             *ngIf="_form.controls?.closingTime">
                             <mat-label>Horário fim</mat-label>
                             <input matInput readonly class="font" autocomplete='off' formControlName="closingTime"
@@ -136,6 +136,6 @@
 
     <button style="margin-top: 0.2rem; width: 100%;" mat-raised-button
         [@btnSubmitState]="_form.valid ? 'enabled' : 'disabled'"
-        class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();submit();"
+        class="product-sans-light btn-submit fade-transition-in" (click)="$event.preventDefault();beforeSubmit();"
         cdkFocusInitial>{{  data?.value ? 'Salvar' : 'Anexar' }} Enquete</button>
 </div>

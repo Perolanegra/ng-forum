@@ -28,12 +28,10 @@ export abstract class NgDialogDefault extends NgForm {
         this.hasClosed = true;
     }
 
-    submit(hasSpinner: boolean = false): void {
-        console.log('submit: ', this._form.value);
-        
+    submit(hasSpinner: boolean = false, payload?: any): void {
         if (this._form.valid) {
             if (hasSpinner) this.spinner.show();
-            this.close(this._form.value);
+            this.close(payload ? payload : this._form.value);
         }
     }
 

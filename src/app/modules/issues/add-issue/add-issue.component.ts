@@ -7,12 +7,16 @@ import { trigger, state, style } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
-import { Subscription } from 'rxjs';
-import { Store } from '@ngxs/store';
+import { Subscription, Observable } from 'rxjs';
+import { Store, Select } from '@ngxs/store';
 import { map } from 'rxjs/operators';
 import { IssueActions } from 'src/app/state/issue/issue.actions';
 import { BtnSubmitState } from 'src/app/animations/btnSubmitState';
 import { RemoveIconState } from 'src/app/animations/removeIconState';
+import { AddPollIssueModel } from 'src/app/models/add-poll-issue.model';
+import { AddContextIssueModel } from 'src/app/models/add-context-issue.model';
+import { AuthState } from 'src/app/state/auth/auth.state';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'ng-add-issue',
@@ -25,6 +29,8 @@ import { RemoveIconState } from 'src/app/animations/removeIconState';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
+
+  @Select(AuthState.userDetails) user$: Observable<UserModel>;
 
   public stateBtnSubmit: string = 'disabled';
   public stateIconAddContent: string = 'disabled';
@@ -59,10 +65,10 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
 
   setMock() {
     this.tagListMock = [
-      {value: 'bug', id: 1},
-      {value: 'implementation', id: 2},
-      {value: 'created', id: 3},
-      {value: 'hot', id: 9},
+      { value: 'bug', id: 1 },
+      { value: 'implementation', id: 2 },
+      { value: 'created', id: 3 },
+      { value: 'hot', id: 9 },
     ];
   }
 
@@ -72,19 +78,20 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
     if (this.formValueChangesSubscription$) this.formValueChangesSubscription$.unsubscribe();
   }
 
-  public submittedValid(): void {
-    console.log('form Issue: ', this._form.value);
-    
-    // const payload = {
-    //   issue: {
-        
-    //   }
-    // }
-
-    this.store.dispatch(new IssueActions.Add(this._form.value)).pipe(map(() => {
+  public async submittedValid(): Promise<void> {
+    const payload = await this.setPayload();
+    this.store.dispatch(new IssueActions.Add(payload)).pipe(map(() => {
       this._form.reset();
-      // this.stateSubmitHasChanged();
     }));
+  }
+
+  private setPayload(): Promise<AddContextIssueModel | AddPollIssueModel> {
+    return new Promise((resolve, reject) => {
+      this.user$.subscribe(state => { // unsubscribe later
+        const payload = { issue: { ...this._form.value, author: 'state?.username' } } as AddContextIssueModel | AddPollIssueModel;
+        resolve(payload);
+      });
+    });
   }
 
   // async setimg() {

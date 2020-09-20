@@ -23,7 +23,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Origin': '*',
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlcm9sYW5lZ3JhIiwicGFzc3dvcmQiOiIkMmEkMTAkdUhsblRMMU9yR0FuMjE5N0tydjNMLlhXb0NLTDJjMUR6a2ZLT1lMVGNobWxjalB6QXhGa20iLCJpYXQiOjE1ODg2OTI5NTUsImV4cCI6MTU4ODY5Mjk2NX0.uedUlqjmx7Lg0eGbi6g5cZwrihvTPxRPVLXPKK5kEfY`
     });
 
     req = req.clone({ headers: headers });

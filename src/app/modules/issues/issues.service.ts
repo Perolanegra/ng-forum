@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
-import { Observable, EMPTY } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 import { IssuesModel } from './issues.model';
-import { AddSurveyModel } from 'src/app/models/add-survey.model';
-import { AddContentModel } from 'src/app/models/add-content.model';
+import { AddPollIssueModel } from 'src/app/models/add-poll-issue.model';
+import { AddContextIssueModel } from 'src/app/models/add-context-issue.model';
 
 @Injectable()
 export class IssuesService {
@@ -16,11 +16,8 @@ export class IssuesService {
         return this.http.get(url, { params: {} }) as Observable<IssuesModel[]>;
     }
 
-    public add(payload: AddSurveyModel | AddContentModel): Observable<IssuesModel | undefined> {
+    public add(payload: AddPollIssueModel | AddContextIssueModel): Observable<any | undefined> {
         const url = `${environment.server}/issues/store`;
-        console.log('payload: ', payload);
-        
-        return EMPTY;
-        // return this.http.post(url, { issue: payload }, {}) as Observable<IssuesModel>;
+        return this.http.post(url, { payload }, {});
     }
 }

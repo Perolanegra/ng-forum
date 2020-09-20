@@ -25,8 +25,8 @@ export class IssueState {
     async add({ getState, setState }: StateContext<IssuesModel>, { payload }: IssueActions.Add) {
         if (payload) {
             const response: any = await this.issueService.add(payload).toPromise();
-            // const state = getState();
-            setState(response);
+            console.log('response: ', response);
+            // setState(response);
         }
     }
 

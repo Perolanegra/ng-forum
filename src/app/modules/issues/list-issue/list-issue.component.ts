@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IssuesModel } from '../issues.model';
+import { IssuesModel } from '../../../models/issues.model';
 
 @Component({
   selector: 'ng-list-issue',

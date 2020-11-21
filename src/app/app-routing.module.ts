@@ -9,7 +9,7 @@ import { ListIssueComponent } from './modules/issues/list-issue/list-issue.compo
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: ListIssueComponent, canActivate: [TestGuard]  }, 
+  { path: 'login', component: LoginComponent, canActivate: [LoginAuthGuard]  }, 
   {
     path: 'home',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),

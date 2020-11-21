@@ -69,13 +69,13 @@
 
                             </div>
 
-                            <mat-form-field appearance="outline" id="tagField" class="fade-transition-in font"
-                                [style.padding-bottom]="styleFormFieldObject?.id_tags?.paddingBottom"
+                            <mat-form-field *ngIf="(tags$ | async) as tags" appearance="outline" id="tagField" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.id_tags?.paddingBottom" (click)="onTagClick(tags)"
                                 [ngClass]="[ (stateIconAddSurvey === 'enabled' || stateIconAddContent === 'enabled') ? '' : 'disabled' ]">
                                 <mat-label>Tags</mat-label>
                                 <mat-select class="font" multiple matInput formControlName="id_tags" ngAutofillOff
                                     required>
-                                    <mat-option *ngFor="let tag of tagListMock" [value]="tag?.id">{{tag?.value}}
+                                    <mat-option *ngFor="let tag of tags as Array" [value]="tag?.id">{{tag?.value}}
                                     </mat-option>
                                 </mat-select>
 
@@ -93,7 +93,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>

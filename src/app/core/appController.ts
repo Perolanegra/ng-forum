@@ -3,7 +3,7 @@ import { AbstractControl } from "@angular/forms";
 import { debounceTime, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store, Select } from '@ngxs/store';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -14,8 +14,9 @@ import { AppActions } from '../state/app/app.actions';
 @Injectable()
 export class AppController {
     @Select(state => state.app.hasMobileMatches) hasMobileMatches$: Observable<any>;
-    
+
     private renderer: Renderer2;
+    private imgRenderer: BehaviorSubject<String> = new BehaviorSubject(null);
 
     constructor(public dialog: MatDialog,
         private rendererFactory: RendererFactory2,
@@ -247,11 +248,11 @@ export class AppController {
         return lObjRetorno;
     }
 
-    async fillerNavs() {
+    fillerNavs() {
         return [
-            { name: 'Início', isActive: false, imgName: 'home.png', path: 'home', img: await this.getImg('home.png') },
-            { name: 'Configurações', isActive: false, imgName: 'configs.svg', path: 'profile', img: await this.getImg('configs.svg') },
-            { name: 'Meus Issues', isActive: false, imgName: 'my-issues.png', path: 'profile', img: await this.getImg('my-issues.png') },
+            { name: 'Início', isActive: false, imgName: 'home.png', path: 'home', img: this.getImgObserver('home.png') },
+            { name: 'Configurações', isActive: false, imgName: 'configs.svg', path: 'profile', img: this.getImgObserver('configs.svg') },
+            { name: 'Meus Issues', isActive: false, imgName: 'my-issues.png', path: 'profile', img: this.getImgObserver('my-issues.png') },
         ];
 
     }
@@ -290,24 +291,20 @@ export class AppController {
     }
 
     /**
-     * Método que retorna a referência da img, se existir, se não retorna nulo.
+     * Método que retorna a o Observable do path da img procurada.
      * @param nameSvg Nome da img passado como parâmetro para busca.
      * @author igor.alves
      */
-    public getImg(nameSvg: string): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            let prefix = '/ng-forum/assets/imgs/'; // Perolanegra/ng-forum/tree/master/src/assets/imgs
+    public getImgObserver(nameSvg: string): Observable<String> {
+        const prefix = environment.prefixImg;
+        let searchImg, isValidImg;
 
-            let searchImg: string, isValidImg;
-
-            searchImg = prefix + nameSvg;
-            isValidImg = await this.verifyImg(searchImg);
-
-            if (isValidImg) {
-                resolve(searchImg);
-            }
-
+        searchImg = prefix + nameSvg;
+        isValidImg = this.verifyImg(searchImg).then(value => {
+            if (value) this.imgRenderer.next(searchImg);
         });
+
+        return this.imgRenderer;
     }
 
     verifyImg(img): Promise<any> {
@@ -326,12 +323,11 @@ export class AppController {
     }
 
     setMenuActiveLink(path: string): void {
-        this.fillerNavs().then(routes => {
-            if (routes) {
-                routes.map((prop) => prop.isActive = prop.path === path);
-                this._store.dispatch(new AppActions.SetRouteState(routes));
-            }
-        });
+        let routes = this.fillerNavs();
+        if (routes) {
+            routes.map((prop) => prop.isActive = prop.path === path);
+            this._store.dispatch(new AppActions.SetRouteState(routes));
+        }
     }
 
     getFillerNav(): Observable<any> {

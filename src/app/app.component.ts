@@ -50,9 +50,8 @@ export class AppComponent extends NgDefault {
   setRoutesLocalStorage(): void {
     this.fillerNavSubscription$ = this.appController.getFillerNav().subscribe(routes => {
       if (!routes) {
-        this.appController.fillerNavs().then((filler: any) => {
-          this.store.dispatch(new AppActions.SetRouteState(filler));
-        });
+        const navs = this.appController.fillerNavs();
+        this.store.dispatch(new AppActions.SetRouteState(navs));
       }
     });
   }

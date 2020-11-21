@@ -9,10 +9,12 @@ import { IssuesRoutingModule } from './issues-routing.module';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { FormsModule } from '@angular/forms';
 import { AddSurveyDialogComponent } from './add-issue/add-survey-dialog/add-survey-dialog.component';
-import { NgxsModule } from '@ngxs/store';
+import { NgxsModule, NGXS_PLUGINS } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { IssueState } from '../../state/issue/issue.state';
 import { IssuesService } from './issues.service';
+import { IssueTagState } from '../../state/issue-tag/issue-tag.state';
+import { IssueTagService } from '../../shared/services/issue-tag.service';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,15 @@ import { IssuesService } from './issues.service';
     IssuesRoutingModule,
     CKEditorModule,
     FormsModule,
-    NgxsModule.forRoot([IssueState], { developmentMode: !environment.production }),
+    NgxsModule.forRoot([IssueState, IssueTagState], { developmentMode: !environment.production }),
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
   entryComponents: [NgRichTextEditorComponent, AddSurveyDialogComponent],
-  providers: [IssuesService]
+  providers: [
+    IssuesService,
+    IssueTagService,
+  ]
 })
 export class IssuesModule { }

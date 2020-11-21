@@ -49,7 +49,7 @@
         <div [title]="nav?.name" [ngClass]="[ hasEnterMenuRef ? 'nav-item' : 'nav-item-colapsed' ]">
 
           <div [ngClass]="[ !hasEnterMenuRef && nav?.isActive ? 'div-img-closed-icons--active' : '' ]">
-            <img [src]="nav?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
+            <img [src]="nav?.img | async" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
           </div>
 
           <div style="margin-left: 20px;" class="fade-transition-in div-fade-out font"

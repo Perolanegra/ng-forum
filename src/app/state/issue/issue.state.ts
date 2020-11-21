@@ -1,6 +1,6 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { IssuesModel } from '../../modules/issues/issues.model';
+import { IssuesModel } from '../../models/issues.model';
 import { IssueActions } from './issue.actions';
 import { IssuesService } from '../../modules/issues/issues.service';
 
@@ -29,6 +29,8 @@ export class IssueState {
             // setState(response);
         }
     }
+
+    
 
 
 }

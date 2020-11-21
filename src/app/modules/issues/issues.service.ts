@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { IssuesModel } from './issues.model';
+import { IssuesModel } from '../../models/issues.model';
 import { AddPollIssueModel } from 'src/app/models/add-poll-issue.model';
 import { AddContextIssueModel } from 'src/app/models/add-context-issue.model';
 

@@ -9,10 +9,13 @@ export abstract class NgDefault {
 
     private _hasMobileMatches: boolean;
 
-    constructor(protected appController: AppController) { 
+    private _logoImg: any;
+
+    constructor(protected appController: AppController) {
+        this.logo = this.appController.getImgObserver('logo.png');
         this.appController.getMobileMatches().then(resp => {
             this.hasMobileMatches = resp;
-        })
+        });
     }
 
     public getStyle(trueValue, falseValue): string {
@@ -25,6 +28,14 @@ export abstract class NgDefault {
 
     public get hasMobileMatches() {
         return this._hasMobileMatches;
+    }
+
+    public get logo() {
+        return this._logoImg;
+    }
+
+    public set logo(logoParam) {
+        this._logoImg = logoParam;
     }
 
 }

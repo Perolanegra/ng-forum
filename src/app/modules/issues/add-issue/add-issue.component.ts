@@ -17,6 +17,9 @@ import { AddPollIssueModel } from 'src/app/models/add-poll-issue.model';
 import { AddContextIssueModel } from 'src/app/models/add-context-issue.model';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { UserModel } from 'src/app/models/user.model';
+import { IssueTagActions } from 'src/app/state/issue-tag/issue-tag.actions';
+import { TagsReducer } from 'src/app/state/issue-tag/issue-tag.reducer';
+import { IssueTagState } from 'src/app/state/issue-tag/issue-tag.state';
 
 @Component({
   selector: 'ng-add-issue',
@@ -31,6 +34,7 @@ import { UserModel } from 'src/app/models/user.model';
 export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
 
   @Select(AuthState.userDetails) user$: Observable<UserModel>;
+  @Select(IssueTagState.tags) tags$: Observable<any>;
 
   public stateBtnSubmit: string = 'disabled';
   public stateIconAddContent: string = 'disabled';
@@ -55,21 +59,12 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.setMock();
+    this.store.dispatch(new IssueTagActions.List());
     this.setForm();
     this.setErrorValidation();
     this.formValueChangesSubscription$ = this._form.valueChanges.pipe().subscribe(formEmitted => {
       formEmitted ? this.stateBtnSubmit = this._form.valid ? 'enabled' : 'disabled' : null;
     });
-  }
-
-  setMock() {
-    this.tagListMock = [
-      { value: 'bug', id: 1 },
-      { value: 'implementation', id: 2 },
-      { value: 'created', id: 3 },
-      { value: 'hot', id: 9 },
-    ];
   }
 
   ngOnDestroy() {
@@ -88,7 +83,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   private setPayload(): Promise<AddContextIssueModel | AddPollIssueModel> {
     return new Promise((resolve, reject) => {
       this.user$.subscribe(state => { // unsubscribe later
-        const payload = { issue: { ...this._form.value, author: 'state?.username' } } as AddContextIssueModel | AddPollIssueModel;
+        const payload = { issue: { ...this._form.value, author: state?.username } } as AddContextIssueModel | AddPollIssueModel;
         resolve(payload);
       });
     });
@@ -109,7 +104,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
       this.count++;
     }
 
-    this.contentAfterClosedSubscription$ = dialogRef.afterClosed().subscribe((data: JSON) => { // fechar essa subscrição
+    this.contentAfterClosedSubscription$ = dialogRef.afterClosed().subscribe((data: JSON) => { 
       if (data) {
         this._form.get('content').setValue(data);
         componentId === '1' ? this.stateIconAddContent = 'enabled' : this.stateIconAddSurvey = 'enabled';
@@ -153,7 +148,12 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
         this.ref.markForCheck();
       }
     });
+  }
 
+  onTagClick(array: Array<any>) {
+    if(!array.length) {
+      // exibir toast que não foi possível carregar as tags
+    }
   }
 
 }

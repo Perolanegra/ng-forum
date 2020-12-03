@@ -30,6 +30,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { ForgetPasswordComponent } from './modules/login/dialogs/forget-password/forget-password.component';
 import { TesteComponent } from './modules/teste/teste.component';
 import { FormsModule } from '@angular/forms';
+import { ChatModule } from './modules/chat/chat.module';
+import { GlobalVars } from './core/globalVars';
 
 @NgModule({
   declarations: [
@@ -46,20 +48,23 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
+    ChatModule,
     BrowserAnimationsModule,
     MaterialModule,
     SharedModule,
     HttpClientModule,
     LayoutModule,
     ToastrModule.forRoot(),
-    NgxsModule.forRoot([AuthState, AppState], { developmentMode: !environment.production }),
+    NgxsModule.forRoot([AuthState, AppState], { developmentMode: !environment.production, selectorOptions: {
+      suppressErrors: false, injectContainerState: false
+    } }),
     NgxsStoragePluginModule.forRoot({
       key: ['auth.token', 'auth.notAuth', 'auth.hasResetPass', 'app.hasMobileMatches', 'app.routes', 'auth.user'],
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     NgxSpinnerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     // JwtModule.forRoot({
     //   config: {
         // tokenGetter: () => localStorage.getItem("meutoken"),
@@ -81,7 +86,8 @@ import { FormsModule } from '@angular/forms';
     AppController,
     MainNavStyle,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService
+    JwtHelperService,
+    GlobalVars
   ],
   bootstrap: [AppComponent],
   schemas: [

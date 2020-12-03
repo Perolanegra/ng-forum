@@ -33,9 +33,7 @@ export class AuthService {
 
   getUserByToken(token: string): Observable<any> {
     const url = `${environment.server}/userByToken`;
-
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
     return this.http.get(url, { headers });
   }
 

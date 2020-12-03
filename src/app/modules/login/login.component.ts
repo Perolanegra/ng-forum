@@ -104,7 +104,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     document.querySelectorAll('span').forEach((element: any) => {
       this.appController.setElementClass(element, 'expanded');
     });
-    setTimeout(() => this.appController.navigate('sign-up'), 1200);
+    setTimeout(() => this.appController.navigate('sign-up'), 1000);
   }
 
 }

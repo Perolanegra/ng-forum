@@ -44,8 +44,8 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.responseSubscription$ ?? this.responseSubscription$.unsubscribe();
-    this.stateMobileMatchesSubscription$ ?? this.stateMobileMatchesSubscription$.unsubscribe();
+    this.responseSubscription$ ? this.responseSubscription$.unsubscribe() : null;
+    this.stateMobileMatchesSubscription$ ? this.stateMobileMatchesSubscription$.unsubscribe() : null;
   }
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg
@@ -83,9 +83,9 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
       const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', this.formControls.pass.value);
       this.formControls.pass.setValue(encrypted);
       const payload = this._form.value;
+      this.stateSubmitHasChanged();
       this.store.dispatch(new AuthActions.Signup(payload));
       this._form.reset();
-      this.stateSubmitHasChanged();
     }
   }
 

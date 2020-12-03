@@ -113,7 +113,7 @@ export abstract class NgForm extends NgDefault {
     }
 
     public stateSubmitHasChanged() {
-        this.ngZone.runOutsideAngular(() => setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000));
+        setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
     }
 
     get formControls(): { [key: string]: AbstractControl } {

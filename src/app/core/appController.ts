@@ -142,9 +142,9 @@ export class AppController {
     }
 
     /**
-    * Retorna para uma nova rota de navegação.
-    * @param path Recebe uma string como parâmetro que faz referência a rota a ser navegada.
     * @author igor.alves
+    * @param path Recebe uma string como parâmetro que faz referência a rota a ser navegada.
+    * @description Retorna para uma nova rota de navegação.
     */
     public navigate(path: string) {
         this.router.navigate(['/' + path])
@@ -321,6 +321,12 @@ export class AppController {
             image.src = img;
         });
     }
+
+    /**
+     * @author igor.alves
+     * @param path Parâmetro da nova rota ativa que será exibido no Menu.
+     * @description Método tem como objetivo setar novo estado pras rotas da aplicação.
+     */
 
     setMenuActiveLink(path: string): void {
         let routes = this.fillerNavs();

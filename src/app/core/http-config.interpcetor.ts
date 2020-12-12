@@ -1,36 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { Store, Select } from '@ngxs/store';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { AppController } from './appController';
 import { AuthState } from '../state/auth/auth.state';
-import { AuthActions } from '../state/auth/auth.actions';
 import { ToastComponent } from '../shared/components/toast/toast.component';
-import { GlobalVars } from './globalVars';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
 
-  @Select(AuthState.token) token$: Observable<string>;
-
-  constructor(private store: Store, private appController: AppController, private globalVars: GlobalVars) { }
+  constructor(private appController: AppController, private authState: AuthState) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token = !!this.store.selectSnapshot(state => state.auth.token);
-
-    // const token = this.store.selectSnapshot<string>((state: AuthState) => state.auth.token);
     req = req.clone();
-    
-    if (token) {
+
+    if (this.authState.snapshot.token) {
       let headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Access-Control-Allow-Headers': '*',
         'Access-Control-Allow-Origin': '*',
-        'Authorization': `Bearer ${this.globalVars.getToken()}`
+        'Authorization': `Bearer ${this.authState.snapshot.token}`
       });
-
       req = req.clone({ headers: headers });
     }
 

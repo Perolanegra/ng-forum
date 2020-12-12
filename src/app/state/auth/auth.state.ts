@@ -3,6 +3,8 @@ import { AuthService } from '../../core/auth.service';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthActions } from './auth.actions';
 import { Injectable } from '@angular/core';
+import { NgxsDataRepository } from '@ngxs-labs/data/repositories';
+import { StateRepository } from '@ngxs-labs/data/decorators';
 
 export class AuthStateModel {
     token: string;
@@ -13,7 +15,7 @@ export class AuthStateModel {
     hasResetPass: boolean;
     signUpResponse: any;
 }
-
+@StateRepository()
 @State<AuthStateModel>({
     name: 'auth',
     defaults: {
@@ -28,9 +30,11 @@ export class AuthStateModel {
 })
 
 @Injectable()
-export class AuthState {
+export class AuthState extends NgxsDataRepository<AuthStateModel> {
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService) {
+        super();
+     }
 
     @Selector()
     static token(state: AuthStateModel) {

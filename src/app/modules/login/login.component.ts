@@ -10,6 +10,7 @@ import { Observable, Subscription } from 'rxjs';
 import { NgForm } from 'src/app/core/ng-form';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
 
 
 @Component({
@@ -52,14 +53,18 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   setErrorValidation(): void {
-    const pass_msg = this.getErrorMessages(4, true);
-    const pass_type = this.getErrorTypes(3, true);
+    try {
+      const pass_msg = this.getErrorMessages(4, true);
+      const pass_type = this.getErrorTypes(3, true);
 
-    const username_msg = [...this.getErrorMessages(0), ...this.getErrorMessages(4), ...this.getErrorMessages(6)];
-    const username_type = [...this.getErrorTypes(0), ...this.getErrorTypes(1), ...this.getErrorTypes(5)];
+      const username_msg = this.setErrorsValidation([0, 4, 6], 'M');
+      const username_type = this.setErrorsValidation([0, 1, 5], 'T');
 
-    this.setErrorMsgs('username', username_type, username_msg);
-    this.setErrorMsgs('password', pass_type, pass_msg);
+      this.setErrorMsgs('username', username_type, username_msg);
+      this.setErrorMsgs('password', pass_type, pass_msg);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   setForm() {

@@ -8,6 +8,6 @@ export class GlobalVars {
 
   }
 
-  public getToken = () => JSON.parse(localStorage.getItem(KEY_TOKEN));
+  // public getToken = () => JSON.parse(localStorage.getItem(KEY_TOKEN));
 
 }

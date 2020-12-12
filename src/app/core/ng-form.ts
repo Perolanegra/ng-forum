@@ -17,7 +17,7 @@ export abstract class NgForm extends NgDefault {
     public hide1 = true;
     public hide2 = true;
     public hasClickedSubmit: boolean = false;
-    public styleFormFieldObject: any = {};
+    public styleFormFieldObject: any = {}; // Propriedade que guarda informações de cada control.
     public comparableControls: { control1: string, control2: string } = { control1: '', control2: '' };
     public responseSubscription$: Subscription;
 
@@ -41,6 +41,10 @@ export abstract class NgForm extends NgDefault {
         return this._form.valid;
     }
 
+    /**
+     * @author igor.alves
+     * @description Método que tem como objetivo setar o estado inicial do padding de cada control.
+     */
     public setInitControlsPadding(): void {
         const controls = Object.keys(this._form.value);
         controls.forEach(control => {
@@ -112,7 +116,13 @@ export abstract class NgForm extends NgDefault {
         this.appController.showToastPopUp(data, component);
     }
 
+    /**
+     * @author igor.alves
+     * @description Deve ser invocado logo após de um submit, no formulário.
+     * @deprecated Pode não ser usado já atualmente.
+     */
     public stateSubmitHasChanged() {
+        this.spinner.hide();
         setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
     }
 
@@ -187,7 +197,7 @@ export abstract class NgForm extends NgDefault {
     }
 
     /**
-     * 
+     * @author igor.alves
      * @param id index da string no array, caso for recuperar uma mensagem específica ou todas. Caso for remover, é o index do elemento inicial a ser removido.
      * @param hasDelete (param opcional) booleano q decide se remove os elementos do array para retornar os elementos solicitados.
      * @param removeIndex (param opcional) o número de elementos que serão removidos a partir do index (param id) passado.
@@ -217,6 +227,12 @@ export abstract class NgForm extends NgDefault {
         this.errorMsgs[control] = payload[control];
     }
 
+    /**
+     * @author igor.alves
+     * @param control control do form a ser manipulado
+     * @param types tipos de validacoes a serem incluidas
+     * @param msgs mensagens das respectivas validações
+     */
     public setErrors(control: string, types: string[], msgs: string[]) {
         let errorResponse: any = {};
         errorResponse[control] = new Array<any>();
@@ -226,6 +242,30 @@ export abstract class NgForm extends NgDefault {
         });
 
         return errorResponse;
+    }
+
+    /**
+     * @author igor.alves
+     * @param arrIndex Parâmetro que será iterado, onde seu valor são os indíces passados 
+     * como parametro nos métodos de captura dos métodos getErrorMessages e getErrorTypes.
+     * @param errorValidation Parâmetro que determina qual a validação para construção do array.
+     */
+    setErrorsValidation(arrIndex: Array<number>, errorValidation: string): string[] {
+        const typeOrMsg = {
+            'm': this.getErrorMessages,
+            't': this.getErrorTypes
+        };
+
+        if (!typeOrMsg[errorValidation.toLowerCase()]) {
+            throw new Error('Parâmetro de tipo de Validação de Erro inválida.');
+        }
+
+        const arrErrorsValidation: Array<string> = new Array();
+        arrIndex.forEach((val: number) => {
+            arrErrorsValidation.push(typeOrMsg[errorValidation.toLowerCase()](val));
+        });
+
+        return arrErrorsValidation;
     }
 
     /**

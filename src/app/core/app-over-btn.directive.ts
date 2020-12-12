@@ -9,13 +9,17 @@ export class AppOverBtnDirective {
   constructor(private renderer: Renderer2, public elfRef: ElementRef, public appController: AppController) { }
   @Input() type?: string;
   @Input() hoverColor?: string;
-  
+
   @HostListener('mouseover') onMouseOver(eventData: Event): void {
-    this.renderer.setStyle(this.elfRef.nativeElement, 'color', this.hoverColor);
+    if (this.type)
+      this.renderer.setStyle(this.elfRef.nativeElement, 'color', this.appController.getColorRef(this.type));
+    else
+      this.renderer.setStyle(this.elfRef.nativeElement, 'color', this.hoverColor);
   }
 
   @HostListener('mouseleave') onMouseLeave(eventData: Event): void {
-    this.renderer.setStyle(this.elfRef.nativeElement, 'color', this.appController.getColorRef(this.type));
+    if (this.type)
+      this.renderer.setStyle(this.elfRef.nativeElement, 'color', '#fff');
   }
 
 }

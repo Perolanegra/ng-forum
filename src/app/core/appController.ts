@@ -45,7 +45,7 @@ export class AppController {
     showToastPopUp(paylaod: any, component: ComponentType<any> | TemplateRef<any>): MatDialogRef<any> {
         let dialogRef = null;
         const { positionTop, positionBottom, positionLeft, positionRight } = paylaod.style;
-
+        
         dialogRef = this.dialog.open(component, {
             data: paylaod,
             hasBackdrop: true,

@@ -5,7 +5,6 @@ import { MatDialogRef, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_D
 import { CommonModule } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import 'moment/locale/pt-br';
 import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import {MAT_CHIPS_DEFAULT_OPTIONS, MatChipsModule} from '@angular/material/chips';

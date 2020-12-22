@@ -43,7 +43,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     this.hasResetPassSubscription$ ? this.hasResetPassSubscription$.unsubscribe() : null;
   }
 
-  setResetPass() {
+  setResetPass(): void {
     this.hasResetPass$
       .subscribe(hasResetPass => {
         if (hasResetPass) setTimeout(() => this.store.dispatch(new AuthActions.RemoveHasReset()), 420000); // 7min p fzr outra requisição.
@@ -51,27 +51,23 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   setErrorValidation(): void {
-    try {
-      const pass_msg = this.getErrorMessages(4, true);
-      const pass_type = this.getErrorTypes(3, true);
+    const pass_msg = this.getErrorMessages(4, true);
+    const pass_type = this.getErrorTypes(3, true);
 
-      const username_msg = this.setErrorsValidation([0, 4, 6], 'M');
-      const username_type = this.setErrorsValidation([0, 1, 5], 'T');
+    const username_msg = this.setErrorsValidation([0, 4, 6], 'M');
+    const username_type = this.setErrorsValidation([0, 1, 5], 'T');
 
-      this.setErrorMsgs('username', username_type, username_msg);
-      this.setErrorMsgs('password', pass_type, pass_msg);
-    } catch (error) {
-      console.log(error);
-    }
+    this.setErrorMsgs('username', username_type, username_msg);
+    this.setErrorMsgs('password', pass_type, pass_msg);
   }
 
-  setForm() {
+  setForm(): void {
     this._form.addControl('username', new FormControl(null, [Validators.required, CustomValidators.allblank]));
     this._form.addControl('password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this.setInitControlsPadding();
   }
 
-  getResponse() {
+  getResponse(): void {
     this.responseSubscription$ = this.token$
       .subscribe((token) => {
         if (token) {
@@ -98,11 +94,11 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     return passLength < 8 ? false : this.hasClickSubmit = this._form.valid;
   }
 
-  openForgotPass() {
+  openForgotPass(): void {
     this.appController.showToastPopUp({ style: {} }, ForgetPasswordComponent);
   }
 
-  onClickSignUp(target: ElementRef<any>) {
+  onClickSignUp(target: ElementRef<any>): void {
     this.appController.setElementClass(target, 'btn-sign-up--clicked');
     document.querySelectorAll('span').forEach((element: any) => {
       this.appController.setElementClass(element, 'expanded');

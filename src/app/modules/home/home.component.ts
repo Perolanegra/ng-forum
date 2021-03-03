@@ -7,7 +7,7 @@ import { NgDefault } from 'src/app/core/pattern/ng-default';
 import { AppController } from 'src/app/core/appController';
 
 @Component({
-  selector: 'app-home',
+  selector: 'ng-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

@@ -7,7 +7,6 @@ import { AuthActions } from './state/auth/auth.actions';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AppActions } from './state/app/app.actions';
 import { NgDefault } from './core/pattern/ng-default';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

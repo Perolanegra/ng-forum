@@ -12,6 +12,7 @@ export abstract class NgDefault {
     public logo: Observable<String>;
 
     constructor(protected appController: AppController) {
+        this.logo = this.appController.getImgObserver('logo.png');
         this.appController.getMobileMatches().then(resp => {
             this.hasMobileMatches = resp;
         });

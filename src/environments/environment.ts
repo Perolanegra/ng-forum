@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   server: 'http://localhost:3001',
   release: '1.0.0',
-  prefixImg: '/assets/imgs/'
+  prefixImg: '/assets/imgs/',
+  prefixAnimationJSON: '/assets/animations/json/',
 };
 
 /*

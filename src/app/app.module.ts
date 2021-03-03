@@ -36,7 +36,6 @@ import { FormsModule } from '@angular/forms';
 import { ChatModule } from './modules/chat/chat.module';
 import { GlobalVars } from './core/globalVars';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +45,7 @@ import { GlobalVars } from './core/globalVars';
     AppAutofillOffDirective,
     AppNavNameBehaviorDirective,
     ForgetPasswordComponent,
-    // TesteComponent,
+    TesteComponent,
   ],
   imports: [
     FormsModule,

@@ -20,12 +20,13 @@ import { NgDefault } from "src/app/core/pattern/ng-default";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainNavComponent extends NgDefault implements OnInit {
+
   @Select(AppState.routes) routes$: Observable<any>;
 
-  public vistoPic: Subject<any>;
+  public vistoPic: Observable<String>;
+  public profileDefault: Observable<String>;
   public hasMobileMatches: boolean;
   public hasEnterMenuRef: boolean = false;
-  public profileDefault: Subject<any>;
 
   @ViewChild("userInfo") elRefUserInfo: ElementRef;
   @ViewChild("navListRoutes") elRefnavListRoutes: ElementRef;
@@ -40,39 +41,25 @@ export class MainNavComponent extends NgDefault implements OnInit {
     super(appController);
   }
 
-  ngOnInit() {
-    Promise.resolve(null).then(() => this.setImg());
+  ngOnInit(): void {
+    this.setImg();
   }
 
   setImg(): void {
-    this.routes$.subscribe((val: Array<any>) => {
-      if (val) {
-        // val[0].img.subscribe(ox => {
-        //   console.log('valor img: ', ox);
-        // });
-      }
-    });
-
-    // this.vistoPic.next(
-    //   this.appController.getImgObserver(Constants.defaultPattern.imgs.vistoPic)
-    // );
-    // this.profileDefault.next(
-    //   this.appController.getImgObserver(
-    //     Constants.defaultPattern.imgs.profileDefault
-    //   )
-    // );
+    this.vistoPic = this.appController.getImgObserver(Constants.defaultPattern.imgs.vistoPic);
+    this.profileDefault = this.appController.getImgObserver(Constants.defaultPattern.imgs.profileDefault);
   }
 
-  onMenuBlur(hasEnterMenu) {
+  onMenuBlur(hasEnterMenu): void {
     this.hasEnterMenuRef = hasEnterMenu;
   }
 
-  toggleMenu(elementRef: Element) {
+  toggleMenu(elementRef: Element): void {
     this.hasEnterMenuRef = true;
     this.mainNavStyle.setStyleMenuNavInit(elementRef, this.hasMobileMatches);
   }
 
-  closeSideMenuMobile(elementRefSideMenu: ElementRef) {
+  closeSideMenuMobile(elementRefSideMenu: ElementRef): void {
     // quando o ElementRef vem de referência, ele já passa o nativeElement
     this.appController.removeElementClass(
       elementRefSideMenu,
@@ -84,7 +71,7 @@ export class MainNavComponent extends NgDefault implements OnInit {
     );
   }
 
-  navigate(path: string) {
+  navigate(path: string): void {
     this.appController.navigate(path);
     this.appController.setMenuActiveLink(path);
   }

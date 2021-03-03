@@ -14,8 +14,6 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { ConfirmDialogComponent } from "./components/confirm-dialog/confirm-dialog.component";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { MatIconModule } from "@angular/material/icon";
-import { NgLottiePlayerComponent } from "./components/ng-lottie-player/ng-lottie-player.component";
-
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +35,6 @@ import { NgLottiePlayerComponent } from "./components/ng-lottie-player/ng-lottie
     TableHeaderComponent,
     SafeHtmlPipe,
     ConfirmDialogComponent,
-    NgLottiePlayerComponent,
   ],
   exports: [
     FormComponent,
@@ -50,7 +47,6 @@ import { NgLottiePlayerComponent } from "./components/ng-lottie-player/ng-lottie
     TableHeaderComponent,
     SafeHtmlPipe,
     MatIconModule,
-    NgLottiePlayerComponent,
   ],
   entryComponents: [ToastComponent, ConfirmDialogComponent],
 })

@@ -13,18 +13,18 @@
       </div>
 
       <div class="" [ngClass]="[ hasMobileMatches ? 'div-img-center-logo-mobile' : 'div-img-center-logo' ]">
-        <img class="img-logo-menu" [src]="logo | async">
+        <img class="img-logo-menu" [src]="logo">
       </div>
     </div>
 
     <div class="div-img-center">
       <div id="out-img"
         [ngClass]="[ hasMobileMatches || hasEnterMenuRef ? 'div-img-background-mobile' : 'div-img-background' ]">
-        <img [src]="profileDefault | async" class="img-menu-over">
+        <img [src]="profileDefault" class="img-menu-over">
 
         <div class="div-visto-img div-fade-out fade-transition-in">
           <!---->
-          <img [src]="vistoPic | async" style="width: 75%; margin-left: 1px;">
+          <img [src]="vistoPic" style="width: 75%; margin-left: 1px;">
         </div>
 
       </div>
@@ -49,7 +49,7 @@
         <div [title]="nav?.name" [ngClass]="[ hasEnterMenuRef ? 'nav-item' : 'nav-item-colapsed' ]">
 
           <div [ngClass]="[ !hasEnterMenuRef && nav?.isActive ? 'div-img-closed-icons--active' : '' ]">
-            <img [src]="nav?.img | async" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
+            <img [src]="nav?.img" [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
           </div>
 
           <div style="margin-left: 20px;" class="fade-transition-in div-fade-out font"
@@ -67,7 +67,7 @@
             [ngClass]="[ hasEnterMenuRef && item?.isActive ? 'nav-mobile--active' : 'nav-mobile--default' ]"
             (click)="navigate(item?.path)" class="btn font" cdkFocusInitial>
             <div class="div-nav-item-mobile">
-              <img style="margin-right: 15px;" [src]="item?.img | async"
+              <img style="margin-right: 15px;" [src]="item?.img"
                 [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
               {{ item?.name }}
             </div>

@@ -8,7 +8,7 @@ import {
 import { AppController } from "../../core/appController";
 import { MainNavStyle } from "./main-nav.style";
 import { Router } from "@angular/router";
-import { Observable, Subscription, Subject } from "rxjs";
+import { Observable } from "rxjs";
 import { Select } from "@ngxs/store";
 import { AppState } from "src/app/state/app/app.state";
 import { Constants } from "../../core/pattern/constants";
@@ -23,8 +23,8 @@ export class MainNavComponent extends NgDefault implements OnInit {
 
   @Select(AppState.routes) routes$: Observable<any>;
 
-  public vistoPic: Observable<String>;
-  public profileDefault: Observable<String>;
+  public vistoPic: string;
+  public profileDefault: string;
   public hasMobileMatches: boolean;
   public hasEnterMenuRef: boolean = false;
 
@@ -43,18 +43,11 @@ export class MainNavComponent extends NgDefault implements OnInit {
 
   ngOnInit(): void {
     this.setImg();
-    this.test();
-  }
-
-  test() {
-    this.routes$.subscribe(val => {
-      console.log('val: ', val);
-    })
   }
 
   setImg(): void {
-    this.vistoPic = this.appController.getImgObserver(Constants.defaultPattern.imgs.vistoPic);
-    this.profileDefault = this.appController.getImgObserver(Constants.defaultPattern.imgs.profileDefault);
+    this.vistoPic = this.appController.getImg(Constants.defaultPattern.imgs.vistoPic);
+    this.profileDefault = this.appController.getImg(Constants.defaultPattern.imgs.profileDefault);
   }
 
   onMenuBlur(hasEnterMenu): void {

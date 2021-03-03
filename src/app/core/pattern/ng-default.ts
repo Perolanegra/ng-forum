@@ -1,4 +1,4 @@
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AppController } from '../appController';
 
 export abstract class NgDefault {
@@ -9,10 +9,10 @@ export abstract class NgDefault {
 
     private _hasMobileMatches: boolean;
 
-    public logo: Observable<String>;
+    public logo: string;
 
     constructor(protected appController: AppController) {
-        this.logo = this.appController.getImgObserver('logo.png');
+        this.logo = this.appController.getImg('logo.png');
         this.appController.getMobileMatches().then(resp => {
             this.hasMobileMatches = resp;
         });

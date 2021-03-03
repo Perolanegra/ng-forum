@@ -279,21 +279,21 @@ export class AppController {
         isActive: false,
         imgName: "home.png",
         path: "home",
-        img: this.getImgObserver("home.png"),
+        img: this.getImg("home.png"),
       },
       {
         name: "Meus Issues",
         isActive: false,
         imgName: "my-issues.png",
         path: "profile",
-        img: this.getImgObserver("my-issues.png"),
+        img: this.getImg("my-issues.png"),
       },
       {
         name: "Configurações",
         isActive: false,
         imgName: "configs.svg",
         path: "configs",
-        img: this.getImgObserver("configs.svg"),
+        img: this.getImg("configs.svg"),
       },
     ];
   }
@@ -332,11 +332,11 @@ export class AppController {
   }
 
   /**
-   * Método que retorna a o Observable do path da img procurada.
+   * Método que retorna a path da img procurada.
    * @param nameSvg Nome da img passado como parâmetro para busca.
    * @author igor.alves
    */
-  public getImgObserver(nameSvg: string): Observable<string> {
+  public getImg(nameSvg: string): string {
     const prefix = environment.prefixImg;
     let searchImg;
 
@@ -348,7 +348,7 @@ export class AppController {
       console.log("erro: ", err);
     };
 
-    return of(image.src);
+    return searchImg;
   }
 
   /**

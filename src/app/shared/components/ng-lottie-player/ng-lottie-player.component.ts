@@ -4,11 +4,11 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 
 @Component({
-  selector: "ng-animation-player",
-  templateUrl: "./ng-animation-player.component.html",
-  styleUrls: ["./ng-animation-player.component.scss"],
+  selector: "ng-lottie-player",
+  templateUrl: "./ng-lottie-player.component.html",
+  styleUrls: ["./ng-lottie-player.component.scss"],
 })
-export class NgAnimationPlayerComponent implements OnInit {
+export class NgLottiePlayerComponent implements OnInit {
   constructor(public appController: AppController, public http: HttpClient) {}
 
   @Input() hasAutoPlay = false;

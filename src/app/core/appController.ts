@@ -336,7 +336,7 @@ export class AppController {
    * @param nameSvg Nome da img passado como parâmetro para busca.
    * @author igor.alves
    */
-  public getImgObserver(nameSvg: string): Observable<String> {
+  public getImgObserver(nameSvg: string): Observable<string> {
     const prefix = environment.prefixImg;
     let searchImg;
 
@@ -348,7 +348,7 @@ export class AppController {
       console.log("erro: ", err);
     };
 
-    return of(searchImg);
+    return of(image.src);
   }
 
   /**

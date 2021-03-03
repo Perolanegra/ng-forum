@@ -43,6 +43,13 @@ export class MainNavComponent extends NgDefault implements OnInit {
 
   ngOnInit(): void {
     this.setImg();
+    this.test();
+  }
+
+  test() {
+    this.routes$.subscribe(val => {
+      console.log('val: ', val);
+    })
   }
 
   setImg(): void {

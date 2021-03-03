@@ -66,8 +66,8 @@
           <button *ngFor="let item of routes$ | async" mat-raised-button
             [ngClass]="[ hasEnterMenuRef && item?.isActive ? 'nav-mobile--active' : 'nav-mobile--default' ]"
             (click)="navigate(item?.path)" class="btn font" cdkFocusInitial>
-            <div id="euagr" class="div-nav-item-mobile">
-              <img style="margin-right: 15px;" [src]="item?.img"
+            <div class="div-nav-item-mobile">
+              <img style="margin-right: 15px;" [src]="item?.img | async"
                 [ngClass]="[ hasEnterMenuRef ? 'img-open-icons' : 'img-closed-icons' ]" />
               {{ item?.name }}
             </div>
@@ -77,7 +77,6 @@
     </ng-template>
 
   </div>
-
 
 
   <div style="display: flex; justify-content: center; flex-direction: column;">

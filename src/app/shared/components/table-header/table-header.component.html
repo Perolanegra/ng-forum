@@ -1,28 +1,60 @@
 <div class="list-header-title tabela-cabecalho">
-    <div class="row">
-        <div class="col-6" style="text-align:left">
-            <i *ngIf="botaoAtualizarVisivel" mat-icon-button class="material-icons cursor-pointer" (click)="atualizarClick()" 
-                matTooltip="Atualizar as informações">refresh</i>            
-            <i *ngIf="botaoAlterarVisivel" mat-icon-button class="material-icons cursor-pointer" (click)="alterarClick()"
-                matTooltip="Alterar o registro selecionado">edit</i>
-            <i *ngIf="botaoExcluirVisivel" mat-icon-button class="cursor-pointer material-icons" (click)="excluirClick()"
-                matTooltip="Excluir o registro selecionado">delete_outline</i>
-            <i *ngIf="botaoInserirVisivel" mat-icon-button class="cursor-pointer material-icons" (click)="inserirClick()"
-                matTooltip="Inserir um novo registro">add</i>
-            <vertical-divider *ngIf="botaoOpcoesVisivel"></vertical-divider>
-            <i *ngIf="botaoOpcoesVisivel" class="cursor-pointer material-icons" mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Mais opções">more_vert</i>
+  <div class="row">
+    <div class="col-6" style="text-align: left">
+      <i
+        *ngIf="botaoInserirVisivel"
+        mat-icon-button
+        class="cursor-pointer material-icons"
+        (click)="insert()"
+        matTooltip="Inserir um novo registro"
+        >add</i
+      >
+      <i
+        *ngIf="botaoAtualizarVisivel"
+        mat-icon-button
+        class="material-icons cursor-pointer"
+        (click)="update()"
+        matTooltip="Atualizar informações"
+        >refresh</i
+      >
+      <i
+        *ngIf="botaoAlterarVisivel"
+        mat-icon-button
+        class="material-icons cursor-pointer"
+        (click)="edit()"
+        matTooltip="Alterar informações"
+        >edit</i
+      >
+      <i
+        *ngIf="botaoExcluirVisivel"
+        mat-icon-button
+        class="cursor-pointer material-icons"
+        (click)="remove()"
+        matTooltip="Excluir o registro selecionado"
+        >delete_outline</i
+      >
 
-            <mat-menu #menu="matMenu" [overlapTrigger]="false" >
-                <ng-content></ng-content>
-            </mat-menu>
+      <vertical-divider *ngIf="botaoOpcoesVisivel"></vertical-divider>
+      <i
+        *ngIf="botaoOpcoesVisivel"
+        class="cursor-pointer material-icons"
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        matTooltip="Mais opções"
+        >more_vert</i
+      >
 
-        </div>
-        <div class="col-6" style="text-align:right; color: white;">
-            <div class="qtd-registro">                   
-                    <span>{{ textoRegistros }}</span>
-                    <span *ngIf="selection.selected.length >0">,{{ textoSelecionados }}</span>
-            </div>
-            
-        </div>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <ng-content></ng-content>
+      </mat-menu>
     </div>
+    <div class="col-6" style="text-align: right; color: white">
+      <div class="qtd-registro">
+        <span>{{ dataNumber }}</span>
+        <span *ngIf="selection.selected.length > 0">
+          {{ dataNumberSelected }}
+        </span>
+      </div>
+    </div>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import { Output } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { TableOrder } from '../../../core/enum/order.enum';
 
 @Component({
   selector: 'ng-table',
@@ -25,19 +26,19 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() botaoInserirVisivel: boolean = true;
   @Input() botaoAlterarVisivel: boolean = true;
   @Input() botaoOpcoesVisivel: boolean = true;
-  @Input() colunasConfig = [];
-  @Input() checkboxVisivel: boolean = false;
-  @Input() registros;
+  @Input() columnsConfig = [];
+  @Input() checkboxVisible: boolean = false;
+  @Input() data: any | MatTableDataSource<any>;
   @Input() height:string='60vh';
   @ViewChild(MatSort) sort: MatSort;
-  @Input() ordenaColuna: string;
-  @Input() direcao:string = "asc";
+  @Input() orderByColumn: string;
+  @Input() direction: TableOrder.ASC | TableOrder.DESC;
   
   constructor() {  }
   
   ngOnInit(): void {
-    this.displayedColumns = this.colunasConfig.map(c => c.nome);
-    this.checkboxVisivel ? this.displayedColumns.unshift('select') : '';
+    this.displayedColumns = this.columnsConfig.map(c => c.name);
+    this.checkboxVisible ? this.displayedColumns.unshift('select') : '';
   }
 
   inserirClick() {
@@ -57,16 +58,16 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.registros) {
+    if (changes.data) {
       this.popularTabela();
     }
   }
 
   popularTabela() {
-    if(this.registros){
-      this.registros = new MatTableDataSource(this.registros);
-      this.registros.sortingDataAccessor = (obj, property) => this.getProperty(obj, property);
-      this.registros.sort = this.sort;
+    if(this.data){
+      this.data = new MatTableDataSource(this.data);
+      this.data.sortingDataAccessor = (obj, property) => this.getProperty(obj, property);
+      this.data.sort = this.sort;
       this.selection.clear();
     }
   }
@@ -85,13 +86,13 @@ export class TableComponent implements OnInit, OnChanges {
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.registros.data.length;
-    return numSelected === numRows;
+    const qtdSelected = this.selection.selected.length;
+    const qtdRows = this.data.data.length;
+    return qtdSelected === qtdRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ? this.selection.clear() : this.registros.data.forEach(row => this.selection.select(row));
+    this.isAllSelected() ? this.selection.clear() : this.data.data.forEach(row => this.selection.select(row));
   }
 
   get selection() {

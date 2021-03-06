@@ -1,7 +1,13 @@
-<div style="display: flex; justify-content: center;">
-    <ng-table [colunasConfig]="colunasConfig" [botaoOpcoesVisivel]="false" [registros]="registros">
-    </ng-table>
+<div style="display: flex; justify-content: center">
+  <ng-table
+    [columnsConfig]="colunasConfig"
+    [botaoOpcoesVisivel]="false"
+    [data]="registros"
+    direction="asc"
+  >
+  </ng-table>
 </div>
+
 
 
 <!--fazer o state p chamar os registros e por o ngif aqui do skeleton com a tabela-->
@@ -16,7 +22,6 @@
         </div>
     </div>
 </div> -->
-
 
 <!--  (atualizar)="atualizar()" (alterar)="alterar($event)" (excluir)="excluir($event)" (inserir)="inserir()"
      [registros]="registros" (rowClicked)="rowClicked($event)"

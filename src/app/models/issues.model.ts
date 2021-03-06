@@ -5,6 +5,7 @@ export interface IssuesModel {
     subtitle: string;
     author: string;
     stars: number;
+    pplVoted: number;
     views: Number;
     tags: string;
     created_at: any;

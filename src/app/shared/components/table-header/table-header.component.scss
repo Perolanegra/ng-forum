@@ -1,15 +1,15 @@
+// Utilities
+@import "../../style/variables";
 
-
-.material-icons{
-     background: rgb(78, 145, 78);
-     color:white;    
-     margin-left:5px;
-     padding:3px;
-    
+.material-icons {
+    background: $accentColor;
+    color: white;
+    margin-left: 5px;
+    padding: 3px;
+    cursor: pointer;
 }
 
-  
-.material-icons:hover{
-    background:rgb(53, 117, 53);
+.material-icons:hover {
+    background: #fff;
+    color: black;
 }
-  

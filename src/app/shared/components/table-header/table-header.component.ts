@@ -1,74 +1,47 @@
 import { Component, Input, EventEmitter, Output } from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
-    selector: 'ng-table-header',
-    templateUrl: './table-header.component.html',
-    styleUrls: ['./table-header.component.scss']
+  selector: "ng-table-header",
+  templateUrl: "./table-header.component.html",
+  styleUrls: ["./table-header.component.scss"],
 })
 export class TableHeaderComponent {
-    constructor(){}
-    @Input() dataSource;
-    @Input() selection;
-    @Input() qtdSelecionados;
+  constructor() {}
+  @Input() public dataSource: MatTableDataSource<any> | any;
+  @Input() selection;
+  @Input() qtdSelecionados;
 
-    @Output() inserir = new EventEmitter<boolean>();
-    @Output() excluir = new EventEmitter<boolean>();
-    @Output() alterar = new EventEmitter<boolean>();
-    @Output() atualizar = new EventEmitter<boolean>();
+  @Output() inserir = new EventEmitter<boolean>();
+  @Output() excluir = new EventEmitter<boolean>();
+  @Output() alterar = new EventEmitter<boolean>();
+  @Output() atualizar = new EventEmitter<boolean>();
 
-    @Input() botaoOpcoesVisivel: boolean = true;
-    @Input() botaoInserirVisivel: boolean = true;
-    @Input() botaoExcluirVisivel: boolean = true;
-    @Input() botaoAlterarVisivel: boolean = true;
-    @Input() botaoAtualizarVisivel: boolean = true;
+  @Input() botaoOpcoesVisivel: boolean = true;
+  @Input() botaoInserirVisivel: boolean = true;
+  @Input() botaoExcluirVisivel: boolean = true;
+  @Input() botaoAlterarVisivel: boolean = true;
+  @Input() botaoAtualizarVisivel: boolean = true;
 
-    inserirClick() {
-        this.inserir.emit(true);
+  insert = () => this.inserir.emit(true);
+
+  remove = () => this.excluir.emit(true);
+
+  edit = () => this.alterar.emit(true);
+
+  update = () => this.atualizar.emit(true);
+
+  get dataNumber(): string {
+    if (this.dataSource && this.dataSource.data.length) {
+      return this.dataSource.data.length >= 1
+        ? this.dataSource.data.length + " registro(s)"
+        : "<<Nenhum registro encontrado>>";
     }
 
-    excluirClick() {
-        this.excluir.emit(true);
-    }
+    return "<<Filtro Pendente>>";
+  }
 
-    alterarClick() {
-        this.alterar.emit(true);
-    }
-
-    atualizarClick() {
-        this.atualizar.emit(true);
-    }
-
-
-    get textoRegistros(){
-        if(this.dataSource==undefined || this.dataSource.data==undefined || this.dataSource.data==null){
-            return "<<Filtro Pendente>>";
-        }else{
-            if(this.dataSource.data.length==1){
-                return "1 registro";
-                
-            }else{
-                if(this.dataSource.data.length>1){
-                    return this.dataSource.data.length+" registros";
-                    
-                }else{
-                    return "<<Nenhum registro encontrado>>";
-                }
-            }
-
-
-        }
-
-
-    }
-
-    get textoSelecionados(){
-        if(this.selection.selected.length>1){
-            return this.selection.selected.length + " selecionados";
-        }
-        if(this.selection.selected.length==1){
-            return "1 selecionado";
-        }
-        return "nenhum selecionado"
-    }
-
+  get dataNumberSelected(): string {
+    return this.selection.selected.length + " selecionado(s)";
+  }
 }

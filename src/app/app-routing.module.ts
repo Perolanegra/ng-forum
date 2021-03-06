@@ -7,7 +7,7 @@ import { ListIssueComponent } from "./modules/issues/list-issue/list-issue.compo
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
-  { path: "login", component: LoginComponent, canActivate: [LoginAuthGuard] },
+  { path: "login", component: ListIssueComponent, canActivate: [NoAuthGuard] },
 
   {
     path: "home",

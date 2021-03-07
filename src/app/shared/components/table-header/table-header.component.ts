@@ -10,38 +10,34 @@ export class TableHeaderComponent {
   constructor() {}
   @Input() public dataSource: MatTableDataSource<any> | any;
   @Input() selection;
-  @Input() qtdSelecionados;
 
-  @Output() inserir = new EventEmitter<boolean>();
-  @Output() excluir = new EventEmitter<boolean>();
-  @Output() alterar = new EventEmitter<boolean>();
-  @Output() atualizar = new EventEmitter<boolean>();
+  @Output() add = new EventEmitter<boolean>();
+  @Output() delete = new EventEmitter<boolean>();
+  @Output() edit = new EventEmitter<boolean>();
+  @Output() update = new EventEmitter<boolean>();
 
-  @Input() botaoOpcoesVisivel: boolean = true;
-  @Input() botaoInserirVisivel: boolean = true;
-  @Input() botaoExcluirVisivel: boolean = true;
-  @Input() botaoAlterarVisivel: boolean = true;
-  @Input() botaoAtualizarVisivel: boolean = true;
+  @Input() hasOptionsBtn: boolean = true;
+  @Input() hasInsertBtn: boolean = true;
+  @Input() hasRemoveBtn: boolean = true;
+  @Input() hasModifyBtn: boolean = true;
+  @Input() hasUpdateBtn: boolean = true;
 
-  insert = () => this.inserir.emit(true);
+  insertData = () => this.add.emit(true);
 
-  remove = () => this.excluir.emit(true);
+  removeData = () => this.delete.emit(true);
 
-  edit = () => this.alterar.emit(true);
+  modifyData = () => this.edit.emit(true);
 
-  update = () => this.atualizar.emit(true);
+  updateData = () => this.update.emit(true);
 
   get dataNumber(): string {
-    if (this.dataSource && this.dataSource.data.length) {
-      return this.dataSource.data.length >= 1
-        ? this.dataSource.data.length + " registro(s)"
+    if (this.dataSource.length) {
+      return this.dataSource.length >= 1
+        ? this.dataSource.length + " registro(s)"
         : "<<Nenhum registro encontrado>>";
     }
 
     return "<<Filtro Pendente>>";
   }
-
-  get dataNumberSelected(): string {
-    return this.selection.selected.length + " selecionado(s)";
-  }
+  
 }

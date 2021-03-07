@@ -5,6 +5,7 @@ import { EventEmitter } from "@angular/core";
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableOrder } from '../../../core/enum/order.enum';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'ng-table',
@@ -13,26 +14,34 @@ import { TableOrder } from '../../../core/enum/order.enum';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit, OnChanges {
-  private _selection: SelectionModel<any>;
-  displayedColumns = [];
+  @ViewChild(MatSort) sort: MatSort;
 
-  @Output() inserir = new EventEmitter<any>();
-  @Output() excluir = new EventEmitter<any>();
-  @Output() alterar = new EventEmitter<any>();
-  @Output() atualizar = new EventEmitter<any>();
+  /**Outputs Table */
+  @Output() insert = new EventEmitter<any>();
+  @Output() remove = new EventEmitter<any>();
+  @Output() edit = new EventEmitter<any>();
+  @Output() update = new EventEmitter<any>();
   @Output() rowClicked = new EventEmitter<boolean>();
-  @Input() botaoAtualizarVisivel: boolean = true;
-  @Input() botaoExcluirVisivel: boolean = true;
-  @Input() botaoInserirVisivel: boolean = true;
-  @Input() botaoAlterarVisivel: boolean = true;
-  @Input() botaoOpcoesVisivel: boolean = true;
+  @Output() paginateRequest = new EventEmitter<number>();
+
+  /**Inputs Table */
+  @Input() hasUpdateBtn: boolean = true;
+  @Input() hasRemoveBtn: boolean = true;
+  @Input() hasInsertBtn: boolean = true;
+  @Input() hasModifyBtn: boolean = true;
+  @Input() hasOptionsBtn: boolean = true;
   @Input() columnsConfig = [];
   @Input() checkboxVisible: boolean = false;
   @Input() data: any | MatTableDataSource<any>;
   @Input() height:string='60vh';
-  @ViewChild(MatSort) sort: MatSort;
   @Input() orderByColumn: string;
   @Input() direction: TableOrder.ASC | TableOrder.DESC;
+
+  /** Vars */
+  public pageSlice = [];
+  private _selection: SelectionModel<any>;
+  displayedColumns = [];
+  private nextPaginate = 15;
   
   constructor() {  }
   
@@ -41,33 +50,26 @@ export class TableComponent implements OnInit, OnChanges {
     this.checkboxVisible ? this.displayedColumns.unshift('select') : '';
   }
 
-  inserirClick() {
-    this.inserir.emit(true);
-  }
+  add = () => this.insert.emit(true);
 
-  excluirClick() {
-    this.excluir.emit(this.selection);
-  }
+  delete = () => this.remove.emit(this.selection);
 
-  alterarClick() {
-    this.alterar.emit(this.selection);
-  }
+  modify = () => this.edit.emit(this.selection);
 
-  atualizarClick() {
-    this.atualizar.emit(true);
-  }
+  upDate = () => this.update.emit(true);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data) {
-      this.popularTabela();
+      this.feedTable();
     }
   }
 
-  popularTabela() {
+  feedTable() {
     if(this.data){
       this.data = new MatTableDataSource(this.data);
       this.data.sortingDataAccessor = (obj, property) => this.getProperty(obj, property);
       this.data.sort = this.sort;
+      this.pageSlice = this.data.data.slice(0, 5);
       this.selection.clear();
     }
   }
@@ -101,5 +103,26 @@ export class TableComponent implements OnInit, OnChanges {
 
   @Input() set selection(pSelection) {
     this._selection = pSelection;
+  }
+
+  paginate(event: PageEvent): void {
+    const result = event.pageSize * (event.pageIndex + 1);
+    if(event.pageSize === 15 || result >= 15) { // talvez de uma bugada.
+      this.paginateRequest.emit(this.nextPaginate += 15);
+    }
+
+    let startIndex, endIndex;
+
+    startIndex = event.pageIndex;
+    endIndex = event.pageSize;
+
+    if(event.pageIndex > 0) {
+      startIndex = event.pageSize;
+      endIndex = startIndex + event.pageSize;
+    }
+
+    if(endIndex > this.data.data.length) endIndex = this.data.data.length;
+
+    this.pageSlice = this.data.data.slice(startIndex, endIndex);
   }
 }

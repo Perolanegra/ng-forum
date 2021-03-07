@@ -272,13 +272,13 @@ export class AppController {
     return lObjRetorno;
   }
 
-  fillerNavs() {
+  fillerNavs() { // TODO: ajustar os paths e criar as rotas restantes
     return [
       {
         name: "Início",
         isActive: false,
         imgName: "home.png",
-        path: "home",
+        path: "issues",
         img: this.getImg("home.png"),
       },
       {
@@ -292,7 +292,7 @@ export class AppController {
         name: "Configurações",
         isActive: false,
         imgName: "configs.svg",
-        path: "configs",
+        path: "home",
         img: this.getImg("configs.svg"),
       },
     ];
@@ -407,6 +407,17 @@ export class AppController {
     };
 
     return call[type]();
+  }
+
+  triggerCustomEvent(eventName: string, params: any = {}) {
+    let event;
+    if (typeof Event === "function") {
+      event = new CustomEvent(eventName, { detail: params });
+    } else {
+      event = document.createEvent("Event");
+      event.initEvent(eventName, true, true);
+    }
+    window.dispatchEvent(event);
   }
 
   // public hasSameValue(str1: string = this.isRequired('str1'), str2: string = this.isRequired('str2')): boolean {

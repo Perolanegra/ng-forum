@@ -8,9 +8,9 @@ export namespace IssueActions {
         constructor(public payload: AddPollIssueModel | AddContextIssueModel) { }
     }
 
-    export class List {
-        static readonly type = '[Issue] List Issue';
-        constructor(public payload: any) { }
+    export class Pagination {
+        static readonly type = '[Issue] Pagination';
+        constructor(public payload: number) { }
     }
 
 }

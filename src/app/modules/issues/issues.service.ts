@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { IssuesModel } from '../../models/issues.model';
 import { AddPollIssueModel } from 'src/app/models/add-poll-issue.model';
 import { AddContextIssueModel } from 'src/app/models/add-context-issue.model';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class IssuesService {
 
     constructor(private http: HttpClient) { }
-    
-    public getAll(): Observable<IssuesModel[] | undefined> {
+
+    public getWithPagination(paginate: number): Observable<IssuesModel[] | undefined> {
         const url = `${environment.server}/issues/list`;
-        return this.http.get(url, { params: {} }) as Observable<IssuesModel[]>;
+        const params = new HttpParams().set("paginate", paginate.toString());
+        return this.http.get(url, { params: params }) as Observable<IssuesModel[]>;
     }
 
     public add(payload: AddPollIssueModel | AddContextIssueModel): Observable<any | undefined> {
         const url = `${environment.server}/issues/store`;
         return this.http.post(url, { payload }, {});
     }
+
 }

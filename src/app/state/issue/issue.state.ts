@@ -4,11 +4,11 @@ import { IssuesModel } from '../../models/issues.model';
 import { IssueActions } from './issue.actions';
 import { IssuesService } from '../../modules/issues/issues.service';
 
-@State<IssuesModel>({
+@State<any>({
     name: 'issue',
-    // defaults: {
-       
-    // }
+    defaults: {
+       pagination: 15
+    }
 })
 
 @Injectable()
@@ -17,12 +17,12 @@ export class IssueState {
     constructor(private issueService: IssuesService) { }
 
     @Selector()
-    static issue(state: IssuesModel) {
-        return state;
+    static pagination(state: any) {
+        return state.pagination;
     }
 
     @Action(IssueActions.Add)
-    async add({ getState, setState }: StateContext<IssuesModel>, { payload }: IssueActions.Add) {
+    async add({ getState, setState }: StateContext<any>, { payload }: IssueActions.Add) {
         if (payload) {
             const response: any = await this.issueService.add(payload).toPromise();
             console.log('response: ', response);
@@ -30,7 +30,16 @@ export class IssueState {
         }
     }
 
-    
+    @Action(IssueActions.Pagination)
+    async list({ getState, setState }: StateContext<any>, { payload }: IssueActions.Pagination) {
+        if(payload) {
+            const state = getState();
+            setState({
+                ...state,
+                pagination: payload
+            });
+        }
+    }
 
 
 }

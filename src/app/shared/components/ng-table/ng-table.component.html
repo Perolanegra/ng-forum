@@ -1,16 +1,15 @@
 <ng-content select="[filtro]"></ng-content>
 
 <div class="content-out">
-    <ng-table-header cabecalhotabela [dataSource]="data" [qtdSelecionados]="selection.selected.length"
-        [selection]="selection" (atualizar)="atualizarClick()" (alterar)="alterarClick()" (excluir)="excluirClick()"
-        (inserir)="inserirClick()" [botaoAtualizarVisivel]="botaoAtualizarVisivel"
-        [botaoExcluirVisivel]="botaoExcluirVisivel" [botaoInserirVisivel]="botaoInserirVisivel"
-        [botaoAlterarVisivel]="botaoAlterarVisivel" [botaoOpcoesVisivel]="botaoOpcoesVisivel">
+    <ng-table-header cabecalhotabela [dataSource]="pageSlice" [selection]="selection" (update)="upDate()"
+        (edit)="modify()" (delete)="delete()" (add)="add()" [hasUpdateBtn]="hasUpdateBtn"
+        [hasRemoveBtn]="hasRemoveBtn" [hasInsertBtn]="hasInsertBtn"
+        [hasModifyBtn]="hasModifyBtn" [hasOptionsBtn]="hasOptionsBtn">
         <ng-content select="[botoesOpcoes]"></ng-content>
     </ng-table-header>
 
     <div class="table-scroll">
-        <table mat-table [dataSource]="data" matSort
+        <table mat-table [dataSource]="pageSlice" matSort
             matSortActive="{{ orderByColumn ? orderByColumn : columnsConfig[0]?.name }}" [matSortDirection]="direction">
 
             <!--- Note that these columns can be defined in any order.
@@ -50,7 +49,7 @@
                 (click)="onRowClicked(row)"></tr>
 
         </table>
-        <mat-paginator [showFirstLastButtons]="true" [length]="data?.data.length" [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+        <mat-paginator [showFirstLastButtons]="true" [length]="data?.data.length" [pageSize]="5"
+            [pageSizeOptions]="[5, 10, 15]" (page)="paginate($event)"></mat-paginator>
     </div>
 </div>

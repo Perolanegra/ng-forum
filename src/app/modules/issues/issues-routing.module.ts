@@ -5,9 +5,9 @@ import { ListIssueComponent } from './list-issue/list-issue.component';
 
 
 const routes: Routes = [
-    { path: 'issues', redirectTo:  '', pathMatch: 'full' },
+    { path: '', redirectTo:  'list', pathMatch: 'full' },
     {
-        path: '', // rota/:param
+        path: 'list', // rota/:param
         component: ListIssueComponent,
     },
     {

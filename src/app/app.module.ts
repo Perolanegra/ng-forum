@@ -91,7 +91,7 @@ import { GlobalVars } from './core/globalVars';
     MainNavStyle,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    GlobalVars
+    GlobalVars,
   ],
   bootstrap: [AppComponent],
   schemas: [

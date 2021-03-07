@@ -24,7 +24,6 @@ import { NgxSpinnerService } from "ngx-spinner";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent extends NgForm implements OnInit, OnDestroy {
-  @Select(AuthState.token) token$: Observable<string>;
   @Select(AuthState.hasResetPass) hasResetPass$: Observable<boolean>;
   public hasResetPassSubscription$: Subscription;
 
@@ -42,13 +41,12 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     this.setForm();
     this.setResetPass();
     this.setErrorValidation();
-    this.getResponse();
   }
 
   ngOnDestroy(): void {
-    this.responseSubscription$
-      ? this.responseSubscription$.unsubscribe()
-      : null;
+    // this.responseSubscription$
+    //   ? this.responseSubscription$.unsubscribe()
+    //   : null;
     this.hasResetPassSubscription$
       ? this.hasResetPassSubscription$.unsubscribe()
       : null;
@@ -87,15 +85,6 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     this.setInitControlsPadding();
   }
 
-  getResponse(): void {
-    this.responseSubscription$ = this.token$.subscribe((token) => {
-      if (token) {
-        this.appController.setMenuActiveLink("home");
-        this.appController.navigate("home");
-      }
-    });
-  }
-
   submit(): void {
     const password = this.formControls.password.value as string;
     if (this.isValidForm(password?.length)) {
@@ -105,7 +94,12 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
         "10610433IA$#@$^@1ERF",
         password
       );
-      this.store.dispatch(new AuthActions.Signin(username, encrypted));
+      this.store.dispatch(new AuthActions.Signin(username, encrypted)).subscribe((state: any) => {
+        if (state.auth.token) {
+          this.appController.setMenuActiveLink("issues");
+          this.appController.navigate("issues");
+        }
+      })
       this._form.reset();
       this.stateSubmitHasChanged();
     }
@@ -126,5 +120,9 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
       this.appController.setElementClass(element, "expanded");
     });
     setTimeout(() => this.appController.navigate("sign-up"), 1000);
+  }
+
+  public getResponse() {
+    throw new Error("Method not implemented.");
   }
 }

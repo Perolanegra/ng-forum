@@ -1,9 +1,10 @@
 <div style="display: flex; justify-content: center">
   <ng-table
     [columnsConfig]="colunasConfig"
-    [botaoOpcoesVisivel]="false"
-    [data]="registros"
+    [hasOptionsBtn]="false"
+    [data]="data | async"
     direction="asc"
+    (paginateRequest)="onPaginate($event)"
   >
   </ng-table>
 </div>

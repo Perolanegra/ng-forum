@@ -2,41 +2,41 @@
   <div class="row">
     <div class="col-6" style="text-align: left">
       <i
-        *ngIf="botaoInserirVisivel"
+        *ngIf="hasInsertBtn"
         mat-icon-button
         class="cursor-pointer material-icons"
-        (click)="insert()"
+        (click)="insertData()"
         matTooltip="Inserir um novo registro"
         >add</i
       >
       <i
-        *ngIf="botaoAtualizarVisivel"
+        *ngIf="hasUpdateBtn"
         mat-icon-button
         class="material-icons cursor-pointer"
-        (click)="update()"
+        (click)="updateData()"
         matTooltip="Atualizar informações"
         >refresh</i
       >
       <i
-        *ngIf="botaoAlterarVisivel"
+        *ngIf="hasModifyBtn"
         mat-icon-button
         class="material-icons cursor-pointer"
-        (click)="edit()"
+        (click)="modifyData()"
         matTooltip="Alterar informações"
         >edit</i
       >
       <i
-        *ngIf="botaoExcluirVisivel"
+        *ngIf="hasRemoveBtn"
         mat-icon-button
         class="cursor-pointer material-icons"
-        (click)="remove()"
+        (click)="removeData()"
         matTooltip="Excluir o registro selecionado"
         >delete_outline</i
       >
 
-      <vertical-divider *ngIf="botaoOpcoesVisivel"></vertical-divider>
+      <vertical-divider *ngIf="hasOptionsBtn"></vertical-divider>
       <i
-        *ngIf="botaoOpcoesVisivel"
+        *ngIf="hasOptionsBtn"
         class="cursor-pointer material-icons"
         mat-icon-button
         [matMenuTriggerFor]="menu"
@@ -52,7 +52,7 @@
       <div class="qtd-registro">
         <span>{{ dataNumber }}</span>
         <span *ngIf="selection.selected.length > 0">
-          {{ dataNumberSelected }}
+          {{ selection.selected.length }}
         </span>
       </div>
     </div>

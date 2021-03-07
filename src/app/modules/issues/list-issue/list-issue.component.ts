@@ -1,6 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { IssuesModel } from '../../../models/issues.model';
 import { AppController } from 'src/app/core/appController';
+import { IssuesService } from '../issues.service';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ng-list-issue',
@@ -9,9 +12,7 @@ import { AppController } from 'src/app/core/appController';
 })
 export class ListIssueComponent implements OnInit {
 
-  constructor(public appController: AppController) {
-
-  }
+  constructor(public appController: AppController, protected service: IssuesService) { }
 
   public colunasConfig = [
     { name: 'issues', title: 'Issues', cell: (data: IssuesModel) => this.getHtml(1, data), classes: ['make-gold'] },
@@ -38,105 +39,226 @@ export class ListIssueComponent implements OnInit {
     'opacity': '0.7'
   };
 
-  public registros: IssuesModel[] = [
-    {
-      id: 1,
-      id_user: 12,
-      title: 'Angular Elements',
-      subtitle: 'teste',
-      author: 'igor',
-      stars: 14,
-      views: 223,
-      tags: 'igor',
-      created_at: 'igor',
-      posts: 45,
-      pplVoted: 3
-    },
-    {
-      id: 1,
-      id_user: 12,
-      title: 'Angular Schematics',
-      subtitle: 'Gerando components padrões pra sua aplicação.',
-      author: 'igor',
-      stars: 14,
-      views: 223,
-      tags: 'igor',
-      created_at: 'igor',
-      posts: 45,
-      pplVoted: 3
-    },
-    {
-      id: 1,
-      id_user: 12,
-      title: 'Interpolação e Property Binding',
-      subtitle: 'Iniciando em angular com interpolação e property binding.',
-      author: 'igor',
-      stars: 14,
-      views: 223,
-      tags: 'igor',
-      created_at: 'igor',
-      posts: 45,
-      pplVoted: 3
-    },
-    {
-      id: 1,
-      id_user: 12,
-      title: 'Angular Animations',
-      subtitle: 'Estilizando sua aplicação com angular animations.',
-      author: 'igor',
-      stars: 14,
-      views: 223,
-      tags: 'igor',
-      created_at: 'igor',
-      posts: 45,
-      pplVoted: 3
-    },
-    {
-      id: 1,
-      id_user: 12,
-      title: 'Angular Animations',
-      subtitle: 'Estilizando sua aplicação com angular animations.',
-      author: 'igor',
-      stars: 14,
-      views: 223,
-      tags: 'igor',
-      created_at: 'igor',
-      posts: 45,
-      pplVoted: 3
-    },
-    {
-      id: 1,
-      id_user: 12,
-      title: 'Angular Animations',
-      subtitle: 'Estilizando sua aplicação com angular animations.',
-      author: 'igor',
-      stars: 14,
-      views: 223,
-      tags: 'igor',
-      created_at: 'igor',
-      posts: 45,
-      pplVoted: 3
-    },
-    {
-      id: 1,
-      id_user: 12,
-      title: 'Angular Animations',
-      subtitle: 'Estilizando sua aplicação com angular animations.',
-      author: 'igor',
-      stars: 14,
-      views: 223,
-      tags: 'igor',
-      created_at: 'igor',
-      posts: 45,
-      pplVoted: 3
-    },
+  public data: Observable<IssuesModel[]>;
+  // public data: IssuesModel[] = [
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Elements',
+  //     subtitle: 'teste',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Schematics',
+  //     subtitle: 'Gerando components padrões pra sua aplicação.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Interpolação e Property Binding',
+  //     subtitle: 'Iniciando em angular com interpolação e property binding.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 1',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 2',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 3',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 4',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 4',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 4',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 4',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 4',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 4',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 4',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 4',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
+  //   {
+  //     id: 1,
+  //     id_user: 12,
+  //     title: 'Angular Animations 4',
+  //     subtitle: 'Estilizando sua aplicação com angular animations.',
+  //     author: 'igor',
+  //     stars: 14,
+  //     views: 223,
+  //     tags: 'igor',
+  //     created_at: '25/08/1996',
+  //     posts_number: 45,
+  //     pplVoted: 3,
+  //     typeSurveyContent: false
+  //   },
 
-  ];
-  ngOnInit(): void {
+  // ];
+  ngOnInit() {
+    this.data = this.service.getWithPagination(15);
   }
 
   public getHtml(col: number, data: IssuesModel): string { // TODO: Completar o html das colunas restantes.
-    
+
     const obj = {
       1: `<div class="iss-content">
             <span class="iss-title">${data.title}</span>
@@ -144,7 +266,7 @@ export class ListIssueComponent implements OnInit {
             <div class="iss-author">@author ${data.author}</div>
           </div>`,
       2: `<div class="iss-content iss-content-row">
-            <span class="iss-table-line iss-table-line__data">${(data.posts)}</span>
+            <span class="iss-table-line iss-table-line__data">${(data.posts_number)}</span>
             <span class="iss-table-line"><img class="iss-table-line__svg" src="${col === 2 ? this.appController.getImg('issue-post.svg') : ''}"></span>
           </div>`,
       3: `<div class="iss-content iss-content-row">
@@ -155,13 +277,18 @@ export class ListIssueComponent implements OnInit {
             <span class="iss-table-line iss-table-line__data">${(data.views)}</span>
             <span class="iss-table-line"><img class="iss-table-line__svg" src="${col === 4 ? this.appController.getImg('issue-views2.svg') : ''}"></span>
           </div>`,
-      5: `<div class="iss-content iss-content-row">
-            <div class="iss-img-out">
-              <img src="http://placeimg.com/320/320/people" class="iss-img" />
+      5: `<div class="iss-content">
+            <div class="iss-content iss-content-row">
+              <div class="iss-img-out">
+                <img src="http://placeimg.com/320/320/people" class="iss-img" />
+              </div>
+              <div class="iss-info">
+                <b>by</b> <span class="iss-info-author">${data.author}</span>
+                <div>${data.created_at}</div>
+              </div>
             </div>
-            <div class="iss-info">
-              <b>by</b> <span class="iss-info-author">${data.author}</span>
-              <div>${data.created_at}</div>
+            <div>
+              ${data.tags}
             </div>
           </div>`
     };
@@ -184,6 +311,18 @@ export class ListIssueComponent implements OnInit {
     for (let i = 0; i < parseInt(average.toString()); i++) htmlSVG = htmlSVG.concat(svg.innerHTML);
 
     return htmlSVG;
+  }
+
+  public onPaginate(pagination: number) {
+    console.log('pagination: ', pagination);
+    // this.store.dispatch(new AppActions.SetRouteState(navs));
+
+    // this.issueService.getWithPagination(pagination).subscribe((response: IssuesModel[]) => {
+    //   if(response.length) {
+    //     // this.data = response;
+    //     console.log('this.data: ', response);
+    //   }
+    // });
   }
 
 }

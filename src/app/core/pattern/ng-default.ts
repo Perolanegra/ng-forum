@@ -1,5 +1,7 @@
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { AppController } from '../appController';
+import { AuthState } from 'src/app/state/auth/auth.state';
+import { Select } from '@ngxs/store';
 
 export abstract class NgDefault {
 
@@ -10,6 +12,11 @@ export abstract class NgDefault {
     private _hasMobileMatches: boolean;
 
     public logo: string;
+
+    public hasToken; notAuth;
+
+    @Select(AuthState.token) token$: Observable<string>;
+    @Select(AuthState.notAuth) notAuth$: Observable<string>;
 
     constructor(protected appController: AppController) {
         this.logo = this.appController.getImg('logo.png');
@@ -29,5 +36,11 @@ export abstract class NgDefault {
     public get hasMobileMatches() {
         return this._hasMobileMatches;
     }
+
+    getAuth() {
+        this.token$.subscribe(token => this.hasToken = token);
+        this.notAuth$.subscribe(notAuth => this.notAuth = notAuth);
+    }
+    
 
 }

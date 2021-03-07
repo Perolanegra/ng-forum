@@ -134,7 +134,7 @@ export abstract class NgForm extends NgDefault {
    * @deprecated Pode não ser usado já atualmente.
    */
   public stateSubmitHasChanged() {
-    this.spinner.hide();
+    // this.spinner.hide();
     setTimeout(() => (this.hasClickSubmit = !this.hasClickSubmit), 2000);
   }
 

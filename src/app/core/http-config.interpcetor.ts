@@ -32,15 +32,14 @@ export class HttpConfigInterceptor implements HttpInterceptor {
       }),
       catchError((error) => {
         // setar interceptors específicos caso haja request para api externa.
-        // const { message, title, type, style } = error.error;
 
         // if (error.status === 401 && !type) {
         //   console.log('ok putassss'); // testar quando for uma request de sessao expirada p ver se da certo.
         //   this._store.dispatch(new AuthActions.RemoveAccess());
         // }
 
-        // this.appController.hideSpinner();
-        // this.appController.showToastPopUp({ title, message, type, style }, ToastComponent);
+        this.appController.hideSpinner();
+        this.appController.showToastPopUp({ title: 'Erro', message: error.error, type: 'error', style: null }, ToastComponent);
 
         return throwError(error);
       }));

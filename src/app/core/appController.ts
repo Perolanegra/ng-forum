@@ -51,27 +51,21 @@ export class AppController {
   }
 
   showToastPopUp(
-    paylaod: any,
+    payload: any,
     component: ComponentType<any> | TemplateRef<any>
   ): MatDialogRef<any> {
     let dialogRef = null;
-    const {
-      positionTop,
-      positionBottom,
-      positionLeft,
-      positionRight,
-    } = paylaod.style;
-
+   
     dialogRef = this.dialog.open(component, {
-      data: paylaod,
+      data: payload,
       hasBackdrop: true,
       disableClose: true,
-      position: {
-        top: positionTop ? positionTop : "",
-        bottom: positionBottom ? positionBottom : "",
-        left: positionLeft ? positionLeft : "",
-        right: positionRight ? positionRight : "",
-      },
+      position: payload.style ? {
+        top: payload.style.positionTop ? payload.style.positionTop : "",
+        bottom: payload.style.positionBottom ? payload.style.positionBottom : "",
+        left: payload.style.positionLeft ? payload.style.positionLeft : "",
+        right: payload.style.positionRight ? payload.style.positionRight : "",
+      } : null,
     });
 
     return dialogRef;

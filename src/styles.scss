@@ -241,10 +241,19 @@ div#msg-error-ng-default {
     font-weight: bold;
 }
 
-.iss-views {
+.iss-table-line {
     color: $justBlack;
     font-size: 0.8rem;
     font-weight: bold;
+    &__svg {
+        width: 30px;
+        height: auto;
+    }
+    &__data {
+        top: 1px;
+        position: relative;
+        padding-right: 10px;
+    }
 }
 
 .logo-out {

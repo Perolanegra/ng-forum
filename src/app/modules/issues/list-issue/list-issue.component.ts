@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { IssuesModel } from '../../../models/issues.model';
+import { AppController } from 'src/app/core/appController';
 
 @Component({
   selector: 'ng-list-issue',
@@ -7,6 +8,10 @@ import { IssuesModel } from '../../../models/issues.model';
   styleUrls: ['./list-issue.component.scss'],
 })
 export class ListIssueComponent implements OnInit {
+
+  constructor(public appController: AppController) {
+
+  }
 
   public colunasConfig = [
     { name: 'issues', title: 'Issues', cell: (data: IssuesModel) => this.getHtml(1, data), classes: ['make-gold'] },
@@ -131,6 +136,7 @@ export class ListIssueComponent implements OnInit {
   }
 
   public getHtml(col: number, data: IssuesModel): string { // TODO: Completar o html das colunas restantes.
+    
     const obj = {
       1: `<div class="iss-content">
             <span class="iss-title">${data.title}</span>
@@ -138,14 +144,16 @@ export class ListIssueComponent implements OnInit {
             <div class="iss-author">@author ${data.author}</div>
           </div>`,
       2: `<div class="iss-content iss-content-row">
-            <span class="iss-posts">${data.posts}</span>
+            <span class="iss-table-line iss-table-line__data">${(data.posts)}</span>
+            <span class="iss-table-line"><img class="iss-table-line__svg" src="${col === 2 ? this.appController.getImg('issue-post.svg') : ''}"></span>
           </div>`,
       3: `<div class="iss-content iss-content-row">
             <span class="iss-stars-out">${col === 3 ? this.countStars(data) : ''}</span>
             <span class="iss-stars-average">${(data.stars / data.pplVoted).toFixed(1)}</span>
           </div>`,
       4: `<div class="iss-content iss-content-row">
-            <span class="iss-views">${data.views}</span>
+            <span class="iss-table-line iss-table-line__data">${(data.views)}</span>
+            <span class="iss-table-line"><img class="iss-table-line__svg" src="${col === 4 ? this.appController.getImg('issue-views2.svg') : ''}"></span>
           </div>`,
       5: `<div class="iss-content iss-content-row">
             <div class="iss-img-out">

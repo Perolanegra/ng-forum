@@ -333,14 +333,14 @@ export class AppController {
 
   /**
    * Método que retorna a path da img procurada.
-   * @param nameSvg Nome da img passado como parâmetro para busca.
+   * @param filename Nome do arquivo img/svg passado como parâmetro para busca.
    * @author igor.alves
    */
-  public getImg(nameSvg: string): string {
+  public getImg(filename: string): string {
     const prefix = environment.prefixImg;
     let searchImg;
 
-    searchImg = prefix + nameSvg;
+    searchImg = prefix + filename;
     let image = new Image();
     image.src = searchImg;
 

@@ -20,7 +20,7 @@ import { AppActions } from "../state/app/app.actions";
 export class AppController {
   @Select((state) => state.app.hasMobileMatches)
   hasMobileMatches$: Observable<any>;
-
+  msg
   private renderer: Renderer2;
   private imgRenderer: BehaviorSubject<String> = new BehaviorSubject(null);
 
@@ -46,7 +46,7 @@ export class AppController {
     });
   }
 
-  tratarErro(err): void {
+  handleError(err): void {
     this.exibirErro(err);
   }
 
@@ -61,10 +61,10 @@ export class AppController {
       hasBackdrop: true,
       disableClose: true,
       position: payload.style ? {
-        top: payload.style.positionTop ? payload.style.positionTop : "",
-        bottom: payload.style.positionBottom ? payload.style.positionBottom : "",
-        left: payload.style.positionLeft ? payload.style.positionLeft : "",
-        right: payload.style.positionRight ? payload.style.positionRight : "",
+        top: payload.style.posTop ? payload.style.posTop : "",
+        bottom: payload.style.posBottom ? payload.style.posBottom : "",
+        left: payload.style.posLeft ? payload.style.posLeft : "",
+        right: payload.style.posRight ? payload.style.posRight : "",
       } : null,
     });
 
@@ -137,7 +137,7 @@ export class AppController {
             try {
               pFuncaoTratamento(pValue);
             } catch (err) {
-              this.tratarErro(err);
+              this.handleError(err);
             }
           }
         })
@@ -237,7 +237,7 @@ export class AppController {
         document.body.removeChild(a);
       }
     } catch (err) {
-      this.tratarErro(err);
+      this.handleError(err);
     }
   }
 

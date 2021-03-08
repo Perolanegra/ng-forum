@@ -1,6 +1,6 @@
 <div *ngIf="!hasClosed" class="toast-out fade-transition-in">
     <div class="toast-in" [ngStyle]="{ width: hasMobileMatches ? '80vw' : 'unset' }">
-        <div id="base-height" class="toast-in-align" style="width: 100%;">
+        <div id="base-height" class="toast-in-align" style="width: 100%">
             <div [ngClass]="[hasMobileMatches ? 'ball-mobile' : 'ball-web']"
                 [ngStyle]="{ background: appController.getColorRef(data?.type) }"></div>
 

@@ -39,7 +39,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         // }
 
         this.appController.hideSpinner();
-        this.appController.showToastPopUp({ title: 'Erro', message: error.error, type: 'error', style: null }, ToastComponent);
+        this.appController.showToastPopUp(error.error, ToastComponent);
 
         return throwError(error);
       }));

@@ -70,6 +70,7 @@
   font-weight: 500;
   color: #fff;
   margin-bottom: 5px;
+  padding-right: 20px;
 }
 
 ::ng-deep .mat-dialog-container {
@@ -90,6 +91,8 @@
   outline: none;
   align-items: center;
   display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
   border-radius: 0px 5px 5px 0px;
   width: fit-content;
   height: fit-content;
@@ -98,8 +101,6 @@
 .btn-close {
   outline: none;
   display: flex;
-  position: relative;
-  bottom: 25%;
   color: #fff;
   width: fit-content;
   right: 50%;

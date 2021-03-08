@@ -1,42 +1,70 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { IssuesModel } from '../../../models/issues.model';
-import { AppController } from 'src/app/core/appController';
-import { IssuesService } from '../issues.service';
-import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { IssuesModel } from "../../../models/issues.model";
+import { AppController } from "src/app/core/appController";
+import { IssuesService } from "../issues.service";
+import { Observable } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
+import { NgTags } from "src/app/shared/components/ng-tags/ng-tags";
 
 @Component({
-  selector: 'ng-list-issue',
-  templateUrl: './list-issue.component.html',
-  styleUrls: ['./list-issue.component.scss'],
+  selector: "ng-list-issue",
+  templateUrl: "./list-issue.component.html",
+  styleUrls: ["./list-issue.component.scss"],
 })
 export class ListIssueComponent implements OnInit {
-
-  constructor(public appController: AppController, protected service: IssuesService) { }
+  constructor(
+    public appController: AppController,
+    protected service: IssuesService
+  ) {}
 
   public colunasConfig = [
-    { name: 'issues', title: 'Issues', cell: (data: IssuesModel) => this.getHtml(1, data), classes: ['make-gold'] },
-    { name: 'post', title: 'Posts', cell: (data: IssuesModel) => this.getHtml(2, data), classes: ['info-col'] },
-    { name: 'stars', title: 'Stars', cell: (data: IssuesModel) => this.getHtml(3, data), classes: ['stars-col'] },
-    { name: 'views', title: 'Views', cell: (data: IssuesModel) => this.getHtml(4, data), classes: ['views-col'] },
-    { name: 'info', title: 'Info', cell: (data: IssuesModel) => this.getHtml(5, data), classes: ['post-col'] },
+    {
+      name: "issues",
+      title: "Issues",
+      cell: (data: IssuesModel) => this.getHtml(1, data),
+      classes: ["make-gold"],
+    },
+    {
+      name: "post",
+      title: "Posts",
+      cell: (data: IssuesModel) => this.getHtml(2, data),
+      classes: ["info-col"],
+    },
+    {
+      name: "stars",
+      title: "Stars",
+      cell: (data: IssuesModel) => this.getHtml(3, data),
+      classes: ["stars-col"],
+    },
+    {
+      name: "views",
+      title: "Views",
+      cell: (data: IssuesModel) => this.getHtml(4, data),
+      classes: ["views-col"],
+    },
+    {
+      name: "info",
+      title: "Info",
+      cell: (data: IssuesModel) => this.getHtml(5, data),
+      classes: ["post-col"],
+    },
     // author, pic author, dateTime Issue created
   ];
 
   public rowSkeletonTheme = {
-    'height': '70px',
-    'width': '55vw',
-    'background-color': '#E91E63',
-    'animation-duration': '2s',
-    'opacity': '0.7'
+    height: "70px",
+    width: "55vw",
+    "background-color": "#E91E63",
+    "animation-duration": "2s",
+    opacity: "0.7",
   };
 
   public titleSkeletonTheme = {
-    'height': '70px',
-    'width': '60vw',
-    'background-color': '#E91E63',
-    'animation-duration': '2s',
-    'opacity': '0.7'
+    height: "70px",
+    width: "60vw",
+    "background-color": "#E91E63",
+    "animation-duration": "2s",
+    opacity: "0.7",
   };
 
   public data: Observable<IssuesModel[]>;
@@ -257,7 +285,28 @@ export class ListIssueComponent implements OnInit {
     this.data = this.service.getWithPagination(15);
   }
 
-  public getHtml(col: number, data: IssuesModel): string { // TODO: Completar o html das colunas restantes.
+  getTagsHTML(tags: string, colors: string): string {
+    const tagComponent = new NgTags(tags, this.appController, colors);
+    this.styleBorderLeftColorTags(colors);
+    return tagComponent.createTagElement();
+  }
+
+  // TODO: ver uma forma de capturar o after de cada elemento pra trocar a cor da borda e deixar dinâmico.
+  styleBorderLeftColorTags(colors: string) {
+    setTimeout(() => {
+      const arrColors = colors.split(",");
+      arrColors.forEach((color: string, index: number) => {
+        document.styleSheets[0].addRule(
+          `a.tag:after`,
+          `border-left-color: ${color};`
+        );
+      })
+
+    }, 3500);
+  }
+
+  public getHtml(col: number, data: IssuesModel): string {
+    // TODO: Completar o html das colunas restantes.
 
     const obj = {
       1: `<div class="iss-content">
@@ -266,16 +315,28 @@ export class ListIssueComponent implements OnInit {
             <div class="iss-author">@author ${data.author}</div>
           </div>`,
       2: `<div class="iss-content iss-content-row">
-            <span class="iss-table-line iss-table-line__data">${(data.posts_number)}</span>
-            <span class="iss-table-line"><img class="iss-table-line__svg" src="${col === 2 ? this.appController.getImg('issue-post.svg') : ''}"></span>
+            <span class="iss-table-line iss-table-line__data">${
+              data.posts_number
+            }</span>
+            <span class="iss-table-line"><img class="iss-table-line__svg" src="${
+              col === 2 ? this.appController.getImg("issue-post.svg") : ""
+            }"></span>
           </div>`,
       3: `<div class="iss-content iss-content-row">
-            <span class="iss-stars-out">${col === 3 ? this.countStars(data) : ''}</span>
-            <span class="iss-stars-average">${(data.stars / data.pplVoted).toFixed(1)}</span>
+            <span class="iss-stars-out">${
+              col === 3 ? this.countStars(data) : ""
+            }</span>
+            <span class="iss-stars-average">${(
+              data.stars / data.pplVoted
+            ).toFixed(1)}</span>
           </div>`,
       4: `<div class="iss-content iss-content-row">
-            <span class="iss-table-line iss-table-line__data">${(data.views)}</span>
-            <span class="iss-table-line"><img class="iss-table-line__svg" src="${col === 4 ? this.appController.getImg('issue-views2.svg') : ''}"></span>
+            <span class="iss-table-line iss-table-line__data">${
+              data.views
+            }</span>
+            <span class="iss-table-line"><img class="iss-table-line__svg" src="${
+              col === 4 ? this.appController.getImg("issue-views2.svg") : ""
+            }"></span>
           </div>`,
       5: `<div class="iss-content">
             <div class="iss-content iss-content-row">
@@ -287,10 +348,10 @@ export class ListIssueComponent implements OnInit {
                 <div>${data.created_at}</div>
               </div>
             </div>
-            <div>
-              ${data.tags}
+            <div class="iss-tags">
+             ${this.getTagsHTML(data.tags, "crimson, #22262e")}
             </div>
-          </div>`
+          </div>`,
     };
 
     return obj[col] || undefined;
@@ -306,15 +367,16 @@ export class ListIssueComponent implements OnInit {
       </svg>`;
 
     const average = data.stars / data.pplVoted;
-    let htmlSVG = '';
+    let htmlSVG = "";
 
-    for (let i = 0; i < parseInt(average.toString()); i++) htmlSVG = htmlSVG.concat(svg.innerHTML);
+    for (let i = 0; i < parseInt(average.toString()); i++)
+      htmlSVG = htmlSVG.concat(svg.innerHTML);
 
     return htmlSVG;
   }
 
   public onPaginate(pagination: number) {
-    console.log('pagination: ', pagination);
+    console.log("pagination: ", pagination);
     // this.store.dispatch(new AppActions.SetRouteState(navs));
 
     // this.issueService.getWithPagination(pagination).subscribe((response: IssuesModel[]) => {
@@ -324,5 +386,4 @@ export class ListIssueComponent implements OnInit {
     //   }
     // });
   }
-
 }

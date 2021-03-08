@@ -178,6 +178,8 @@ div#msg-error-ng-default {
     background: #555;
 }
 
+/* Issue Style */
+
 .iss-content {
     cursor: pointer;
     width: fit-content;
@@ -206,10 +208,6 @@ div#msg-error-ng-default {
 .iss-author {
     padding-bottom: 2px;
 }
-
-// .iss-img-out {
-
-// }
 
 .iss-img {
     width: 3.5vw;
@@ -256,6 +254,56 @@ div#msg-error-ng-default {
     }
 }
 
+/* TAG Issue Style*/
+
+.iss-tags {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 10px;
+    width: 100%;
+}
+
+.tag {
+    border-radius: 3px 0 0 3px;
+    color: white;
+    font-family: "Product Sans Light Regular";
+    font-weight: 500;
+    display: inline-block;
+    pointer-events: none;
+    height: auto;
+    line-height: 20px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;
+}
+
+.tag::before {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+    content: "";
+    height: 6px;
+    left: 10px;
+    position: absolute;
+    width: 6px;
+    top: 7px;
+}
+
+.tag::after {
+    background: #e91e63;
+    border-bottom: 9px solid transparent;
+    border-left: 8px solid #eee;
+    border-top: 11px solid transparent;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    // border-left-color: crimson;
+}
+
+/* LOGO Style */
 .logo-out {
     display: flex;
     width: 100%;

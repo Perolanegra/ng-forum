@@ -12,7 +12,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
   constructor(private appController: AppController, private authState: AuthState) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     req = req.clone();
 
     if (this.authState.snapshot.token) {
@@ -26,10 +25,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     }
 
     return next.handle(req).pipe(
-      map((event: HttpEvent<any>) => {
-        // loader aqui
-        return event;
-      }),
+      map((event: HttpEvent<any>) => event),
       catchError((error) => {
         // setar interceptors específicos caso haja request para api externa.
 

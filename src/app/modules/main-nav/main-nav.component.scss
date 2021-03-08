@@ -1,3 +1,5 @@
+@import "src/app/shared/style/variables";
+
 .example-container {
   flex-direction: column;
   position: absolute;
@@ -204,7 +206,7 @@
 }
 
 .div-nav-item--active {
-  background: #E91E63;
+  background: $accentColor;
   width: 88%;
   border-radius: 0 20px 20px 0;
 }
@@ -223,11 +225,11 @@
   justify-content: center;
   width: 70%;
   border-radius: 8%;
-  background: #E91E63;
+  background: $accentColor;
   align-items: center;
   height: 44px;
   // filter: drop-shadow(5px 30px 18px red);
-  box-shadow: #E91E63 0px 5px 9px;
+  box-shadow: $accentColor 0px 5px 9px;
 }
 
 .img-closed-icons {
@@ -254,7 +256,7 @@ div#sideNavContainer:not(.div-nav-item--active):hover {
 }
 
 .nav-mobile--active {
-  background: #E91E63;
+  background: $accentColor;
   width: 88%;
   border-radius: 0 20px 20px 0;
   margin-bottom: 15px;

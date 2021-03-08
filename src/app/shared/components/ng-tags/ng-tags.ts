@@ -20,7 +20,8 @@ export class NgTags {
     arrTags.forEach((tag: string, index: number) => {
       const tagElement = document.createElement("a");
       tagElement.href = "#";
-      tagElement.className = `tag ${index.toString()}`;
+      tagElement.classList.add('tag');
+      tagElement.classList.add(`borderTag${index.toString()}`);
       tagElement.textContent = tag;
       tagElement.style.background = arrColors[index];
       tagElement.style.borderLeftColor = arrColors[index];

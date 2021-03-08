@@ -1,13 +1,15 @@
+@import "src/app/shared/style/variables";
+
 .toast-out {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #22262e;
+  background: $blueBlack;
   border-radius: 5px;
 }
 .toast-in {
   display: flex;
-  background: #22262e;
+  background: $blueBlack;
   align-items: center;
   border-radius: 5px;
 }

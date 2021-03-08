@@ -1,3 +1,5 @@
+@import "src/app/shared/style/variables";
+
 ::ng-deep .la-ball-scale-multiple {
-    color: #E91E63 !important;
+    color: $accentColor !important;
 }

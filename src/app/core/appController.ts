@@ -371,7 +371,7 @@ export class AppController {
         return "#ff4444";
       },
       info: () => {
-        return "#33b5e5";
+        return "#178ab4";
       },
       warning: () => {
         return "#ffbb33";

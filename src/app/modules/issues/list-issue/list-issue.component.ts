@@ -15,7 +15,10 @@ export class ListIssueComponent implements OnInit {
   constructor(
     public appController: AppController,
     protected service: IssuesService
-  ) {}
+  ) { }
+
+  public tagColorMock = "crimson,#22262e,#22262e,#22262e";
+  public tagsMock = 'bug,implementation,implementation,implementation';
 
   public colunasConfig = [
     {
@@ -286,28 +289,12 @@ export class ListIssueComponent implements OnInit {
   }
 
   getTagsHTML(tags: string, colors: string): string {
-    const tagComponent = new NgTags(tags, this.appController, colors);
-    this.styleBorderLeftColorTags(colors);
+    const tagComponent = new NgTags(this.tagsMock, this.appController, colors);
     return tagComponent.createTagElement();
   }
 
-  // TODO: ver uma forma de capturar o after de cada elemento pra trocar a cor da borda e deixar dinâmico.
-  styleBorderLeftColorTags(colors: string) {
-    setTimeout(() => {
-      const arrColors = colors.split(",");
-      arrColors.forEach((color: string, index: number) => {
-        document.styleSheets[0].addRule(
-          `a.tag:after`,
-          `border-left-color: ${color};`
-        );
-      })
-
-    }, 3500);
-  }
-
+  // TODO: Configurar a forma de manipular a data na aplicação.
   public getHtml(col: number, data: IssuesModel): string {
-    // TODO: Completar o html das colunas restantes.
-
     const obj = {
       1: `<div class="iss-content">
             <span class="iss-title">${data.title}</span>
@@ -316,40 +303,40 @@ export class ListIssueComponent implements OnInit {
           </div>`,
       2: `<div class="iss-content iss-content-row">
             <span class="iss-table-line iss-table-line__data">${
-              data.posts_number
-            }</span>
+        data.posts_number
+        }</span>
             <span class="iss-table-line"><img class="iss-table-line__svg" src="${
-              col === 2 ? this.appController.getImg("issue-post.svg") : ""
-            }"></span>
+        col === 2 ? this.appController.getImg("issue-post.svg") : ""
+        }"></span>
           </div>`,
       3: `<div class="iss-content iss-content-row">
             <span class="iss-stars-out">${
-              col === 3 ? this.countStars(data) : ""
-            }</span>
+        col === 3 ? this.countStars(data) : ""
+        }</span>
             <span class="iss-stars-average">${(
-              data.stars / data.pplVoted
-            ).toFixed(1)}</span>
+          data.stars / data.pplVoted
+        ).toFixed(1)}</span>
           </div>`,
       4: `<div class="iss-content iss-content-row">
             <span class="iss-table-line iss-table-line__data">${
-              data.views
-            }</span>
+        data.views
+        }</span>
             <span class="iss-table-line"><img class="iss-table-line__svg" src="${
-              col === 4 ? this.appController.getImg("issue-views2.svg") : ""
-            }"></span>
+        col === 4 ? this.appController.getImg("issue-views2.svg") : ""
+        }"></span>
           </div>`,
-      5: `<div class="iss-content">
+      5: `<div class="iss-content info-content">
             <div class="iss-content iss-content-row">
               <div class="iss-img-out">
                 <img src="http://placeimg.com/320/320/people" class="iss-img" />
               </div>
               <div class="iss-info">
                 <b>by</b> <span class="iss-info-author">${data.author}</span>
-                <div>${data.created_at}</div>
+                <div>${new Date(data.created_at).toLocaleDateString()}</div>
               </div>
             </div>
             <div class="iss-tags">
-             ${this.getTagsHTML(data.tags, "crimson, #22262e")}
+             ${this.getTagsHTML(data.tags, this.tagColorMock)}
             </div>
           </div>`,
     };

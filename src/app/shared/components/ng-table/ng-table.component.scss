@@ -1,4 +1,5 @@
-@import "../../style/variables";
+// @import "../../style/variables";
+@import "src/app/shared/style/variables";
 
 .table-scroll {
     max-height: 90vh;
@@ -25,7 +26,7 @@ tr {
 }
 
 .selected-row {
-    background: #e91e63;
+    background: $accentColor;
 }
 
 .table-row {
@@ -70,11 +71,11 @@ th.mat-header-cell:first-child {
     position: fixed;
     display: flex;
     justify-content: flex-end;
-    background: #e91e63;
+    background: $accentColor;
 }
 
 tr.mat-row {
-    background: #e91e63;
+    background: $accentColor;
 }
 
 tr:active {
@@ -109,7 +110,7 @@ th.mat-header-cell:nth-child(4) {
 th.mat-header-cell:nth-child(5) {
     font-family: "Product Sans Black Regular" !important;
     font-size: 1.5rem !important;
-    background: #e91e63;
+    background: $accentColor;
     border: none;
     outline: none;
 }
@@ -121,7 +122,7 @@ th.mat-header-cell:nth-child(5) {
 
 table.mat-table {
     width: 100%;
-    background: #e91e63;
+    background: $accentColor;
 }
 
 td.mat-cell,

@@ -1,3 +1,6 @@
+
+@import "src/app/shared/style/variables";
+
 .out-login {
     display: flex;
     justify-content: center;
@@ -21,7 +24,7 @@ div.mat-form-field-infix ng-tns-c35-1 {
     min-height: 44px;
     font-size: 20px;
     color: #fff;
-    background: #e91e63;
+    background: $accentColor;
 }
 
 .logo-out {
@@ -45,13 +48,13 @@ div.mat-form-field-infix ng-tns-c35-1 {
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: #e91e63 !important;
+    color: $accentColor !important;
     opacity: 0.2 !important;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     opacity: 0.3;
-    color: #e91e63;
+    color: $accentColor;
 }
 
 ::ng-deep .mat-hint {
@@ -68,12 +71,12 @@ input:-webkit-autofill:active {
 
 input:-webkit-autofill {
     -webkit-text-fill-color: #fff !important;
-    color: #e91e63 !important;
+    color: $accentColor !important;
     font-family: "Montserrat" !important;
 }
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
-    border: 1.4px solid #e91e63;
+    border: 1.4px solid $accentColor;
 }
 
 .text-link-size {
@@ -94,7 +97,7 @@ input:-webkit-autofill {
     top: 3%;
     width: fit-content;
     cursor: pointer;
-    background: #e91e63;
+    background: $accentColor;
     border-radius: 50%;
     box-shadow: 5px 10px 9px #191919;
     transition: 0.2s;
@@ -116,7 +119,7 @@ svg:hover {
 
 .btn-submit:hover {
     background: #fff;
-    color: #e91e63;
+    color: $accentColor;
 }
 
 * {
@@ -178,7 +181,7 @@ body {
 $colors: (
     red: #c5002d,
     // #1b8bf9
-    pink: #e91e63,
+    pink: $accentColor,
     white: #f9f9f9,
     default: #303030,
 );

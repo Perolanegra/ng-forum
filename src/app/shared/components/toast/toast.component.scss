@@ -6,6 +6,7 @@
   align-items: center;
   background: $blueBlack;
   border-radius: 5px;
+  height: 100%;
 }
 .toast-in {
   display: flex;
@@ -97,7 +98,7 @@
   flex-direction: column;
   border-radius: 0px 5px 5px 0px;
   width: fit-content;
-  height: fit-content;
+  height: 100%;
 }
 
 .btn-close {

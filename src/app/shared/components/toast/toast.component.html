@@ -1,31 +1,46 @@
 <div *ngIf="!hasClosed" class="toast-out fade-transition-in">
-    <div class="toast-in" [ngStyle]="{ width: hasMobileMatches ? '80vw' : 'unset' }">
-        <div id="base-height" class="toast-in-align" style="width: 100%">
-            <div [ngClass]="[hasMobileMatches ? 'ball-mobile' : 'ball-web']"
-                [ngStyle]="{ background: appController.getColorRef(data?.type) }"></div>
+  <div
+    class="toast-in"
+    [ngStyle]="{ width: hasMobileMatches ? '80vw' : 'unset' }"
+  >
+    <div id="base-height" class="toast-in-align" style="width: 100%">
+      <div
+        [ngClass]="[hasMobileMatches ? 'ball-mobile' : 'ball-web']"
+        [ngStyle]="{ background: appController.getColorRef(data?.type) }"
+      ></div>
 
-            <div class="align-message">
-                <strong class="title-msg" [ngStyle]="{
+      <div class="align-message">
+        <strong
+          class="title-msg"
+          [ngStyle]="{
             'line-height': getStyle('unset', '28px'),
             'font-size': getStyle('16px', '20px')
-          }">{{ title }}</strong>
-                <p class="msg" [ngStyle]="{
+          }"
+          >{{ title }}</strong
+        >
+        <p
+          class="msg"
+          [ngStyle]="{
             'font-size': getStyle('13px', '16px'),
             'max-width': getStyle('161px', '255px')
-          }">
-                    {{ message }}
-                </p>
-            </div>
-        </div>
+          }"
+        >
+          {{ message }}
+        </p>
+      </div>
     </div>
+  </div>
 
-    <div class="align-close" [ngStyle]="{
-      height: elementHeight,
-      background: getStyle('#E91E63', '#22262e')
-    }">
-        <button tabindex="-1" ngOverBtn [type]="data?.type" [ngClass]="[hasMobileMatches ? '' : 'btn-close']"
-            [ngStyle]="{ height: getStyle('100%', 'unset') }" mat-icon-button (click)="close()">
-            <mat-icon>close</mat-icon>
-        </button>
-    </div>
+  <div class="align-close">
+    <button
+      tabindex="-1"
+      ngOverBtn
+      [type]="data?.type"
+      [ngClass]="[hasMobileMatches ? '' : 'btn-close']"
+      mat-icon-button
+      (click)="close()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 </div>

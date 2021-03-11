@@ -8,11 +8,10 @@ import {
 import { AppController } from "../../core/appController";
 import { MainNavStyle } from "./main-nav.style";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { Select } from "@ngxs/store";
 import { AppState } from "src/app/state/app/app.state";
 import { Constants } from "../../core/pattern/constants";
 import { NgDefault } from "src/app/core/pattern/ng-default";
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 @Component({
   selector: "ng-main-nav",
   templateUrl: "./main-nav.component.html",
@@ -21,22 +20,17 @@ import { NgDefault } from "src/app/core/pattern/ng-default";
 })
 export class MainNavComponent extends NgDefault implements OnInit {
 
-  @Select(AppState.routes) routes$: Observable<any>;
+  @ViewChild("userInfo") elRefUserInfo: ElementRef;
+  @SelectSnapshot(AppState.routes) routes: any[];
 
   public vistoPic: string;
   public profileDefault: string;
-  public hasMobileMatches: boolean;
   public hasEnterMenuRef: boolean = false;
-
-  @ViewChild("userInfo") elRefUserInfo: ElementRef;
-  @ViewChild("navListRoutes") elRefnavListRoutes: ElementRef;
-
-  @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
 
   constructor(
     public router: Router,
     private mainNavStyle: MainNavStyle,
-    public appController: AppController
+    public appController: AppController,
   ) {
     super(appController);
   }

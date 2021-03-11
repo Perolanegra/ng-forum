@@ -41,7 +41,7 @@ export class AppController {
   public getMobileMatches(): Promise<any | undefined> {
     return new Promise((resolve, reject) => {
       this.hasMobileMatches$.subscribe((state) => {
-        resolve(state);
+        if(state) resolve(state);
       });
     });
   }

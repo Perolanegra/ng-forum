@@ -32,22 +32,13 @@ export class AppState {
 
 
     @Action(AppActions.SetMediaScreen)
-    setMediaScreen({ getState, setState }: StateContext<AppStateModel>, { hasMobileMatches }: AppActions.SetMediaScreen) {
-        const state = getState();
-        setState({
-            ...state,
-            hasMobileMatches: hasMobileMatches
-        });
-
+    setMediaScreen({ patchState }: StateContext<AppStateModel>, { hasMobileMatches }: AppActions.SetMediaScreen) {
+        patchState({ hasMobileMatches })
     }
 
     @Action(AppActions.SetRouteState)
-    setRouteState({ getState, setState }: StateContext<AppStateModel>, { payload }: AppActions.SetRouteState) {
-        const state = getState();
-        setState({
-            ...state,
-            routes: payload
-        });
+    setRouteState({ patchState }: StateContext<AppStateModel>, { payload }: AppActions.SetRouteState) {
+        patchState({ routes: payload });
     }
 
     @Action(AppActions.RemoveRouteState)

@@ -35,6 +35,7 @@ import { TesteComponent } from './modules/teste/teste.component';
 import { FormsModule } from '@angular/forms';
 import { ChatModule } from './modules/chat/chat.module';
 import { GlobalVars } from './core/globalVars';
+import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { GlobalVars } from './core/globalVars';
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     NgxsDataPluginModule.forRoot([NGXS_DATA_STORAGE_PLUGIN]),
+    NgxsSelectSnapshotModule.forRoot(),
     NgxSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     // JwtModule.forRoot({

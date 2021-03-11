@@ -29,6 +29,7 @@
     "@angular/service-worker": "~10.0.3",
     "@auth0/angular-jwt": "^4.0.0",
     "@ngxs-labs/data": "^4.1.1",
+    "@ngxs-labs/select-snapshot": "^2.0.1",
     "@ngxs/devtools-plugin": "^3.6.2",
     "@ngxs/logger-plugin": "^3.6.2-dev.master-7118f7e",
     "@ngxs/storage-plugin": "^3.6.2",

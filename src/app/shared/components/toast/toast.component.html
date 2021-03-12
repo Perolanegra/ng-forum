@@ -3,7 +3,7 @@
     class="toast-in"
     [ngStyle]="{ width: hasMobileMatches ? '80vw' : 'unset' }"
   >
-    <div id="base-height" class="toast-in-align" style="width: 100%">
+    <div class="toast-in-align" style="width: 100%">
       <div
         [ngClass]="[hasMobileMatches ? 'ball-mobile' : 'ball-web']"
         [ngStyle]="{ background: appController.getColorRef(data?.type) }"

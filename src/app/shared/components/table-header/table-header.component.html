@@ -1,6 +1,6 @@
 <div class="list-header-title tabela-cabecalho">
-  <div class="row">
-    <div class="col-6" style="text-align: left">
+  <div class="align-opts">
+    <div class="opts">
       <i
         *ngIf="hasInsertBtn"
         mat-icon-button
@@ -48,13 +48,13 @@
         <ng-content></ng-content>
       </mat-menu>
     </div>
-    <div class="col-6" style="text-align: right; color: white">
+    <!-- <div class="col-6" style="text-align: right; color: white">
       <div class="qtd-registro">
         <span>{{ dataNumber }}</span>
         <span *ngIf="selection.selected.length > 0">
           {{ selection.selected.length }}
         </span>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

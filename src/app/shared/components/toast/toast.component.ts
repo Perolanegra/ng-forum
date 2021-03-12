@@ -9,10 +9,9 @@ import { NgDialogDefault } from 'src/app/core/ng-dialog';
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })
-export class ToastComponent extends NgDialogDefault implements OnInit, AfterViewInit {
+export class ToastComponent extends NgDialogDefault implements OnInit {
   public message: string;
   public title: string;
-  public elementHeight: string;
 
   constructor(
     public dialogRef: MatDialogRef<ToastComponent>,
@@ -22,11 +21,6 @@ export class ToastComponent extends NgDialogDefault implements OnInit, AfterView
     protected renderer: Renderer2,
     @Inject(MAT_DIALOG_DATA) public data) {
     super(dialogRef, formBuilder, appController, false);
-  }
-
-  ngAfterViewInit() {
-    Promise.resolve(null).then(() =>
-      this.elementHeight = ((<HTMLElement>document.getElementById('base-height')).offsetHeight).toString().concat('px'));
   }
 
   ngOnInit(): void {

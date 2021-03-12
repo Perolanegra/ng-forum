@@ -51,8 +51,6 @@ export class TableComponent implements OnInit, OnChanges {
     this.checkboxVisible ? this.displayedColumns.unshift('select') : '';
   }
 
-  
-
   add = () => this.insert.emit(true);
 
   delete = () => this.remove.emit(this.selection);

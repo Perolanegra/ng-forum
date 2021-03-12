@@ -45,4 +45,7 @@ export class ToastComponent extends NgDialogDefault implements OnInit {
     throw new Error("Method not implemented.");
   }
 
+  public fillForm() {
+    throw new Error("Method not implemented.");
+  }
 }

@@ -165,4 +165,8 @@ export class AddSurveyDialogComponent extends NgDialogDefault implements OnInit 
     throw new Error("Method not implemented.");
   }
 
+  public fillForm() {
+    throw new Error("Method not implemented.");
+  }
+
 }

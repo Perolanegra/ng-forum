@@ -44,6 +44,8 @@ export abstract class NgForm extends NgDefault {
 
   public abstract setForm(): void;
 
+  public abstract fillForm(): any;
+
   public abstract getResponse(): any;
 
   public isValidForm(payload?: any): boolean {

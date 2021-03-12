@@ -89,4 +89,8 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     }
   }
 
+  public fillForm() {
+    throw new Error("Method not implemented.");
+  }
+
 }

@@ -18,8 +18,8 @@ import { AddContextIssueModel } from 'src/app/models/add-context-issue.model';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { UserModel } from 'src/app/models/user.model';
 import { IssueTagActions } from 'src/app/state/issue-tag/issue-tag.actions';
-import { TagsReducer } from 'src/app/state/issue-tag/issue-tag.reducer';
 import { IssueTagState } from 'src/app/state/issue-tag/issue-tag.state';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ng-add-issue',
@@ -32,6 +32,7 @@ import { IssueTagState } from 'src/app/state/issue-tag/issue-tag.state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
+  
 
   @Select(AuthState.userDetails) user$: Observable<UserModel>;
   @Select(IssueTagState.tags) tags$: Observable<any>;
@@ -54,6 +55,7 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
     protected formBuilder: FormBuilder,
     private ref: ChangeDetectorRef,
     private store: Store,
+    private route: ActivatedRoute
   ) {
     super(formBuilder, appController, false);
   }
@@ -89,10 +91,6 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
     });
   }
 
-  // async setimg() {
-  //   await this.appController.getImg('content-issue.png');
-  // }
-
   addContent(componentId: string): void {
     const componentObj = { 1: NgRichTextEditorComponent, 2: AddSurveyDialogComponent };
     const dialogRef = this.appController.showToastPopUp({
@@ -125,12 +123,20 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   setForm(): void {
-    this._form.addControl('title', new FormControl(null, [Validators.required, CustomValidators.allblank]));
-    this._form.addControl('subtitle', new FormControl(null, [Validators.required, CustomValidators.allblank]));
-    this._form.addControl('id_tags', new FormControl(null, [Validators.required]));
-    this._form.addControl('content', new FormControl(null, [Validators.required]));
+    this._form.addControl('title', new FormControl(this.fillForm(), [Validators.required, CustomValidators.allblank]));
+    this._form.addControl('subtitle', new FormControl(this.fillForm(), [Validators.required, CustomValidators.allblank]));
+    this._form.addControl('id_tags', new FormControl(this.fillForm(), [Validators.required]));
+    this._form.addControl('content', new FormControl(this.fillForm(), [Validators.required]));
     this._form.addControl('typeSurveyContent', new FormControl(false));
     this.setInitControlsPadding();
+  }
+
+  public fillForm(): any {
+    if(this.route.snapshot.params['id']) {
+      // Do the request details with id param
+      console.log('this.route.snapshot.params: ', this.route.snapshot.params['id']);
+    }
+    return null;
   }
 
   confirmRemoveContent() {// chamar popup de confirmação passando dinamicamente a mensagem de pergunta e as opções.

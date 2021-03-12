@@ -11,9 +11,13 @@ const routes: Routes = [
         component: ListIssueComponent,
     },
     {
-        path: 'add', // rota/:param
+        path: 'add/:id', // rota/:param
         component: AddIssueComponent,
-    }
+    },
+    // {
+    //     path: 'details/:id', // rota/:param
+    //     component: DetailsIssueComponent,
+    // },
 ];
 
 @NgModule({

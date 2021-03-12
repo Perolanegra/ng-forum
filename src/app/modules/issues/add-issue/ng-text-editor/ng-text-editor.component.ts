@@ -90,4 +90,8 @@ export class NgRichTextEditorComponent extends NgDialogDefault implements OnInit
     this.close();
   }
 
+  public fillForm() {
+    throw new Error("Method not implemented.");
+  }
+
 }

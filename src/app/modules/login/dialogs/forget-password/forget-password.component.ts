@@ -72,4 +72,7 @@ export class ForgetPasswordComponent extends NgDialogDefault implements OnInit, 
     throw new Error("Method not implemented.");
   }
 
+  public fillForm() {
+    throw new Error("Method not implemented.");
+  }
 }

@@ -88,4 +88,8 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
     });
   }
 
+  public fillForm() {
+    throw new Error("Method not implemented.");
+  }
+
 }

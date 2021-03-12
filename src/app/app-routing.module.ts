@@ -46,6 +46,16 @@ const routes: Routes = [
       import("./modules/configs/configs.module").then((m) => m.ConfigsModule),
     canActivate: [NoAuthGuard],
   },
+  // {
+  //   path: "not-found",
+  //   loadChildren: () =>
+  //     import("./modules/not-found/not-found.module").then((m) => m.NotFoundModule),
+  //   canActivate: [NoAuthGuard],
+  // },
+  // {
+  //   path: "**",
+  //   redirectTo: '/not-found'
+  // },
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes, {

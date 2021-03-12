@@ -20,6 +20,7 @@ import { UserModel } from 'src/app/models/user.model';
 import { IssueTagActions } from 'src/app/state/issue-tag/issue-tag.actions';
 import { IssueTagState } from 'src/app/state/issue-tag/issue-tag.state';
 import { ActivatedRoute } from '@angular/router';
+import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate.guard';
 
 @Component({
   selector: 'ng-add-issue',
@@ -31,8 +32,7 @@ import { ActivatedRoute } from '@angular/router';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
-  
+export class AddIssueComponent extends NgForm implements OnInit, OnDestroy, CanComponentDeactivate {
 
   @Select(AuthState.userDetails) user$: Observable<UserModel>;
   @Select(IssueTagState.tags) tags$: Observable<any>;
@@ -58,6 +58,11 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {
     super(formBuilder, appController, false);
+  }
+
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    // lógica pra ele sair do component caso ele clique errado e faça uma navegação.
+    return true;
   }
 
   ngOnInit(): void {

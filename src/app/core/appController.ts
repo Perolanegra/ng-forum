@@ -168,6 +168,19 @@ export class AppController {
       .finally(() => this.spinner.hide());
   }
 
+  /**
+   * @author igor.alves
+   * @param path Recebe uma string como parâmetro que faz referência a rota a ser navegada.
+   * @param params Array de parametros a serem expostos na URL que são obtidos nos resolvers se implementado.
+   * @description Retorna para uma nova rota de navegação.
+   */
+   public navigateWithParams(path: string, params?: any[]) {
+    this.router
+      .navigate(["/" + path, ...params])
+      .catch((error) => console.log("error: ", error))
+      .finally(() => this.spinner.hide());
+  }
+
   public hideSpinner() {
     this.spinner.hide();
   }

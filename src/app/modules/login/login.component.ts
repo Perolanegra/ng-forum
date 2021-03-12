@@ -97,7 +97,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
       this.store.dispatch(new AuthActions.Signin(username, encrypted)).subscribe((state: any) => {
         if (state.auth.token) {
           this.appController.setMenuActiveLink("issues");
-          this.appController.navigate("issues");
+          this.appController.navigateWithParams("issues", [15]);
         }
       })
       this._form.reset();

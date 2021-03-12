@@ -3,7 +3,7 @@ import { IssuesModel } from "../../../models/issues.model";
 import { AppController } from "src/app/core/appController";
 import { IssuesService } from "../issues.service";
 import { Observable } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Data } from "@angular/router";
 import { NgTags } from "src/app/shared/components/ng-tags/ng-tags";
 import { NgDefaultList } from "src/app/core/pattern/ng-default-list";
 
@@ -15,7 +15,8 @@ import { NgDefaultList } from "src/app/core/pattern/ng-default-list";
 export class ListIssueComponent extends NgDefaultList implements OnInit {
   constructor(
     public appController: AppController,
-    protected service: IssuesService
+    protected service: IssuesService,
+    private route: ActivatedRoute
   ) {
     super({
       columnsTable: ["issues", "post", "stars", "views", "info"],
@@ -50,7 +51,11 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
   public data: Observable<IssuesModel[]>;
 
   ngOnInit() {
-    this.data = this.service.getWithPagination(15);
+    this.route.data
+    .subscribe((data: Data) => {
+      this.data = data['issues'];
+    });
+    // this.data = this.service.getWithPagination(15);
   }
 
   getTagsHTML(tags: string, colors: string): string | undefined {

@@ -1,44 +1,49 @@
-import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError, finalize } from 'rxjs/operators';
-import { AppController } from './appController';
-import { AuthState } from '../state/auth/auth.state';
-import { ToastComponent } from '../shared/components/toast/toast.component';
+import { Injectable } from "@angular/core";
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpHeaders,
+} from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { map, catchError, finalize } from "rxjs/operators";
+import { AppController } from "./appController";
+import { AuthState } from "../state/auth/auth.state";
+import { ToastComponent } from "../shared/components/toast/toast.component";
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
+  constructor(
+    private appController: AppController,
+    private authState: AuthState
+  ) {}
 
-  constructor(private appController: AppController, private authState: AuthState) { }
-
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     this.appController.showSpinner();
     req = req.clone();
-
+    
     if (this.authState.snapshot.token) {
       let headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Headers': '*',
-        'Access-Control-Allow-Origin': '*',
-        'Authorization': `Bearer ${this.authState.snapshot.token}`
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${this.authState.snapshot.token}`,
       });
       req = req.clone({ headers: headers });
     }
 
     return next.handle(req).pipe(
       map((event: HttpEvent<any>) => event),
-      catchError((error) => {
-        // setar interceptors específicos caso haja request para api externa.
-        // TODO: tratar erro 429
-        // if (error.status === 401 && !type) {
-        //   console.log('ok putassss'); // testar quando for uma request de sessao expirada p ver se da certo.
-        //   this._store.dispatch(new AuthActions.RemoveAccess());
-        // }
-        
-        this.appController.showToastPopUp(error.error, ToastComponent);
-
+      catchError((err) => {
+        const error = this.appController.handleError(err);
+        this.appController.showToastPopUp(error, ToastComponent);
         return throwError(error);
-      }), finalize(() => this.appController.hideSpinner()));
+      }),
+      finalize(() => this.appController.hideSpinner())
+    );
   }
-
 }

@@ -45,9 +45,6 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.responseSubscription$
-    //   ? this.responseSubscription$.unsubscribe()
-    //   : null;
     this.hasResetPassSubscription$
       ? this.hasResetPassSubscription$.unsubscribe()
       : null;

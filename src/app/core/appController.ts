@@ -15,13 +15,14 @@ import { Store, Select } from "@ngxs/store";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ComponentType } from "@angular/cdk/portal";
 import { AppActions } from "../state/app/app.actions";
-import { Constants } from './pattern/constants';
+import { Constants } from "./pattern/constants";
+import { AuthActions } from "../state/auth/auth.actions";
+import { RoutesModel } from '../models/routes.model';
 
 @Injectable()
 export class AppController {
   @Select((state) => state.app.hasMobileMatches)
   hasMobileMatches$: Observable<any>;
-  msg
   private renderer: Renderer2;
   private imgRenderer: BehaviorSubject<String> = new BehaviorSubject(null);
 
@@ -42,13 +43,28 @@ export class AppController {
   public getMobileMatches(): Promise<any | undefined> {
     return new Promise((resolve, reject) => {
       this.hasMobileMatches$.subscribe((state) => {
-        if(state) resolve(state);
+        if (state) resolve(state);
       });
     });
   }
 
-  handleError(err): void {
-    this.exibirErro(err);
+  handleError(err): JSON {
+    let payloadError;
+    payloadError = err.error;
+
+    if (err.status === 0) {
+      payloadError = {
+        style: { posTop: "5vh" },
+        title: "Fora de uso",
+        message: "O Servidor está offline.",
+        type: "error",
+      };
+    } else if (err.status === 401) {
+      this._store.dispatch(new AuthActions.RemoveAccess());
+      this._store.dispatch(new AppActions.RemoveRouteState());
+    }
+
+    return payloadError;
   }
 
   showToastPopUp(
@@ -61,28 +77,17 @@ export class AppController {
       data: payload,
       hasBackdrop: true,
       disableClose: true,
-      position: payload.style ? {
-        top: payload.style.posTop ? payload.style.posTop : "",
-        bottom: payload.style.posBottom ? payload.style.posBottom : "",
-        left: payload.style.posLeft ? payload.style.posLeft : "",
-        right: payload.style.posRight ? payload.style.posRight : "",
-      } : null,
+      position: payload.style
+        ? {
+            top: payload.style.posTop ? payload.style.posTop : "",
+            bottom: payload.style.posBottom ? payload.style.posBottom : "",
+            left: payload.style.posLeft ? payload.style.posLeft : "",
+            right: payload.style.posRight ? payload.style.posRight : "",
+          }
+        : null,
     });
 
     return dialogRef;
-  }
-
-  // exibirSucesso(msg: string) {
-  //     setTimeout(() => this.toastr.success(msg, ''));
-  // }
-
-  exibirErro(msg: string) {
-    // this.toastr.error(msg, '', {
-    //     progressAnimation: 'decreasing',
-    //     progressBar: true,
-    //     closeButton: true,
-    //     tapToDismiss: true,
-    // });
   }
 
   orderBy(records: Array<any>, atributos: string[], direction: string): any {
@@ -162,7 +167,7 @@ export class AppController {
    * @param path Recebe uma string como parâmetro que faz referência a rota a ser navegada.
    * @description Retorna para uma nova rota de navegação.
    */
-  public navigate(path: string) {
+  public navigate(path: string): void {
     this.router
       .navigate(["/" + path])
       .catch((error) => console.log("error: ", error))
@@ -175,7 +180,7 @@ export class AppController {
    * @param params Array de parametros a serem expostos na URL que são obtidos nos resolvers se implementado.
    * @description Retorna para uma nova rota de navegação.
    */
-   public navigateWithParams(path: string, params: any[]) {
+  public navigateWithParams(path: string, params: any[]): void {
     this.router
       .navigate(["/" + path, ...params])
       .catch((error) => console.log("error: ", error))
@@ -284,7 +289,8 @@ export class AppController {
     return lObjRetorno;
   }
 
-  fillerNavs() { // TODO: ajustar os paths e criar as rotas restantes
+  fillerNavs(): Array<RoutesModel> {
+    // TODO: ajustar os paths e criar as rotas restantes
     return [
       {
         name: "Início",
@@ -432,7 +438,7 @@ export class AppController {
     window.dispatchEvent(event);
   }
 
-  public countStars(data: any): string {
+  public countStars(data: { stars: number, pplVoted: number }): string {
     const svg: HTMLElement = document.createElement("svg");
     svg.innerHTML = `
       <svg width="15" height="15" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">

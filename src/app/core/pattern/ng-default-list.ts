@@ -3,26 +3,36 @@ import { ActivatedRoute, Data } from '@angular/router';
 
 export abstract class NgDefaultList {
   public columnsConfig: ColumnsTableModel[] = [];
-  public dataTable: any;
+  public data: any;
 
   constructor(protected route: ActivatedRoute, payload?: any) {
-    this.checkPayload(payload);
+    this.checkPayloadColumnsConfig(payload);
   }
 
-  private checkPayload(payload: any): void {
+  private checkPayloadColumnsConfig(payload: any): void {
     if (payload && payload.columnsTable !== undefined && payload.columnsTable.length) {
       this.setColumnsConig(payload);
     }
   }
 
-  setDataTableResolver(resolverParam: string): void {
+  setDataResolver(resolverParam: string): void {
     this.route.data
     .subscribe((data: Data) => {
-      this.dataTable = data[resolverParam];
+      this.data = data[resolverParam];
     });
   }
 
-  private setColumnsConig(payload: { columnsTable: string[]; classes: any }) {
+  /**
+   * 
+   * @param payload param objeto que contém duas propriedades, sendo a 1ª 
+   * columnsTable, que é um array de string dos nomes das colunas, em ordem, e a 2ª
+   * classes: que é o objeto que representa a classe aplicada em cada coluna, seguindo a
+   * respectiva estrutura de dados: { nome_da_coluna1: ['classe1', 'classe2'], nome_da_coluna2: ['classe1'] }...
+   * @description tem como objetivo montar o array de objetos columnsConfig referente ao model ColumnsTableModel.
+   * @author igor.silva
+   * @returns void
+   */
+  private setColumnsConig(payload: { columnsTable: string[]; classes: any }): void {
     const { columnsTable, classes } = payload;
     columnsTable.forEach((column: string, index: number) => {
       this.columnsConfig.push({

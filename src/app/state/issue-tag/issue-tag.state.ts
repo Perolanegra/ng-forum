@@ -9,6 +9,7 @@ import { IssueTagService } from 'src/app/shared/services/issue-tag.service';
     defaults: {
         id: null,
         value: null,
+        color: null
     }
 })
 
@@ -23,7 +24,7 @@ export class IssueTagState {
     }
 
     @Action(IssueTagActions.List)
-    async getTags({ getState, setState }: StateContext<IssueTagModel>, { }: IssueTagActions.List) {
+    async getTags({ setState }: StateContext<IssueTagModel>, { }: IssueTagActions.List) {
         const response: any = await this.issueTagService.list().toPromise();
         setState(response);
     }

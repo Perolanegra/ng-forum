@@ -7,7 +7,7 @@ import {
 } from "@angular/router";
 import { Observable } from "rxjs";
 import { AuthService } from "src/app/core/auth.service";
-import { Store, Select } from "@ngxs/store";
+import { Store } from "@ngxs/store";
 import { AuthActions } from "src/app/state/auth/auth.actions";
 import { AppController } from "src/app/core/appController";
 import { ToastComponent } from "../components/toast/toast.component";

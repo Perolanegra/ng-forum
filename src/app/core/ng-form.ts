@@ -156,7 +156,6 @@ export abstract class NgForm extends NgDefault {
   submit(hasSpinner: boolean = false): void {
     // centralizar no NgDialogDefault
     if (this.isValidForm()) {
-      hasSpinner ? this.spinner.show() : null;
       this.submittedValid();
     }
   }
@@ -284,11 +283,14 @@ export abstract class NgForm extends NgDefault {
    * @param errorValidation Parâmetro que determina qual a validação para construção do array.
    * Ex: M para validações de mensagem, T para validações de Types.
    */
-  setErrorsValidation(arrIndex: Array<number>,errorValidation: string): string[] {
+  setErrorsValidation(
+    arrIndex: Array<number>,
+    errorValidation: string
+  ): string[] {
     try {
       const typeOrMsg = {
-        'm': this.getErrorMessages,
-        't': this.getErrorTypes,
+        m: this.getErrorMessages,
+        t: this.getErrorTypes,
       };
 
       if (!typeOrMsg[errorValidation.toLowerCase()]) {

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { IssuesModel } from "../../../models/issues.model";
 import { AppController } from "src/app/core/appController";
 import { IssuesService } from "../issues.service";
-import { ActivatedRoute, Data } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { NgTags } from "src/app/shared/components/ng-tags/ng-tags";
 import { NgDefaultList } from "src/app/core/pattern/ng-default-list";
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
@@ -51,7 +51,7 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
   };
 
   ngOnInit() {
-    this.dataTable = this.service.getWithPagination(+this.pagination);
+    this.data = this.service.getWithPagination(+this.pagination);
   }
 
   getTagsHTML(tags: string, colors: string): string | undefined {

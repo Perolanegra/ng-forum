@@ -3,7 +3,7 @@ import { AppController } from 'src/app/core/appController';
 import { NgRichTextEditorComponent } from './ng-text-editor/ng-text-editor.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgForm } from 'src/app/core/ng-form';
-import { trigger, state, style } from '@angular/animations';
+import { trigger } from '@angular/animations';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { AddSurveyDialogComponent } from './add-survey-dialog/add-survey-dialog.component';
@@ -46,10 +46,6 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy, CanC
   protected contentAfterClosedSubscription$: Subscription;
   protected removeContentSubscription$: Subscription;
   protected formValueChangesSubscription$: Subscription;
-
-  public getResponse() {
-    throw new Error("Method not implemented.");
-  }
 
   constructor(protected appController: AppController,
     protected formBuilder: FormBuilder,
@@ -128,10 +124,10 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy, CanC
   }
 
   setForm(): void {
-    this._form.addControl('title', new FormControl(this.fillForm(), [Validators.required, CustomValidators.allblank]));
-    this._form.addControl('subtitle', new FormControl(this.fillForm(), [Validators.required, CustomValidators.allblank]));
-    this._form.addControl('id_tags', new FormControl(this.fillForm(), [Validators.required]));
-    this._form.addControl('content', new FormControl(this.fillForm(), [Validators.required]));
+    this._form.addControl('title', new FormControl(null, [Validators.required, CustomValidators.allblank]));
+    this._form.addControl('subtitle', new FormControl(null, [Validators.required, CustomValidators.allblank]));
+    this._form.addControl('id_tags', new FormControl(null, [Validators.required]));
+    this._form.addControl('content', new FormControl(null, [Validators.required]));
     this._form.addControl('typeSurveyContent', new FormControl(false));
     this.setInitControlsPadding();
   }
@@ -165,6 +161,10 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy, CanC
     if(!array.length) {
       // exibir toast que não foi possível carregar as tags
     }
+  }
+
+  public getResponse() {
+    throw new Error("Method not implemented.");
   }
 
 }

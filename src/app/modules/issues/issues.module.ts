@@ -15,6 +15,7 @@ import { IssueState } from '../../state/issue/issue.state';
 import { IssuesService } from './issues.service';
 import { IssueTagState } from '../../state/issue-tag/issue-tag.state';
 import { IssueTagService } from '../../shared/services/issue-tag.service';
+import { DetailsIssueComponent } from './details-issue/details-issue.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { IssueTagService } from '../../shared/services/issue-tag.service';
     AddIssueComponent,
     ListIssueComponent,
     AddSurveyDialogComponent,
+    DetailsIssueComponent,
   ],
   imports: [
     CommonModule,

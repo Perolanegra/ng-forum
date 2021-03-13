@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AddIssueComponent } from './add-issue/add-issue.component';
 import { ListIssueComponent } from './list-issue/list-issue.component';
 import { CanDeactivateGuard } from '../../shared/guards/can-deactivate.guard';
+import { DetailsIssueComponent } from './details-issue/details-issue.component';
 
 
 const routes: Routes = [
@@ -17,10 +18,13 @@ const routes: Routes = [
         component: AddIssueComponent,
         canDeactivate: [CanDeactivateGuard]
     },
-    // {
-    //     path: 'details/:id', // rota/:param
-    //     component: DetailsIssueComponent,
-    // },
+    {
+        path: 'details/:id', // rota/:param
+        component: DetailsIssueComponent,
+        // resolve: {
+
+        // }
+    },
 ];
 
 @NgModule({
@@ -28,6 +32,7 @@ const routes: Routes = [
     exports: [RouterModule],
     providers: [
         // resolvers
+        CanDeactivateGuard
     ]
 })
 export class IssuesRoutingModule { }

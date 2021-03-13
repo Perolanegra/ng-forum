@@ -68,7 +68,7 @@
                                 </div>
 
                             </div>
-
+<!-- 
                             <mat-form-field *ngIf="(tags$ | async) as tags" appearance="outline" id="tagField" class="fade-transition-in font"
                                 [style.padding-bottom]="styleFormFieldObject?.id_tags?.paddingBottom" (click)="onTagClick(tags)"
                                 [ngClass]="[ (stateIconAddSurvey === 'enabled' || stateIconAddContent === 'enabled') ? '' : 'disabled' ]">
@@ -78,14 +78,13 @@
                                     <mat-option *ngFor="let tag of tags as Array" [value]="tag?.id">{{tag?.value}}
                                     </mat-option>
                                 </mat-select>
-
                                 <mat-error>
                                     <ng-input-error (indexLastErrorField)="setPadding($event);"
                                         [control]="_form.controls?.id_tags" [controlName]="'id_tags'"
                                         [errorMsgs]="errorMsgs?.id_tags">
                                     </ng-input-error>
                                 </mat-error>
-                            </mat-form-field>
+                            </mat-form-field> -->
                         </div>
 
                         <button style="margin-top: 0.2rem;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"

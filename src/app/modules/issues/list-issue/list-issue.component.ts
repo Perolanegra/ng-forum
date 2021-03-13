@@ -1,11 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { IssuesModel } from "../../../models/issues.model";
 import { AppController } from "src/app/core/appController";
 import { IssuesService } from "../issues.service";
-import { Observable } from "rxjs";
 import { ActivatedRoute, Data } from "@angular/router";
 import { NgTags } from "src/app/shared/components/ng-tags/ng-tags";
 import { NgDefaultList } from "src/app/core/pattern/ng-default-list";
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
+import { AppState } from 'src/app/state/app/app.state';
 
 @Component({
   selector: "ng-list-issue",
@@ -13,12 +14,13 @@ import { NgDefaultList } from "src/app/core/pattern/ng-default-list";
   styleUrls: ["./list-issue.component.scss"],
 })
 export class ListIssueComponent extends NgDefaultList implements OnInit {
+  @SelectSnapshot(AppState.pagination) pagination: number | string;
   constructor(
     public appController: AppController,
     protected service: IssuesService,
-    private route: ActivatedRoute
+    protected route: ActivatedRoute
   ) {
-    super({
+    super(route, {
       columnsTable: ["issues", "post", "stars", "views", "info"],
       classes: {
         issues: ["make-gold"],
@@ -48,14 +50,8 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
     opacity: "0.7",
   };
 
-  public data: Observable<IssuesModel[]>;
-
   ngOnInit() {
-    this.route.data
-    .subscribe((data: Data) => {
-      this.data = data['issues'];
-    });
-    // this.data = this.service.getWithPagination(15);
+    this.dataTable = this.service.getWithPagination(+this.pagination);
   }
 
   getTagsHTML(tags: string, colors: string): string | undefined {
@@ -84,7 +80,9 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
           </div>`,
       3: `<div class="iss-content iss-content-row">
             <span class="iss-stars-out">${
-              col === 3 ? this.appController.countStars(data as IssuesModel) : ""
+              col === 3
+                ? this.appController.countStars(data as IssuesModel)
+                : ""
             }</span>
             <span class="iss-stars-average">${(
               data.stars / data.pplVoted
@@ -116,8 +114,6 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
 
     return obj[col] || undefined;
   }
-
-  
 
   public onPaginate(pagination: number) {
     console.log("pagination: ", pagination);

@@ -3,17 +3,13 @@ import { NgModule } from '@angular/core';
 import { AddIssueComponent } from './add-issue/add-issue.component';
 import { ListIssueComponent } from './list-issue/list-issue.component';
 import { CanDeactivateGuard } from '../../shared/guards/can-deactivate.guard';
-import { ListIssuesResolver } from './resolvers/list-issues.resolver';
 
 
 const routes: Routes = [
-    { path: ':pagination', redirectTo: 'list/:pagination', pathMatch: 'full' },
+    { path: '', redirectTo: 'list', pathMatch: 'full' },
     {
-        path: 'list/:pagination', // rota/:param
+        path: 'list', // rota/:param
         component: ListIssueComponent,
-        resolve: {
-            issues: ListIssuesResolver
-        },
         
     },
     {
@@ -32,7 +28,6 @@ const routes: Routes = [
     exports: [RouterModule],
     providers: [
         // resolvers
-        ListIssuesResolver
     ]
 })
 export class IssuesRoutingModule { }

@@ -5,13 +5,15 @@ import { AppActions } from './app.actions';
 export class AppStateModel {
     hasMobileMatches: boolean;
     routes: any;
+    pagination: number | string;
 }
 
 @State<AppStateModel>({
     name: 'app',
     defaults: {
         hasMobileMatches: null,
-        routes: null
+        routes: null,
+        pagination: 15
     }
 })
 
@@ -28,6 +30,11 @@ export class AppState {
     @Selector()
     static routes(state: AppStateModel): Object {
         return state.routes;
+    }
+
+    @Selector()
+    static pagination(state: AppStateModel): number | string {
+        return state.pagination;
     }
 
 
@@ -48,6 +55,11 @@ export class AppState {
             ...state,
             routes: null
         });
+    }
+
+    @Action(AppActions.SetPagination)
+    setPaginationState({ patchState }: StateContext<AppStateModel>, { pagination }: AppActions.SetPagination) {
+        patchState({ pagination });
     }
 
 }

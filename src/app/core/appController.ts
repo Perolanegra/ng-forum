@@ -15,6 +15,7 @@ import { Store, Select } from "@ngxs/store";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ComponentType } from "@angular/cdk/portal";
 import { AppActions } from "../state/app/app.actions";
+import { Constants } from './pattern/constants';
 
 @Injectable()
 export class AppController {
@@ -174,15 +175,19 @@ export class AppController {
    * @param params Array de parametros a serem expostos na URL que são obtidos nos resolvers se implementado.
    * @description Retorna para uma nova rota de navegação.
    */
-   public navigateWithParams(path: string, params?: any[]) {
+   public navigateWithParams(path: string, params: any[]) {
     this.router
       .navigate(["/" + path, ...params])
       .catch((error) => console.log("error: ", error))
       .finally(() => this.spinner.hide());
   }
 
-  public hideSpinner() {
+  public hideSpinner(): void {
     this.spinner.hide();
+  }
+
+  public showSpinner(): void {
+    this.spinner.show();
   }
 
   /**
@@ -284,23 +289,23 @@ export class AppController {
       {
         name: "Início",
         isActive: false,
-        imgName: "home.png",
+        imgName: Constants.defaultPattern.imgs.homeIssues,
         path: "issues",
-        img: this.getImg("home.png"),
+        img: this.getImg(Constants.defaultPattern.imgs.homeIssues),
       },
       {
         name: "Meus Issues",
         isActive: false,
-        imgName: "my-issues.png",
+        imgName: Constants.defaultPattern.imgs.myIssues,
         path: "profile",
-        img: this.getImg("my-issues.png"),
+        img: this.getImg(Constants.defaultPattern.imgs.myIssues),
       },
       {
         name: "Configurações",
         isActive: false,
-        imgName: "configs.svg",
+        imgName: Constants.defaultPattern.imgs.configs,
         path: "home",
-        img: this.getImg("configs.svg"),
+        img: this.getImg(Constants.defaultPattern.imgs.configs),
       },
     ];
   }

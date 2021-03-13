@@ -25,6 +25,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   @Select(AuthState.hasResetPass) hasResetPass$: Observable<boolean>;
+
   public hasResetPassSubscription$: Subscription;
 
   constructor(
@@ -97,7 +98,7 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
       this.store.dispatch(new AuthActions.Signin(username, encrypted)).subscribe((state: any) => {
         if (state.auth.token) {
           this.appController.setMenuActiveLink("issues");
-          this.appController.navigateWithParams("issues", [15]);
+          this.appController.navigate("issues");
         }
       })
       this._form.reset();

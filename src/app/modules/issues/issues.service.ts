@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { IssuesModel } from '../../models/issues.model';
 import { AddPollIssueModel } from 'src/app/models/add-poll-issue.model';
 import { AddContextIssueModel } from 'src/app/models/add-context-issue.model';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class IssuesService {

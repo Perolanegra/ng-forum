@@ -2,7 +2,7 @@
   <ng-table
     [columnsConfig]="columnsConfig"
     [hasOptionsBtn]="false"
-    [data]="data | async"
+    [data]="dataTable | async"
     direction="asc"
     (paginateRequest)="onPaginate($event)"
     [tagColors]="tagColorMock"

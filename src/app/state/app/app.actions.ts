@@ -14,5 +14,10 @@ export namespace AppActions {
         static readonly type = '[App] Remove Route State';
     }
 
+    export class SetPagination {
+        constructor(public pagination: number | string) { }
+        static readonly type = '[App] Set Pagination State';
+    }
+
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, HostListener } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { NgDialogDefault } from 'src/app/core/ng-dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -62,6 +62,10 @@ export class ForgetPasswordComponent extends NgDialogDefault implements OnInit, 
       this.getResponse();
       setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
     }
+  }
+  
+  @HostListener('window:keyup.esc') exitByESC(): void {
+    this.close();
   }
 
   public setErrorValidation() {

@@ -47,9 +47,9 @@ export class ResetPasswordComponent extends NgForm implements OnInit, OnDestroy 
   }
 
   ngOnDestroy() {
-    this.responseSubscription$ ?? this.responseSubscription$.unsubscribe();
-    this.stateMobileMatchesSubscription$ ?? this.stateMobileMatchesSubscription$.unsubscribe();
-    this.tokenSubscription$ ?? this.tokenSubscription$.unsubscribe();
+    if (this.responseSubscription$) this.responseSubscription$.unsubscribe();
+    if (this.stateMobileMatchesSubscription$) this.stateMobileMatchesSubscription$.unsubscribe();
+    if (this.tokenSubscription$) this.tokenSubscription$.unsubscribe();
     this.store.dispatch(new AuthActions.SetResetedPassword(true));
   }
 

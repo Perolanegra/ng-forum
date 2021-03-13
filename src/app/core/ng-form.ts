@@ -181,7 +181,7 @@ export abstract class NgForm extends NgDefault {
         : (this.styleFormFieldObject[response.controlName].paddingBottom =
             "0%");
     } else {
-      const basePadding = padding ? Number(padding) : 1; // base é 1.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
+      const basePadding = padding ? Number(padding) : 1.5; // base é 1.5% qd tiver 2 elementos de erro, a cada mais 1 elemento, auemnta 2.5%.
       const resultPadding = basePadding * response.index;
       control
         ? (this.styleFormFieldObject[response.controlName][

@@ -11,7 +11,7 @@
                     <input matInput class="font" autocomplete='off' formControlName="username" maxlength="35" minlength="2"
                         type="text" required ngAutofillOff>
                     <mat-error>
-                        <ng-input-error (indexLastErrorField)="setPadding($event);" [control]="_form.controls?.username"
+                        <ng-input-error (indexLastErrorField)="setPadding($event, '1.7');" [control]="_form.controls?.username"
                             [controlName]="'username'" [errorMsgs]="errorMsgs?.username">
                         </ng-input-error>
                     </mat-error>
@@ -28,7 +28,7 @@
                     </mat-icon-button>
                     <mat-hint class="primary-color" align="end">{{input.value?.length || 0}} / 8</mat-hint>
                     <mat-error>
-                        <ng-input-error (indexLastErrorField)="setPadding($event);" [control]="_form.controls?.password"
+                        <ng-input-error (indexLastErrorField)="setPadding($event, '0.2');" [control]="_form.controls?.password"
                             [controlName]="'password'" [errorMsgs]="errorMsgs?.password">
                         </ng-input-error>
                     </mat-error>

@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { AppController } from "../../core/appController";
 import { MainNavStyle } from "./main-nav.style";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { AppState } from "src/app/state/app/app.state";
 import { Constants } from "../../core/pattern/constants";
 import { NgDefault } from "src/app/core/pattern/ng-default";
@@ -31,8 +31,9 @@ export class MainNavComponent extends NgDefault implements OnInit {
     public router: Router,
     private mainNavStyle: MainNavStyle,
     public appController: AppController,
+    protected route: ActivatedRoute,
   ) {
-    super(appController);
+    super(appController, route);
   }
 
   ngOnInit(): void {

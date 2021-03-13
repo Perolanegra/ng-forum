@@ -45,8 +45,8 @@
                                     <button style="margin-top: 0.2rem;" mat-raised-button
                                         [ngClass]="[ _form?.value?.typeSurveyContent ? 'disabled' : 'enabled' ]"
                                         (click)="$event.preventDefault();addContent('1');"
-                                        class="btn-submit box-btn-inside"
-                                        cdkFocusInitial>{{ stateIconAddContent === 'enabled' ? 'Editar' : 'Adicionar' }}
+                                        class="btn-submit box-btn-inside" cdkFocusInitial>{{ stateIconAddContent ===
+                                        'enabled' ? 'Editar' : 'Adicionar' }}
                                         Conteúdo</button>
                                     <img (click)="confirmRemoveContent()" class="box-img-in"
                                         src="assets/imgs/remove-icon.png" [@removeIconState]="stateIconAddContent">
@@ -61,30 +61,26 @@
                                     <button style="margin-top: 0.2rem;" mat-raised-button
                                         [ngClass]="[ _form?.value?.typeSurveyContent ? 'enabled' : 'disabled' ]"
                                         class="btn-submit box-btn-inside" cdkFocusInitial
-                                        (click)="$event?.preventDefault();addContent('2');">{{ stateIconAddSurvey === 'enabled' ?  'Editar' : 'Adicionar' }}
+                                        (click)="$event?.preventDefault();addContent('2');">{{ stateIconAddSurvey ===
+                                        'enabled' ? 'Editar' : 'Adicionar' }}
                                         Enquete</button>
                                     <img (click)="confirmRemoveContent()" class="box-img-in"
                                         src="assets/imgs/remove-icon.png" [@removeIconState]="stateIconAddSurvey">
                                 </div>
 
                             </div>
-<!-- 
-                            <mat-form-field *ngIf="(tags$ | async) as tags" appearance="outline" id="tagField" class="fade-transition-in font"
-                                [style.padding-bottom]="styleFormFieldObject?.id_tags?.paddingBottom" (click)="onTagClick(tags)"
+
+                            <mat-form-field appearance="outline" id="tagField" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.id_tags?.paddingBottom"
                                 [ngClass]="[ (stateIconAddSurvey === 'enabled' || stateIconAddContent === 'enabled') ? '' : 'disabled' ]">
                                 <mat-label>Tags</mat-label>
                                 <mat-select class="font" multiple matInput formControlName="id_tags" ngAutofillOff
                                     required>
-                                    <mat-option *ngFor="let tag of tags as Array" [value]="tag?.id">{{tag?.value}}
+                                    <mat-option *ngFor="let tag of dataResolved?.tags" [value]="tag?.id">
+                                        {{tag?.value}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error>
-                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
-                                        [control]="_form.controls?.id_tags" [controlName]="'id_tags'"
-                                        [errorMsgs]="errorMsgs?.id_tags">
-                                    </ng-input-error>
-                                </mat-error>
-                            </mat-form-field> -->
+                            </mat-form-field>
                         </div>
 
                         <button style="margin-top: 0.2rem;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"

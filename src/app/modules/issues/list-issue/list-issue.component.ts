@@ -7,6 +7,8 @@ import { NgTags } from "src/app/shared/components/ng-tags/ng-tags";
 import { NgDefaultList } from "src/app/core/pattern/ng-default-list";
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { AppState } from 'src/app/state/app/app.state';
+import { IssueTagActions } from 'src/app/state/issue-tag/issue-tag.actions';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: "ng-list-issue",
@@ -18,9 +20,10 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
   constructor(
     public appController: AppController,
     protected service: IssuesService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    private store: Store
   ) {
-    super(route, {
+    super(route, appController, {
       columnsTable: ["issues", "post", "stars", "views", "info"],
       classes: {
         issues: ["make-gold"],
@@ -52,6 +55,7 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
 
   ngOnInit() {
     this.data = this.service.getWithPagination(+this.pagination);
+    // this.store.dispatch(new IssueTagActions.List()); // por dps q fizer a request de tags
   }
 
   getTagsHTML(tags: string, colors: string): string | undefined {

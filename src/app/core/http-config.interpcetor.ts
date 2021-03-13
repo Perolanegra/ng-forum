@@ -23,7 +23,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.appController.showSpinner();
     req = req.clone();
     
     if (this.authState.snapshot.token) {
@@ -43,7 +42,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         this.appController.showToastPopUp(error, ToastComponent);
         return throwError(error);
       }),
-      finalize(() => this.appController.hideSpinner())
     );
   }
 }

@@ -1,11 +1,12 @@
 import { Component, ChangeDetectorRef, HostListener } from '@angular/core';
 import { AppController } from './core/appController';
-import { Select, Store, Actions, ofActionDispatched } from '@ngxs/store';
+import { Store, Actions, ofActionDispatched } from '@ngxs/store';
 import {  Subscription } from 'rxjs';
 import { AuthActions } from './state/auth/auth.actions';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AppActions } from './state/app/app.actions';
 import { NgDefault } from './core/pattern/ng-default';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,9 +22,10 @@ export class AppComponent extends NgDefault {
     changeDetectorRef: ChangeDetectorRef,
     public media: MediaMatcher,
     private actions: Actions,
-    private store: Store
+    private store: Store,
+    protected route: ActivatedRoute
   ) {
-    super(appController);
+    super(appController, route);
     this.setRoutesLocalStorage();
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');

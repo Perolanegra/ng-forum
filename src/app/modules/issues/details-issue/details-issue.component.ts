@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgDetails } from 'src/app/core/pattern/ng-details';
 import { ActivatedRoute } from '@angular/router';
+import { AppController } from 'src/app/core/appController';
 
 @Component({
   selector: 'app-details-issue',
@@ -8,10 +9,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./details-issue.component.scss']
 })
 export class DetailsIssueComponent extends NgDetails implements OnInit {
-  
 
-  constructor(protected route: ActivatedRoute) { 
-    super(route);
+  constructor(protected route: ActivatedRoute, protected appController: AppController) { 
+    super(route, appController);
   }
 
   ngOnInit(): void {

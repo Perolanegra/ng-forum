@@ -21,6 +21,8 @@ import { IssueTagActions } from 'src/app/state/issue-tag/issue-tag.actions';
 import { IssueTagState } from 'src/app/state/issue-tag/issue-tag.state';
 import { ActivatedRoute } from '@angular/router';
 import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate.guard';
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
+import { IssueTagModel } from 'src/app/models/issue-tag.model';
 
 @Component({
   selector: 'ng-add-issue',
@@ -35,7 +37,6 @@ import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate.gua
 export class AddIssueComponent extends NgForm implements OnInit, OnDestroy, CanComponentDeactivate {
 
   @Select(AuthState.userDetails) user$: Observable<UserModel>;
-  @Select(IssueTagState.tags) tags$: Observable<any>;
 
   public stateBtnSubmit: string = 'disabled';
   public stateIconAddContent: string = 'disabled';
@@ -51,9 +52,9 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy, CanC
     protected formBuilder: FormBuilder,
     private ref: ChangeDetectorRef,
     private store: Store,
-    private route: ActivatedRoute
+    protected route: ActivatedRoute
   ) {
-    super(formBuilder, appController, false);
+    super(formBuilder, appController, false, route);
   }
 
   canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
@@ -62,7 +63,6 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy, CanC
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new IssueTagActions.List());
     this.setForm();
     this.setErrorValidation();
     this.formValueChangesSubscription$ = this._form.valueChanges.pipe().subscribe(formEmitted => {
@@ -155,12 +155,6 @@ export class AddIssueComponent extends NgForm implements OnInit, OnDestroy, CanC
         this.ref.markForCheck();
       }
     });
-  }
-
-  onTagClick(array: Array<any>) {
-    if(!array.length) {
-      // exibir toast que não foi possível carregar as tags
-    }
   }
 
   public getResponse() {

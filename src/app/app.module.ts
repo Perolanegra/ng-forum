@@ -46,7 +46,6 @@ import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
     AppAutofillOffDirective,
     AppNavNameBehaviorDirective,
     ForgetPasswordComponent,
-    TesteComponent,
   ],
   imports: [
     FormsModule,

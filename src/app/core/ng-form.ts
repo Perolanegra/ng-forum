@@ -12,6 +12,7 @@ import { Subscription } from "rxjs";
 import { NgZone } from "@angular/core";
 import { NgFormErrorType } from "./pattern/ng-form-error-type";
 import { NgxSpinnerService } from "ngx-spinner";
+import { ActivatedRoute } from '@angular/router';
 
 export abstract class NgForm extends NgDefault {
   _form: FormGroup;
@@ -32,6 +33,7 @@ export abstract class NgForm extends NgDefault {
     protected formBuilder: FormBuilder,
     protected appController: AppController,
     protected hasKeepRegister: boolean,
+    protected route?: ActivatedRoute,
     protected ngZone?: NgZone,
     protected spinner?: NgxSpinnerService
   ) {

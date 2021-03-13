@@ -2,6 +2,7 @@ import { Subscription, Observable } from "rxjs";
 import { AppController } from "../appController";
 import { AuthState } from "src/app/state/auth/auth.state";
 import { Select } from "@ngxs/store";
+import { ActivatedRoute, Data } from '@angular/router';
 
 export abstract class NgDefault {
   public hasClickSubmit: boolean = false;
@@ -14,6 +15,7 @@ export abstract class NgDefault {
 
   public hasToken;
   public notAuth;
+  
 
   @Select((state) => state.app.hasMobileMatches)
   hasMobileMatches$: Observable<any>;
@@ -21,7 +23,7 @@ export abstract class NgDefault {
   @Select(AuthState.token) token$: Observable<string>;
   @Select(AuthState.notAuth) notAuth$: Observable<string>;
 
-  constructor(protected appController: AppController) {
+  constructor(protected appController: AppController, protected route?: ActivatedRoute) {
     this.logo = this.appController.getImg("logo.png");
     this.appController.getMobileMatches().then((resp) => {
       this.hasMobileMatches = resp;
@@ -44,4 +46,10 @@ export abstract class NgDefault {
     this.token$.subscribe((token) => (this.hasToken = token));
     this.notAuth$.subscribe((notAuth) => (this.notAuth = notAuth));
   }
+
+  get dataResolved(): any {
+    return this.route.snapshot.data;
+  }
+
+  
 }

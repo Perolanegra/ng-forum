@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Inject, Renderer2 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FormBuilder } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';

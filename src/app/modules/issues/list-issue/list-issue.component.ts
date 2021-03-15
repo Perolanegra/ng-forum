@@ -32,8 +32,6 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
     });
   }
 
-  public tagColorMock = "crimson,#22262e,#22262e,#22262e";
-
   public rowSkeletonTheme = {
     height: "70px",
     width: "55vw",
@@ -107,7 +105,7 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
               </div>
             </div>
             <div class="iss-tags">
-             ${this.getTagsHTML(data.tags, this.tagColorMock) // mudar para data.colors e concatenar no back
+             ${this.getTagsHTML(data.tags, data.tag_colors) // mudar para data.colors e concatenar no back
             }
             </div>
           </div>`,

@@ -16,13 +16,14 @@ export class NgTags {
   createTagElement(): string {
     const arrColors = this.colors.split(",");
     const arrTags = this.tags.split(",");
+    
     let innerHTML: string = "";
     arrTags.forEach((tag: string, index: number) => {
       const tagElement = document.createElement("a");
       tagElement.href = "#";
       tagElement.classList.add('tag');
-      tagElement.classList.add(`borderTag${index.toString()}`);
-      tagElement.textContent = tag;
+      tagElement.classList.add(`borderTag${index.toString() + tag.toLowerCase()}`);
+      tagElement.textContent = tag.toLowerCase();
       tagElement.style.background = arrColors[index];
       tagElement.style.borderLeftColor = arrColors[index];
       innerHTML = innerHTML.concat(tagElement.outerHTML);

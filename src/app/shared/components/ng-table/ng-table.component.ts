@@ -129,12 +129,13 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   styleTagBorder(): void {
-    const arrColors = this.tagColors.split(",");
-    arrColors.forEach((color: string, index: number) => {
-      document.styleSheets[0].addRule(
-        `a.tag.borderTag${index}:after`,
-        `border-left-color: ${color};`
-      );
+    this.pageSlice.forEach((data: any) => {
+      (data.tag_colors as string).split(",").forEach((color: string, index: number) => {
+        document.styleSheets[0].addRule(
+          `a.tag.borderTag${index + (data.tags.split(",")[index] as string).toLowerCase()}:after`,
+          `border-left-color: ${color};`
+        );
+      })
     });
   }
 }

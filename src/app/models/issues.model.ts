@@ -11,4 +11,5 @@ export interface IssuesModel {
     created_at: any;
     posts_number: number;
     typeSurveyContent: boolean;
+    tag_colors: string;
 }

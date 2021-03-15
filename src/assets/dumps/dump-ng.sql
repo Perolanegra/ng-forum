@@ -25,16 +25,15 @@ VALUES (null, 1, 'Igor', '071', '993337275', current_timestamp, '', '', 'perolan
 ######
 /**
 ## Execute para inserir dados na tabela tags
-INSERT INTO tags VALUES (NULL, 'bug', current_timestamp(),'', '');
-INSERT INTO tags VALUES (NULL, 'implementation', current_timestamp(),'', '');
-INSERT INTO tags VALUES (NULL, 'created', current_timestamp(),'', '');
-INSERT INTO tags VALUES (NULL, 'closed', current_timestamp(),'', '');
-INSERT INTO tags VALUES (NULL, 'reopen', current_timestamp(),'', '');
-INSERT INTO tags VALUES (NULL, 'error', current_timestamp(),'', '');
-INSERT INTO tags VALUES (NULL, 'resolved', current_timestamp(),'', '');
-INSERT INTO tags VALUES (NULL, 'question', current_timestamp(),'', '');
-INSERT INTO tags VALUES (NULL, 'hot', current_timestamp(),'', '');
-INSERT INTO tags VALUES (NULL, 'deprecated', current_timestamp(),'', '');
+INSERT INTO tags VALUES (NULL, 'BUG', current_timestamp(),'', '', 'crimson');
+INSERT INTO tags VALUES (NULL, 'IMPLEMENTATION', current_timestamp(),'', '', '#22262e');
+INSERT INTO tags VALUES (NULL, 'CLOSED', current_timestamp(),'', '', '#a6a6a6');
+INSERT INTO tags VALUES (NULL, 'REOPEN', current_timestamp(),'', '', '#178ab4');
+INSERT INTO tags VALUES (NULL, 'ERROR', current_timestamp(),'', '', '#ff4444');
+INSERT INTO tags VALUES (NULL, 'RESOLVED', current_timestamp(),'', '', '#00C851');
+INSERT INTO tags VALUES (NULL, 'QUESTION', current_timestamp(),'', '', 'yellow');
+INSERT INTO tags VALUES (NULL, 'HOT', current_timestamp(),'', '', '#cc6633');
+INSERT INTO tags VALUES (NULL, 'DEPRECATED', current_timestamp(),'', '', '#ffbb33');
 ######
 */
 

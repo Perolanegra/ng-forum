@@ -5,6 +5,7 @@ import { ListIssueComponent } from './list-issue/list-issue.component';
 import { CanDeactivateGuard } from '../../shared/guards/can-deactivate.guard';
 import { DetailsIssueComponent } from './details-issue/details-issue.component';
 import { ListIssueTagsResolver } from './resolvers/list-issue-tags.resolver';
+import { DetailsByIdResolver } from './resolvers/details-by-id.resolver';
 
 
 const routes: Routes = [
@@ -25,9 +26,9 @@ const routes: Routes = [
     {
         path: 'details/:id', // rota/:param
         component: DetailsIssueComponent,
-        // resolve: {
-
-        // }
+        resolve: {
+            details: DetailsByIdResolver
+        }
     },
 ];
 
@@ -37,7 +38,8 @@ const routes: Routes = [
     providers: [
         // resolvers
         CanDeactivateGuard,
-        ListIssueTagsResolver
+        ListIssueTagsResolver,
+        DetailsByIdResolver
     ]
 })
 export class IssuesRoutingModule { }

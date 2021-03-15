@@ -22,4 +22,9 @@ export class IssuesService {
         return this.http.post(url, { payload }, {});
     }
 
+    public getDetailsById(id: number): Observable<any | undefined> {
+        const url = `${environment.server}/issues/detail/${id}`;
+        return this.http.get(url, { params: {} }) as Observable<any>;
+    }
+
 }

@@ -81,11 +81,11 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
       3: `<div class="iss-content iss-content-row">
             <span class="iss-stars-out">${
               col === 3
-                ? this.appController.countStars(data as IssuesModel)
+                ? this.appController.countStars({ pplVoted: data.pplVoted, stars: data.stars })
                 : ""
             }</span>
             <span class="iss-stars-average">${(
-              data.stars / data.pplVoted
+              (data.stars || data.pplVoted) ? data.stars / data.pplVoted : 0.00
             ).toFixed(1)}</span>
           </div>`,
       4: `<div class="iss-content iss-content-row">
@@ -107,7 +107,8 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
               </div>
             </div>
             <div class="iss-tags">
-             ${this.getTagsHTML(data.tags, this.tagColorMock)}
+             ${this.getTagsHTML(data.tags, this.tagColorMock) // mudar para data.colors e concatenar no back
+            }
             </div>
           </div>`,
     };

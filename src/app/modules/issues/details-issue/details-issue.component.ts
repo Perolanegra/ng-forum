@@ -16,6 +16,7 @@ export class DetailsIssueComponent extends NgDetails implements OnInit {
 
   ngOnInit(): void {
     this.data = this.dataResolved['details'];
+    console.log('data: ', this.data);
   }
 
   getHtml(payload: any): string {

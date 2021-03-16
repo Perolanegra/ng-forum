@@ -61,4 +61,8 @@ export abstract class NgDefaultList extends NgDefault {
     first.toLocaleUpperCase(locale) + rest.join("");
 
   abstract getHtml(payload: any): string;
+
+  onRowClicked(rowId: number, path: string): void {
+    this.appController.navigateWithParams(path, [rowId]);
+  }
 }

@@ -6,7 +6,7 @@ import {
   HttpEvent,
   HttpHeaders,
 } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import { Observable, throwError, EMPTY } from "rxjs";
 import { map, catchError, finalize } from "rxjs/operators";
 import { AppController } from "./appController";
 import { AuthState } from "../state/auth/auth.state";
@@ -40,7 +40,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
       catchError((err) => {
         const error = this.appController.handleError(err);
         this.appController.showToastPopUp(error, ToastComponent);
-        return throwError(error);
+        return EMPTY;
       }),
     );
   }

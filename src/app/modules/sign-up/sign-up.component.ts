@@ -46,6 +46,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.responseSubscription$ ? this.responseSubscription$.unsubscribe() : null;
     this.stateMobileMatchesSubscription$ ? this.stateMobileMatchesSubscription$.unsubscribe() : null;
+    this.store.dispatch(new AuthActions.RemoveStateSignup());
   }
 
   setErrorValidation(): void { // lembrando que tem que ser na ordem, type - msg
@@ -70,7 +71,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   getResponse() {
     this.responseSubscription$ = this.rSignUpResponse$.subscribe(async (data) => {
       if (data) {
-        this.spinner.hide();
+        this.spinner.hide();        
         this.showToast(data, ToastComponent);
         setTimeout(() => this.appController.navigate('login'), 800);
       }

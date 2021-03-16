@@ -5,6 +5,7 @@
     [data]="data | async"
     direction="asc"
     (paginateRequest)="onPaginate($event)"
+    (rowClicked)="onRowClicked($event, path_details)"
   >
   </ng-table>
 </div>

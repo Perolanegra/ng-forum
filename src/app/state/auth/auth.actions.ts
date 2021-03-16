@@ -9,6 +9,10 @@ export namespace AuthActions {
         constructor(public payload: any) { }
     }
 
+    export class RemoveStateSignup {
+        static readonly type = '[Auth] RemoveStateSignup';
+    }
+
     export class RemoveAccess {
         static readonly type = '[Auth] Signout';
     }

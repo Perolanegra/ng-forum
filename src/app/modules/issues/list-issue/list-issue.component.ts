@@ -7,6 +7,8 @@ import { NgTags } from "src/app/shared/components/ng-tags/ng-tags";
 import { NgDefaultList } from "src/app/core/pattern/ng-default-list";
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { AppState } from 'src/app/state/app/app.state';
+import { Constants } from 'src/app/core/pattern/constants';
+
 
 @Component({
   selector: "ng-list-issue",
@@ -15,13 +17,16 @@ import { AppState } from 'src/app/state/app/app.state';
 })
 export class ListIssueComponent extends NgDefaultList implements OnInit {
   @SelectSnapshot(AppState.pagination) pagination: number | string;
+
+  readonly path_details = Constants.defaultPattern.routesPath.issues.details
+
   constructor(
     public appController: AppController,
     protected service: IssuesService,
     protected route: ActivatedRoute,
   ) {
     super(route, appController, {
-      columnsTable: ["issues", "post", "stars", "views", "info"],
+      columnsTable: ["issues", "posts", "stars", "views", "info"],
       classes: {
         issues: ["make-gold"],
         post: ["post-col"],
@@ -30,6 +35,7 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
         info: ["info-col"],
       },
     });
+    
   }
 
   public rowSkeletonTheme = {

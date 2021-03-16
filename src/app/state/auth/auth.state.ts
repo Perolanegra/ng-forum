@@ -78,6 +78,7 @@ export class AuthState extends NgxsDataRepository<AuthStateModel> {
 
         if (data) {
             const user = await this.authService.getUserByToken(data.access_token).toPromise();
+            
             const state = getState();
             setState({
                 ...state,
@@ -88,7 +89,7 @@ export class AuthState extends NgxsDataRepository<AuthStateModel> {
     }
 
     @Action(AuthActions.Signup)
-    async signUp({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.Signup) {
+    async setStateSignUp({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.Signup) {
 
         const data: any = await this.authService.signUp(payload).toPromise();
 
@@ -99,6 +100,15 @@ export class AuthState extends NgxsDataRepository<AuthStateModel> {
                 signUpResponse: data
             });
         }
+    }
+
+    @Action(AuthActions.RemoveStateSignup)
+    async removeStateSignUp({ getState, setState }: StateContext<AuthStateModel>, { }: AuthActions.RemoveStateSignup) {
+        const state = getState();
+        setState({
+            ...state,
+            signUpResponse: null
+        });
     }
 
     @Action(AuthActions.RemoveAccess)

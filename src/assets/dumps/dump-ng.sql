@@ -37,5 +37,10 @@ INSERT INTO tags VALUES (NULL, 'DEPRECATED', current_timestamp(),'', '', '#ffbb3
 ######
 */
 
+/*
+INSERT INTO roles(`id`,`role`, `description`)
+VALUES (null, 'Administrador', 'Permissão para administrar o sistema');
 
-
+INSERT INTO roles(`id`,`role`, `description`)
+VALUES (null, 'Noob', 'newbie');
+*/

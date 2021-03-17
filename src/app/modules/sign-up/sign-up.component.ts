@@ -39,7 +39,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     this._form.addControl('name', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this._form.addControl('username', new FormControl(null, [Validators.required]));
     this._form.addControl('email', new FormControl(null, [Validators.required, Validators.email]));
-    this._form.addControl('pass', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
+    this._form.addControl('password', new FormControl(null, [Validators.required, CustomValidators.whitespace]));
     this.setInitControlsPadding();
   }
 
@@ -62,7 +62,7 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
     const name_msg = [ ...this.getErrorMessages(0), ...this.getErrorMessages(4), ...this.getErrorMessages(2) ];
     const name_type = [ ...this.getErrorTypes(0), ...this.getErrorTypes(1), ...this.getErrorTypes(2) ];
 
-    this.setErrorMsgs('pass', pass_type, pass_msg);
+    this.setErrorMsgs('password', pass_type, pass_msg);
     this.setErrorMsgs('username', username_type, username_msg);
     this.setErrorMsgs('name', name_type, name_msg);
     this.setErrorMsgs('email', email_type, email_msg);
@@ -71,18 +71,16 @@ export class SignUpComponent extends NgForm implements OnInit, OnDestroy {
   getResponse() {
     this.responseSubscription$ = this.rSignUpResponse$.subscribe(async (data) => {
       if (data) {
-        this.spinner.hide();        
         this.showToast(data, ToastComponent);
         setTimeout(() => this.appController.navigate('login'), 800);
       }
     });
   }
 
-  async submit(): Promise<void> { // centralizar mais dps
+  async submit(): Promise<void> {
     if (this.isValidForm()) {
-      this.spinner.show();
-      const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', this.formControls.pass.value);
-      this.formControls.pass.setValue(encrypted);
+      const encrypted = this.encryptService.set('10610433IA$#@$^@1ERF', this.formControls.password.value);
+      this.formControls.password.setValue(encrypted);
       const payload = this._form.value;
       this.stateSubmitHasChanged();
       this.store.dispatch(new AuthActions.Signup(payload));

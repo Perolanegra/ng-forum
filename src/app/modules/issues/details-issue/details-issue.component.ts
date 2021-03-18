@@ -9,7 +9,6 @@ import { AppController } from 'src/app/core/appController';
   styleUrls: ['./details-issue.component.scss']
 })
 export class DetailsIssueComponent extends NgDetails implements OnInit {
-
   constructor(protected route: ActivatedRoute, protected appController: AppController) { 
     super(route, appController);
   }
@@ -19,6 +18,10 @@ export class DetailsIssueComponent extends NgDetails implements OnInit {
   }
 
   getHtml(payload: any): string {
+    throw new Error("Method not implemented.");
+  }
+
+  add() {
     throw new Error("Method not implemented.");
   }
 

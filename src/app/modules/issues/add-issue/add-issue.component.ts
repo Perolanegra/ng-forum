@@ -17,12 +17,9 @@ import { AddPollIssueModel } from 'src/app/models/add-poll-issue.model';
 import { AddContextIssueModel } from 'src/app/models/add-context-issue.model';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { UserModel } from 'src/app/models/user.model';
-import { IssueTagActions } from 'src/app/state/issue-tag/issue-tag.actions';
-import { IssueTagState } from 'src/app/state/issue-tag/issue-tag.state';
 import { ActivatedRoute } from '@angular/router';
 import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate.guard';
-import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
-import { IssueTagModel } from 'src/app/models/issue-tag.model';
+
 
 @Component({
   selector: 'ng-add-issue',
@@ -35,7 +32,6 @@ import { IssueTagModel } from 'src/app/models/issue-tag.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddIssueComponent extends NgForm implements OnInit, OnDestroy, CanComponentDeactivate {
-
   @Select(AuthState.userDetails) user$: Observable<UserModel>;
 
   public stateBtnSubmit: string = 'disabled';

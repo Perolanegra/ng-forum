@@ -131,4 +131,6 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
     //   }
     // });
   }
+
+  add = () => this.appController.navigate(Constants.defaultPattern.routesPath.issues.add);
 }

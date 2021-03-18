@@ -1,4 +1,4 @@
-<div class="example-container" [class.example-is-mobile]="hasMobileMatches">
+<div class="main-nav-container" [class.example-is-mobile]="hasMobileMatches">
 
   <div #sideMenu ngMenuOver (hasEnterMenu)="onMenuBlur($event)" id="sideMenuContainer"
     [hasMobileMatches]="hasMobileMatches" class="side-menu-init">
@@ -81,8 +81,8 @@
 
 
   <div style="display: flex; justify-content: center; flex-direction: column;">
-    <mat-toolbar class="my-toolbar">
-      <button *ngIf="hasMobileMatches" tabindex="-1" mat-icon-button class="btn-toggle-mobile"
+    <mat-toolbar *ngIf="hasMobileMatches" class="my-toolbar">
+      <button tabindex="-1" mat-icon-button class="btn-toggle-mobile"
         (click)="toggleMenu(sideMenu)">
         <mat-icon>menu</mat-icon>
       </button>

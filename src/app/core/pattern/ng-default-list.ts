@@ -65,4 +65,6 @@ export abstract class NgDefaultList extends NgDefault {
   onRowClicked(rowId: number, path: string): void {
     this.appController.navigateWithParams(path, [rowId]);
   }
+
+  abstract add();
 }

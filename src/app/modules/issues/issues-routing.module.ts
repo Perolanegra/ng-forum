@@ -16,7 +16,7 @@ const routes: Routes = [
         
     },
     {
-        path: 'add/:id', // rota/:param
+        path: 'add', // rota/:param
         component: AddIssueComponent,
         canDeactivate: [CanDeactivateGuard],
         resolve: {

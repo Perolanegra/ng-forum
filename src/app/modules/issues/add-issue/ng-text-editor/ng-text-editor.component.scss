@@ -20,6 +20,10 @@
     cursor: pointer;
 }
 
+::ng-deep div.main-nav-container {
+    z-index: 0;
+}
+
 .toggle-slide {
     position: absolute;
     top: 80%;

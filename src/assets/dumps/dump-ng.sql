@@ -38,6 +38,7 @@ INSERT INTO tags VALUES (NULL, 'DEPRECATED', current_timestamp(),'', '', '#ffbb3
 */
 
 /*
+## Execute para inserir dados na tabela roles
 INSERT INTO roles(`id`,`role`, `description`)
 VALUES (null, 'Administrador', 'Permissão para administrar o sistema');
 

@@ -77,7 +77,7 @@
                                 <mat-select class="font" multiple matInput formControlName="id_tags" ngAutofillOff
                                     required>
                                     <mat-option *ngFor="let tag of dataResolved?.tags" [value]="tag?.id">
-                                        {{tag?.value}}
+                                        {{ tag?.value | lowercase }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>

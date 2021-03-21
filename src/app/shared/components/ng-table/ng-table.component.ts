@@ -78,9 +78,9 @@ export class TableComponent implements OnInit, OnChanges {
 
   getProperty = (obj, property) => (property.split('.').reduce((o, p) => o && o[p], obj));
 
-  //Quando é afetuado um click na linha ele captura a linha e direciona para tela de edição passando o ID da mesma
+  //Quando é afetuado um click na linha ele captura a linha e direciona e emite pro componente pai.
   onRowClicked(row) {
-    this.rowClicked.emit(row.id);
+    this.rowClicked.emit(row);
   }
 
   checkBoxClicked(row) {
@@ -125,6 +125,7 @@ export class TableComponent implements OnInit, OnChanges {
     if (endIndex > this.data.data.length) endIndex = this.data.data.length;
 
     this.pageSlice = this.data.data.slice(startIndex, endIndex);
+    this.styleTagBorder();
   }
 
   styleTagBorder(): void {

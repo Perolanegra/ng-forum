@@ -40,8 +40,39 @@ INSERT INTO tags VALUES (NULL, 'DEPRECATED', '#ffbb33', current_timestamp(),'', 
 /*
 ## Execute para inserir dados na tabela roles
 INSERT INTO roles(`id`,`role`, `description`)
-VALUES (null, 'Administrador', 'Permissão para administrar o sistema');
+VALUES (null, 'Admin', 'Permissão para administrar o sistema');
 
 INSERT INTO roles(`id`,`role`, `description`)
-VALUES (null, 'Noob', 'newbie');
+VALUES (null, 'Noob', "'newbie' kkkkk");
+
+INSERT INTO roles(`id`,`role`, `description`)
+VALUES (null, 'Moderador', "Staff moderação. Gestão da escalabilidade e organização de dados.
+Tais como poder de fechamentos, edições, e bloqueios de visualização de Issues que violem 
+a política do fórum, com base no bem estar de todos.");
+
+INSERT INTO roles(`id`,`role`, `description`)
+VALUES (null, 'Membro', "Membro Comum");
+
+INSERT INTO roles(`id`,`role`, `description`)
+VALUES (null, 'Membro Antigo', "Issues e posts são vistos com mais frequência.");
+
+INSERT INTO roles(`id`,`role`, `description`)
+VALUES (null, 'Criador', 'Posts mais vistos. Capacidade de criar roles e permissões,
+dentre outras features. Tags únicas. Maior taxa de recebimento de ngCoins.');
+
+INSERT INTO roles(`id`,`role`, `description`)
+VALUES (null, 'Ancião', "É brother do Moderador, um Anciã(o) inclusive é um pré-mod. É aquele 
+velho(a) postador assíduo, que hoje mais gerencia junto com o seu respectivo mod.");
+
+INSERT INTO roles(`id`,`role`, `description`)
+VALUES (null, 'A Putinha do ADM', "KKKKKKKK FAZ TUDO QUE O ADM MANDAR, MAS PODE TE BANIR KKKKKKKKK");
+*/
+
+/*
+## Execute para inserir dados na tabela titles
+INSERT INTO titles(`id`,`title`, `description`)
+VALUES (null, 'MVP', 'Most Valuable Professional');
+
+INSERT INTO titles(`id`,`title`, `description`)
+VALUES (null, 'GDE', 'Google Developer Expert');
 */

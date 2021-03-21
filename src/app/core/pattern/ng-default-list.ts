@@ -62,8 +62,9 @@ export abstract class NgDefaultList extends NgDefault {
 
   abstract getHtml(payload: any): string;
 
-  onRowClicked(rowId: number, path: string): void {
-    this.appController.navigateWithParams(path, [rowId]);
+  onRowClicked(params: any, path: string): void {
+    const hasPoll = params.typeSurveyContent ? 'poll' : '';
+    this.appController.navigateWithParams(path, [params.id, hasPoll]);
   }
 
   abstract add();

@@ -111,7 +111,7 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
               </div>
             </div>
             <div class="iss-tags">
-             ${this.getTagsHTML(data.tags, data.tag_colors) // mudar para data.colors e concatenar no back
+             ${this.getTagsHTML(data.tags, data.tag_colors)
             }
             </div>
           </div>`,

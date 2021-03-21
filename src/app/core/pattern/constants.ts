@@ -14,6 +14,14 @@ export class Constants {
                 add: 'issues/add',
                 details: 'issues/details/'
             }
+        },
+        nestPath: {
+            issues: {
+                store: 'issues/store',
+                getWithPagination: 'issues/list',
+                getDetailsById: 'issues/detail',
+                getPollDetailById: 'issues/detail/poll'
+            }
         }
     };
 }

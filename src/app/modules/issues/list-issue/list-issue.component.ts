@@ -8,6 +8,7 @@ import { NgDefaultList } from "src/app/core/pattern/ng-default-list";
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { AppState } from 'src/app/state/app/app.state';
 import { Constants } from 'src/app/core/pattern/constants';
+import { NgTooltipEnum } from 'src/app/core/enum/tooltip-position.enum';
 
 
 @Component({
@@ -33,6 +34,9 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
         stars: ["stars-col"],
         views: ["views-col"],
         info: ["info-col"],
+      },
+      tooltip: {
+        issues:{ position: { title: NgTooltipEnum.ACIMA, subtitle: NgTooltipEnum.ACIMA }, classes: [] }
       },
     });
     
@@ -122,7 +126,6 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
 
   public onPaginate(pagination: number) {
     console.log("pagination: ", pagination);
-    // this.store.dispatch(new AppActions.SetRouteState(navs));
 
     // this.issueService.getWithPagination(pagination).subscribe((response: IssuesModel[]) => {
     //   if(response.length) {

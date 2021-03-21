@@ -2,9 +2,8 @@
 
 <div class="content-out">
     <ng-table-header cabecalhotabela [dataSource]="pageSlice" [selection]="selection" (update)="upDate()"
-        (edit)="modify()" (delete)="delete()" (add)="add()" [hasUpdateBtn]="hasUpdateBtn"
-        [hasRemoveBtn]="hasRemoveBtn" [hasInsertBtn]="hasInsertBtn"
-        [hasModifyBtn]="hasModifyBtn" [hasOptionsBtn]="hasOptionsBtn">
+        (edit)="modify()" (delete)="delete()" (add)="add()" [hasUpdateBtn]="hasUpdateBtn" [hasRemoveBtn]="hasRemoveBtn"
+        [hasInsertBtn]="hasInsertBtn" [hasModifyBtn]="hasModifyBtn" [hasOptionsBtn]="hasOptionsBtn">
         <ng-content select="[botoesOpcoes]"></ng-content>
     </ng-table-header>
 
@@ -12,9 +11,6 @@
         <table mat-table [dataSource]="pageSlice" matSort
             matSortActive="{{ orderByColumn ? orderByColumn : columnsConfig[0]?.name }}" [matSortDirection]="direction">
 
-            <!--- Note that these columns can be defined in any order.
-                                    The actual rendered columns are set as a property on the row definition" -->
-            <!-- Checkbox Column -->
 
             <ng-container matColumnDef="select" *ngIf="checkboxVisible">
                 <th mat-header-cell *matHeaderCellDef>
@@ -31,7 +27,6 @@
                 <td mat-footer-cell *matFooterCellDef></td>
             </ng-container>
 
-            <!-- For das colunas que foram baseadas na configuração do atributo columnsConfig-->
             <ng-container [matColumnDef]="column?.name" *ngFor="let column of columnsConfig;">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="column.headerClass">{{ column?.title }}
                 </th>
@@ -53,3 +48,5 @@
             [pageSizeOptions]="[5, 10, 15]" (page)="paginate($event)"></mat-paginator>
     </div>
 </div>
+
+<!-- <ng-tooltip></ng-tooltip> -->

@@ -18,7 +18,7 @@
                                 [style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom">
                                 <mat-label>Título</mat-label>
                                 <input matInput class="font" autocomplete='off' formControlName="title" required
-                                    ngAutofillOff minlength="8" type="text" />
+                                    ngAutofillOff minlength="8" maxlength="75" type="text" />
                                 <mat-error>
                                     <ng-input-error (indexLastErrorField)="setPadding($event);"
                                         [control]="_form.controls?.title" [controlName]="'title'"
@@ -31,7 +31,7 @@
                                 [style.padding-bottom]="styleFormFieldObject?.subtitle?.paddingBottom">
                                 <mat-label>Subtítulo</mat-label>
                                 <textarea matInput class="font" autocomplete='off' formControlName="subtitle" required
-                                    ngAutofillOff minlength="10" type="text"></textarea>
+                                    ngAutofillOff minlength="10" maxlength="150" type="text"></textarea>
                                 <mat-error>
                                     <ng-input-error (indexLastErrorField)="setPadding($event, '1.5');"
                                         [control]="_form.controls?.subtitle" [controlName]="'subtitle'"

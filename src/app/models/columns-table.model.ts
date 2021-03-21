@@ -3,4 +3,5 @@ export interface ColumnsTableModel {
   title: string;
   cell: any;
   classes: string[];
+  tooltip?: any;
 }

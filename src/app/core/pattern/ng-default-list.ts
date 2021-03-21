@@ -45,14 +45,18 @@ export abstract class NgDefaultList extends NgDefault {
   private setColumnsConig(payload: {
     columnsTable: string[];
     classes: any;
+    tooltip: any;
   }): void {
-    const { columnsTable, classes } = payload;
+    const { columnsTable, classes, tooltip } = payload;
+    const arr = [...columnsTable];
+    const res = arr.reduce((acc, curr) => ((acc[curr] = ""), acc), {});
     columnsTable.forEach((column: string, index: number) => {
       this.columnsConfig.push({
         name: column,
         title: this.capitalizeFirstLetter(column as any),
         cell: (data: any) => this.getHtml({ col: index + 1, data }),
         classes: classes[column],
+        tooltip: res[column] = tooltip[column]
       });
     });
   }
@@ -63,7 +67,7 @@ export abstract class NgDefaultList extends NgDefault {
   abstract getHtml(payload: any): string;
 
   onRowClicked(params: any, path: string): void {
-    const hasPoll = params.typeSurveyContent ? 'poll' : '';
+    const hasPoll = params.typeSurveyContent ? "poll" : "";
     this.appController.navigateWithParams(path, [params.id, hasPoll]);
   }
 

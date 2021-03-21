@@ -25,6 +25,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
 import { NgMatPaginatorIntl } from '../services/paginator/mat-paginator.provider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export const MY_FORMATS = {
   parse: {
@@ -62,7 +63,8 @@ export const MY_FORMATS = {
     CdkTreeModule,
     MatRippleModule,
     MatSlideToggleModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule
     // MatTreeModule,
     // MatProgressBarModule
   ],
@@ -89,7 +91,8 @@ export const MY_FORMATS = {
     CdkTreeModule,
     MatRippleModule,
     MatSlideToggleModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule
     // MatTreeModule,
     // MatProgressBarModule
   ],

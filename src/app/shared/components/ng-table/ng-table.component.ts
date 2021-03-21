@@ -1,16 +1,25 @@
-import { Component, ViewChild, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectionStrategy } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { SelectionModel } from "@angular/cdk/collections";
 import { Output } from "@angular/core";
 import { EventEmitter } from "@angular/core";
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { TableOrder } from '../../../core/enum/order.enum';
-import { PageEvent } from '@angular/material/paginator';
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+import { TableOrder } from "../../../core/enum/order.enum";
+import { PageEvent } from "@angular/material/paginator";
+import tippy from 'tippy.js';
 
 @Component({
-  selector: 'ng-table',
-  templateUrl: './ng-table.component.html',
-  styleUrls: ['./ng-table.component.scss'],
+  selector: "ng-table",
+  templateUrl: "./ng-table.component.html",
+  styleUrls: ["./ng-table.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit, OnChanges {
@@ -33,7 +42,7 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() columnsConfig = [];
   @Input() checkboxVisible: boolean = false;
   @Input() data: any | MatTableDataSource<any>;
-  @Input() height: string = '60vh';
+  @Input() height: string = "60vh";
   @Input() orderByColumn: string;
   @Input() direction: TableOrder.ASC | TableOrder.DESC;
   @Input() tagColors: string;
@@ -44,11 +53,13 @@ export class TableComponent implements OnInit, OnChanges {
   displayedColumns = [];
   private nextPaginate = 15;
 
-  constructor() { }
+  constructor() {
+    window['tes'] = this;
+  }
 
   ngOnInit(): void {
-    this.displayedColumns = this.columnsConfig.map(c => c.name);
-    this.checkboxVisible ? this.displayedColumns.unshift('select') : '';
+    this.displayedColumns = this.columnsConfig.map((c) => c.name);
+    this.checkboxVisible ? this.displayedColumns.unshift("select") : "";
   }
 
   add = () => this.insert.emit(true);
@@ -68,7 +79,8 @@ export class TableComponent implements OnInit, OnChanges {
   feedTable() {
     if (this.data) {
       this.data = new MatTableDataSource(this.data);
-      this.data.sortingDataAccessor = (obj, property) => this.getProperty(obj, property);
+      this.data.sortingDataAccessor = (obj, property) =>
+        this.getProperty(obj, property);
       this.data.sort = this.sort;
       this.pageSlice = this.data.data.slice(0, 5);
       this.selection.clear();
@@ -76,11 +88,13 @@ export class TableComponent implements OnInit, OnChanges {
     }
   }
 
-  getProperty = (obj, property) => (property.split('.').reduce((o, p) => o && o[p], obj));
+  getProperty = (obj, property) =>
+    property.split(".").reduce((o, p) => o && o[p], obj);
 
   //Quando é afetuado um click na linha ele captura a linha e direciona e emite pro componente pai.
   onRowClicked(row) {
-    this.rowClicked.emit(row);
+    // this.rowClicked.emit(row);
+    console.log("row: ", row);
   }
 
   checkBoxClicked(row) {
@@ -95,11 +109,15 @@ export class TableComponent implements OnInit, OnChanges {
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ? this.selection.clear() : this.data.data.forEach(row => this.selection.select(row));
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.data.data.forEach((row) => this.selection.select(row));
   }
 
   get selection() {
-    return this._selection ? this._selection : this._selection = new SelectionModel<any>(true, []);
+    return this._selection
+      ? this._selection
+      : (this._selection = new SelectionModel<any>(true, []));
   }
 
   @Input() set selection(pSelection) {
@@ -108,8 +126,9 @@ export class TableComponent implements OnInit, OnChanges {
 
   paginate(event: PageEvent): void {
     const result = event.pageSize * (event.pageIndex + 1);
-    if (event.pageSize === 15 || result >= 15) { // talvez de uma bugada.
-      this.paginateRequest.emit(this.nextPaginate += 15);
+    if (event.pageSize === 15 || result >= 15) {
+      // talvez de uma bugada.
+      this.paginateRequest.emit((this.nextPaginate += 15));
     }
 
     let startIndex, endIndex;
@@ -130,12 +149,40 @@ export class TableComponent implements OnInit, OnChanges {
 
   styleTagBorder(): void {
     this.pageSlice.forEach((data: any) => {
-      (data.tag_colors as string).split(",").forEach((color: string, index: number) => {
-        document.styleSheets[0].addRule(
-          `a.tag.borderTag${index + (data.tags.split(",")[index] as string).toLowerCase()}:after`,
-          `border-left-color: ${color};`
-        );
-      })
+      (data.tag_colors as string)
+        .split(",")
+        .forEach((color: string, index: number) => {
+          document.styleSheets[0].addRule(
+            `a.tag.borderTag${
+              index + (data.tags.split(",")[index] as string).toLowerCase()
+            }:after`,
+            `border-left-color: ${color};`
+          );
+        });
     });
   }
+
+  setTableTooltip() {
+
+    
+    tippy('.iss-title', {
+      content: 'My tooltip!',
+    });
+
+    const nodeList: NodeListOf<HTMLElement> = document.querySelectorAll(
+      ".iss-title"
+    );
+    nodeList.forEach((e: HTMLElement) => {
+      // Se entrar precisa exibir o tooltip
+      if (this.isEllipsisActive(e)) {
+        console.log("");
+      }
+    });
+  }
+
+  isEllipsisActive(e: HTMLElement): boolean {
+    return e.offsetHeight <= e.scrollHeight;
+  }
+
+  
 }

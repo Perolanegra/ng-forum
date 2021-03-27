@@ -36,7 +36,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;  
-  color: #fff;
+  color: $justWhite;
 }
 
 .nav-item {
@@ -181,7 +181,7 @@
 }
 
 .btn-close-side-menu-mobile {
-  color: #fff;
+  color: $justWhite;
   outline: none;
   width: 95%;
   top: 10px;
@@ -271,7 +271,7 @@ div#sideNavContainer:not(.div-nav-item--active):hover {
   border: none !important;
   box-shadow: none !important;
   margin-bottom: 15px;
-  color: #fff;
+  color: $justWhite;
   text-align: left;
 }
 

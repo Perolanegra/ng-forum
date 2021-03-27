@@ -68,7 +68,7 @@ body {
 }
 
 .primary-color {
-    color: #fff;
+    color: $justWhite;
 }
 
 .base-color {
@@ -132,7 +132,7 @@ body {
     font-size: inherit;
     font-weight: 400;
     line-height: 1.125;
-    color: #fff;
+    color: $justWhite;
 }
 
 .btn-submit {
@@ -163,7 +163,7 @@ div#msg-error-ng-default {
 }
 
 .text-link {
-    color: #fff;
+    color: $justWhite;
     font-family: "Montserrat";
     cursor: pointer;
 }
@@ -299,7 +299,7 @@ div#msg-error-ng-default {
 }
 
 .tag::before {
-    background: #fff;
+    background: $justWhite;
     border-radius: 10px;
     box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
     content: "";

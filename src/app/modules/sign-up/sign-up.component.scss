@@ -17,7 +17,7 @@
 }
 
 .square {
-    color: #fff;
+    color: $justWhite;
     background: $blueBlack;
     padding: 5vh;
     border-radius: 2%;
@@ -40,33 +40,33 @@
 }
 
 ::ng-deep .mat-hint {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
-    border: 1.4px solid #fff;
+    border: 1.4px solid $justWhite;
 }
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-	color: #fff;
+	color: $justWhite;
 }
 
 ::ng-deep .mat-form-field-label {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: #fff !important;
+    color: $justWhite !important;
     opacity: 0.2 !important;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     opacity: 0.3;
-    color: #fff;
+    color: $justWhite;
 }
 
 @media only screen and (max-width: 1024px) {

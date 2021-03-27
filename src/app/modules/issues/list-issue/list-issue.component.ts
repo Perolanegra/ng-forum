@@ -89,11 +89,11 @@ export class ListIssueComponent extends NgDefaultList implements OnInit {
       3: `<div class="iss-content iss-content-row">
             <span class="iss-stars-out">${
               col === 3
-                ? this.appController.countStars({ pplVoted: data.pplVoted, stars: data.stars })
+                ? this.appController.countStars({ pplVoted: +data.pplVoted, stars: +data.stars })
                 : ""
             }</span>
             <span class="iss-stars-average">${(
-              (data.stars || data.pplVoted) ? data.stars / data.pplVoted : 0.00
+              (+data.stars || +data.pplVoted) ? data.stars / data.pplVoted : 0.00
             ).toFixed(1)}</span>
           </div>`,
       4: `<div class="iss-content iss-content-row">

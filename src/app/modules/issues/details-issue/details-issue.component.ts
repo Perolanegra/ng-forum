@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgDetails } from 'src/app/core/pattern/ng-details';
 import { ActivatedRoute } from '@angular/router';
 import { AppController } from 'src/app/core/appController';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-details-issue',
@@ -9,12 +10,15 @@ import { AppController } from 'src/app/core/appController';
   styleUrls: ['./details-issue.component.scss']
 })
 export class DetailsIssueComponent extends NgDetails implements OnInit {
+  @ViewChild(MatAccordion) accordion: MatAccordion;
+
   constructor(protected route: ActivatedRoute, protected appController: AppController) { 
     super(route, appController);
   }
 
   ngOnInit(): void {
     this.data = this.dataResolved['details'];
+    console.log('data ngOnInit: ', this.data);
   }
 
   getHtml(payload: any): string {

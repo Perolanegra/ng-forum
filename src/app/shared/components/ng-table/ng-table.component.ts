@@ -74,7 +74,7 @@ export class TableComponent implements OnInit, OnChanges {
     }
   }
 
-  feedTable() {
+  feedTable(): void {
     if (this.data) {
       this.data = new MatTableDataSource(this.data);
       this.data.sortingDataAccessor = (obj, property) =>
@@ -90,27 +90,26 @@ export class TableComponent implements OnInit, OnChanges {
     }
   }
 
-  getProperty = (obj, property) =>
+  getProperty = (obj, property): void =>
     property.split(".").reduce((o, p) => o && o[p], obj);
 
   //Quando é afetuado um click na linha ele captura a linha e direciona e emite pro componente pai.
-  onRowClicked(row) {
-    // this.rowClicked.emit(row);
-    console.log("row: ", row);
+  onRowClicked(row): void {
+    this.rowClicked.emit(row);
   }
 
-  checkBoxClicked(row) {
+  checkBoxClicked(row): void {
     this.selection.toggle(row);
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
+  isAllSelected(): boolean {
     const qtdSelected = this.selection.selected.length;
     const qtdRows = this.data.data.length;
     return qtdSelected === qtdRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
+  masterToggle(): void {
     this.isAllSelected()
       ? this.selection.clear()
       : this.data.data.forEach((row) => this.selection.select(row));

@@ -17,7 +17,8 @@ import { ComponentType } from "@angular/cdk/portal";
 import { AppActions } from "../state/app/app.actions";
 import { Constants } from "./pattern/constants";
 import { AuthActions } from "../state/auth/auth.actions";
-import { RoutesModel } from '../models/routes.model';
+import { RoutesModel } from "../models/routes.model";
+import tippy from "tippy.js";
 
 @Injectable()
 export class AppController {
@@ -438,7 +439,7 @@ export class AppController {
     window.dispatchEvent(event);
   }
 
-  public countStars(data: { stars: number, pplVoted: number }): string {
+  public countStars(data: { stars: number; pplVoted: number }): string {
     const svg: HTMLElement = document.createElement("svg");
     svg.innerHTML = `
       <svg width="15" height="15" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
@@ -463,4 +464,20 @@ export class AppController {
   // public isRequired = text => {
   //     throw new Error(`${text} é obrigatório.`);
   // }
+
+  public setTooltip(querySelectorSearch: string): void {
+    const nodeList: NodeListOf<HTMLElement> = document.querySelectorAll(querySelectorSearch);
+    nodeList.forEach((e: HTMLElement) => {
+      // Se entrar precisa exibir o tooltip
+      if (this.isEllipsisActive(e)) {
+        tippy(e, {
+          content: e.textContent,
+        });
+      }
+    });
+  }
+
+  private isEllipsisActive(e: HTMLElement): boolean {
+    return e.offsetHeight < e.scrollHeight;
+  }
 }

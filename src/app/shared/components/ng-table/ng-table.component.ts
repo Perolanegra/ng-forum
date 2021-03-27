@@ -14,7 +14,7 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { TableOrder } from "../../../core/enum/order.enum";
 import { PageEvent } from "@angular/material/paginator";
-import tippy from 'tippy.js';
+import { AppController } from "src/app/core/appController";
 
 @Component({
   selector: "ng-table",
@@ -53,9 +53,7 @@ export class TableComponent implements OnInit, OnChanges {
   displayedColumns = [];
   private nextPaginate = 15;
 
-  constructor() {
-    window['tes'] = this;
-  }
+  constructor(public appController: AppController) {}
 
   ngOnInit(): void {
     this.displayedColumns = this.columnsConfig.map((c) => c.name);
@@ -85,6 +83,10 @@ export class TableComponent implements OnInit, OnChanges {
       this.pageSlice = this.data.data.slice(0, 5);
       this.selection.clear();
       this.styleTagBorder();
+      setTimeout(() => {
+        this.appController.setTooltip(".iss-title");
+        this.appController.setTooltip(".iss-subtitle");
+      }, 250);
     }
   }
 
@@ -145,6 +147,10 @@ export class TableComponent implements OnInit, OnChanges {
 
     this.pageSlice = this.data.data.slice(startIndex, endIndex);
     this.styleTagBorder();
+    setTimeout(() => {
+      this.appController.setTooltip(".iss-title");
+      this.appController.setTooltip(".iss-subtitle");
+    }, 250);
   }
 
   styleTagBorder(): void {
@@ -161,28 +167,4 @@ export class TableComponent implements OnInit, OnChanges {
         });
     });
   }
-
-  setTableTooltip() {
-
-    
-    tippy('.iss-title', {
-      content: 'My tooltip!',
-    });
-
-    const nodeList: NodeListOf<HTMLElement> = document.querySelectorAll(
-      ".iss-title"
-    );
-    nodeList.forEach((e: HTMLElement) => {
-      // Se entrar precisa exibir o tooltip
-      if (this.isEllipsisActive(e)) {
-        console.log("");
-      }
-    });
-  }
-
-  isEllipsisActive(e: HTMLElement): boolean {
-    return e.offsetHeight <= e.scrollHeight;
-  }
-
-  
 }

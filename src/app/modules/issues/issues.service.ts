@@ -37,4 +37,9 @@ export class IssuesService {
     const url = `${environment.server}/${path}/${id}`;
     return this.http.get(url, { params: {} }) as Observable<any>;
   }
+
+  public markView(payload: { id_issue: number }): Observable<any | undefined> {
+    const url = `${environment.server}/${Constants.defaultPattern.nestPath.issues.markView}`;
+    return this.http.post(url, { payload }) as Observable<any>;
+  }
 }

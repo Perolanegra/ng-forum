@@ -24,4 +24,15 @@ export class IssueState {
       setState({ issueCreated: response });
     }
   }
+
+  @Action(IssueActions.MarkView)
+  async markView(
+    { getState, setState }: StateContext<any>,
+    { payload }: IssueActions.MarkView
+  ) {
+    if (payload.id_issue) {
+      await this.issueService.markView(payload).toPromise();
+      setState({...getState()});
+    }
+  }
 }

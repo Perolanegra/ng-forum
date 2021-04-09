@@ -6,17 +6,12 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, AfterViewChecked {
+export class ProfileComponent implements OnInit {
 
   constructor(public route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    
-    
   }
 
-  ngAfterViewChecked() {    
-
-  }
 
 }

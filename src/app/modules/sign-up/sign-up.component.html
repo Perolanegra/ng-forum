@@ -2,7 +2,7 @@
     <div class="content-inside">
         <div class="square">
             <div class="logo-out">
-                <img class="logo" src="/ng-forum/assets/imgs/logo.png">
+                <img class="logo-img" [src]="logo">
             </div>
 
             <div class="font label-info" style="width: 100%;">
@@ -53,9 +53,9 @@
                             </mat-form-field>
 
                             <mat-form-field id="inputPassword" appearance="outline" class="fade-transition-in font"
-                                [style.padding-bottom]="styleFormFieldObject?.pass?.paddingBottom">
+                                [style.padding-bottom]="styleFormFieldObject?.password?.paddingBottom" >
                                 <mat-label>Senha</mat-label>
-                                <input matInput class="font" autocomplete='off' formControlName="pass" required
+                                <input matInput class="font" autocomplete='off' formControlName="password" required
                                     ngAutofillOff maxlength="20" minlength="8" [type]="hide1 ? 'password' : 'text'" />
                                 <mat-icon-button style="cursor: pointer; color: white;" matSuffix
                                     (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
@@ -64,8 +64,8 @@
                                 </mat-icon-button>
                                 <mat-error>
                                     <ng-input-error (indexLastErrorField)="setPadding($event);"
-                                        [control]="_form.controls?.pass" [controlName]="'pass'"
-                                        [errorMsgs]="errorMsgs?.pass">
+                                        [control]="_form.controls?.password" [controlName]="'password'"
+                                        [errorMsgs]="errorMsgs?.password">
                                     </ng-input-error>
                                 </mat-error>
                             </mat-form-field>

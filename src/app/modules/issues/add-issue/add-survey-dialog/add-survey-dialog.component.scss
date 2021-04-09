@@ -1,0 +1,301 @@
+@import "src/app/shared/style/variables";
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .mat-dialog-container {
+    background: $blueBlack;
+    overflow: hidden;
+}
+
+::ng-deep .cdk-overlay-dark-backdrop {
+    background: black !important;
+}
+
+::ng-deep .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0.7;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border: 1.7px solid $accentColor;
+    opacity: 0.5;
+}
+
+// configs p centralizar o checkbox dps
+::ng-deep .mat-checkbox-checkmark-path {
+    stroke-width: 4px !important;
+}
+
+::ng-deep .mat-checkbox-checkmark-path {
+    stroke: black !important;
+}
+
+::ng-deep .cdk-overlay-pane {
+    font-size: 90%;
+}
+
+.mat-checkbox {
+    font-family: "Montserrat";
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 1.125;
+    color: $justWhite;
+}
+
+.closing-date {
+    margin-left: 15px;
+}
+
+// ******** Configurações Calendário ****************
+
+::ng-deep .mat-form-field-suffix .mat-icon-button {
+    outline: none;
+    opacity: 0.7;
+}
+
+::ng-deep .mat-datepicker-toggle,
+.mat-datepicker-content .mat-calendar-next-button,
+.mat-datepicker-content .mat-calendar-previous-button {
+    color: $justWhite;
+    opacity: 0.7;
+}
+
+::ng-deep .mat-calendar-body-cell-content {
+    color: $justWhite;
+}
+
+::ng-deep .mat-datepicker-content .mat-calendar {
+    background: $blueBlack;
+}
+
+::ng-deep .mat-datepicker-content.mat-accent .mat-calendar-body-today.mat-calendar-body-selected {
+    border-radius: 6px !important;
+    box-shadow: 0px 1px 3px 1px rgb(255, 64, 129, 0.75) !important;
+}
+
+::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border-color: rgb(233, 30, 99, 0.45) !important;
+    border-radius: 6px !important;
+}
+
+::ng-deep .mat-datepicker-content.mat-accent .mat-calendar-body-selected {
+    border-radius: 6px !important;
+    box-shadow: 0px 1px 3px 1px rgb(255, 64, 129, 0.75) !important;
+}
+
+::ng-deep .mat-calendar-body-label {
+    color: $justWhite;
+}
+
+::ng-deep .mat-calendar-table-header {
+    color: $justWhite;
+    opacity: 0.6;
+}
+
+::ng-deep .mat-calendar-period-button {
+    opacity: 0.8;
+    color: $justWhite;
+}
+
+::ng-deep .mat-calendar-arrow {
+    border-top-color: $accentColor;
+    opacity: 0.7;
+}
+
+::ng-deep .mat-datepicker-content .mat-calendar-previous-button {
+    color: $accentColor;
+    opacity: 0.7;
+}
+
+::ng-deep .mat-datepicker-content .mat-calendar-next-button {
+    color: $accentColor;
+    opacity: 0.7;
+}
+
+// ***************** Fim Configurações Calendário ***************************
+
+// *************** Configurações timePicker *************************
+::ng-deep .timepicker {
+    position: fixed !important;
+    top: 23% !important;
+    left: 45% !important;
+}
+
+::ng-deep .timepicker-overlay {
+    z-index: 9999999999 !important;
+    pointer-events: auto !important;
+}
+
+.timepickerIcon {
+    color: $justWhite;
+    opacity: 0.7;
+}
+
+::ng-deep .timepicker__actions {
+    background-color: $blueBlack !important;
+}
+
+::ng-deep .clock-face {
+    background-color: $blueBlack !important;
+}
+
+::ng-deep .timepicker__header {
+    background-color: $blueBlack !important;
+}
+
+::ng-deep .timepicker__body {
+    background-color: #303030 !important;
+}
+
+::ng-deep .timepicker-button {
+    color: $justWhite !important;
+    opacity: 0.8;
+}
+
+::ng-deep .clock-face__number > span {
+    border-radius: 40px !important;
+    color: black !important;
+}
+
+::ng-deep .clock-face__number > span.active {
+    background-color: $accentColor !important;
+    color: black !important;
+    filter: drop-shadow(2px 4px 6px rgb(233, 30, 99, 0.8));
+}
+
+::ng-deep .clock-face__number--outer {
+    color: black !important;
+}
+
+::ng-deep .clock-face__number--outer > span {
+    color: $justWhite !important;
+}
+
+::ng-deep .clock-face__clock-hand {
+    background: $accentColor !important;
+    box-shadow: 0px 0px 10px 3px rgba(233, 30, 99, 0.25);
+}
+
+::ng-deep .clock-face__clock-hand_minute:before {
+    box-shadow: 0px 0px 10px 3px rgb(233, 30, 99, 0.45);
+    border: 4.4px solid $accentColor !important;
+}
+
+::ng-deep .clock-face__clock-hand:after {
+    left: -2.5px;
+    box-shadow: 0px 0px 10px 3px rgb(233, 30, 99, 0.45);
+}
+
+::ng-deep .timepicker-dial__control:valid {
+    background-color: $blueBlack !important;
+    color: $justWhite !important;
+}
+
+// ********************** Fim Configurações timePicker ************************
+
+//********************* Configs Animation closingDateTime ******************
+
+.disabled {
+    opacity: 0.1;
+}
+
+.opt-out {
+    max-height: 33vh;
+}
+
+.opt-out--state-datetime {
+    max-height: 22vh;
+}
+
+.opt-label-out {
+    justify-content: space-around;
+    margin-left: 15px;
+}
+
+.opt-label {
+    width: fit-content;
+    font-weight: bold;
+    color: $accentColor;
+    opacity: 0.9;
+}
+
+.btn-remove-field {
+    position: relative;
+    top: -3px;
+    box-shadow: 0px 1px 3px 1px rgba(255, 64, 129, 0.75) !important;
+}
+
+::ng-deep .mat-icon-button {
+    border-radius: 13% !important;
+}
+
+@media only screen and (max-width: 1024px) {
+    .content {
+        font-size: 70%;
+    }
+
+    .opt-out {
+        max-height: 20vh;
+    }
+
+    div#boxCheckbox {
+        flex-direction: column;
+    }
+
+    div#closingDate {
+        flex-direction: column !important;
+    }
+
+    ::ng-deep .mat-dialog-container {
+        width: 95vw;
+    }
+
+    .closing-date {
+        margin-left: unset;
+    }
+
+    .btn-remove-field {
+        left: 10px;
+    }
+
+    .mat-icon-button {
+        border-radius: 50% !important;
+    }
+
+    .btn-submit {
+        font-weight: bold;
+    }
+
+    .opt-label-out {
+        margin-left: unset;
+    }
+
+    ::ng-deep .timepicker {
+        position: fixed !important;
+        left: 15px !important;
+        top: 35px !important;
+    }
+
+    ::ng-deep .cdk-overlay-pane {
+        font-size: unset;
+    }
+    
+}
+
+@media only screen and (max-width: 320px) {
+
+    .btn-submit {
+        font-size: 12px;
+    }
+
+    ::ng-deep .cdk-overlay-pane {
+        font-size: unset;
+    }
+
+    .opt-label-out {
+        margin-left: unset;
+    }
+    
+}

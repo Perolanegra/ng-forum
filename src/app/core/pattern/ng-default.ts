@@ -1,26 +1,55 @@
-import { Select } from '@ngxs/store';
-import { AppState } from 'src/app/shared/state/app.state';
-import { Observable, Subscription } from 'rxjs';
-
+import { Subscription, Observable } from "rxjs";
+import { AppController } from "../appController";
+import { AuthState } from "src/app/state/auth/auth.state";
+import { Select } from "@ngxs/store";
+import { ActivatedRoute, Data } from '@angular/router';
 
 export abstract class NgDefault {
+  public hasClickSubmit: boolean = false;
 
-    public readonly lastIndex = 9999;
+  public stateMobileMatchesSubscription$: Subscription;
 
-    public hasClickSubmit: boolean = false;
+  private _hasMobileMatches: boolean;
 
-    @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
-    public stateMobileMatchesSubscription$: Subscription;
+  public logo: string;
 
-    public hasMobileMatches: boolean;
+  public hasToken;
+  public notAuth;
+  
 
-    constructor() {
-        this.stateMobileMatchesSubscription$ = this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
-    }
+  @Select((state) => state.app.hasMobileMatches)
+  hasMobileMatches$: Observable<any>;
 
-    public getStyle(trueValue, falseValue): string {
-        return this.hasMobileMatches ? trueValue : falseValue;
-    }
+  @Select(AuthState.token) token$: Observable<string>;
+  @Select(AuthState.notAuth) notAuth$: Observable<string>;
 
+  constructor(protected appController: AppController, protected route?: ActivatedRoute) {
+    this.logo = this.appController.getImg("logo.png");
+    this.appController.getMobileMatches().then((resp) => {
+      this.hasMobileMatches = resp;
+    });
+  }
 
+  public getStyle(trueValue, falseValue): string {
+    return this.hasMobileMatches ? trueValue : falseValue;
+  }
+
+  public set hasMobileMatches(value: boolean) {
+    this._hasMobileMatches = value;
+  }
+
+  public get hasMobileMatches() {
+    return this._hasMobileMatches;
+  }
+
+  getAuth() {
+    this.token$.subscribe((token) => (this.hasToken = token));
+    this.notAuth$.subscribe((notAuth) => (this.notAuth = notAuth));
+  }
+
+  get dataResolved(): any {
+    return this.route.snapshot.data;
+  }
+
+  
 }

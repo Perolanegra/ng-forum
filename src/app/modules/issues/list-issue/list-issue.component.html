@@ -1,0 +1,31 @@
+<div style="display: flex; justify-content: center">
+  <ng-table
+    [columnsConfig]="columnsConfig"
+    [hasOptionsBtn]="false"
+    [data]="data | async"
+    direction="asc"
+    (paginateRequest)="onPaginate($event)"
+    (rowClicked)="onRowClicked($event, path_details)"
+    (insert)="add()"
+  >
+  </ng-table>
+</div>
+
+
+
+<!--fazer o state p chamar os registros e por o ngif aqui do skeleton com a tabela-->
+<!-- <div class="content"> 
+    <div class="skeleton-out">
+        <div class="skeleton-content">
+            <ngx-skeleton-loader count="1" animation="progress" [theme]="titleSkeletonTheme">
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader *ngFor="let i of [0,1,2,3,4]" count="1" 
+            animation="progress" [theme]="rowSkeletonTheme">
+            </ngx-skeleton-loader>
+        </div>
+    </div>
+</div> -->
+
+<!--  (atualizar)="atualizar()" (alterar)="alterar($event)" (excluir)="excluir($event)" (inserir)="inserir()"
+     [registros]="registros" (rowClicked)="rowClicked($event)"
+    -->

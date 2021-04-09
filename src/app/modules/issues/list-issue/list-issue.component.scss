@@ -1,0 +1,21 @@
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.skeleton-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.skeleton-out {
+    width: fit-content;
+    margin-top: 25px;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+}

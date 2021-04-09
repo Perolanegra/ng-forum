@@ -1,65 +1,73 @@
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { AppController } from '../../core/appController';
-import { MainNavStyle } from './main-nav.style';
-import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { Select } from '@ngxs/store';
-import { AppState } from 'src/app/shared/state/app.state';
-
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from "@angular/core";
+import { AppController } from "../../core/appController";
+import { MainNavStyle } from "./main-nav.style";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AppState } from "src/app/state/app/app.state";
+import { Constants } from "../../core/pattern/constants";
+import { NgDefault } from "src/app/core/pattern/ng-default";
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 @Component({
-    selector: 'ng-main-nav',
-    templateUrl: './main-nav.component.html',
-    styleUrls: ['./main-nav.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: "ng-main-nav",
+  templateUrl: "./main-nav.component.html",
+  styleUrls: ["./main-nav.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainNavComponent implements OnInit {
+export class MainNavComponent extends NgDefault implements OnInit {
 
-    public routes;
-    public vistoPic = '/ng-forum/assets/imgs/moderator-male.svg';
-    public hasMobileMatches: boolean;
-    public hasEnterMenuRef: boolean = false;
-    public profileDefault: string = '/ng-forum/assets/imgs/profile-default.jfif';
+  @ViewChild("userInfo") elRefUserInfo: ElementRef;
+  @SelectSnapshot(AppState.routes) routes: any[];
 
-    @ViewChild('userInfo') elRefUserInfo: ElementRef;
-    @ViewChild('navListRoutes') elRefnavListRoutes: ElementRef;
+  public vistoPic: string;
+  public profileDefault: string;
+  public hasEnterMenuRef: boolean = false;
 
-    @Select(AppState.hasMobileMatches) stateMobileMatches$: Observable<any>;
+  constructor(
+    public router: Router,
+    private mainNavStyle: MainNavStyle,
+    public appController: AppController,
+    protected route: ActivatedRoute,
+  ) {
+    super(appController, route);
+  }
 
-    private stateMobileMatchesSubscription$: Subscription;
+  ngOnInit(): void {
+    this.setImg();
+  }
 
-    constructor(
-        public router: Router,
-        private mainNavStyle: MainNavStyle,
-        public appController: AppController) { }
+  setImg(): void {
+    this.vistoPic = this.appController.getImg(Constants.defaultPattern.imgs.vistoPic);
+    this.profileDefault = this.appController.getImg(Constants.defaultPattern.imgs.profileDefault);
+  }
 
+  onMenuBlur(hasEnterMenu): void {
+    this.hasEnterMenuRef = hasEnterMenu;
+  }
 
-    ngOnInit() {
-        this.routes = this.appController.getFillerNav();
-        this.stateMobileMatchesSubscription$ = this.stateMobileMatches$.subscribe(state => this.hasMobileMatches = state);
-    }
+  toggleMenu(elementRef: Element): void {
+    this.hasEnterMenuRef = true;
+    this.mainNavStyle.setStyleMenuNavInit(elementRef, this.hasMobileMatches);
+  }
 
-    ngOnDestroy(): void {
-        this.stateMobileMatchesSubscription$.unsubscribe();
-    }
+  closeSideMenuMobile(elementRefSideMenu: ElementRef): void {
+    // quando o ElementRef vem de referência, ele já passa o nativeElement
+    this.appController.removeElementClass(
+      elementRefSideMenu,
+      "side-menu-init--active"
+    );
+    this.mainNavStyle.setStyleMenuNavClose(
+      this.elRefUserInfo.nativeElement,
+      this.hasMobileMatches
+    );
+  }
 
-    onMenuBlur(hasEnterMenu) {
-        this.hasEnterMenuRef = hasEnterMenu;
-    }
-
-    toggleMenu(elementRef: Element) {
-        this.hasEnterMenuRef = true;
-        this.mainNavStyle.setStyleMenuNavInit(elementRef, this.hasMobileMatches);
-    }
-
-    closeSideMenuMobile(elementRefSideMenu: ElementRef) { // quando o ElementRef vem de referência, ele já passa o nativeElement
-        this.appController.removeElementClass(elementRefSideMenu, 'side-menu-init--active');
-        this.mainNavStyle.setStyleMenuNavClose(this.elRefUserInfo.nativeElement, this.hasMobileMatches);
-    }
-
-    navigate(path: string) {
-        this.appController.navigate(path);
-        this.appController.setMenuActiveLink(path);
-    }
-
-
+  navigate(path: string): void {
+    this.appController.navigate(path);
+    this.appController.setMenuActiveLink(path);
+  }
 }

@@ -1,0 +1,93 @@
+<!-- <ng-text-editor></ng-text-editor> -->
+<div class="content base-color">
+    <div class="content-inside">
+        <div class="square">
+            <div class="logo-out">
+                <img class="logo-img" src="assets/imgs/logo.png">
+            </div>
+
+            <div class="font label-info" style="width: 100%;">
+                Criar nova Issue
+            </div>
+
+            <div>
+                <form [formGroup]="_form">
+                    <div class="form-content">
+                        <div class="form-content-inside">
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.title?.paddingBottom">
+                                <mat-label>Título</mat-label>
+                                <input matInput class="font" autocomplete='off' formControlName="title" required
+                                    ngAutofillOff minlength="8" maxlength="75" type="text" />
+                                <mat-error>
+                                    <ng-input-error (indexLastErrorField)="setPadding($event);"
+                                        [control]="_form.controls?.title" [controlName]="'title'"
+                                        [errorMsgs]="errorMsgs?.title">
+                                    </ng-input-error>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.subtitle?.paddingBottom">
+                                <mat-label>Subtítulo</mat-label>
+                                <textarea matInput class="font" autocomplete='off' formControlName="subtitle" required
+                                    ngAutofillOff minlength="10" maxlength="150" type="text"></textarea>
+                                <mat-error>
+                                    <ng-input-error (indexLastErrorField)="setPadding($event, '1.5');"
+                                        [control]="_form.controls?.subtitle" [controlName]="'subtitle'"
+                                        [errorMsgs]="errorMsgs?.subtitle">
+                                    </ng-input-error>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <div class="content-box-buttons">
+                                <div class="content-box-in">
+                                    <button style="margin-top: 0.2rem;" mat-raised-button
+                                        [ngClass]="[ _form?.value?.typeSurveyContent ? 'disabled' : 'enabled' ]"
+                                        (click)="$event.preventDefault();addContent('1');"
+                                        class="btn-submit box-btn-inside" cdkFocusInitial>{{ stateIconAddContent ===
+                                        'enabled' ? 'Editar' : 'Adicionar' }}
+                                        Conteúdo</button>
+                                    <img (click)="confirmRemoveContent()" class="box-img-in"
+                                        src="assets/imgs/remove-icon.png" [@removeIconState]="stateIconAddContent">
+                                </div>
+
+                                <mat-slide-toggle [ngClass]="[ _form.value.content ? 'disabled' : 'enabled' ]"
+                                    [checked]="false" formControlName="typeSurveyContent">
+                                </mat-slide-toggle>
+
+
+                                <div class="content-box-in">
+                                    <button style="margin-top: 0.2rem;" mat-raised-button
+                                        [ngClass]="[ _form?.value?.typeSurveyContent ? 'enabled' : 'disabled' ]"
+                                        class="btn-submit box-btn-inside" cdkFocusInitial
+                                        (click)="$event?.preventDefault();addContent('2');">{{ stateIconAddSurvey ===
+                                        'enabled' ? 'Editar' : 'Adicionar' }}
+                                        Enquete</button>
+                                    <img (click)="confirmRemoveContent()" class="box-img-in"
+                                        src="assets/imgs/remove-icon.png" [@removeIconState]="stateIconAddSurvey">
+                                </div>
+
+                            </div>
+
+                            <mat-form-field appearance="outline" id="tagField" class="fade-transition-in font"
+                                [style.padding-bottom]="styleFormFieldObject?.id_tags?.paddingBottom"
+                                [ngClass]="[ (stateIconAddSurvey === 'enabled' || stateIconAddContent === 'enabled') ? '' : 'disabled' ]">
+                                <mat-label>Tags</mat-label>
+                                <mat-select class="font" multiple matInput formControlName="id_tags" ngAutofillOff
+                                    required>
+                                    <mat-option *ngFor="let tag of dataResolved?.tags" [value]="tag?.id">
+                                        {{ tag?.value | lowercase }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <button style="margin-top: 0.2rem;" mat-raised-button [@btnSubmitState]="stateBtnSubmit"
+                            class="btn-submit iss-submit" (click)="submit()" cdkFocusInitial>Criar Issue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

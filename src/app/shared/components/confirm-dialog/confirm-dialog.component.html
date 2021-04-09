@@ -1,0 +1,38 @@
+<div *ngIf="!hasClosed">
+    <div class="toast-out fade-transition-in ">
+        <div class="toast-in" [ngStyle]="{ 'width': hasMobileMatches ? '80vw' : 'unset' }">
+            <div class="toast-in-align">
+                <div [ngClass]="[ hasMobileMatches ? 'ball-mobile' : 'ball-web' ]"
+                    [ngStyle]="{ 'background': appController.getColorRef(data?.type) }"></div>
+
+                <div class="align-message">
+                    <strong class="title-msg"
+                        [ngStyle]="{ 'line-height': getStyle('unset', '28px'), 'font-size': getStyle('16px', '20px') }">{{ title }}</strong>
+                    <p class="msg" [ngStyle]="{ 'font-size': getStyle('13px', '16px') }">{{ message }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="align-close">
+            <button class="btn-close" tabindex="-1" ngOverBtn [type]="data?.type" hoverColor="#E91E63" mat-icon-button
+                (click)="close()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="toast-out toast-box-btn fade-transition-out">
+        <div class="toast-in full-width-ref" (click)="close();">
+            <div class="btn-no btn-box">
+                Não
+            </div>
+        </div>
+
+        <div class="toast-in full-width-ref" (click)="close(true);">
+            <div class="btn-yes btn-box">
+                Sim
+            </div>
+        </div>
+    </div>
+</div>

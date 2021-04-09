@@ -3,6 +3,8 @@ import { AuthService } from '../../core/auth.service';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthActions } from './auth.actions';
 import { Injectable } from '@angular/core';
+import { NgxsDataRepository } from '@ngxs-labs/data/repositories';
+import { StateRepository } from '@ngxs-labs/data/decorators';
 
 export class AuthStateModel {
     token: string;
@@ -13,7 +15,7 @@ export class AuthStateModel {
     hasResetPass: boolean;
     signUpResponse: any;
 }
-
+@StateRepository()
 @State<AuthStateModel>({
     name: 'auth',
     defaults: {
@@ -28,9 +30,11 @@ export class AuthStateModel {
 })
 
 @Injectable()
-export class AuthState {
+export class AuthState extends NgxsDataRepository<AuthStateModel> {
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService) {
+        super();
+     }
 
     @Selector()
     static token(state: AuthStateModel) {
@@ -74,6 +78,7 @@ export class AuthState {
 
         if (data) {
             const user = await this.authService.getUserByToken(data.access_token).toPromise();
+            
             const state = getState();
             setState({
                 ...state,
@@ -84,7 +89,7 @@ export class AuthState {
     }
 
     @Action(AuthActions.Signup)
-    async signUp({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.Signup) {
+    async setStateSignUp({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.Signup) {
 
         const data: any = await this.authService.signUp(payload).toPromise();
 
@@ -95,6 +100,15 @@ export class AuthState {
                 signUpResponse: data
             });
         }
+    }
+
+    @Action(AuthActions.RemoveStateSignup)
+    async removeStateSignUp({ getState, setState }: StateContext<AuthStateModel>, { }: AuthActions.RemoveStateSignup) {
+        const state = getState();
+        setState({
+            ...state,
+            signUpResponse: null
+        });
     }
 
     @Action(AuthActions.RemoveAccess)

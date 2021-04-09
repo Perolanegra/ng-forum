@@ -1,0 +1,232 @@
+@import "src/app/shared/style/variables";
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: none;
+}
+
+.content-inside {
+    width: fit-content;
+}
+
+.square {
+    color: $justWhite;
+    background: $blueBlack;
+    padding: 5vh;
+    border-radius: 6px;
+    border: transparent;
+    width: 65vw;
+    font-size: 90%;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-content-inside {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-info {
+    margin-bottom: 6%;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    color: #f36079;
+}
+
+::ng-deep .mat-hint {
+    color: $justWhite;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: $justWhite;
+}
+
+::ng-deep .mat-form-field-label {
+    color: $justWhite;
+}
+
+::ng-deep
+    .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+    .mat-form-field-outline-thick {
+    color: $accentColor !important;
+    opacity: 0.3;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    color: $justWhite;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: $accentColor !important;
+    opacity: 0.2 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    opacity: 0.3;
+    color: $accentColor;
+}
+
+::ng-deep .mat-hint {
+    color: $justWhite;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #303030 inset !important;
+    font-family: "Montserrat" !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: $justWhite !important;
+    color: $accentColor !important;
+    font-family: "Montserrat" !important;
+}
+
+.text-link-size {
+    font-size: 75%;
+}
+
+.content-box-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.box-btn-inside {
+    width: 15vw;
+    color: black;
+}
+
+::ng-deep .mat-option {
+    color: black !important;
+    font-family: "Product Sans";
+    font-size: 16px !important;
+}
+
+::ng-deep .mat-select-panel {
+    background: $accentColor;
+}
+
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked,
+.mat-primary .mat-pseudo-checkbox-indeterminate {
+    background: black;
+}
+
+::ng-deep .mat-select-value {
+    color: $justWhite !important;
+}
+
+.content-box-in {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-img-in {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.box-img-in:hover {
+    overflow: hidden;
+    &:hover,
+    &:active,
+    &:focus {
+        animation: upLift ease-in-out 0.2s;
+        position: relative;
+        animation-fill-mode: both;
+    }
+}
+
+@keyframes upLift {
+    0% {
+        top: -1px;
+    }
+
+    100% {
+        top: -5px;
+    }
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: #1b171c;
+    box-shadow: 0px 4px 39px 0px $accentColor;
+}
+
+::ng-deep .mat-slide-toggle-thumb {
+    background-color: blue;
+    box-shadow: 0px 4px 39px 0px $accentColor;
+}
+
+@media only screen and (max-width: 1024px) {
+    .content-inside {
+        font-size: 80%;
+    }
+
+    .square {
+        font-size: 80%;
+        width: 90vw;
+    }
+
+    .logo {
+        max-width: 45%;
+    }
+
+    .label-info {
+        font-size: 12px;
+    }
+
+    .content-box-buttons {
+        align-items: flex-end !important;
+        flex-direction: column !important;
+    }
+
+    .content-box-in {
+        width: 100%;
+    }
+
+    .box-btn-inside {
+        font-size: 14px;
+        width: 90% !important;
+    }
+
+    .box-img-in {
+        position: relative;
+        left: 5px;
+    }
+
+    .mat-slide-toggle {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .iss-submit {
+        font-size: 14px;
+    }
+
+    .mat-error {
+        font-size: 9px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .btn-submit {
+        font-size: 12px;
+    }
+}

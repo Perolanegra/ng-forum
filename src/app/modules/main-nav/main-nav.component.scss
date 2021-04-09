@@ -1,4 +1,6 @@
-.example-container {
+@import "src/app/shared/style/variables";
+
+.main-nav-container {
   flex-direction: column;
   position: absolute;
   top: 0;
@@ -34,7 +36,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;  
-  color: #fff;
+  color: $justWhite;
 }
 
 .nav-item {
@@ -179,7 +181,7 @@
 }
 
 .btn-close-side-menu-mobile {
-  color: #fff;
+  color: $justWhite;
   outline: none;
   width: 95%;
   top: 10px;
@@ -204,7 +206,7 @@
 }
 
 .div-nav-item--active {
-  background: #E91E63;
+  background: $accentColor;
   width: 88%;
   border-radius: 0 20px 20px 0;
 }
@@ -212,10 +214,12 @@
 .div-nav-item--colapsed {
   margin-bottom: 25px;
   background: transparent;
+  outline: none;
 }
 
 .div-align-nav-item--active {
   margin-bottom: 6px;
+  outline: none;
 }
 
 .div-img-closed-icons--active {
@@ -223,11 +227,11 @@
   justify-content: center;
   width: 70%;
   border-radius: 8%;
-  background: #E91E63;
+  background: $accentColor;
   align-items: center;
   height: 44px;
   // filter: drop-shadow(5px 30px 18px red);
-  box-shadow: #E91E63 0px 5px 9px;
+  box-shadow: $accentColor 0px 5px 9px;
 }
 
 .img-closed-icons {
@@ -254,7 +258,7 @@ div#sideNavContainer:not(.div-nav-item--active):hover {
 }
 
 .nav-mobile--active {
-  background: #E91E63;
+  background: $accentColor;
   width: 88%;
   border-radius: 0 20px 20px 0;
   margin-bottom: 15px;
@@ -267,7 +271,7 @@ div#sideNavContainer:not(.div-nav-item--active):hover {
   border: none !important;
   box-shadow: none !important;
   margin-bottom: 15px;
-  color: #fff;
+  color: $justWhite;
   text-align: left;
 }
 

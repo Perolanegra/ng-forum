@@ -1,13 +1,16 @@
+@import "src/app/shared/style/variables";
+
 .toast-out {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #22262e;
+  background: $blueBlack;
   border-radius: 5px;
+  height: 100%;
 }
 .toast-in {
   display: flex;
-  background: #22262e;
+  background: $blueBlack;
   align-items: center;
   border-radius: 5px;
 }
@@ -19,16 +22,16 @@
   justify-content: left;
   align-items: baseline;
   text-align: center;
-  color: #fff;
+  color: $justWhite;
   font-family: 'Montserrat';
   text-align: left;
   padding-left: 35px;
 }
 
 .ball-web {
-  width: 24px;
+  width: 18px;
   border-radius: 50%;
-  height: 24px;
+  height: 18px;
   position: relative;
   top: 15px;
 }
@@ -53,7 +56,7 @@
 }
 
 .div-close-toast-btn {
-  color: #fff;
+  color: $justWhite;
   position: absolute;
   margin-left: 8%;
   top: 17px;
@@ -68,8 +71,9 @@
 .title-msg {
   font-family: 'Product Sans Light Regular';
   font-weight: 500;
-  color: #fff;
+  color: $justWhite;
   margin-bottom: 5px;
+  padding-right: 20px;
 }
 
 ::ng-deep .mat-dialog-container {
@@ -90,17 +94,17 @@
   outline: none;
   align-items: center;
   display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
   border-radius: 0px 5px 5px 0px;
   width: fit-content;
-  height: fit-content;
+  height: 100%;
 }
 
 .btn-close {
   outline: none;
   display: flex;
-  position: relative;
-  bottom: 25%;
-  color: #fff;
+  color: $justWhite;
   width: fit-content;
   right: 50%;
 }
@@ -114,7 +118,7 @@
 @media only screen and (max-width: 767px) {
   ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
     line-height: 24px;
-    color: #fff;
+    color: $justWhite;
     outline: none;
     font-size: 20px;
   }
@@ -124,22 +128,18 @@
 
   ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
     line-height: 24px;
-    color: #fff;
+    color: $justWhite;
     outline: none;
     font-size: 20px;
   }
-  
-
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px)  {
   ::ng-deep .mat-icon-button i, .mat-icon-button .mat-icon {
     line-height: 24px;
-    color: #fff;
+    color: $justWhite;
     outline: none;
     font-size: 20px;
   }
- 
-
 }
 

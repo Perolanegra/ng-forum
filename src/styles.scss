@@ -1,65 +1,147 @@
-html, body { height: 100%; background: #303030; overflow: hidden; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-@font-face {
-    font-family: 'Montserrat';
-    src: url('./assets/fonts/Montserrat-Regular.ttf'),
+html,
+body {
+    height: 100%;
+    background: #303030;
+    overflow: hidden;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-@font-face { font-family: 'Product Sans'; src: url('./assets/fonts/ProductSans-Regular.ttf') }
-@font-face { font-family: 'Product Sans Light Italic'; src: url('./assets/fonts/ProductSans-LightItalic.ttf') }
-@font-face { font-family: 'Product Sans Light Regular'; src: url('./assets/fonts/ProductSans-Light.ttf') }
-@font-face { font-family: 'Product Sans Black Regular'; src: url('./assets/fonts/ProductSans-Black.ttf') }
-@font-face { font-family: 'Product Sans Medium'; src: url('./assets/fonts/ProductSans-Medium.ttf') }
-@font-face { font-family: 'Montserrat Semi Bold'; src: url('./assets/fonts/Montserrat-SemiBold.ttf') }
-@font-face { font-family: 'Montserrat Medium'; src: url('./assets/fonts/Montserrat-Medium.ttf') }
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/fonts/Montserrat-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Product Sans";
+    src: url("./assets/fonts/ProductSans-Regular.ttf");
+}
+@font-face {
+    font-family: "Product Sans Light Italic";
+    src: url("./assets/fonts/ProductSans-LightItalic.ttf");
+}
+@font-face {
+    font-family: "Product Sans Light Regular";
+    src: url("./assets/fonts/ProductSans-Light.ttf");
+}
+@font-face {
+    font-family: "Product Sans Black Regular";
+    src: url("./assets/fonts/ProductSans-Black.ttf");
+}
+@font-face {
+    font-family: "Product Sans Medium";
+    src: url("./assets/fonts/ProductSans-Medium.ttf");
+}
+@font-face {
+    font-family: "Montserrat Semi Bold";
+    src: url("./assets/fonts/Montserrat-SemiBold.ttf");
+}
+@font-face {
+    font-family: "Montserrat Medium";
+    src: url("./assets/fonts/Montserrat-Medium.ttf");
+}
+
+@import "./src/app/shared/style/variables";
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,500&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,500,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,500,500i,700,700i&display=swap");
 
 
+@mixin multiline-ellipsis($font-size: 15px, $line-height: 1.5, $lines-to-show: 3, $background: transparent) {
+    background: $background;
+    display: block;
+    display: -webkit-box;
+    max-height: $font-size * $line-height * $lines-to-show;
+    -webkit-line-clamp: $lines-to-show;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: -o-ellipsis-lastline;
+}
 
 .accent-color {
-    color: #E91E63;
+    color: $accentColor;
 }
 
 .primary-color {
-    color: #fff;
+    color: $justWhite;
 }
 
 .base-color {
-    background-color: #303030;;
+    background-color: #303030;
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-	color: #E91E63;
+    color: $accentColor;
+}
+
+.flexbox-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexbox-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.space-beetween {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-items-baseline {
+    align-items: baseline;
+}
+
+.align-items-center {
+    align-items: center;
 }
 
 .font {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
 }
 
 .font-semi-bold {
-    font-family: 'Montserrat Semi Bold';
+    font-family: "Montserrat Semi Bold";
 }
 
 .product-sans-light {
-    font-family: 'Product Sans Light Regular';
+    font-family: "Product Sans Light Regular";
 }
 
 .fade-transition-in {
     transition: 0.4s;
     transition-timing-function: ease-in-out;
 }
-  
+
 .fade-transition-out {
     transition: 0.3s;
     transition-timing-function: ease-in-out;
 }
 
+.input-text {
+    font-family: "Montserrat";
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 1.125;
+    color: $justWhite;
+}
+
 .btn-submit {
-    font-family: 'Product Sans Black Regular';
-    font-size: 1rem;
-    background: #E91E63;
-    color: #22262e;
+    font-family: "Montserrat";
+    font-size: 14px;
+    background: $accentColor;
+    color: $blueBlack;
     outline: none !important;
+    font-weight: 600;
 }
 
 .disabled {
@@ -72,59 +154,184 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     pointer-events: auto;
 }
 
+.none {
+    display: none;
+}
+
 div#msg-error-ng-default {
     margin-bottom: 2px;
 }
 
 .text-link {
-    color: #fff;
-    font-family: 'Montserrat';
+    color: $justWhite;
+    font-family: "Montserrat";
     cursor: pointer;
 }
 
 .text-link:hover {
-    color: #E91E63;
+    color: $accentColor;
 }
-
 
 ::-webkit-scrollbar {
     width: 4px;
 }
-  
+
 /* Track */
 ::-webkit-scrollbar-track {
-    background: transparent; 
+    background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888; 
+    background: #888;
     border-radius: 50px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #555;
 }
 
-// .animate {
-//     animation-name: slide-right;
-//     animation-duration: 2s;
-//     animation-fill-mode: forwards;
-// }
+/* Issue Style */
 
-// @keyframes slide-right { // nome animacao
-//     from {
-//         margin-left: 0px;
-//     }
+.iss-content {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 
-//     50% {
-//         margin-left: 110px;
-//         opacity: 0.5;
-//     }
+.iss-content-row {
+    flex-direction: row !important;
+    align-items: center;
+}
 
-//     to {
-//         margin-left: 200px;
-//         opacity: 0.2;
-//     }
-// }
+.iss-title {
+    @include multiline-ellipsis(20px, 1.8, 2, transparent);
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 16px;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+}
+
+.iss-subtitle {
+    @include multiline-ellipsis();
+    max-width: 220px;
+    font-family: "Product Sans Light Regular";
+    cursor: pointer;
+}
+
+.iss-author {
+    padding-bottom: 2px;
+}
+
+.iss-img {
+    width: 3.5vw;
+    border-radius: 5px;
+}
+
+.iss-info {
+    padding-left: 15px;
+}
+
+.info-content {
+    max-width: fit-content;
+}
+
+.iss-stars {
+    color: $starColor;
+    fill: $starColor;
+    height: 13px;
+}
+
+.iss-stars-average {
+    top: 2px;
+    position: relative;
+    color: $justBlack;
+    font-size: 0.8rem;
+    left: 5.4px;
+    font-weight: bold;
+}
+
+.iss-posts {
+    color: $justBlack;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.iss-table-line {
+    color: $justBlack;
+    font-size: 0.8rem;
+    font-weight: bold;
+    &__svg {
+        width: 30px;
+        height: auto;
+    }
+    &__data {
+        top: 1px;
+        position: relative;
+        padding-right: 10px;
+    }
+}
+
+/* TAG Issue Style*/
+
+.iss-tags {
+    padding-top: 10px;
+    width: 100%;
+}
+
+.tag {
+    border-radius: 3px 0 0 3px;
+    color: white;
+    font-family: "Product Sans Light Regular";
+    font-weight: 500;
+    display: inline-block;
+    pointer-events: none;
+    height: auto;
+    line-height: 20px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;
+}
+
+.tag::before {
+    background: $justWhite;
+    border-radius: 10px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+    content: "";
+    height: 6px;
+    left: 10px;
+    position: absolute;
+    width: 6px;
+    top: 7px;
+}
+
+.tag::after {
+    background: $accentColor;
+    border-bottom: 9px solid transparent;
+    border-left: 8px solid #eee;
+    border-top: 11px solid transparent;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* LOGO Style */
+.logo-out {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    bottom: 2vh;
+}
+
+.logo-img {
+    max-width: 10vw;
+}
+
+// ************** TimePicker **********************

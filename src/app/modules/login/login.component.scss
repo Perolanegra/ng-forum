@@ -1,3 +1,6 @@
+
+@import "src/app/shared/style/variables";
+
 .out-login {
     display: flex;
     justify-content: center;
@@ -20,63 +23,60 @@ div.mat-form-field-infix ng-tns-c35-1 {
     margin-top: 10px;
     min-height: 44px;
     font-size: 20px;
-    color: #fff;
-    background: #E91E63;
+    color: $justWhite;
+    background: $accentColor;
 }
 
 .logo-out {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
+    bottom: unset !important;
 }
 
 .logo {
-    max-width: 250px;
+    max-width: 250px !important;
 }
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-	color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-form-field-label {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: #E91E63 !important;
+    color: $accentColor !important;
     opacity: 0.2 !important;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     opacity: 0.3;
-    color: #E91E63;
+    color: $accentColor;
 }
 
 ::ng-deep .mat-hint {
-    color: #fff;
+    color: $justWhite;
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0px 1000px #303030 inset !important;
-    font-family: 'Montserrat' !important;
+    font-family: "Montserrat" !important;
 }
 
 input:-webkit-autofill {
-    -webkit-text-fill-color: #fff !important;
-    color: #E91E63 !important;
-    font-family: 'Montserrat' !important;
+    -webkit-text-fill-color: $justWhite !important;
+    color: $accentColor !important;
+    font-family: "Montserrat" !important;
 }
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
-    border: 1.4px solid #E91E63;
+    border: 1.4px solid $accentColor;
 }
 
 .text-link-size {
@@ -97,7 +97,7 @@ input:-webkit-autofill {
     top: 3%;
     width: fit-content;
     cursor: pointer;
-    background: #E91E63;
+    background: $accentColor;
     border-radius: 50%;
     box-shadow: 5px 10px 9px #191919;
     transition: 0.2s;
@@ -105,11 +105,11 @@ input:-webkit-autofill {
 }
 
 .sign-up:hover {
-    background: #fff;
+    background: $justWhite;
 }
 
-svg { 
-    padding: 2px 0px 0px 8px; 
+svg {
+    padding: 2px 0px 0px 8px;
     filter: invert(13%) sepia(18%) saturate(544%) hue-rotate(181deg) brightness(93%) contrast(95%);
 }
 
@@ -118,89 +118,81 @@ svg:hover {
 }
 
 .btn-submit:hover {
-    background: #fff;
-    color: #E91E63;
+    background: $justWhite;
+    color: $accentColor;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
 
-*{
-    margin:0;
-    padding:0;
-  }
-  
-  body
-  {
-    overflow:hidden;
-    background:rgb(20,20,20);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-  }
-  .btn-sign-up
-  {
-    font-family:sans-serif;
-    color:white;
-    text-decoration:none;
-    text-transform:uppercase;
-    letter-spacing:2.8px;
-    background-color: #1b8bf9;
-    padding:15px 50px;
-    border-radius:5rem;
-    box-shadow: 1px 2.9px 16px rgba(27,139,249,0.4);
-    transition:0.6s cubic-bezier(0.01, 1.69,    0.99, 0.94); 
-  
-    &:hover
-    {box-shadow: 3px 4.9px 16px rgba(27,139,249,0.6);
-     letter-spacing:5px;
-  }
-    &--clicked
-    {
-      transition:0.6s cubic-bezier(0.01, 1.69, 0.99, 0.94); 
-      padding:15px 2px;
-      width:50px;
-      color:transparent;
-      z-index:-10;
-    }
-  }
-  
-  .color{
-    display:block;
-     width:0;
-    height:0;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    position:absolute;
-    transition:0.8s ease;
-     border-radius:50%;
-    background-color:transparent;
-  }
-  .expanded
-  {
+body {
     overflow: hidden;
-    width:250%;
-    padding-bottom:250%;
-    height:auto;
-  
-  }
-  $colors: (
-    red: #c5002d, // #1b8bf9 
-    pink: #E91E63,
+    background: rgb(20, 20, 20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.btn-sign-up {
+    font-family: sans-serif;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2.8px;
+    background-color: #1b8bf9;
+    padding: 15px 50px;
+    border-radius: 5rem;
+    box-shadow: 1px 2.9px 16px rgba(27, 139, 249, 0.4);
+    transition: 0.6s cubic-bezier(0.01, 1.69, 0.99, 0.94);
+
+    &:hover {
+        box-shadow: 3px 4.9px 16px rgba(27, 139, 249, 0.6);
+        letter-spacing: 5px;
+    }
+    &--clicked {
+        transition: 0.6s cubic-bezier(0.01, 1.69, 0.99, 0.94);
+        padding: 15px 2px;
+        width: 50px;
+        color: transparent;
+        z-index: -10;
+    }
+}
+
+.color {
+    display: block;
+    width: 0;
+    height: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    transition: 0.8s ease;
+    border-radius: 50%;
+    background-color: transparent;
+}
+.expanded {
+    overflow: hidden;
+    width: 250%;
+    padding-bottom: 250%;
+    height: auto;
+}
+$colors: (
+    red: #c5002d,
+    // #1b8bf9
+    pink: $accentColor,
     white: #f9f9f9,
     default: #303030,
-  );
-  $i:0.20s;
-  @each $colorName, $color in $colors {
-    
-    .color--#{''+$colorName} {
-      background-color: $color;
-      transition-delay:($i);
-      
+);
+$i: 0.2s;
+@each $colorName, $color in $colors {
+    .color--#{"" + $colorName} {
+        background-color: $color;
+        transition-delay: ($i);
     }
-    $i: $i + 0.20s;
-  }
-  
+    $i: $i + 0.2s;
+}
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
     padding: unset !important;

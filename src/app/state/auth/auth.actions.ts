@@ -4,10 +4,13 @@ export namespace AuthActions {
         static readonly type = '[Auth] Signin';
         constructor(public username: string, public password: string) { }
     }
-
     export class Signup {
         static readonly type = '[Auth] Signup';
         constructor(public payload: any) { }
+    }
+
+    export class RemoveStateSignup {
+        static readonly type = '[Auth] RemoveStateSignup';
     }
 
     export class RemoveAccess {

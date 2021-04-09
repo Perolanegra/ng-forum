@@ -1,0 +1,29 @@
+// Utilities
+// @import "../../style/variables";
+@import "src/app/shared/style/variables";
+
+.material-icons {
+    background: $accentColor;
+    color: white;
+    margin-left: 5px;
+    padding: 3px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.material-icons:hover {
+    background: $justWhite;
+    color: black;
+}
+
+.align-opts {
+    display: flex;
+    justify-content: flex-end;
+    padding: 3px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.opts {
+    box-shadow: $boxShadowGold;
+}

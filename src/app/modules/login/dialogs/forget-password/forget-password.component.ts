@@ -1,21 +1,21 @@
-import { Component, OnInit, Inject, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, Inject, Renderer2, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { NgDialogDefault } from 'src/app/core/ng-dialog';
+import { DialogDefault } from 'src/app/core/dialog-default';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AppController } from 'src/app/core/appController';
 import { Store, Select } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import { Observable, Subscription } from 'rxjs';
-import { ToastComponent } from '../../../../shared/components/toast/toast.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastComponent } from '../../../../shared/components/toast/toast.component';
 
 @Component({
   selector: 'ng-reset-password',
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.scss']
 })
-export class ForgetPasswordComponent extends NgDialogDefault implements OnInit, OnDestroy {
+export class ForgetPasswordComponent extends DialogDefault implements OnInit, OnDestroy {
 
   @Select(AuthState.forgotPassResponse) fPassResponse$: Observable<any>;
   private fPassResponseSubscription$: Subscription;
@@ -26,17 +26,15 @@ export class ForgetPasswordComponent extends NgDialogDefault implements OnInit, 
     protected dialog: MatDialog,
     protected appController: AppController,
     private store: Store,
-    protected spinner: NgxSpinnerService,
+    private spinner: NgxSpinnerService,
+    protected renderer: Renderer2,
     @Inject(MAT_DIALOG_DATA) public data) {
-    super(dialogRef, formBuilder, appController, false);
+    super(dialog, formBuilder, renderer, appController);
   }
 
   ngOnInit(): void {
-    this.setForm();
-  }
-
-  setForm() {
-    this._form.addControl("username", new FormControl(null, Validators.required));
+    this.setDialogForm();
+    this.dialogForm.addControl("username", new FormControl(null, Validators.required));
   }
 
   ngOnDestroy() {
@@ -53,30 +51,20 @@ export class ForgetPasswordComponent extends NgDialogDefault implements OnInit, 
     });
   }
 
-  submit(): void {
-    if (this._form.valid) {
-      this.hasClickSubmit = this._form.valid;
+  submit(): void { // centralizar no DialogDefault
+    if (this.dialogForm.valid) {
+      this.hasClickSubmit = this.dialogForm.valid;
       this.spinner.show();
-      this.store.dispatch(new AuthActions.ForgotPassword(this._form.get('username').value));
-      this._form.reset();
+      this.store.dispatch(new AuthActions.ForgotPassword(this.dialogForm.get('username').value));
+      this.dialogForm.reset();
       this.getResponse();
       setTimeout(() => this.hasClickSubmit = !this.hasClickSubmit, 2000);
     }
   }
-  
-  @HostListener('window:keyup.esc') exitByESC(): void {
-    this.close();
+
+  close() {
+    this.dialogRef.close();
+    this.hasClosed = true;
   }
 
-  public setErrorValidation() {
-    throw new Error("Method not implemented.");
-  }
-
-  public setComponentState() {
-    throw new Error("Method not implemented.");
-  }
-
-  public fillForm() {
-    throw new Error("Method not implemented.");
-  }
 }

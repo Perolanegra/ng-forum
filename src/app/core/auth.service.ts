@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -33,7 +33,9 @@ export class AuthService {
 
   getUserByToken(token: string): Observable<any> {
     const url = `${environment.server}/userByToken`;
+
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
     return this.http.get(url, { headers });
   }
 

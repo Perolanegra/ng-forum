@@ -10,10 +10,10 @@ export class AppAutofillOffDirective {
 
   ngOnInit() {
     if (this._chrome) {
-      if (this.elRef.nativeElement.getAttribute('autocomplete') === 'on') {
+      if (this.elRef.nativeElement.getAttribute('autocomplete') === 'off') {
         this.ngZone.runOutsideAngular(() => {
           setTimeout(() => {
-            this.elRef.nativeElement.setAttribute('autocomplete', 'off');
+            this.elRef.nativeElement.setAttribute('autocomplete', 'offoff');
           });
         });
       }

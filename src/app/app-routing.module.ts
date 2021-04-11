@@ -1,64 +1,38 @@
-import { Routes, RouterModule } from "@angular/router";
-import { LoginComponent } from "./modules/login/login.component";
-import { NoAuthGuard } from "./shared/guards/no-auth.guard";
-import { LoginAuthGuard } from "./shared/guards/login-auth.guard";
-import { ResetPasswordGuard } from "./shared/guards/reset-pass.guard";
+import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './modules/login/login.component';
+import { TestGuard } from './shared/guards/test.guard';
+import { NoAuthGuard } from './shared/guards/no-auth.guard';
+import { LoginAuthGuard } from './shared/guards/login-auth.guard';
+import { ResetPasswordGuard } from './shared/guards/reset-pass.guard';
 
 const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "login" },
-  { path: "login", component: LoginComponent, canActivate: [LoginAuthGuard] },
-
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: 'login', component: LoginComponent, canActivate: [LoginAuthGuard]  }, 
   {
-    path: "home",
-    loadChildren: () =>
-      import("./modules/home/home.module").then((m) => m.HomeModule),
-    canActivate: [NoAuthGuard],
+    path: 'home',
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
+    canActivate: [NoAuthGuard] 
   },
   {
-    path: "profile",
-    loadChildren: () =>
-      import("./modules/profile/profile.module").then((m) => m.ProfileModule),
-    canActivate: [NoAuthGuard],
+    path: 'profile',
+    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule),
+    canActivate: [TestGuard] 
   },
   {
-    path: "reset-password",
-    loadChildren: () =>
-      import("./modules/reset-password/reset-password.module").then(
-        (m) => m.ResetPasswordModule
-      ),
-    canActivate: [ResetPasswordGuard],
+    path: 'reset-password',
+    loadChildren: () => import('./modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule),
+    canActivate: [ResetPasswordGuard] 
   },
   {
-    path: "sign-up",
-    loadChildren: () =>
-      import("./modules/sign-up/sign-up.module").then((m) => m.SignUpModule),
-    canActivate: [NoAuthGuard],
+    path: 'sign-up',
+    loadChildren: () => import('./modules/sign-up/sign-up.module').then(m => m.SignUpModule),
+    canActivate: [NoAuthGuard] 
   },
-  {
-    path: "issues",
-    loadChildren: () =>
-      import("./modules/issues/issues.module").then((m) => m.IssuesModule),
-    canActivate: [NoAuthGuard],
-  },
-  {
-    path: "configs",
-    loadChildren: () =>
-      import("./modules/configs/configs.module").then((m) => m.ConfigsModule),
-    canActivate: [NoAuthGuard],
-  },
-  {
-    path: "not-found",
-    loadChildren: () =>
-      import("./modules/not-found/not-found.module").then((m) => m.NotFoundModule),
-    canActivate: [NoAuthGuard],
-  },
-  {
-    path: "**",
-    redirectTo: '/not-found'
-  },
+  
 ];
 
-export const AppRoutingModule = RouterModule.forRoot(routes, {
-  useHash: true,
-  onSameUrlNavigation: "reload",
-});
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes)],
+//   exports: [RouterModule]
+// })
+export const AppRoutingModule = RouterModule.forRoot(routes, { useHash: true, onSameUrlNavigation: 'reload' });

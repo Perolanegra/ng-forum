@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
-import { AppActions } from 'src/app/state/app/app.actions';
 import { NgDefault } from 'src/app/core/pattern/ng-default';
+import { AppActions } from 'src/app/shared/state/app.actions';
 import { AppController } from 'src/app/core/appController';
 
 @Component({
-  selector: 'ng-home',
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -17,9 +17,9 @@ export class HomeComponent extends NgDefault implements OnInit {
     protected router: Router,
     private store: Store,
     protected route: ActivatedRoute,
-    protected appController: AppController,
+    private appController: AppController,
   ) {
-    super(appController, route);
+    super();
 
   }
 

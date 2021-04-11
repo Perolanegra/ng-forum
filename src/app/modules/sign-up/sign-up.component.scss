@@ -1,5 +1,3 @@
-@import "src/app/shared/style/variables";
-
 .content {
     display: flex;
     justify-content: center;
@@ -17,8 +15,8 @@
 }
 
 .square {
-    color: $justWhite;
-    background: $blueBlack;
+    color: #fff;
+    background: #22262e;
     padding: 5vh;
     border-radius: 2%;
     border: transparent;
@@ -35,38 +33,50 @@
     flex-direction: column;
 }
 
+.logo-out {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    bottom: 2vh;
+}
+
+.logo {
+    max-width: 13vw;
+}
+
 .label-info {
     margin-bottom: 6%;
 }
 
 ::ng-deep .mat-hint {
-    color: $justWhite;
+    color: #fff;
 }
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
-    border: 1.4px solid $justWhite;
+    border: 1.4px solid #fff;
 }
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-	color: $justWhite;
+	color: #fff;
 }
 
 ::ng-deep .mat-form-field-label {
-    color: $justWhite;
+    color: #fff;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-    color: $justWhite;
+    color: #fff;
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: $justWhite !important;
+    color: #fff !important;
     opacity: 0.2 !important;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     opacity: 0.3;
-    color: $justWhite;
+    color: #fff;
 }
 
 @media only screen and (max-width: 1024px) {

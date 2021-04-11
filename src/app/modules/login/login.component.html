@@ -1,67 +1,66 @@
 <div class="out-login base-color">
-        <div class="logo-out">
-            <img class="logo-img" [src]="logo">
-        </div>
-    
-        <form [formGroup]="_form" (ngSubmit)="submit()">
-            <div class="login">
-                <mat-form-field appearance="outline" class="fade-transition-in font"
-                    [style.padding-bottom]="styleFormFieldObject?.username?.paddingBottom">
-                    <mat-label>Username</mat-label>
-                    <input matInput class="font" autocomplete='off' formControlName="username" maxlength="35" minlength="2"
-                        type="text" required ngAutofillOff>
-                    <mat-error>
-                        <ng-input-error (indexLastErrorField)="setPadding($event, '1.7');" [control]="_form.controls?.username"
-                            [controlName]="'username'" [errorMsgs]="errorMsgs?.username">
-                        </ng-input-error>
-                    </mat-error>
-                </mat-form-field>
-    
-                <mat-form-field class="fade-transition-in font" appearance="outline" hintLabel="Mínimo de 8 caracteres"
-                    style="display: flex;" [style.padding-bottom]="styleFormFieldObject?.password?.paddingBottom">
-                    <mat-label>Password</mat-label>
-                    <input matInput #input type="password" required [type]="hide1 ? 'password' : 'text'"
-                        formControlName="password" maxlength="20" />
-                    <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide1 = !hide1"
-                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
-                        <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </mat-icon-button>
-                    <mat-hint class="primary-color" align="end">{{input.value?.length || 0}} / 8</mat-hint>
-                    <mat-error>
-                        <ng-input-error (indexLastErrorField)="setPadding($event, '0.2');" [control]="_form.controls?.password"
-                            [controlName]="'password'" [errorMsgs]="errorMsgs?.password">
-                        </ng-input-error>
-                    </mat-error>
-                </mat-form-field>
-    
-                <div class="fade-transition-in text-link text-link-size forget-pass" (click)="openForgotPass()">
-                    Esqueceu a senha?
-                </div>
-    
-                <button mat-raised-button class="btn-submit fade-transition-in" cdkFocusInitial
-                    [ngClass]="[ hasClickSubmit && input.value?.length >= 8 ? 'disabled' : 'enabled' ]">Acessar</button>
-    
-                <span class='color color--red' data-value='1'></span>
-                <span class='color color--pink' data-value='1'></span>
-                <span class='color color--white' data-value='1'></span>
-                <span class='color color--default' data-value='1'></span>
+    <div class="logo-out">
+        <img class="logo" src="/ng-forum/assets/imgs/logo.png">
+    </div>
+
+    <form [formGroup]="_form" (ngSubmit)="submit()">
+        <div class="login">
+            <mat-form-field appearance="outline" class="fade-transition-in font"
+                [style.padding-bottom]="styleFormFieldObject?.username?.paddingBottom">
+                <mat-label>Username</mat-label>
+                <input matInput class="font" autocomplete='off' formControlName="username" maxlength="35" minlength="2"
+                    type="text" required ngAutofillOff>
+                <mat-error>
+                    <ng-input-error (indexLastErrorField)="setPadding($event);" [control]="_form.controls?.username"
+                        [controlName]="'username'" [errorMsgs]="errorMsgs?.username">
+                    </ng-input-error>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="fade-transition-in font" appearance="outline" hintLabel="Mínimo de 8 caracteres"
+                style="display: flex;" [style.padding-bottom]="styleFormFieldObject?.password?.paddingBottom">
+                <mat-label>Password</mat-label>
+                <input matInput #input type="password" required [type]="hide1 ? 'password' : 'text'"
+                    formControlName="password" maxlength="10" />
+                <mat-icon-button style="cursor: pointer; color: white;" matSuffix (click)="hide1 = !hide1"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+                    <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-icon-button>
+                <mat-hint class="primary-color" align="end">{{input.value?.length || 0}} / 8</mat-hint>
+                <mat-error>
+                    <ng-input-error (indexLastErrorField)="setPadding($event);" [control]="_form.controls?.password"
+                        [controlName]="'password'" [errorMsgs]="errorMsgs?.password">
+                    </ng-input-error>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="fade-transition-in text-link text-link-size forget-pass" (click)="openForgotPass()">
+                Esqueceu a senha?
             </div>
-        </form>
-    
-        <div *ngIf="hasMobileMatches; else itsWeb" #signupMobile
-            class="fade-transition-in text-link text-link-size register" (click)="onClickSignUp(signupMobile)">
-            Registrar
+
+            <button mat-raised-button class="btn-submit fade-transition-in" cdkFocusInitial
+                [ngClass]="[ hasClickSubmit && input.value?.length >= 8 ? 'disabled' : 'enabled' ]">Acessar</button>
+
+            <span class='color color--red' data-value='1'></span>
+            <span class='color color--pink' data-value='1'></span>
+            <span class='color color--white' data-value='1'></span>
+            <span class='color color--default' data-value='1'></span>
         </div>
-    
-        <ng-template #itsWeb>
-            <div class="sign-up" #signupWeb (click)="onClickSignUp(signupWeb)">
-                <svg id="Solid" viewBox="0 0 550 550" width="4vw" height="4vw" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m272 384a96 96 0 1 0 96-96 96.108 96.108 0 0 0 -96 96zm40-8h48v-48a8 8 0 0 1 16 0v48h48a8 8 0 0 1 0 16h-48v48a8 8 0 0 1 -16 0v-48h-48a8 8 0 0 1 0-16z" />
-                    <path
-                        d="m272.6 442.613a111.947 111.947 0 0 1 71.217-167.976c-31.117-42.497-77.107-66.637-127.817-66.637-45.522 0-87.578 19.485-118.42 54.865-31.063 35.633-48.567 85.3-49.538 140.291 18.365 9.261 93.77 44.844 167.958 44.844a312.1 312.1 0 0 0 56.6-5.387z" />
-                    <circle cx="216" cy="112" r="80" />
-                </svg>
-            </div>
-        </ng-template>
+    </form>
+
+    <div *ngIf="hasMobileMatches; else itsWeb" #signupMobile
+        class="fade-transition-in text-link text-link-size register" (click)="onClickSignUp(signupMobile)">
+        Registrar
+    </div>
+
+    <ng-template #itsWeb>
+        <div class="sign-up" #signupWeb (click)="onClickSignUp(signupWeb)">
+            <svg id="Solid" viewBox="0 0 550 550" width="4vw" height="4vw" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="m272 384a96 96 0 1 0 96-96 96.108 96.108 0 0 0 -96 96zm40-8h48v-48a8 8 0 0 1 16 0v48h48a8 8 0 0 1 0 16h-48v48a8 8 0 0 1 -16 0v-48h-48a8 8 0 0 1 0-16z" />
+                <path
+                    d="m272.6 442.613a111.947 111.947 0 0 1 71.217-167.976c-31.117-42.497-77.107-66.637-127.817-66.637-45.522 0-87.578 19.485-118.42 54.865-31.063 35.633-48.567 85.3-49.538 140.291 18.365 9.261 93.77 44.844 167.958 44.844a312.1 312.1 0 0 0 56.6-5.387z" />
+                <circle cx="216" cy="112" r="80" /></svg>
+        </div>
+    </ng-template>
 </div>

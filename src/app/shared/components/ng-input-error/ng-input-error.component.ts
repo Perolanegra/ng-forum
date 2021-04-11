@@ -20,12 +20,10 @@ export class NgInputErrorComponent {
 
     emitLastErrorField(index, type) {
         if(this.control.hasError(type)) {
-            
             const dataResp = {
                 controlName: this.controlName,
                 index: index
             };
-            
             this.indexLastErrorField.next(dataResp);
         }
 

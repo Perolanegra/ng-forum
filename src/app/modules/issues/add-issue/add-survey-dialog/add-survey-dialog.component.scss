@@ -41,7 +41,7 @@
     font-size: inherit;
     font-weight: 400;
     line-height: 1.125;
-    color: #fff;
+    color: $justWhite;
 }
 
 .closing-date {
@@ -58,12 +58,12 @@
 ::ng-deep .mat-datepicker-toggle,
 .mat-datepicker-content .mat-calendar-next-button,
 .mat-datepicker-content .mat-calendar-previous-button {
-    color: #fff;
+    color: $justWhite;
     opacity: 0.7;
 }
 
 ::ng-deep .mat-calendar-body-cell-content {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-datepicker-content .mat-calendar {
@@ -86,17 +86,17 @@
 }
 
 ::ng-deep .mat-calendar-body-label {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-calendar-table-header {
-    color: #fff;
+    color: $justWhite;
     opacity: 0.6;
 }
 
 ::ng-deep .mat-calendar-period-button {
     opacity: 0.8;
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-calendar-arrow {
@@ -129,7 +129,7 @@
 }
 
 .timepickerIcon {
-    color: #fff;
+    color: $justWhite;
     opacity: 0.7;
 }
 
@@ -150,7 +150,7 @@
 }
 
 ::ng-deep .timepicker-button {
-    color: #fff !important;
+    color: $justWhite !important;
     opacity: 0.8;
 }
 
@@ -170,7 +170,7 @@
 }
 
 ::ng-deep .clock-face__number--outer > span {
-    color: #fff !important;
+    color: $justWhite !important;
 }
 
 ::ng-deep .clock-face__clock-hand {
@@ -190,7 +190,7 @@
 
 ::ng-deep .timepicker-dial__control:valid {
     background-color: $blueBlack !important;
-    color: #fff !important;
+    color: $justWhite !important;
 }
 
 // ********************** Fim Configurações timePicker ************************

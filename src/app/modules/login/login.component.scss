@@ -23,7 +23,7 @@ div.mat-form-field-infix ng-tns-c35-1 {
     margin-top: 10px;
     min-height: 44px;
     font-size: 20px;
-    color: #fff;
+    color: $justWhite;
     background: $accentColor;
 }
 
@@ -36,15 +36,15 @@ div.mat-form-field-infix ng-tns-c35-1 {
 }
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-form-field-label {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-    color: #fff;
+    color: $justWhite;
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
@@ -58,7 +58,7 @@ div.mat-form-field-infix ng-tns-c35-1 {
 }
 
 ::ng-deep .mat-hint {
-    color: #fff;
+    color: $justWhite;
 }
 
 input:-webkit-autofill,
@@ -70,7 +70,7 @@ input:-webkit-autofill:active {
 }
 
 input:-webkit-autofill {
-    -webkit-text-fill-color: #fff !important;
+    -webkit-text-fill-color: $justWhite !important;
     color: $accentColor !important;
     font-family: "Montserrat" !important;
 }
@@ -105,7 +105,7 @@ input:-webkit-autofill {
 }
 
 .sign-up:hover {
-    background: #fff;
+    background: $justWhite;
 }
 
 svg {
@@ -118,7 +118,7 @@ svg:hover {
 }
 
 .btn-submit:hover {
-    background: #fff;
+    background: $justWhite;
     color: $accentColor;
 }
 

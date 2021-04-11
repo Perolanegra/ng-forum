@@ -12,10 +12,10 @@ export class IssuesService {
   constructor(private http: HttpClient) {}
 
   public getWithPagination(
-    paginate: number
+    pagination: number
   ): Observable<IssuesModel[] | undefined> {
     const url = `${environment.server}/${Constants.defaultPattern.nestPath.issues.getWithPagination}`;
-    const params = new HttpParams().set("paginate", paginate.toString());
+    const params = new HttpParams().set("pagination", pagination.toString());
     return this.http.get(url, { params: params }) as Observable<IssuesModel[]>;
   }
 

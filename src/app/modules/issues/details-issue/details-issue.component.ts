@@ -27,11 +27,19 @@ export class DetailsIssueComponent extends NgDetails implements OnInit {
     setTimeout(() => {
       this.markView()
     }, 800);
+
+    // if(this.route.snapshot.params['hasPoll']) {
+    //   this.setPollComponent()
+    // }
   }
 
   markView() {
     this.store.dispatch(new IssueActions.MarkView({ id_issue: +this.route.snapshot.params['id'] }))
   }
+
+  // setPollComponent() {
+
+  // }
 
   getHtml(payload: any): string {
     throw new Error("Method not implemented.");

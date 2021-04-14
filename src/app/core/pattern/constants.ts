@@ -15,7 +15,7 @@ export class Constants {
                 details: 'issues/details/'
             }
         },
-        nestPath: {
+        rest: {
             issues: {
                 store: 'issues/store',
                 getWithPagination: 'issues/list',

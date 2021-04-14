@@ -89,16 +89,12 @@ export class AuthState extends NgxsDataRepository<AuthStateModel> {
     }
 
     @Action(AuthActions.Signup)
-    async setStateSignUp({ getState, setState }: StateContext<AuthStateModel>, { payload }: AuthActions.Signup) {
+    async setStateSignUp({ patchState }: StateContext<AuthStateModel>, { payload }: AuthActions.Signup) {
 
         const data: any = await this.authService.signUp(payload).toPromise();
 
         if (data) {
-            const state = getState();
-            setState({
-                ...state,
-                signUpResponse: data
-            });
+            patchState({ signUpResponse: data })
         }
     }
 

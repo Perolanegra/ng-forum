@@ -11,13 +11,14 @@ import { Store } from "@ngxs/store";
 import { AuthActions } from "src/app/state/auth/auth.actions";
 import { AppController } from "src/app/core/appController";
 import { ToastComponent } from "../components/toast/toast.component";
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
+import { AuthState } from 'src/app/state/auth/auth.state';
 
 @Injectable({
   providedIn: "root",
 })
 export class ResetPasswordGuard implements CanActivate {
   private hasntAlreadyReseted: boolean;
-  private token: string;
 
   constructor(
     private store: Store,
@@ -27,7 +28,6 @@ export class ResetPasswordGuard implements CanActivate {
   ) {
     this.store.select((state) => {
       this.hasntAlreadyReseted = state.auth.hasResetPass;
-      this.token = state.auth.token;
     });
   }
 
@@ -35,9 +35,6 @@ export class ResetPasswordGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
-    if (!this.token) {
-      this.appController.navigate("login");
-    }
 
     const url = window.location.href;
     const index = url.indexOf("bnag=");

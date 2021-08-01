@@ -3,7 +3,6 @@ import { LoginComponent } from "./modules/login/login.component";
 import { NoAuthGuard } from "./shared/guards/no-auth.guard";
 import { LoginAuthGuard } from "./shared/guards/login-auth.guard";
 import { ResetPasswordGuard } from "./shared/guards/reset-pass.guard";
-import { TesteComponent } from "./modules/teste/teste.component";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },

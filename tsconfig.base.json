@@ -20,6 +20,12 @@
     ],
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "paths": {
+      "dinamic-form-inputs": [
+        "dist/dinamic-form-inputs/dinamic-form-inputs",
+        "dist/dinamic-form-inputs"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

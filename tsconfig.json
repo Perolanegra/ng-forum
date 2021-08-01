@@ -12,12 +12,6 @@
     },
     {
       "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/dinamic-form-inputs/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/dinamic-form-inputs/tsconfig.spec.json"
     }
   ]
 }

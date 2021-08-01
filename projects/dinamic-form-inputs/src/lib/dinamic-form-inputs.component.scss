@@ -1,0 +1,65 @@
+.form-out {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.add-subject-btn {
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+}
+
+.align-select-subject {
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+}
+
+.input-group-prepend .btn,
+.input-group-append .btn {
+    top: -0.1px;
+    padding: 0.25rem 1rem !important;
+}
+
+.mat-icon#addSubject {
+    position: relative;
+    top: 3px;
+}
+
+.input-select-form-field {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+}
+
+.input-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    border: 1px solid #b5b5c3;
+    margin-left: 5px;
+}
+
+.box-select-btn-more {
+    display: flex;
+    align-items: center;
+}
+
+.box-field {
+    padding-left: unset;
+    padding-right: 24px;
+    min-width: 25%;
+}
+
+.box-btn-add {
+    display: flex;
+    align-items: center;
+}
+
+.input-date {
+    width: 100%;
+    border: none;
+    color: #000;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}

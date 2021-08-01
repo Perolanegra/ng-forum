@@ -31,7 +31,6 @@ import { AppNavNameBehaviorDirective } from './core/app-nav-name-behavior.direct
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ForgetPasswordComponent } from './modules/login/dialogs/forget-password/forget-password.component';
 
-import { TesteComponent } from './modules/teste/teste.component';
 import { FormsModule } from '@angular/forms';
 import { ChatModule } from './modules/chat/chat.module';
 import { GlobalVars } from './core/globalVars';

@@ -49,12 +49,14 @@ const routes: Routes = [
   {
     path: "not-found",
     loadChildren: () =>
-      import("./modules/not-found/not-found.module").then((m) => m.NotFoundModule),
+      import("./modules/not-found/not-found.module").then(
+        (m) => m.NotFoundModule
+      ),
     canActivate: [NoAuthGuard],
   },
   {
     path: "**",
-    redirectTo: '/not-found'
+    redirectTo: "/not-found",
   },
 ];
 

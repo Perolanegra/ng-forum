@@ -150,6 +150,46 @@
           }
         }
       }
+    },
+    "dinamic-form-inputs": {
+      "projectType": "library",
+      "root": "projects/dinamic-form-inputs",
+      "sourceRoot": "projects/dinamic-form-inputs/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/dinamic-form-inputs/tsconfig.lib.json",
+            "project": "projects/dinamic-form-inputs/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dinamic-form-inputs/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dinamic-form-inputs/src/test.ts",
+            "tsConfig": "projects/dinamic-form-inputs/tsconfig.spec.json",
+            "karmaConfig": "projects/dinamic-form-inputs/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dinamic-form-inputs/tsconfig.lib.json",
+              "projects/dinamic-form-inputs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-forum"

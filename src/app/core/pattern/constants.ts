@@ -15,12 +15,13 @@ export class Constants {
                 details: 'issues/details/'
             }
         },
-        nestPath: {
+        rest: {
             issues: {
                 store: 'issues/store',
                 getWithPagination: 'issues/list',
                 getDetailsById: 'issues/detail',
-                getPollDetailById: 'issues/detail/poll'
+                getPollDetailById: 'issues/detail/poll',
+                markView: 'issues/views/mark'
             }
         }
     };

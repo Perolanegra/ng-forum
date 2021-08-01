@@ -14,6 +14,7 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { ConfirmDialogComponent } from "./components/confirm-dialog/confirm-dialog.component";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { MatIconModule } from "@angular/material/icon";
+import { DinamicFormInputsModule } from "dinamic-form-inputs";
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +24,7 @@ import { MatIconModule } from "@angular/material/icon";
     NgxSkeletonLoaderModule,
     NgxMaterialTimepickerModule,
     MatIconModule,
+    DinamicFormInputsModule,
     // MatAutocompleteModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -47,6 +49,7 @@ import { MatIconModule } from "@angular/material/icon";
     TableHeaderComponent,
     SafeHtmlPipe,
     MatIconModule,
+    DinamicFormInputsModule,
   ],
   entryComponents: [ToastComponent, ConfirmDialogComponent],
 })

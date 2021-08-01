@@ -3,6 +3,7 @@ import { LoginComponent } from "./modules/login/login.component";
 import { NoAuthGuard } from "./shared/guards/no-auth.guard";
 import { LoginAuthGuard } from "./shared/guards/login-auth.guard";
 import { ResetPasswordGuard } from "./shared/guards/reset-pass.guard";
+import { TesteComponent } from "./modules/teste/teste.component";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
@@ -49,12 +50,19 @@ const routes: Routes = [
   {
     path: "not-found",
     loadChildren: () =>
-      import("./modules/not-found/not-found.module").then((m) => m.NotFoundModule),
+      import("./modules/not-found/not-found.module").then(
+        (m) => m.NotFoundModule
+      ),
+    canActivate: [NoAuthGuard],
+  },
+  {
+    path: "dev",
+    component: TesteComponent,
     canActivate: [NoAuthGuard],
   },
   {
     path: "**",
-    redirectTo: '/not-found'
+    redirectTo: "/not-found",
   },
 ];
 

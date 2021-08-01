@@ -56,11 +56,6 @@ const routes: Routes = [
     canActivate: [NoAuthGuard],
   },
   {
-    path: "dev",
-    component: TesteComponent,
-    canActivate: [NoAuthGuard],
-  },
-  {
     path: "**",
     redirectTo: "/not-found",
   },

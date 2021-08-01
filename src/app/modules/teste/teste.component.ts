@@ -1,29 +1,84 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
+  FormControl,
+  Validators,
 } from "@angular/forms";
-
+/**
+ * A lib possui seletores na view para inserção de conteúdo.
+ *
+ *  A divisão é feita da seguinte forma:
+ *
+ * Identifier: preHeader (Localizado antes do título do Form)
+ *
+ * Identifier: header (Localizado antes do Form, logo após o título)
+ *
+ * Identifier: bodyBeforeFooter (Localizado após o Form)
+ *
+ * Identifier: footerBtns (Localizado após o Body, ao final da página)
+ */
 @Component({
   selector: "ng-dev",
   templateUrl: "./teste.component.html",
   styleUrls: ["./teste.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TesteComponent implements OnInit {
   @Input() data: any;
   // tslint:disable-next-line: variable-name
-  _form: FormGroup;
+  protected _form: FormGroup;
 
-  hasEdit: boolean;
+  @Input() hasEdit: boolean;
+  @Output() stateOpenChanged: EventEmitter<any> = new EventEmitter();
+  @Output() stateAddItem: EventEmitter<any> = new EventEmitter();
+  @Output() stateOnSelectedValue: EventEmitter<any> = new EventEmitter();
+  @Output() stateSubmit: EventEmitter<any> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) {
     this._form = this.formBuilder.group({});
   }
+
   ngOnInit(): void {
-    throw new Error("Method not implemented.");
+    this.setComponentState();
   }
 
-  addItem(item) {}
+  setComponentState(): void {
+    this.addControlData();
+  }
+
+  addControlData(): void {
+    (this.data.fields as Array<any>).forEach((field: any) => {
+      this._form.addControl(
+        field.formControlName,
+        new FormControl(
+          {
+            value: field.type === "select" && field.hasMulti ? [] : "",
+            disabled: field.type === "date",
+          },
+          Validators.required
+        )
+      );
+    });
+    this.data.hasSearch
+      ? this._form.addControl("searchWord", new FormControl(null))
+      : "";
+  }
+
+  /**
+   * Método responsável por manipular o estado do control após botão de adicionar for clicado.
+   * @param item item que será capturado e emitido para o seu componente toda vez que o botão + for disparado.
+   */
+  addItem(item): void {
+    this.stateAddItem.emit({ item });
+  }
 
   /**
    * Emite os seguintes parâmetros em um único objeto para manipulação do valor selecionado.
@@ -33,12 +88,34 @@ export class TesteComponent implements OnInit {
    * @param value o valor da opção selecionada.
    * @param hasMultiSelection Se o control for seleção múltipla retorna true.
    */
-  onSelectValue(item, index, selected, value, hasMultiSelection) {}
+  onSelectValue(item, index, selected, value, hasMultiSelection): void {
+    this.stateOnSelectedValue.emit({
+      item,
+      index,
+      selected,
+      value,
+      hasMultiSelection,
+    });
+  }
 
   /**
    * Emite os seguintes parâmetros em um único objeto para manipulação do valor após select aberto.
    * @param event evento recebido pelo select.
    * @param item item passado da iteração.
    */
-  hasOpenedChange(event, item) {}
+  hasOpenedChange(event, item): void {
+    this.stateOpenChanged.emit({ event, item });
+  }
+
+  submit(): void {
+    this.stateSubmit.emit(JSON.parse(JSON.stringify(this._form.value)));
+  }
+
+  get formControls(): any {
+    return this._form.controls;
+  }
+
+  get form(): any {
+    return this._form;
+  }
 }

@@ -1,120 +1,155 @@
-<h4 class="step-title-in">
-  {{ data?.title }}
-</h4>
-<form [formGroup]="_form">
-  <div class="form-out">
-    <div
-      *ngFor="let item of data; let i = index"
-      style="padding-left: unset; padding-right: 24px"
-      [class]="item?.class"
-    >
-      <span *ngIf="item?.type === 'select'">
-        <div class="form-group">
-          <label>{{ item?.field }} </label>
-          <div style="display: flex">
-            <mat-select
-              (openedChange)="hasOpenedChange($event)"
-              matInput
-              [placeholder]="'Selecione'"
-              [multiple]="item?.hasMulti"
-              [formControlName]="item?.formControlName"
-              class="form-control"
-              required
-            >
-              <div
-                *ngIf="item.active"
-                style="display: none"
-                class="input-select-form-field"
+<div style="padding: 20px">
+  <ng-content select="[preHeader]"></ng-content>
+  <h4 class="title-first">
+    {{ data?.title }}
+  </h4>
+  <ng-content select="[header]"></ng-content>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-out">
+      <div
+        *ngFor="let item of data?.fields; let i = index"
+        [class]="item?.class"
+        class="box-field"
+      >
+        <span *ngIf="item?.type === 'select'">
+          <div class="form-group">
+            <label>{{ item?.field }} </label>
+            <div class="box-select-btn-more">
+              <mat-select
+                (openedChange)="hasOpenedChange($event, item)"
+                matInput
+                [placeholder]="'Selecione'"
+                [multiple]="item?.hasMulti"
+                [formControlName]="item?.formControlName"
+                class="form-control"
+                required
               >
-                <input
-                  autocomplete="off"
-                  matInput
-                  type="text"
-                  formControlName="searchWord"
-                  placeholder="Pesquise"
-                  (keydown)="$event.stopPropagation()"
-                  class="input-select"
-                />
-                <button
-                  style="position: fixed; top: 0; right: 0"
-                  *ngIf="_form.controls.searchWord.value"
-                  matSuffix
-                  mat-icon-button
-                  aria-label="Clear"
-                  (click)="_form.controls.searchWord.setValue('')"
+                <div
+                  *ngIf="item.active"
+                  style="display: none"
+                  class="input-select-form-field"
                 >
-                  <mat-icon>close</mat-icon>
-                </button>
+                  <input
+                    autocomplete="off"
+                    matInput
+                    type="text"
+                    formControlName="searchWord"
+                    placeholder="Pesquise"
+                    (keydown)="$event.stopPropagation()"
+                    class="input-select"
+                  />
+                  <button
+                    style="position: fixed; top: 0; right: 0"
+                    *ngIf="formControls.searchWord.value"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="formControls.searchWord.setValue('')"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+                <mat-option
+                  #matOption
+                  class="pattern-font-13px"
+                  *ngFor="let opt of item?.optsField"
+                  [value]="opt?.id"
+                  (click)="
+                    onSelectValue(
+                      item,
+                      i,
+                      matOption.selected,
+                      matOption.value,
+                      item?.hasMulti
+                    )
+                  "
+                >
+                  {{ opt?.value }}
+                </mat-option>
+              </mat-select>
+              <div class="input-group-append" *ngIf="item?.hasSideBtnMore">
+                <a class="btn btn-primary add-subject-btn">
+                  <mat-icon (click)="addItem(item)">{{ "add" }}</mat-icon>
+                </a>
               </div>
-              <mat-option
-                #matOption
-                class="pattern-font-13px"
-                *ngFor="let opt of item?.optsField"
-                [value]="opt?.id"
-                (click)="
-                  onSelectValue(
-                    item,
-                    i,
-                    matOption.selected,
-                    matOption.value,
-                    item?.hasMulti
-                  )
-                "
-              >
-                {{ opt?.value }}
-              </mat-option>
-            </mat-select>
-            <div class="input-group-append" *ngIf="item?.formControlName">
-              <a class="btn btn-primary add-subject-btn">
-                <mat-icon id="addSubject" (click)="addItem(item)">{{
-                  "add"
-                }}</mat-icon>
-              </a>
             </div>
           </div>
-        </div>
-      </span>
+        </span>
 
-      <span *ngIf="item.type === 'date'">
-        <div class="form-group">
-          <label>{{ item.field }}:</label>
-          <input
-            tabindex="-1"
-            type="date"
-            class="form-control"
-            [placeholder]="item.field"
-            [formControlName]="item?.formControlName"
-          />
-        </div>
-      </span>
+        <span *ngIf="item.type === 'date'">
+          <div class="form-group">
+            <label
+              >{{ item?.field }}
+              <span *ngIf="item?.required" class="text-danger">*</span></label
+            >
+            <div class="form-control flex">
+              <input
+                tabindex="-1"
+                matInput
+                [matDatepicker]="picker"
+                class="input-date"
+                [formControlName]="item?.formControlName"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+                disabled="false"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
+              <mat-error
+                *ngIf="
+                  formControls[item?.formControlName].hasError('invalidDate')
+                "
+                >Invalid date</mat-error
+              >
+            </div>
+          </div>
+        </span>
 
-      <span *ngIf="item.type === 'upload'">
-        <div class="form-group">
-          <label>{{ item.field }}:</label><br />
-          <input
-            tabindex="-1"
-            type="file"
-            [ngClass]="{ 'input-upload-off': !hasEdit }"
-            [formControlName]="item?.formControlName"
-            multiple
-            accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-            disabled="true"
-          />
-        </div>
-      </span>
+        <span *ngIf="item.type === 'upload'">
+          <div class="form-group">
+            <label>{{ item.field }}:</label><br />
+            <input
+              tabindex="-1"
+              type="file"
+              [ngClass]="{ 'input-upload-off': !hasEdit }"
+              [formControlName]="item?.formControlName"
+              multiple
+              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+              disabled="true"
+            />
+          </div>
+        </span>
 
-      <span *ngIf="item?.type === 'textinput' || item?.type === 'number'">
-        <div class="form-group">
-          <label>{{ item?.field }} </label>
-          <input
-            tabindex="-1"
-            [type]="item?.type"
-            class="form-control"
-            [formControlName]="item?.formControlName"
-            [placeholder]="item?.field"
-          />
-        </div>
-      </span>
+        <span
+          class="box-btn-add"
+          *ngIf="item?.type === 'textinput' || item?.type === 'number'"
+        >
+          <div class="form-group" style="width: 100%">
+            <label>{{ item?.field }} </label>
+            <div style="display: flex; align-items: center">
+              <input
+                tabindex="-1"
+                [type]="item?.type"
+                class="form-control"
+                [formControlName]="item?.formControlName"
+                [placeholder]="item?.field"
+              />
+              <div *ngIf="item?.hasSideBtnMore">
+                <a
+                  class="btn btn-primary"
+                  style="margin-left: -1px"
+                  [ngStyle]="{ height: item?.height ? item?.height : '40px' }"
+                >
+                  <mat-icon (click)="addItem(item)">{{ "add" }}</mat-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </span>
+      </div>
     </div>
-  </div>
-</form>
+    <ng-content select="[bodyBeforeFooter]"></ng-content>
+    <ng-content select="[footerBtns]"></ng-content>
+  </form>
+</div>

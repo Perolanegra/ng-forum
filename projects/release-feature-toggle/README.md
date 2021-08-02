@@ -36,7 +36,6 @@ ngOnInit() {
 
 ## Por último, mas não menos importante
 
-Run `ng generate component component-name --project release-feature-toggle` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project release-feature-toggle`.
 > Nota: Não esqueça de criar os arquivos que irão conter as features `features.json` onde existirá cada arquivo para determinado ambiente. Exemplo Abaixo: 
 
 

@@ -1,6 +1,6 @@
 {
   "name": "ng-forum",
-  "version": "0.0.7",
+  "version": "0.1.7",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",

@@ -21,7 +21,7 @@ export class ReleaseFeatureToggleService {
     return this.propPath;
   }
 
-  isEnabled(
+  private isEnabled(
     features: { [key: string]: { enabled: boolean; value: string } },
     key: string,
     value?: string | Array<string>

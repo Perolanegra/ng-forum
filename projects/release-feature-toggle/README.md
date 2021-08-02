@@ -18,9 +18,12 @@ import { ReleaseFeatureToggleService } from 'release-feature-toggle';
 constructor(private toggle: ReleaseFeatureToggleService) {}
 
 ngOnInit() {
-    this.toggle.isOn('nomeFeatureSetadoNoJSON', 'matricula_qualquer').then((hasPermission: boolean) => {
+
+    this.toggle.isOn('nomeFeatureSetadoNoJSON', 'matricula_qualquer')
+    .then((hasPermission: boolean) => {
       console.log('haspermission: ', hasPermission);
     })
+    
 }
 
 # Utilizando a lib no seu component HTML

@@ -52,7 +52,8 @@ export class AppController {
   handleError(err): JSON {
     let payloadError;
     payloadError = err.error;
-
+    console.log('errr: ', err);
+    
     if (err.status === 0) {
       payloadError = {
         style: { posTop: "5vh" },

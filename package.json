@@ -3,9 +3,9 @@
   "version": "0.0.7",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --aot",
+    "start": "node server.js",
     "start:dev": "ng s --host 0.0.0.0 -o",
-    "build:optimize": "ng build --prod --aot --buildOptimizer=true --output-path dist/ng-forum/ --baseHref='https://perolanegra.github.io/ng-forum/'",
+    "build:optimize": "ng build --prod --aot --buildOptimizer=true --output-path dist/ng-forum/",
     "deploy": "npx angular-cli-ghpages — dir=dist/ng-forum",
     "build": "ng build",
     "test": "ng test",
@@ -14,7 +14,12 @@
     "create-lib": "ng generate library",
     "build-pack-lib": "ng build $PROJECTNAME && npm run pack-lib",
     "build-lib": "ng build",
-    "pack-lib": "cd dist/$PROJECTNAME && npm pack"
+    "pack-lib": "cd dist/$PROJECTNAME && npm pack",
+    "heroku-postbuild": "npm run build:optimize"
+  },
+  "engines": {
+    "node": "12.19.0",
+    "npm": "6.14.8"
   },
   "private": true,
   "dependencies": {
@@ -44,7 +49,8 @@
     "ckeditor4-angular": "^1.2.2",
     "crypto-es": "^1.2.4",
     "crypto-js": "^3.3.0",
-    "dinamic-form-inputs": "file:dist/dinamic-form-inputs/dinamic-form-inputs-0.0.1.tgz",
+    "dinamic-form-inputs": "file:libs/dinamic-form-inputs-0.0.1.tgz",
+    "express": "^4.17.1",
     "lottie-web": "^5.7.6",
     "material-icons": "^0.3.1",
     "moment": "^2.24.0",
@@ -53,11 +59,13 @@
     "ngx-skeleton-loader": "^2.2.1",
     "ngx-spinner": "^9.0.2",
     "ngx-toastr": "^12.0.1",
+    "path": "^0.12.7",
     "rxjs": "~6.5.4",
     "stream": "0.0.2",
     "tippy.js": "^6.3.1",
     "tls": "0.0.1",
     "tslib": "^2.0.0",
+    "typescript": "^3.9.6",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
@@ -80,7 +88,6 @@
     "ng-packagr": "^10.0.0",
     "protractor": "~7.0.0",
     "ts-node": "^7.0.1",
-    "tslint": "~6.1.0",
-    "typescript": "~3.9.6"
+    "tslint": "~6.1.0"
   }
 }

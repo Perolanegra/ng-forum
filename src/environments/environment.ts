@@ -8,6 +8,7 @@ export const environment = {
   release: '1.0.0',
   prefixImg: '/assets/imgs/',
   prefixAnimationJSON: '/assets/animations/json/',
+  featuresTogglePath: "assets/features/dev/features.json",
 };
 
 /*

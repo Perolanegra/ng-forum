@@ -1,0 +1,6 @@
+{
+    "exibirLogin": {
+        "enabled": false,
+        "value": "^i12345|^j5678"
+    }
+}

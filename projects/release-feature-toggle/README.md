@@ -18,8 +18,8 @@ import { ReleaseFeatureToggleService } from 'release-feature-toggle';
 constructor(private toggle: ReleaseFeatureToggleService) {}
 
 ngOnInit() {
-
-    this.toggle.isOn('nomeFeatureSetadoNoJSON', 'matricula_qualquer')
+    const matricula_qualquer = 'i12345';
+    this.toggle.isOn('exibirLogin', matricula_qualquer)
     .then((hasPermission: boolean) => {
       console.log('haspermission: ', hasPermission);
     })

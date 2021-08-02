@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "start:dev": "ng s --host 0.0.0.0 -o",
+    "start:dev": "ng s --aot --host 0.0.0.0 -o",
     "build:optimize": "ng build --prod --aot --buildOptimizer=true --output-path dist/ng-forum/",
     "deploy": "npx angular-cli-ghpages — dir=dist/ng-forum",
     "build": "ng build",
@@ -60,6 +60,7 @@
     "ngx-spinner": "^9.0.2",
     "ngx-toastr": "^12.0.1",
     "path": "^0.12.7",
+    "release-feature-toggle": "file:dist/release-feature-toggle/release-feature-toggle-0.0.1.tgz",
     "rxjs": "~6.5.4",
     "stream": "0.0.2",
     "tippy.js": "^6.3.1",

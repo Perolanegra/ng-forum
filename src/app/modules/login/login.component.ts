@@ -16,7 +16,7 @@ import { Observable, Subscription } from "rxjs";
 import { NgForm } from "src/app/core/ng-form";
 import { CustomValidators } from "src/app/shared/validators/custom-validators";
 import { NgxSpinnerService } from "ngx-spinner";
-
+import { ReleaseFeatureToggleService } from 'release-feature-toggle';
 @Component({
   selector: "ng-login",
   templateUrl: "./login.component.html",
@@ -33,7 +33,8 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     private store: Store,
     protected appController: AppController,
     protected spinner: NgxSpinnerService,
-    private encryptService: EncryptionService
+    private encryptService: EncryptionService,
+    private toggle: ReleaseFeatureToggleService
   ) {
     super(formBuilder, appController, false);
   }
@@ -42,13 +43,13 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     this.setForm();
     this.setResetPass();
     this.setErrorValidation();
-    // this.teste()
+    this.teste()
   }
 
   teste() {
-    // this.toggle.isOn('exibirLogin', 'i123452').then((hasPermission: boolean) => {
-    //   console.log('haspermission: ', hasPermission);
-    // })
+    this.toggle.isOn('exibirLogin', 'i12345').then((hasPermission: boolean) => {
+      console.log('haspermission: ', hasPermission);
+    })
   }
 
   ngOnDestroy(): void {

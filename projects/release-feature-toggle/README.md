@@ -46,4 +46,7 @@ ngOnInit() {
 
 ![image](https://user-images.githubusercontent.com/34343165/127925260-83ddcd97-4eb2-4c4e-80bb-027b253eadbf.png)
 
+![image](https://user-images.githubusercontent.com/34343165/127935417-f328693e-5ea7-45e9-af1d-aaf2502aae85.png)
+
+> Nota: a propriedade `value` é exatamente dividio pelo caractere ^ (que significa o começo de uma matrícula), seguido da matrícula, terminando separado do começo de outra matrícula indicado pelo caractere |, e assim sucessivamente com as outras matrículas.
 

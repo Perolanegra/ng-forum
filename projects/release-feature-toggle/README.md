@@ -14,7 +14,8 @@ ReleaseFeatureToggleModule.forRoot(environment)
 # Utilizando a lib no seu component TS
 
 import { ReleaseFeatureToggleService } from 'release-feature-toggle';
-constructor(private toggle: ReleaseFeatureToggleService)
+
+constructor(private toggle: ReleaseFeatureToggleService) {}
 
 ngOnInit() {
     this.toggle.isOn('nomeFeatureSetadoNoJSON', 'matricula_qualquer').then((hasPermission: boolean) => {
@@ -36,5 +37,11 @@ ngOnInit() {
 ## Por último, mas não menos importante
 
 Run `ng generate component component-name --project release-feature-toggle` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project release-feature-toggle`.
-> Nota: Não esqueça de criar os arquivos que irão conter as features `features.json` onde existirá cada arquivo para determinado ambiente. Exemplo Abaixo:  
+> Nota: Não esqueça de criar os arquivos que irão conter as features `features.json` onde existirá cada arquivo para determinado ambiente. Exemplo Abaixo: 
+
+
+![image](https://user-images.githubusercontent.com/34343165/127925157-3b23ff27-a75b-47c9-bdcd-6fcb7867675f.png)
+
+![image](https://user-images.githubusercontent.com/34343165/127925260-83ddcd97-4eb2-4c4e-80bb-027b253eadbf.png)
+
 

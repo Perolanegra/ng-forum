@@ -7,6 +7,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { AppActions } from './state/app/app.actions';
 import { NgDefault } from './core/pattern/ng-default';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -535,7 +537,8 @@ export class AppComponent extends NgDefault {
     public media: MediaMatcher,
     private actions: Actions,
     private store: Store,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
     super(appController, route);
     this.setRoutesLocalStorage();
@@ -573,5 +576,15 @@ export class AppComponent extends NgDefault {
   submit(event) {
     console.log('evento: ', event);
   }
+
+  @HostListener('window:HandleStateSpinner', ['$event'])
+  handlerStateSpinner({ detail }: CustomEvent): void {
+    detail.value ? this.spinner.show() : this.spinner.hide();
+  }
+
+  // @HostListener('window:HandleStateSkeleton', ['$event'])
+  // handlerStateSkeleton({ detail }: CustomEvent): void {
+  //   this.stateSkeleton[detail.key] = detail.value;
+  // }
 }
 

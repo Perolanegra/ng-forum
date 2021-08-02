@@ -65,6 +65,10 @@ export class AppController {
       this._store.dispatch(new AppActions.RemoveRouteState());
     }
 
+    this.triggerCustomEvent("HandleStateSpinner", {
+      value: false,
+    });
+
     return payloadError;
   }
 

@@ -1,5 +1,4 @@
-import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
+import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -8,12 +7,12 @@ import { HttpClient } from "@angular/common/http";
 export class ReleaseFeatureToggleService {
   private propPath: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject("env") private env) {
     this.start();
   }
 
   private start() {
-    this.path = environment.featuresTogglePath;
+    this.path = this.env.featuresTogglePath;
   }
 
   private set path(pPath: string) {
@@ -53,7 +52,7 @@ export class ReleaseFeatureToggleService {
   isOn(key: string, value?: string | Array<string>) {
     return new Promise((resolve, reject) => {
       this.http
-        .get(environment.featuresTogglePath)
+        .get(this.env.featuresTogglePath)
         .subscribe(
           (features: {
             [key: string]: { enabled: boolean; value: string };

@@ -36,7 +36,7 @@ import { ChatModule } from "./modules/chat/chat.module";
 import { GlobalVars } from "./core/globalVars";
 import { NgxsSelectSnapshotModule } from "@ngxs-labs/select-snapshot";
 // import { TesteComponent } from "./modules/teste/teste.component";
-import { ReleaseFeatureToggleModule } from "release-feature-toggle";
+// import { ReleaseFeatureToggleModule } from "release-feature-toggle";
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +84,7 @@ import { ReleaseFeatureToggleModule } from "release-feature-toggle";
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
     }),
-    ReleaseFeatureToggleModule.forRoot(environment),
+    // ReleaseFeatureToggleModule.forRoot(environment),
     // JwtModule.forRoot({
     //   config: {
     // tokenGetter: () => localStorage.getItem("meutoken"),

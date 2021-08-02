@@ -37,11 +37,18 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   ) {
     super(formBuilder, appController, false);
   }
-
+  igor = "i12345";
   ngOnInit(): void {
     this.setForm();
     this.setResetPass();
     this.setErrorValidation();
+    // this.teste()
+  }
+
+  teste() {
+    // this.toggle.isOn('exibirLogin', 'i123452').then((hasPermission: boolean) => {
+    //   console.log('haspermission: ', hasPermission);
+    // })
   }
 
   ngOnDestroy(): void {
@@ -92,12 +99,14 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
         "10610433IA$#@$^@1ERF",
         password
       );
-      this.store.dispatch(new AuthActions.Signin(username, encrypted)).subscribe((state: any) => {
-        if (state.auth.token) {
-          this.appController.setMenuActiveLink("issues");
-          this.appController.navigate("issues");
-        }
-      })
+      this.store
+        .dispatch(new AuthActions.Signin(username, encrypted))
+        .subscribe((state: any) => {
+          if (state.auth.token) {
+            this.appController.setMenuActiveLink("issues");
+            this.appController.navigate("issues");
+          }
+        });
       this._form.reset();
       this.stateSubmitHasChanged();
     }

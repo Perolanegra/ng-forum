@@ -60,7 +60,6 @@
     "ngx-spinner": "^9.0.2",
     "ngx-toastr": "^12.0.1",
     "path": "^0.12.7",
-    "release-feature-toggle": "file:dist/release-feature-toggle/release-feature-toggle-0.0.1.tgz",
     "rxjs": "~6.5.4",
     "stream": "0.0.2",
     "tippy.js": "^6.3.1",

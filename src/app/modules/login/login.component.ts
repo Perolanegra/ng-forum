@@ -15,7 +15,6 @@ import { AuthState } from "src/app/state/auth/auth.state";
 import { Observable, Subscription } from "rxjs";
 import { NgForm } from "src/app/core/ng-form";
 import { CustomValidators } from "src/app/shared/validators/custom-validators";
-
 @Component({
   selector: "ng-login",
   templateUrl: "./login.component.html",
@@ -35,7 +34,6 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   ) {
     super(formBuilder, appController, false);
   }
-
   ngOnInit(): void {
     this.setForm();
     this.setResetPass();

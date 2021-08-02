@@ -29,13 +29,15 @@ ngOnInit() {
 
 # Utilizando a lib no seu component HTML
 
-<ng-template toggleFeature="nomeFeatureSetadoNoJSON" [matriculas]="propriedadeTypescript"> 
-    <div>Conteúdo aqui</div>
-</ng-template>    
 
-<ng-template toggleFeature="nomeFeatureSetadoNoJSON" [matriculas]="'matricula_qualquer'"> 
-    <div>Conteúdo aqui</div>
-</ng-template> 
+<ng-template toggleFeature="exibirLogin" [matriculas]="matricula_qualquer"> 
+    Conteúdo aqui
+< / ng-template>    
+
+  
+<ng-template toggleFeature="exibirLogin" [matriculas]=" 'i12345' "> 
+    Conteúdo aqui
+< / ng-template> 
 
 
 ## Por último, mas não menos importante

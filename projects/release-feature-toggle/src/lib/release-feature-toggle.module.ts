@@ -5,7 +5,7 @@ import { ReleaseFeatureToggleService } from "./release-feature-toggle.service";
 @NgModule({
   declarations: [ReleaseFeatureToggleDirective],
   imports: [HttpClientModule],
-  exports: [],
+  exports: [ReleaseFeatureToggleDirective],
 })
 export class ReleaseFeatureToggleModule {
   public static forRoot(

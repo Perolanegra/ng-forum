@@ -9,7 +9,7 @@ import { ReleaseFeatureToggleService } from "./release-feature-toggle.service";
 
 /**
  * @var toggleFeature: InputParam onde valor será a chave da feature que será autorizada. (Ex: enableNewCalendar)
- * @var value: InputParam onde será o valor da(s) matrícula(s) que terão autorização a feature especificada no parâmetro key.
+ * @var matriculas: InputParam onde será o valor da(s) matrícula(s) que terão autorização a feature especificada no parâmetro key.
  */
 @Directive({
   selector: "[toggleFeature]",
@@ -22,15 +22,26 @@ export class ReleaseFeatureToggleDirective {
     private viewContainer: ViewContainerRef
   ) {}
 
-  @Input() value: string | Array<string>;
+  @Input() matriculas?: string | Array<string>;
+  private key: string;
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    Promise.resolve(null).then(() => this.validate());
+  }
 
-  @Input() set key(key: string) {
-    this.featureToggle.isOn(key, this.value).then((hasPermission: boolean) => {
-      hasPermission
-        ? this.viewContainer.createEmbeddedView(this.templateRef)
-        : this.viewContainer.clear();
-    });
+  validate(): void {
+    if (this.key && this.matriculas) {
+      this.featureToggle
+        .isOn(this.key, this.matriculas)
+        .then((hasPermission: boolean) => {
+          hasPermission
+            ? this.viewContainer.createEmbeddedView(this.templateRef)
+            : this.viewContainer.clear();
+        });
+    }
+  }
+
+  @Input() set toggleFeature(key: string) {
+    this.key = key;
   }
 }

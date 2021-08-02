@@ -85,7 +85,6 @@ import { CommonModule } from '@angular/common';
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
     }),
-    // ReleaseFeatureToggleModule,
     // JwtModule.forRoot({
     //   config: {
     // tokenGetter: () => localStorage.getItem("meutoken"),

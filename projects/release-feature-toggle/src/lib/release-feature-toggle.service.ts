@@ -24,13 +24,13 @@ export class ReleaseFeatureToggleService {
     return this.propPath;
   }
 
-  public isEnabled(
-    features: any,
+  isEnabled(
+    features: { [key: string]: { enabled: boolean; value: string } },
     key: string,
     value?: string | Array<string>
   ): boolean {
-    try {
-      if (features[key].enabled && features[key].value) {
+    if (features[key].enabled) {
+      if (features[key].value && value) {
         if (typeof value === "string") {
           return String(features[key].value)
             .toLowerCase()
@@ -46,19 +46,23 @@ export class ReleaseFeatureToggleService {
           )
         );
       }
-    } catch (error) {
-      throw new Error(
-        "Não existe a feature referente a chave passada ou falta o parametro matrícula."
-      );
+      return features[key].enabled;
     }
   }
 
-  isOn(key: string, value?: string | Array<string>): Promise<boolean> {
+  isOn(key: string, value?: string | Array<string>) {
     return new Promise((resolve, reject) => {
-      this.http.get(environment.featuresTogglePath).subscribe(
-        (features) => resolve(this.isEnabled(features, key, value)),
-        (err) => reject(err)
-      );
+      this.http
+        .get(environment.featuresTogglePath)
+        .subscribe(
+          (features: {
+            [key: string]: { enabled: boolean; value: string };
+          }) => {
+            if (features) {
+              resolve(this.isEnabled(features, key, value));
+            }
+          }
+        );
     });
   }
 }

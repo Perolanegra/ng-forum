@@ -18,8 +18,8 @@
     "heroku-postbuild": "npm run build:optimize"
   },
   "engines": {
-    "node": "12.19.0",
-    "npm": "6.14.8"
+    "node": "12.18.0",
+    "npm": "6.14.6"
   },
   "private": true,
   "dependencies": {
@@ -88,6 +88,6 @@
     "protractor": "~7.0.0",
     "ts-node": "^7.0.1",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.6"
+    "typescript": "^3.9.8"
   }
 }

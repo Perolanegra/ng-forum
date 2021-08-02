@@ -21,6 +21,11 @@
     "node": "12.19.0",
     "npm": "6.14.8"
   },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
+  },
   "private": true,
   "dependencies": {
     "@angular-ru/common": "^15.34.1",
@@ -45,6 +50,7 @@
     "@ngxs/store": "^3.6.2-dev.master-7118f7e",
     "@syncfusion/ej2-angular-richtexteditor": "^18.1.54",
     "@types/crypto-js": "^3.1.44",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "ckeditor4-angular": "^1.2.2",
     "crypto-es": "^1.2.4",
@@ -88,6 +94,7 @@
     "ng-packagr": "^10.0.0",
     "protractor": "~7.0.0",
     "ts-node": "^7.0.1",
-    "tslint": "~6.1.0"
+    "tslint": "~6.1.0",
+    "typescript": "~3.9.5"
   }
 }

@@ -12,6 +12,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/release-feature-toggle/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/release-feature-toggle/tsconfig.spec.json"
     }
   ]
 }

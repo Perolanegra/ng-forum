@@ -36,6 +36,7 @@ import { ChatModule } from "./modules/chat/chat.module";
 import { GlobalVars } from "./core/globalVars";
 import { NgxsSelectSnapshotModule } from "@ngxs-labs/select-snapshot";
 // import { TesteComponent } from "./modules/teste/teste.component";
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { NgxsSelectSnapshotModule } from "@ngxs-labs/select-snapshot";
     // TesteComponent,
   ],
   imports: [
+    CommonModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -83,6 +85,7 @@ import { NgxsSelectSnapshotModule } from "@ngxs-labs/select-snapshot";
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
     }),
+    // ReleaseFeatureToggleModule,
     // JwtModule.forRoot({
     //   config: {
     // tokenGetter: () => localStorage.getItem("meutoken"),

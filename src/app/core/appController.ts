@@ -52,9 +52,8 @@ export class AppController {
   handleError(err): JSON {
     let payloadError;
     payloadError = err.error;
-    console.log('errr: ', err);
-    
-    if (err.status === 0) {
+
+    if (err.status === 0 || err.status === 503) {
       payloadError = {
         style: { posTop: "5vh" },
         title: "Fora de uso",
@@ -467,7 +466,8 @@ export class AppController {
   // }
 
   public setTooltip(querySelectorSearch: string): void {
-    const nodeList: NodeListOf<HTMLElement> = document.querySelectorAll(querySelectorSearch);
+    const nodeList: NodeListOf<HTMLElement> =
+      document.querySelectorAll(querySelectorSearch);
     nodeList.forEach((e: HTMLElement) => {
       // Se entrar precisa exibir o tooltip
       if (this.isEllipsisActive(e)) {

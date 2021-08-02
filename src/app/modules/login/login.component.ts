@@ -15,7 +15,6 @@ import { AuthState } from "src/app/state/auth/auth.state";
 import { Observable, Subscription } from "rxjs";
 import { NgForm } from "src/app/core/ng-form";
 import { CustomValidators } from "src/app/shared/validators/custom-validators";
-import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "ng-login",
@@ -32,7 +31,6 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
     protected formBuilder: FormBuilder,
     private store: Store,
     protected appController: AppController,
-    protected spinner: NgxSpinnerService,
     private encryptService: EncryptionService
   ) {
     super(formBuilder, appController, false);
@@ -86,18 +84,25 @@ export class LoginComponent extends NgForm implements OnInit, OnDestroy {
   submit(): void {
     const password = this.formControls.password.value as string;
     if (this.isValidForm(password?.length)) {
-      this.spinner.show();
+      this.appController.triggerCustomEvent("HandleStateSpinner", {
+        value: true,
+      });
       const username = this.formControls.username.value as string;
       const encrypted = this.encryptService.set(
         "10610433IA$#@$^@1ERF",
         password
       );
-      this.store.dispatch(new AuthActions.Signin(username, encrypted)).subscribe((state: any) => {
-        if (state.auth.token) {
-          this.appController.setMenuActiveLink("issues");
-          this.appController.navigate("issues");
-        }
-      })
+      this.store
+        .dispatch(new AuthActions.Signin(username, encrypted))
+        .subscribe((state: any) => {
+          if (state.auth.token) {
+            this.appController.setMenuActiveLink("issues");
+            this.appController.navigate("issues");
+            this.appController.triggerCustomEvent("HandleStateSpinner", {
+              value: false,
+            });
+          }
+        });
       this._form.reset();
       this.stateSubmitHasChanged();
     }

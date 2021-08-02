@@ -1,9 +1,7 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class ReleaseFeatureToggleService {
   private propPath: string;
 

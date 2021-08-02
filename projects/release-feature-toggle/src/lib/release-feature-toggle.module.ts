@@ -8,7 +8,9 @@ import { ReleaseFeatureToggleService } from "./release-feature-toggle.service";
   exports: [],
 })
 export class ReleaseFeatureToggleModule {
-  public static forRoot(environment: any): ModuleWithProviders<any> {
+  public static forRoot(
+    environment: any
+  ): ModuleWithProviders<ReleaseFeatureToggleModule> {
     return {
       ngModule: ReleaseFeatureToggleModule,
       providers: [

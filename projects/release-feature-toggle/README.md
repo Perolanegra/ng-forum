@@ -56,3 +56,11 @@ ngOnInit() {
 > Nota: dentro do seu objeto environment é preciso existir a propriedade `featuresTogglePath` que será populada pelo valor da url de caminho até o
 arquivo `features.json` do determinado ambiente.
 
+
+  
+  #### Baixando a lib ####
+  
+  Vá até a pasta assets/libs deste repositório e faça o download o arquivo referente a lib.
+  Siga para o primeiro passo de instalação no topo do Informativo.
+  
+  #################################################

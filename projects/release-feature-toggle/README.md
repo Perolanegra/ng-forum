@@ -1,6 +1,6 @@
 # ReleaseFeatureToggle
 
-npm install release-feature-toggle
+npm install path-to-release-feature-toggle/release-feature-toggle-0.0.1.tgz
 
 Import a lib no seu AppModule:
 

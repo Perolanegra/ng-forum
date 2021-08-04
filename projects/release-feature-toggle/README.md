@@ -21,7 +21,14 @@ ngOnInit() {
 
     const matricula_qualquer = 'i12345';
     this.toggle.isOn('exibirLogin', matricula_qualquer)
-    .then((hasPermission: boolean) => {
+      .then((hasPermission: boolean) => {
+      console.log('haspermission: ', hasPermission);
+    })
+    
+    
+    const matricula_qualquer_array = ['i12345', ];
+    this.toggle.isOn('exibirLogin', matricula_qualquer_array)
+      .then((hasPermission: boolean) => {
       console.log('haspermission: ', hasPermission);
     })
     

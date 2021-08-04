@@ -17,22 +17,9 @@ import { DinamicFormInputsModule } from "dinamic-form-inputs";
 - Identifier: bodyBeforeFooter (Localizado após o Form)
 - Identifier: footerBtns (Localizado após o Body, ao final da página)
 
-  ## Outputs
-
-      `stateOpenChanged` <strong>Emite os seguintes parâmetros em um único objeto para manipulação do valor após select aberto</strong>
-      `stateAddItem` <strong>Emite o item do control após botão de adicionar for clicado.</strong>
-      `stateOnSelectedValue` <strong>Emite os seguintes parâmetros em um único objeto para manipulação do valor selecionado:</strong>
-      `
-      - @param item o item passado da iteração.
-      - @param index o index do item passado da iteração.
-      - @param selected a opção selecionada.
-      - @param value o valor da opção selecionada.
-      - @param hasMultiSelection Se o control for seleção múltipla retorna true.
-          \*/
-          `
-      `stateSubmit` <strong>Emite uma cópia do form Object</strong>
-
-  ## Inputs
+  #### Outputs
+  
+  #### Inputs
   
         `hasEdit` <strong>Se o formulário será editável ou não, referência pra os campos começarem desabilitados.</strong>
         `data` <strong>Array de dados que deve ser estruturado conforme especificado.</strong>

@@ -26,17 +26,16 @@ import { DinamicFormInputsModule } from "dinamic-form-inputs";
     `stateOnSelectedValue`  <strong>Emite os seguintes parâmetros em um único objeto 
      para manipulação do valor selecionado:</strong>
 
-    - param: item o item passado da iteração.
-    - param: index o index do item passado da iteração.
-    - param: selected a opção selecionada.
-    - param: value o valor da opção selecionada.
-    - param: hasMultiSelection Se o control for seleção múltipla retorna true.
+    - param `item` o item passado da iteração.
+    - param `index` o index do item passado da iteração.
+    - param `selected` a opção selecionada.
+    - param `value` o valor da opção selecionada.
+    - param `hasMultiSelection` Se o control for seleção múltipla retorna true.
         
   
   #### Inputs
-  
-        `hasEdit` <strong>Se o formulário será editável ou não, referência pra os campos começarem desabilitados.</strong>
-        `data` <strong>Array de dados que deve ser estruturado conforme especificado.</strong>
+     `hasEdit`  <strong>Se o formulário será editável ou não, referência pra os campos começarem desabilitados.</strong>                     
+     `data`  <strong>Array de dados que deve ser estruturado conforme especificado.</strong>
 
 
 # Sample 

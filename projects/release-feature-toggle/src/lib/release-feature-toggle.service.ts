@@ -40,14 +40,12 @@ export class ReleaseFeatureToggleService {
         .includes(value.toLowerCase());
     }
 
-    return Boolean(
-      value.findIndex((val: string) =>
-        val
-          ? String(features[key].value)
-              .toLowerCase()
-              .includes(val.toLowerCase())
-          : 0
-      )
+    const splittedValues = String(features[key].value)
+      .toLowerCase()
+      .replace("|", "")
+      .split("^");
+    return (
+      JSON.stringify(splittedValues) === JSON.stringify(value as Array<string>)
     );
   }
 

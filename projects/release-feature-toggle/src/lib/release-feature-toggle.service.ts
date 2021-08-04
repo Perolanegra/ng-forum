@@ -26,25 +26,29 @@ export class ReleaseFeatureToggleService {
     key: string,
     value?: string | Array<string>
   ): boolean {
-    if (features[key].enabled) {
-      if (features[key].value && value) {
-        if (typeof value === "string") {
-          return String(features[key].value)
-            .toLowerCase()
-            .includes(value.toLowerCase());
-        }
-        return Boolean(
-          value.findIndex((val: string) =>
-            val
-              ? String(features[key].value)
-                  .toLowerCase()
-                  .includes(val.toLowerCase())
-              : 0
-          )
-        );
-      }
+    if (!features[key].enabled || !features[key].value) {
       return features[key].enabled;
     }
+
+    if (!value) {
+      return Boolean(value);
+    }
+
+    if (typeof value === "string") {
+      return String(features[key].value)
+        .toLowerCase()
+        .includes(value.toLowerCase());
+    }
+
+    return Boolean(
+      value.findIndex((val: string) =>
+        val
+          ? String(features[key].value)
+              .toLowerCase()
+              .includes(val.toLowerCase())
+          : 0
+      )
+    );
   }
 
   isOn(key: string, value?: string | Array<string>) {

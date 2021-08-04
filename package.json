@@ -49,7 +49,7 @@
     "ckeditor4-angular": "^1.2.2",
     "crypto-es": "^1.2.4",
     "crypto-js": "^3.3.0",
-    "dinamic-form-inputs": "file:src/assets/libs/dinamic-form-inputs-0.0.1.tgz",
+    "dinamic-form-inputs": "file:src/assets/libs/dinamic-form-inputs-0.0.2.tgz",
     "express": "^4.17.1",
     "lottie-web": "^5.7.6",
     "material-icons": "^0.3.1",

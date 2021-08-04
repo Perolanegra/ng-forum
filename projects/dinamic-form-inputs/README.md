@@ -19,12 +19,11 @@ import { DinamicFormInputsModule } from "dinamic-form-inputs";
 
   #### Outputs
   
-    `stateOpenChanged` <strong>Emite os seguintes parâmetros em 
+    `stateOpenChanged`  <strong>Emite os seguintes parâmetros em 
      um único objeto para manipulação do valor após select aberto.</strong>
-    `stateAddItem` <strong>Emite o item do control após botão 
-     de adicionar for clicado.</strong>
-    `stateSubmit` <strong>Emite uma cópia do form Object</strong>
-    `stateOnSelectedValue` <strong>Emite os seguintes parâmetros em um único objeto 
+    `stateAddItem`  <strong>Emite o item do control após botão de adicionar for clicado.</strong>                      
+    `stateSubmit`  <strong>Emite uma cópia do form Object.</strong>                        
+    `stateOnSelectedValue`  <strong>Emite os seguintes parâmetros em um único objeto 
      para manipulação do valor selecionado:</strong>
 
     - param: item o item passado da iteração.

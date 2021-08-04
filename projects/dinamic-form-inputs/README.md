@@ -19,16 +19,17 @@ import { DinamicFormInputsModule } from "dinamic-form-inputs";
 
   #### Outputs
   
-        `stateOpenChanged` <strong>Emite os seguintes parâmetros em um único objeto para manipulação do valor após select aberto</strong>
-        `stateAddItem` <strong>Emite o item do control após botão de adicionar for clicado.</strong>
-        `stateSubmit` <strong>Emite uma cópia do form Object</strong>
-        `stateOnSelectedValue` <strong>Emite os seguintes parâmetros em um único objeto para manipulação do valor selecionado:</strong>
-        
-        - param: item o item passado da iteração.
-        - param: index o index do item passado da iteração.
-        - param: selected a opção selecionada.
-        - param: value o valor da opção selecionada.
-        - param: hasMultiSelection Se o control for seleção múltipla retorna true.
+    `stateOpenChanged` <strong>Emite os seguintes parâmetros em 
+  um único objeto para manipulação do valor após select aberto</strong>
+    `stateAddItem` <strong>Emite o item do control após botão de adicionar for clicado.</strong>
+    `stateSubmit` <strong>Emite uma cópia do form Object</strong>
+    `stateOnSelectedValue` <strong>Emite os seguintes parâmetros em um único objeto para manipulação do valor selecionado:</strong>
+
+    - param: item o item passado da iteração.
+    - param: index o index do item passado da iteração.
+    - param: selected a opção selecionada.
+    - param: value o valor da opção selecionada.
+    - param: hasMultiSelection Se o control for seleção múltipla retorna true.
         
   
   #### Inputs

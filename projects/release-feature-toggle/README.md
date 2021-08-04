@@ -1,6 +1,6 @@
 # ReleaseFeatureToggle
 
-npm install release-feature-toggle
+npm install path-to-release-feature-toggle/release-feature-toggle-0.0.1.tgz
 
 Import a lib no seu AppModule:
 
@@ -18,20 +18,26 @@ import { ReleaseFeatureToggleService } from 'release-feature-toggle';
 constructor(private toggle: ReleaseFeatureToggleService) {}
 
 ngOnInit() {
-    this.toggle.isOn('nomeFeatureSetadoNoJSON', 'matricula_qualquer').then((hasPermission: boolean) => {
+
+    const matricula_qualquer = 'i12345';
+    this.toggle.isOn('exibirLogin', matricula_qualquer)
+    .then((hasPermission: boolean) => {
       console.log('haspermission: ', hasPermission);
     })
+    
 }
 
 # Utilizando a lib no seu component HTML
 
-<ng-template toggleFeature="nomeFeatureSetadoNoJSON" [matriculas]="propriedadeTypescript"> 
-    <div>Conteúdo aqui</div>
-</ng-template>    
 
-<ng-template toggleFeature="nomeFeatureSetadoNoJSON" [matriculas]="'matricula_qualquer'"> 
-    <div>Conteúdo aqui</div>
-</ng-template> 
+<ng-template toggleFeature="exibirLogin" [matriculas]="matricula_qualquer"> 
+    Conteúdo aqui
+< / ng-template>    
+
+  
+<ng-template toggleFeature="exibirLogin" [matriculas]=" 'i12345' "> 
+    Conteúdo aqui
+< / ng-template> 
 
 
 ## Por último, mas não menos importante
@@ -43,4 +49,18 @@ ngOnInit() {
 
 ![image](https://user-images.githubusercontent.com/34343165/127925260-83ddcd97-4eb2-4c4e-80bb-027b253eadbf.png)
 
+![image](https://user-images.githubusercontent.com/34343165/127935417-f328693e-5ea7-45e9-af1d-aaf2502aae85.png)
 
+> Nota: a propriedade `value` é exatamente dividida pelo caractere ^ (que significa o começo de uma matrícula), seguido da matrícula, terminando separado do começo de outra matrícula indicado pelo caractere |, e assim sucessivamente com as outras matrículas.
+ 
+> Nota: dentro do seu objeto environment é preciso existir a propriedade `featuresTogglePath` que será populada pelo valor da url de caminho até o
+arquivo `features.json` do determinado ambiente.
+
+
+  
+  #### Baixando a lib ####
+  
+  Vá até a pasta assets/libs deste repositório e faça o download o arquivo referente a lib.
+  Siga para o primeiro passo de instalação no topo do Informativo.
+  
+  #################################################

@@ -44,6 +44,7 @@ export class ReleaseFeatureToggleService {
       .toLowerCase()
       .replace("|", "")
       .split("^");
+    splittedValues.shift();
     return (
       JSON.stringify(splittedValues) === JSON.stringify(value as Array<string>)
     );

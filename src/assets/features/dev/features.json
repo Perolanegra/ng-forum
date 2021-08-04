@@ -1,6 +1,6 @@
 {
-    "exibirLogin": {
+    "feature_show": {
         "enabled": true,
-        "value": "^i12345|^j5678"
+        "value": "^vip|^admin"
     }
 }

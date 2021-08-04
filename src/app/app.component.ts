@@ -1,21 +1,20 @@
-import { Component, ChangeDetectorRef, HostListener } from '@angular/core';
-import { AppController } from './core/appController';
-import { Store, Actions, ofActionDispatched } from '@ngxs/store';
-import {  Subscription } from 'rxjs';
-import { AuthActions } from './state/auth/auth.actions';
-import { MediaMatcher } from '@angular/cdk/layout';
-import { AppActions } from './state/app/app.actions';
-import { NgDefault } from './core/pattern/ng-default';
-import { ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Component, ChangeDetectorRef, HostListener } from "@angular/core";
+import { AppController } from "./core/appController";
+import { Store, Actions, ofActionDispatched } from "@ngxs/store";
+import { Subscription } from "rxjs";
+import { AuthActions } from "./state/auth/auth.actions";
+import { MediaMatcher } from "@angular/cdk/layout";
+import { AppActions } from "./state/app/app.actions";
+import { NgDefault } from "./core/pattern/ng-default";
+import { ActivatedRoute } from "@angular/router";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent extends NgDefault {
-
   public stepContent = [
     {
       title: "Entre com as informações do Item",
@@ -527,42 +526,47 @@ export class AppComponent extends NgDefault {
     },
   ];
 
-  title = 'ng-forum';
+  title = "ng-forum";
 
   private mobileQuery: MediaQueryList;
   private fillerNavSubscription$: Subscription;
 
-  constructor(protected appController: AppController,
+  constructor(
+    protected appController: AppController,
     changeDetectorRef: ChangeDetectorRef,
     public media: MediaMatcher,
     private actions: Actions,
     private store: Store,
     protected route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
   ) {
     super(appController, route);
     this.setRoutesLocalStorage();
 
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
+    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
   }
 
   private _mobileQueryListener: () => void;
 
   ngOnInit() {
     this.appController.dipatchMobileMatches(this.mobileQuery.matches);
-    this.actions.pipe(ofActionDispatched(AuthActions.RemoveAccess)).subscribe((val) => this.appController.navigate('login'))
+    this.actions
+      .pipe(ofActionDispatched(AuthActions.RemoveAccess))
+      .subscribe((val) => this.appController.navigate("login"));
     this.getAuth();
   }
 
   setRoutesLocalStorage(): void {
-    this.fillerNavSubscription$ = this.appController.getFillerNav().subscribe(routes => {
-      if (!routes) {
-        const navs = this.appController.fillerNavs();
-        this.store.dispatch(new AppActions.SetRouteState(navs));
-      }
-    });
+    this.fillerNavSubscription$ = this.appController
+      .getFillerNav()
+      .subscribe((routes) => {
+        if (!routes) {
+          const navs = this.appController.fillerNavs();
+          this.store.dispatch(new AppActions.SetRouteState(navs));
+        }
+      });
   }
 
   ngOnDestroy(): void {
@@ -570,14 +574,14 @@ export class AppComponent extends NgDefault {
     if (this.fillerNavSubscription$) this.fillerNavSubscription$.unsubscribe();
   }
 
-  @HostListener('window:hasToken', ['$event'])
-  hasAccessToken = (event) => this.hasToken = event.detail.hasToken;
+  @HostListener("window:hasToken", ["$event"])
+  hasAccessToken = (event) => (this.hasToken = event.detail.hasToken);
 
   submit(event) {
-    console.log('evento: ', event);
+    console.log("evento: ", event);
   }
 
-  @HostListener('window:HandleStateSpinner', ['$event'])
+  @HostListener("window:HandleStateSpinner", ["$event"])
   handlerStateSpinner({ detail }: CustomEvent): void {
     detail.value ? this.spinner.show() : this.spinner.hide();
   }
@@ -587,4 +591,3 @@ export class AppComponent extends NgDefault {
   //   this.stateSkeleton[detail.key] = detail.value;
   // }
 }
-

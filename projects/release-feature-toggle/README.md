@@ -67,7 +67,7 @@ arquivo `features.json` do determinado ambiente.
   
   #### Baixando a lib ####
   
-  Vá até a pasta assets/libs deste repositório e faça o download o arquivo referente a lib.
+  Vá até a pasta assets/libs deste repositório e faça o download do arquivo referente a lib.
   Siga para o primeiro passo de instalação no topo do Informativo.
   
   #################################################

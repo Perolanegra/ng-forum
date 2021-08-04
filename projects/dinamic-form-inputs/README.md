@@ -1,24 +1,50 @@
 # DinamicFormInputs
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
+npm install path-to-dinamic-form-inputs/dinamic-form-inputs-0.0.1.tgz
 
-## Code scaffolding
+Import a lib no seu AppModul e declare no array de imports:
 
-Run `ng generate component component-name --project dinamic-form-inputs` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project dinamic-form-inputs`.
-> Note: Don't forget to add `--project dinamic-form-inputs` or else it will be added to the default project in your `angular.json` file. 
+import { DinamicFormInputsModule } from "dinamic-form-inputs";
 
-## Build
+# Informações Principais
 
-Run `ng build dinamic-form-inputs` to build the project. The build artifacts will be stored in the `dist/` directory.
+/\*\*
 
-## Publishing
+- A lib possui seletores na view para inserção de conteúdo.
+-
+- A divisão é feita da seguinte forma:
+-
+- Identifier: preHeader (Localizado antes do título do Form)
+-
+- Identifier: header (Localizado antes do Form, logo após o título)
+-
+- Identifier: bodyBeforeFooter (Localizado após o Form)
+-
+- Identifier: footerBtns (Localizado após o Body, ao final da página)
+  \*/
 
-After building your library with `ng build dinamic-form-inputs`, go to the dist folder `cd dist/dinamic-form-inputs` and run `npm publish`.
+  #### Outputs
 
-## Running unit tests
+        `stateOpenChanged` <strong>Emite os seguintes parâmetros em um único objeto para manipulação do valor após select aberto</strong>
+        `stateAddItem` <strong>Emite o item do control após botão de adicionar for clicado.</strong>
+        `stateOnSelectedValue` <strong>Emite os seguintes parâmetros em um único objeto para manipulação do valor selecionado:</strong>
+        `
+        - @param item o item passado da iteração.
+        - @param index o index do item passado da iteração.
+        - @param selected a opção selecionada.
+        - @param value o valor da opção selecionada.
+        - @param hasMultiSelection Se o control for seleção múltipla retorna true.
+            \*/
+            `
+        `stateSubmit` <strong>Emite uma cópia do form Object</strong>
 
-Run `ng test dinamic-form-inputs` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    #### Inputs
+        `hasEdit` <strong>Se o formulário será editável ou não, referência pra os campos começarem desabilitados.</strong>
+        `data` <strong>Array de dados que deve ser estruturado conforme especificado.</strong>
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# Sample 
+
+# Estrutura de Dados - Inputs
+
+> Nota: O Input `data` precisar ser tipado da seguinte forma abaixo.

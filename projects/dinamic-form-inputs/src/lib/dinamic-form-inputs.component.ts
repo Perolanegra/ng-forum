@@ -34,7 +34,7 @@ import {
 export class DinamicFormInputsComponent implements OnInit {
   @Input() data: any;
   // tslint:disable-next-line: variable-name
-  protected _form: FormGroup;
+  private _form: FormGroup;
 
   @Input() hasEdit: boolean;
   @Output() stateOpenChanged: EventEmitter<any> = new EventEmitter();

@@ -58,7 +58,7 @@ ngOnInit() {
 
 ![image](https://user-images.githubusercontent.com/34343165/127935417-f328693e-5ea7-45e9-af1d-aaf2502aae85.png)
 
-  > Nota: a propriedade `value` é exatamente dividida pelo caractere <strong style="font-weight: bold">^</strong> `(que significa o começo de uma matrícula)`, seguido da matrícula, terminando separado do começo de outra matrícula indicado pelo caractere `<strong>|</strong>`, e assim sucessivamente com as outras matrículas.
+  > Nota: a propriedade `value` é exatamente dividida pelo caractere <strong style="font-weight: bold; color:	#d6204e">^</strong> `(que significa o começo de uma matrícula)`, seguido da matrícula, terminando separado do começo de outra matrícula indicado pelo caractere `<strong style="font-weight: bold; color:	#d6204e">|</strong>`, e assim sucessivamente com as outras matrículas.
  
 > Nota: dentro do seu objeto environment é preciso existir a propriedade `featuresTogglePath` que será populada pelo valor da url de caminho até o
 arquivo `features.json` do determinado ambiente.

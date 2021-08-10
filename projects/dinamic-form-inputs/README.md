@@ -2,7 +2,7 @@
 
 npm install path-to-dinamic-form-inputs/dinamic-form-inputs-0.0.2.tgz
 
-Import a lib no seu AppModul e declare no array de imports:
+Import a lib no seu AppModule e declare no array de imports:
 
 import { DinamicFormInputsModule } from "dinamic-form-inputs";
 

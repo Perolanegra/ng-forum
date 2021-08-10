@@ -24,7 +24,7 @@ import { DinamicFormInputsModule } from "dinamic-form-inputs";
     `stateAddItem`  <strong>Emite o item do control após botão de adicionar for clicado.</strong>                      
     `stateSubmit`  <strong>Emite uma cópia do form Object.</strong>                        
     `stateOnSelectedValue`  <strong>Emite os seguintes parâmetros em um único objeto 
-     para manipulação do valor selecionado:</strong>
+     para manipulação do valor selecionado em um input-select:</strong>
 
     - param `item` o item passado da iteração.
     - param `index` o index do item passado da iteração.

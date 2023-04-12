@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "start:dev": "ng s --aot --host 0.0.0.0 -o",
+    "dev": "ng s --aot --host 0.0.0.0 -o",
     "build:optimize": "ng build --prod --aot --buildOptimizer=true --output-path dist/ng-forum/",
     "deploy": "npx angular-cli-ghpages — dir=dist/ng-forum",
     "build": "ng build",

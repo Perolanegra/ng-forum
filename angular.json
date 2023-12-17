@@ -192,5 +192,8 @@
       }
     }
   },
-  "defaultProject": "ng-forum"
+  "defaultProject": "ng-forum",
+  "cli": {
+    "analytics": "c5a11b6c-69d9-4de9-8b94-25a6de01bf99"
+  }
 }
